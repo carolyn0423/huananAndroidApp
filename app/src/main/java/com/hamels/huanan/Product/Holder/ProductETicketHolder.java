@@ -1,9 +1,9 @@
 package com.hamels.huanan.Product.Holder;
 
 import android.graphics.Paint;
-import android.support.annotation.NonNull;
-import android.support.constraint.ConstraintLayout;
-import android.support.v7.widget.RecyclerView;
+import androidx.annotation.NonNull;
+import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.recyclerview.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -18,7 +18,6 @@ import java.text.DecimalFormat;
 
 public class ProductETicketHolder extends RecyclerView.ViewHolder {
     public static final String TAG = ProductETicketHolder.class.getSimpleName();
-
     public ImageView img_product;
     public TextView tv_product_name, tv_sale_price, tv_price;
     public ConstraintLayout layout;
@@ -34,7 +33,7 @@ public class ProductETicketHolder extends RecyclerView.ViewHolder {
     }
 
     public void setImg_product(Product product) {
-        Glide.with(ProductFragment.getInstance()).load(EOrderApplication.DOMAIN + product.getPicture_url()).into(img_product);
+        Glide.with(ProductFragment.getInstance()).load(EOrderApplication.sApiUrl + product.getPicture_url()).into(img_product);
         img_product.setTag(R.id.img_product, product.getId());
         layout.setTag(R.id.layout_constraint, product.getId());
         tv_product_name.setText(product.getProduct_name());

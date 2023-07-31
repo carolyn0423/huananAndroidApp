@@ -76,12 +76,12 @@ public class ApiAdminRepository {
         retrofit.create(CustomerApiService.class).GetCustomerList(requestBody).enqueue(apiCallback);
     }
 
-    public void getCustomerDetail(String sCustomerID, final AbsApiCallback apiCallback) {
+    public void getCustomerDetail(String sCustomerID, String sFunctionName, final AbsApiCallback apiCallback) {
         Map<String, String> map = new HashMap<>();
         map.put("customer_id", sCustomerID);
         map.put("isApp", "true");
         map.put("isPagination", "false");
-        map.put("functionname", "CustomerData");
+        map.put("functionname", sFunctionName);
         map.put("modified_user", "app");
 
         Log.e(TAG,"map : " + map.toString());

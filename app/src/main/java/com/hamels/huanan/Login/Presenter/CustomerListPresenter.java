@@ -38,7 +38,7 @@ public class CustomerListPresenter extends BasePresenter<CustomerListContract.Vi
 
         repositoryManager.saveCustomerID(EOrderApplication.CUSTOMER_ID);
         repositoryManager.saveCustomerName(EOrderApplication.CUSTOMER_NAME);
-        repositoryManager.saveApiUrl(EOrderApplication.sApiUel);
+        repositoryManager.saveApiUrl(EOrderApplication.sApiUrl);
         view.goCustomer();
     }
 

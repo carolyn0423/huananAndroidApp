@@ -1,8 +1,8 @@
 package com.hamels.huanan.Main.View;
 
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,12 +12,10 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.hamels.huanan.Base.BaseFragment;
+import com.hamels.huanan.EOrderApplication;
 import com.hamels.huanan.Main.Contract.NewsContract;
 import com.hamels.huanan.R;
 import com.hamels.huanan.Repository.Model.Carousel;
-
-import static com.hamels.huanan.EOrderApplication.DOMAIN;
-
 public class NewsFragment extends BaseFragment implements NewsContract.View {
     public static final String TAG = NewsFragment.class.getSimpleName();
 
@@ -66,7 +64,7 @@ public class NewsFragment extends BaseFragment implements NewsContract.View {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        Glide.with(getActivity()).load(DOMAIN+carousel.getPicture_url2()).into(imageView);
+        Glide.with(getActivity()).load(EOrderApplication.sApiUrl + carousel.getPicture_url2()).into(imageView);
         tv_news_content.setText(Html.fromHtml(carousel.getContent()));
         tv_news_title.setText(carousel.getTitle());
     }

@@ -3,11 +3,11 @@ package com.hamels.huanan.DrawLots.View;
 import android.content.DialogInterface;
 import android.graphics.Typeface;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.constraint.ConstraintLayout;
-import android.support.v4.content.res.ResourcesCompat;
-import android.support.v7.app.AlertDialog;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.core.content.res.ResourcesCompat;
+import androidx.appcompat.app.AlertDialog;
 import android.text.Html;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -24,6 +24,7 @@ import com.bumptech.glide.Glide;
 import com.hamels.huanan.Base.BaseFragment;
 import com.hamels.huanan.DrawLots.Contract.LotDetailContract;
 import com.hamels.huanan.DrawLots.Presenter.LotDetailPresenter;
+import com.hamels.huanan.EOrderApplication;
 import com.hamels.huanan.Main.View.CustomViewsInfo;
 import com.hamels.huanan.Main.View.MainActivity;
 import com.hamels.huanan.R;
@@ -35,8 +36,6 @@ import com.stx.xhb.xbanner.XBanner;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
-
-import static com.hamels.huanan.EOrderApplication.DOMAIN;
 
 public class LotDetailFragment extends BaseFragment implements LotDetailContract.View{
     public static final String TAG = LotDetailFragment.class.getSimpleName();
@@ -142,7 +141,7 @@ public class LotDetailFragment extends BaseFragment implements LotDetailContract
         List<ProductPicture> productPictureList = lotDetail.getLot_picture_url_list();
         List<CustomViewsInfo> data = new ArrayList<>();
         for(int i = 0 ; i < productPictureList.size();i++){
-            data.add(new CustomViewsInfo(DOMAIN + productPictureList.get(i).getPictureurl(),productPictureList.get(i).getId()));
+            data.add(new CustomViewsInfo(EOrderApplication.sApiUrl + productPictureList.get(i).getPictureurl(),productPictureList.get(i).getId()));
         }
         mXBanner.setBannerData(R.layout.layout_main_activity, data);
         mXBanner.loadImage(new XBanner.XBannerAdapter() {

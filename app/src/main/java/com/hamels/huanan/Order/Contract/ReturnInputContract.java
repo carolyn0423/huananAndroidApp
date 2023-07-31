@@ -1,6 +1,6 @@
 package com.hamels.huanan.Order.Contract;
 
-import android.support.annotation.StringRes;
+import androidx.annotation.StringRes;
 
 import com.hamels.huanan.Base.BaseContract;
 import com.hamels.huanan.Repository.Model.OrderProduct;

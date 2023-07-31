@@ -14,15 +14,15 @@ import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
 import android.provider.Settings;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.constraint.ConstraintLayout;
-import android.support.design.widget.BottomNavigationView;
-import android.support.design.widget.FloatingActionButton;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentTransaction;
-import android.support.v7.app.AlertDialog;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.constraintlayout.widget.ConstraintLayout;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import androidx.core.app.ActivityCompat;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
+import androidx.appcompat.app.AlertDialog;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -114,8 +114,8 @@ public class MainActivity extends BaseActivity implements MainContract.View {
     // qrcode
     private PopupWindow popupWindow;
     private ImageView dialog_img_qrcode;
-    private int barcodeWidth = 350;
-    private int barcodeHeight = 350;
+    private int barcodeWidth = 300;
+    private int barcodeHeight = 300;
     private int brightnessNow = 0;
 
     public static String sSourceActive = "";
@@ -660,10 +660,10 @@ public class MainActivity extends BaseActivity implements MainContract.View {
                 changeTabFragment(MemberCenterFragment.getInstance());
                 break;
             case REQUEST_COUPON:
-                addFragment(WebViewFragment.getInstance(R.string.coupon, EOrderApplication.WEBVIEW_COUPONS_URL));
+                addFragment(WebViewFragment.getInstance(R.string.coupon, EOrderApplication.sApiUrl + EOrderApplication.WEBVIEW_COUPONS_URL));
                 break;
             case REQUEST_POINT:
-                addFragment(WebViewFragment.getInstance(R.string.my_point, EOrderApplication.WEBVIEW_SMILEPOINT_URL));
+                addFragment(WebViewFragment.getInstance(R.string.my_point, EOrderApplication.sApiUrl + EOrderApplication.WEBVIEW_SMILEPOINT_URL));
                 break;
             case REQUEST_MAIL:
                 addFragment(MailFileFragment.getInstance());
@@ -689,11 +689,21 @@ public class MainActivity extends BaseActivity implements MainContract.View {
 
     @Override
     public void refreshBadge() {
-//        mainPresenter.getMailBadgeFromApi();
-//        mainPresenter.getMessageBadgeFromApi();
+        mainPresenter.getMailBadgeFromApi();
+        mainPresenter.getMessageBadgeFromApi();
         mainPresenter.getBadgeNumberFromApi();
 
         setAppBadge();
+    }
+
+    @Override
+    public void setMailBadge(String count) {
+        appToolbar.setMailBadgeCount(Integer.parseInt(count));
+    }
+
+    @Override
+    public void setMessageBadge(String count) {
+        appToolbar.setMessageBadgeCount(Integer.parseInt(count));
     }
 
     // 判斷畫面上顯示的是否為MainIndexFragment
@@ -847,7 +857,7 @@ public class MainActivity extends BaseActivity implements MainContract.View {
             getSupportFragmentManager().beginTransaction().remove(fragment).commitNow();
         }
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction().replace(R.id.frame, baseFragment, "");
-        transaction.addToBackStack("");
+        transaction.addToBackStack(null);
         transaction.commit();
     }
 
@@ -1012,7 +1022,7 @@ public class MainActivity extends BaseActivity implements MainContract.View {
                 goBackPage = mWebBackForwardList.getItemAtIndex(mWebBackForwardList.getCurrentIndex() - 1).getUrl();
             }
             if (currentPage.indexOf("orderDetail.html") > 0 && goBackPage.indexOf("order.html") > 0) {
-                webView.loadUrl(EOrderApplication.WEBVIEW_ORDER_URL + "?orderType=" + "");
+                webView.loadUrl(EOrderApplication.sApiUrl + EOrderApplication.WEBVIEW_ORDER_URL + "?orderType=" + "");
             } else if (currentPage.indexOf("order.html") > 0) {
                 changeTabFragment(MemberCenterFragment.getInstance());
                 webView = null;
@@ -1191,18 +1201,26 @@ public class MainActivity extends BaseActivity implements MainContract.View {
             if (willChangeFragment.isAdded()) {
                 MultiFormatWriter multiFormatWriter = new MultiFormatWriter();
                 try {
-                    BitMatrix bitMatrix = multiFormatWriter.encode(barcodeNum, BarcodeFormat.QR_CODE, barcodeWidth, barcodeHeight);
-                    int height = bitMatrix.getHeight();
-                    int width = bitMatrix.getWidth();
-                    BarcodeEncoder barcodeEncoder = new BarcodeEncoder();
-                    Bitmap bitmap = barcodeEncoder.createBitmap(bitMatrix);
-                    for (int x = 0; x < width; x++) {
-                        for (int y = 0; y < height; y++) {
-                            bitmap.setPixel(x, y, bitMatrix.get(x, y) ? Color.BLACK : Color.WHITE);
+                    BitMatrix bitMatrix = new MultiFormatWriter().encode(barcodeNum, BarcodeFormat.QR_CODE, barcodeWidth, barcodeHeight);
+
+                    int newWidth = 800;
+                    int newHeight = 800;
+
+                    Bitmap bitmap = Bitmap.createBitmap(newWidth, newHeight, Bitmap.Config.ARGB_8888);
+                    float scaleX = (float) newWidth / barcodeWidth;
+                    float scaleY = (float) newHeight / barcodeHeight;
+                    for (int x = 0; x < barcodeWidth; x++) {
+                        for (int y = 0; y < barcodeHeight; y++) {
+                            if (bitMatrix.get(x, y)) {
+                                for (int scaledX = (int) (x * scaleX); scaledX < (int) ((x + 1) * scaleX); scaledX++) {
+                                    for (int scaledY = (int) (y * scaleY); scaledY < (int) ((y + 1) * scaleY); scaledY++) {
+                                        bitmap.setPixel(scaledX, scaledY, Color.BLACK);
+                                    }
+                                }
+                            }
                         }
                     }
                     dialog_img_qrcode.setImageBitmap(bitmap);
-
                 } catch (WriterException e) {
                     e.printStackTrace();
                 }
@@ -1257,20 +1275,19 @@ public class MainActivity extends BaseActivity implements MainContract.View {
         TextView tvEOrder = findViewById(R.id.tv_eorder);
         if(customers == null && (sCustomerID.equals("") || sCustomerName.equals(""))){
             //tvEOrder.setText("全部商家");
-            //EOrderApplication.CUSTOMER_ID = "";
-            //EOrderApplication.DOMAIN = EOrderApplication.isPrd ? EOrderApplication.DOMAIN_ADMIN_PRO : EOrderApplication.DOMAIN_ADMIN_SIT;
-            //EOrderApplication.DOMAIN = EOrderApplication.ADMIN_DOMAIN;
-            //EOrderApplication.WEBVIEW_DOMAIN = EOrderApplication.DOMAIN;
+            EOrderApplication.CUSTOMER_ID = "";
+            EOrderApplication.CUSTOMER_NAME = "";
+            EOrderApplication.sApiUrl = "";
         }else if(!sCustomerName.equals((""))){
             //tvEOrder.setText(sCustomerName);
-            //EOrderApplication.CUSTOMER_ID = sCustomerID;
-            //EOrderApplication.DOMAIN = sApiUrl;
-            //EOrderApplication.WEBVIEW_DOMAIN = sApiUrl;
+            EOrderApplication.CUSTOMER_ID = sCustomerID;
+            EOrderApplication.CUSTOMER_NAME = sCustomerName;
+            EOrderApplication.sApiUrl = sApiUrl;
         }else{
             //tvEOrder.setText(customers.getCustomerName());
-            //EOrderApplication.CUSTOMER_ID = customers.getCustomerID();
-            //EOrderApplication.DOMAIN = customers.getApiUrl();
-            //EOrderApplication.WEBVIEW_DOMAIN = customers.getApiUrl();
+            EOrderApplication.CUSTOMER_ID = customers.getCustomerID();
+            EOrderApplication.CUSTOMER_NAME = customers.getCustomerName();
+            EOrderApplication.sApiUrl = customers.getApiUrl();
         }
         ApiRepository.repository = null;
         MemberRepository.memberRepository = null;
@@ -1297,7 +1314,6 @@ public class MainActivity extends BaseActivity implements MainContract.View {
 
     private void AlertUpdateApp(){
         String PackageName = this.getPackageName();
-        /*
         new AlertDialog.Builder(this).setTitle(R.string.dialog_hint).setMessage("發現新版本")
                 .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
                     @Override
@@ -1309,8 +1325,6 @@ public class MainActivity extends BaseActivity implements MainContract.View {
                     }
                 })
                 .show();
-
-         */
     }
 
     /**

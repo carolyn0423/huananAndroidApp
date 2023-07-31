@@ -26,15 +26,13 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 
-import static com.hamels.huanan.EOrderApplication.DOMAIN;
-
 public class ApiRepository {
     public static final String TAG = ApiRepository.class.getSimpleName();
 
     private final String CLIENT_ID = "doubleservice";
     protected Retrofit retrofit;
     public static ApiRepository repository;
-    private String sDOMAIN = DOMAIN;
+    private String sDOMAIN = EOrderApplication.sApiUrl;
 
     public static ApiRepository getInstance() {
         if (repository == null) {
@@ -47,13 +45,12 @@ public class ApiRepository {
     public ApiRepository() {
 
         if (EOrderApplication.isLogin) {
-            sDOMAIN = DOMAIN;
+            sDOMAIN = EOrderApplication.sApiUrl;
         } else {
-            String sApiUrl = EOrderApplication.sApiUel;
-            if (sApiUrl.equals("")) {
+            if (EOrderApplication.sApiUrl.equals("")) {
                 sDOMAIN = EOrderApplication.ADMIN_DOMAIN;
             } else {
-                sDOMAIN = sApiUrl;
+                sDOMAIN = EOrderApplication.sApiUrl;
             }
         }
 

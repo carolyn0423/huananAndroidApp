@@ -54,18 +54,20 @@ public class LocationListPresenter extends BasePresenter<LocationListContract.Vi
         String sCustomerID = repositoryManager.getCustomerID();
 
         //  先取得該商家的全門市清單
+        String finalTmpfunctionname = tmpfunctionname;
+        String finalSKilometer = sKilometer;
         repositoryManager.callGetLocationApi("AppLocation", sCustomerID, "", "0", "", new BaseContract.ValueCallback<List<Store>>() {
             @Override
             public void onValueCallback(int task, List<Store> type) {
                 boolean isOnlineShopping = type.size() > 0 ? true : false;
                 view.setOnlineShoppingFlag(isOnlineShopping, type);
-            }
-        });
 
-        repositoryManager.callGetLocationApi(tmpfunctionname, sCustomerID, location_id, sKilometer, "", new BaseContract.ValueCallback<List<Store>>() {
-            @Override
-            public void onValueCallback(int task, List<Store> type) {
-                view.setLocationList(type);
+                repositoryManager.callGetLocationApi(finalTmpfunctionname, sCustomerID, location_id, finalSKilometer, "", new BaseContract.ValueCallback<List<Store>>() {
+                    @Override
+                    public void onValueCallback(int task, List<Store> type) {
+                        view.setLocationList(type);
+                    }
+                });
             }
         });
     }

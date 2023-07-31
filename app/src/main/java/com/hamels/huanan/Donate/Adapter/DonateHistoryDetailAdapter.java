@@ -1,6 +1,6 @@
 package com.hamels.huanan.Donate.Adapter;
 
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 import android.view.ViewGroup;
 
 import com.hamels.huanan.Base.BaseAdapter;

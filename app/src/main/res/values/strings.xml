@@ -1,8 +1,8 @@
 <resources>
-    <string name="eorder_app_name">Huanan</string>
+    <string name="eorder_app_name">學田泉</string>
 
     <!-- basic -->
-    <string name="store_name">Huanan</string>
+    <string name="store_name">學田泉</string>
     <string name="setting">設定</string>
     <string name="name">姓名</string>
     <string name="gender">性別</string>
@@ -125,7 +125,7 @@
 
     <!-- lot -->
     <string name="hint_cif_code">請輸入身分證字號</string>
-    <string name="main_type_name">菜單分類</string>
+    <string name="main_type_name">產品專區</string>
     <string name="lot_prod_name">商品名稱</string>
     <string name="lot_spec_name">規格名稱</string>
     <string name="lot_prod_id">商品編號</string>
@@ -145,7 +145,7 @@
     <!-- bottomNavigation -->
     <string name="tab_index">首頁</string>
     <string name="tab_news">最新消息</string>
-    <string name="tab_shop">外帶外送</string>
+    <string name="tab_shop">產品專區</string>
     <string name="tab_ticket">買提貨券</string>
     <string name="tab_lot">抽獎抽籤</string>
     <string name="tab_member_card">會員卡資料</string>

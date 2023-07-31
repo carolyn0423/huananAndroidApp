@@ -1,7 +1,7 @@
 package com.hamels.huanan.Donate.Holder;
 
-import android.support.annotation.NonNull;
-import android.support.v7.widget.RecyclerView;
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -21,7 +21,6 @@ import java.util.Date;
 
 public class DonateCartHolder extends RecyclerView.ViewHolder {
     public static final String TAG = DonateCartHolder.class.getSimpleName();
-
     public ImageView img_picture_url;
     public TextView tv_product_name, tv_type_name_spec_name, tv_eticket_due_date, tv_left_number, tv_giveflag, tv_cart_count;
     public EditText edit_cart_count;
@@ -43,7 +42,7 @@ public class DonateCartHolder extends RecyclerView.ViewHolder {
     }
 
     public void setImg_donatecart1(DonateCart history) {
-        Glide.with(DonateCartFragment.getInstance()).load(EOrderApplication.DOMAIN + history.getPictureUrl()).into(img_picture_url);
+        Glide.with(DonateCartFragment.getInstance()).load(EOrderApplication.sApiUrl + history.getPictureUrl()).into(img_picture_url);
         tv_product_name.setText(history.getProductName());
         tv_type_name_spec_name.setText(" ( " + history.getTypeName() + " - " + history.getspec_name() + " ) ");
         //tv_spec_name.setText("");
@@ -76,7 +75,7 @@ public class DonateCartHolder extends RecyclerView.ViewHolder {
     }
 
     public void setImg_donatecart2(DonateCart history) {
-        Glide.with(DonateCart2Fragment.getInstance()).load(EOrderApplication.DOMAIN + history.getPictureUrl()).into(img_picture_url);
+        Glide.with(DonateCart2Fragment.getInstance()).load(EOrderApplication.sApiUrl + history.getPictureUrl()).into(img_picture_url);
         tv_product_name.setText(history.getProductName());
         tv_type_name_spec_name.setText(" ( " + history.getTypeName() + " - " + history.getspec_name() + " ) ");
         tv_eticket_due_date.setText(history.getEticketDueDate());

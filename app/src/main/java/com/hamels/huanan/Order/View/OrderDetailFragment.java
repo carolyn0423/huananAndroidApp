@@ -1,8 +1,8 @@
 package com.hamels.huanan.Order.View;
 
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -79,7 +79,7 @@ public class OrderDetailFragment extends BaseFragment {
         //Toast.makeText(getActivity(), "order_id: " + orderid, Toast.LENGTH_LONG).show();
         //Toast.makeText(getActivity(), "meal_no: " + meal_no, Toast.LENGTH_LONG).show();
 
-        webView.loadUrl(EOrderApplication.WEBVIEW_ORDERDETAIL_URL + "?order_id=" + orderid + "&meal_no=" + meal_no);
+        webView.loadUrl(EOrderApplication.sApiUrl + EOrderApplication.WEBVIEW_ORDERDETAIL_URL + "?order_id=" + orderid + "&meal_no=" + meal_no);
     }
 
     @Override

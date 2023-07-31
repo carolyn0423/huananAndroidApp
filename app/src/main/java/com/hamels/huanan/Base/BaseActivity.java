@@ -4,11 +4,11 @@ import android.Manifest;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.Bundle;
-import android.support.annotation.IdRes;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.annotation.StringRes;
-import android.support.v7.app.AppCompatActivity;
+import androidx.annotation.IdRes;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.annotation.StringRes;
+import androidx.appcompat.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Toast;
 
@@ -87,6 +87,12 @@ public class BaseActivity extends AppCompatActivity implements BaseContract.View
                     onBackPressed();
                 }
             } : null);
+        }
+    }
+
+    public void setBackButtonVisibilityNoClick(boolean isVisible) {
+        if (appToolbar != null) {
+            appToolbar.getBtnBack().setVisibility(isVisible ? View.VISIBLE : View.GONE);
         }
     }
 

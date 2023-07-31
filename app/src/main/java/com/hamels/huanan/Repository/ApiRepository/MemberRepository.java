@@ -595,25 +595,25 @@ public class MemberRepository extends ApiRepository {
         }, callback);
     }
 
-//    public void getMailBadge(final String mebmer_id , final AbsApiCallback callback) {
-//        Map<String, String> map = new HashMap<>();
-//        map.put("modified_user",mebmer_id);
-//        map.put("member_id",mebmer_id);
-//        map.put("isApp","true");
-//
-//        RequestBody requestBody = RequestBody.create(MediaType.parse("text/plain"), ApiUtils.getEncodeStringParams(map));
-//        retrofit.create(MemberApiService.class).postGetMailBadge(requestBody).enqueue(callback);
-//    }
+    public void getMailBadge(final String mebmer_id , final AbsApiCallback callback) {
+        Map<String, String> map = new HashMap<>();
+        map.put("modified_user",mebmer_id);
+        map.put("member_id",mebmer_id);
+        map.put("isApp","true");
 
-//    public void getMessageBadge(final String mebmer_id , final AbsApiCallback callback) {
-//        Map<String, String> map = new HashMap<>();
-//        map.put("modified_user",mebmer_id);
-//        map.put("member_id",mebmer_id);
-//        map.put("isApp","true");
-//
-//        RequestBody requestBody = RequestBody.create(MediaType.parse("text/plain"), ApiUtils.getEncodeStringParams(map));
-//        retrofit.create(MemberApiService.class).postGetMessageBadge(requestBody).enqueue(callback);
-//    }
+        RequestBody requestBody = RequestBody.create(MediaType.parse("text/plain"), ApiUtils.getEncodeStringParams(map));
+        retrofit.create(MemberApiService.class).postGetMailBadge(requestBody).enqueue(callback);
+    }
+
+    public void getMessageBadge(final String mebmer_id , final AbsApiCallback callback) {
+        Map<String, String> map = new HashMap<>();
+        map.put("modified_user",mebmer_id);
+        map.put("member_id",mebmer_id);
+        map.put("isApp","true");
+
+        RequestBody requestBody = RequestBody.create(MediaType.parse("text/plain"), ApiUtils.getEncodeStringParams(map));
+        retrofit.create(MemberApiService.class).postGetMessageBadge(requestBody).enqueue(callback);
+    }
 
     public void getBadgeNumber(final String customer_id,final String mebmer_id, final AbsApiCallback callback) {
         Map<String, String> map = new HashMap<>();

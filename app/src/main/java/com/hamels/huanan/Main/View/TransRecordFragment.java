@@ -1,8 +1,8 @@
 package com.hamels.huanan.Main.View;
 
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -81,7 +81,7 @@ public class TransRecordFragment extends BaseFragment {
         ((MainActivity) getActivity()).bindWebView(webView);
 //
         //setCookies();
-        webView.loadUrl(EOrderApplication.WEBVIEW_ORDER_URL + "?orderType=" + mOrderType + "&order_id=" + sOrderID + "&meal_no=" + sMealNo);
+        webView.loadUrl(EOrderApplication.sApiUrl + EOrderApplication.WEBVIEW_ORDER_URL + "?orderType=" + mOrderType + "&order_id=" + sOrderID + "&meal_no=" + sMealNo);
     }
 
     private void setCookies() {

@@ -159,11 +159,11 @@ public interface MemberApiService {
     @POST("v1/member/getMemberOrder")
     Call<BaseModel<List<Order>>> postGetMemberOrders(@Body RequestBody body);
 
-//    @POST("Push/GetPushUnReadNum")
-//    Call<BaseModel<List<Map<String , String>>>> postGetMailBadge(@Body RequestBody body);
+    @POST("Push/GetPushUnReadNum")
+    Call<BaseModel<List<Map<String , String>>>> postGetMailBadge(@Body RequestBody body);
 
-//    @POST("Message/GetMessageUnReadNum")
-//    Call<BaseModel<List<Map<String , String>>>> postGetMessageBadge(@Body RequestBody body);
+    @POST("Message/GetMessageUnReadNum")
+    Call<BaseModel<List<Map<String , String>>>> postGetMessageBadge(@Body RequestBody body);
 
     @POST("Member/GetBadgeNumber")
     Call<BaseModel<List<Map<String , String>>>> postGetBadgeNumber(@Body RequestBody body);

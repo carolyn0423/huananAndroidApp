@@ -9,9 +9,9 @@ public interface MainContract {
     interface View extends BaseContract.View {
         void refreshBadge();
 
-//        void setMailBadge(String count);
-//
-//        void setMessageBadge(String count);
+        void setMailBadge(String count);
+
+        void setMessageBadge(String count);
 
         void setAllBadge(String count);
 
@@ -29,9 +29,9 @@ public interface MainContract {
     }
 
     interface Presenter extends BaseContract.Presenter {
-//        void getMailBadgeFromApi();
-//
-//        void getMessageBadgeFromApi();
+        void getMailBadgeFromApi();
+
+        void getMessageBadgeFromApi();
 
         void getBadgeNumberFromApi();
 

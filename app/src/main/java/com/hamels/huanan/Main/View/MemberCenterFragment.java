@@ -2,10 +2,10 @@ package com.hamels.huanan.Main.View;
 
 import android.content.DialogInterface;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.constraint.ConstraintLayout;
-import android.support.v7.app.AlertDialog;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.appcompat.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -135,7 +135,7 @@ public class MemberCenterFragment extends BaseFragment implements View.OnClickLi
         }else if (id == R.id.btn_point){
             ((MainActivity) getActivity()).addFragment(MemberPointFragment.getInstance());
         }else if (id == R.id.btn_coupon){
-            ((MainActivity) getActivity()).addFragment(WebViewFragment.getInstance(R.string.coupon, EOrderApplication.WEBVIEW_COUPONS_URL));
+            ((MainActivity) getActivity()).addFragment(WebViewFragment.getInstance(R.string.coupon, EOrderApplication.sApiUrl + EOrderApplication.WEBVIEW_COUPONS_URL));
         }else if (id == R.id.btn_contact_us){
             ((MainActivity) getActivity()).addFragment(AboutFragment.getInstance());
         }else if (id == R.id.btn_terms){

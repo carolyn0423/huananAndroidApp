@@ -6,7 +6,7 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.Settings;
-import android.support.annotation.StringRes;
+import androidx.annotation.StringRes;
 import com.hamels.huanan.Base.BaseActivity;
 import com.hamels.huanan.Base.WebViewActivity;
 import com.hamels.huanan.Init.NotificationControlActivity;

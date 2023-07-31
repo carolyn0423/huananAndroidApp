@@ -1,9 +1,9 @@
 package com.hamels.huanan.Order.Adapter;
 
 import android.content.Context;
-import android.support.annotation.Nullable;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentStatePagerAdapter;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentStatePagerAdapter;
 
 import com.hamels.huanan.Order.View.OrderListFragment;
 import com.hamels.huanan.R;

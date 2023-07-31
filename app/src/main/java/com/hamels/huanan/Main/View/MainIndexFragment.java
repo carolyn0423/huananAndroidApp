@@ -2,9 +2,9 @@ package com.hamels.huanan.Main.View;
 
 import android.app.AlertDialog;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.constraint.ConstraintLayout;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -15,6 +15,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.hamels.huanan.Base.BaseFragment;
+import com.hamels.huanan.EOrderApplication;
 import com.hamels.huanan.Main.Contract.MainIndexContract;
 import com.hamels.huanan.Main.Presenter.MainIndexPresenter;
 import com.hamels.huanan.R;
@@ -162,7 +163,7 @@ public class MainIndexFragment extends BaseFragment implements MainIndexContract
     @Override
     public void setCarouselList(final List<Carousel> carouselList) {
         List<CustomViewsInfo> data = new ArrayList<>();
-        String sDoMain = mainindexPresenter.getUserLogin() ? DOMAIN : ADMIN_DOMAIN;
+        String sDoMain = EOrderApplication.sApiUrl.equals("") ? ADMIN_DOMAIN : EOrderApplication.sApiUrl;
         for(int i = 0 ; i < carouselList.size();i++){
             data.add(new CustomViewsInfo(sDoMain + carouselList.get(i).getPicture_url(),carouselList.get(i).getId()));
         }

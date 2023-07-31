@@ -1,8 +1,8 @@
 package com.hamels.huanan.Main.View;
 
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -52,7 +52,9 @@ public class ShoppingCartFragment extends BaseFragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_news, container, false);
 
-        orderType = getArguments().getString("G", "");
+        orderType = "G";
+
+        //  orderType = getArguments().getString("G", "");
 
         initView(view);
 
@@ -74,13 +76,13 @@ public class ShoppingCartFragment extends BaseFragment {
 
         switch (orderType) {
             case "G":
-                webView.loadUrl(EOrderApplication.WEBVIEW_SHOPPING_CART_URL);
+                webView.loadUrl(EOrderApplication.sApiUrl + EOrderApplication.WEBVIEW_SHOPPING_CART_URL);
                 break;
             case "E":
-                webView.loadUrl(EOrderApplication.WEBVIEW_SHOPPING_CART_URL2);
+                webView.loadUrl(EOrderApplication.sApiUrl + EOrderApplication.WEBVIEW_SHOPPING_CART_URL2);
                 break;
             default:
-                webView.loadUrl(EOrderApplication.WEBVIEW_SHOPPING_CART_URL);
+                webView.loadUrl(EOrderApplication.sApiUrl + EOrderApplication.WEBVIEW_SHOPPING_CART_URL);
                 break;
         }
 

@@ -27,6 +27,8 @@ public class Customer {
     private double distance;
     @SerializedName("Online_Enabled")
     private String OnlineEnabled;
+    @SerializedName("appstore_version")
+    private String AppstoreVersion;
 
     public String getCustomerID() {
         return customer_id;
@@ -102,5 +104,9 @@ public class Customer {
 
     public String getOnlineEnabled() {
         return OnlineEnabled;
+    }
+
+    public String getAppstoreVersion() {
+        return AppstoreVersion;
     }
 }

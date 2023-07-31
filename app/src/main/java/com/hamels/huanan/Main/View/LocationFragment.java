@@ -8,13 +8,13 @@ import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.constraint.ConstraintLayout;
-import android.support.constraint.Group;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.ContextCompat;
-import android.support.v7.widget.RecyclerView;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.constraintlayout.widget.Group;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
+import androidx.recyclerview.widget.RecyclerView;
 import android.util.Log;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
@@ -82,7 +82,7 @@ public class LocationFragment extends BaseFragment implements LocationListContra
         ((MainActivity) getActivity()).setSortButtonVisibility(false);
 
         ((MainActivity) getActivity()).setTopBarVisibility(false);
-        ((MainActivity) getActivity()).setAppToolbarVisibility(true);
+        ((MainActivity) getActivity()).setAppToolbarVisibility(false);
         ((MainActivity) getActivity()).setMainIndexMessageUnreadVisibility(false);
 
         noLocationGroup = view.findViewById(R.id.no_location_group);
@@ -161,7 +161,7 @@ public class LocationFragment extends BaseFragment implements LocationListContra
         }else{
             ((MainActivity) getActivity()).setAppTitle(R.string.tab_store);
 
-            btn_functionname_1.setVisibility(view.VISIBLE);
+            btn_functionname_1.setVisibility(view.GONE);
             clFunctionname_2.width = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 110, getResources().getDisplayMetrics());
             clFunctionname_2.endToStart = clFunctionname_2.UNSET;
 
@@ -204,9 +204,17 @@ public class LocationFragment extends BaseFragment implements LocationListContra
             ((MainActivity) getActivity()).addFragment(ProductMainTypeFragment.getInstance());
         }else if(location_count > 1 && stores.size() == 0){
             // 若門市有多個, 但無常用門市時，頁籤default 在全部門市
+            ((MainActivity) getActivity()).setAppToolbarVisibility(true);
             storeListPresenter.setFunctionname(FUNCTIONNAME_3, location_id);
+            btn_functionname_1.setVisibility(getView().VISIBLE);
+            btn_functionname_2.setVisibility(getView().VISIBLE);
+            btn_functionname_3.setVisibility(getView().VISIBLE);
         }else {
+            ((MainActivity) getActivity()).setAppToolbarVisibility(true);
             locationListAdapter.setData(stores);
+            btn_functionname_1.setVisibility(getView().VISIBLE);
+            btn_functionname_2.setVisibility(getView().VISIBLE);
+            btn_functionname_3.setVisibility(getView().VISIBLE);
         }
     }
 

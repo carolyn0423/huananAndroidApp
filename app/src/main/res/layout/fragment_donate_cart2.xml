@@ -12,7 +12,7 @@
         android:layout_marginBottom="60dp"
         android:overScrollMode="never">
 
-        <android.support.constraint.ConstraintLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="15dp">
@@ -44,7 +44,7 @@
                 android:paddingBottom="8dp"
                 app:layout_constraintTop_toBottomOf="@+id/tv_product_cnt" />
 
-            <android.support.constraint.ConstraintLayout
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/constraintLayout1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -52,12 +52,12 @@
                 android:padding="1dp"
                 tools:ignore="MissingConstraints">
 
-                <android.support.constraint.ConstraintLayout
+                <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@drawable/donate_bg_3">
 
-                    <android.support.constraint.ConstraintLayout
+                    <androidx.constraintlayout.widget.ConstraintLayout
                         android:id="@+id/constraintLayout2"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -86,9 +86,9 @@
                             android:textColor="#3AAD37"
                             android:textSize="20dp" />
 
-                    </android.support.constraint.ConstraintLayout>
+                    </androidx.constraintlayout.widget.ConstraintLayout>
 
-                    <android.support.v7.widget.RecyclerView
+                    <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/donate_recycler_view"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -99,9 +99,9 @@
                         app:layout_constraintTop_toBottomOf="@+id/constraintLayout2"
                         app:layout_constraintVertical_bias="0.0" />
 
-                </android.support.constraint.ConstraintLayout>
+                </androidx.constraintlayout.widget.ConstraintLayout>
 
-            </android.support.constraint.ConstraintLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
             <TextView
                 android:id="@+id/tv_product_cnt_title"
@@ -121,7 +121,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/constraintLayout1"
                 app:layout_constraintEnd_toEndOf="parent"/>
 
-        </android.support.constraint.ConstraintLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
     </ScrollView>
 

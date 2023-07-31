@@ -15,6 +15,7 @@ public class Product implements Parcelable {
     @SerializedName("product_id")
     private int id = 0;
     private String product_type_main_name = "";
+    private String product_type_main_id = "";
     private String type_name = "";
     private String product_name = "";
     private String location_id = "";
@@ -105,6 +106,10 @@ public class Product implements Parcelable {
         return product_type_main_name;
     }
 
+    public String getProductTypeMainID() {
+        return product_type_main_id;
+    }
+
     public String getTypeName() {
         return type_name;
     }
@@ -185,6 +190,7 @@ public class Product implements Parcelable {
         store_name = in.readString();
         spec_list = in.createTypedArrayList(ProductSpec.CREATOR);
         soldout_flag = in.readString();
+        product_type_main_id = in.readString();
     }
 
     public static final Creator<Product> CREATOR = new Creator<Product>() {
@@ -219,6 +225,7 @@ public class Product implements Parcelable {
         dest.writeString(store_name);
         dest.writeTypedList(spec_list);
         dest.writeString(soldout_flag);
+        dest.writeString(product_type_main_id);
     }
 }
 

@@ -5,10 +5,10 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.provider.Settings;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.constraint.ConstraintLayout;
-import android.support.v4.app.FragmentTransaction;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.fragment.app.FragmentTransaction;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -166,7 +166,7 @@ public class DonateDetailFragment extends BaseFragment implements DonateDetailCo
 
     @Override
     public void setDonateDetail(List<Donate> productDetail) {
-        Glide.with(DonateDetailFragment.getInstance(uid)).load(EOrderApplication.DOMAIN + productDetail.get(0).getPictureUrl()).into(img_donate);
+        Glide.with(DonateDetailFragment.getInstance(uid)).load(EOrderApplication.sApiUrl + productDetail.get(0).getPictureUrl()).into(img_donate);
 
         ticket_code = productDetail.get(0).getTicketCode();
 

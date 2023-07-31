@@ -56,7 +56,7 @@ public class RepositoryManager {
     public boolean getUserLogin() {
         boolean isLogin = false;
 
-        if(SharedUtils.getInstance().getUser(context) != null && !EOrderApplication.sApiUel.equals("")){
+        if(SharedUtils.getInstance().getUser(context) != null && !EOrderApplication.sApiUrl.equals("")){
             isLogin = true;
         }
 
@@ -758,49 +758,49 @@ public class RepositoryManager {
         });
     }
 
-//    public void callGetMailBadgeApi(final BaseContract.ValueCallback<String> valueCallback) {
-////        basePresenter.startCallApi();
-//        String member_id = context.getSharedPreferences("MemberID", Context.MODE_PRIVATE).getString("MemberID", "");
-//        MemberRepository.getInstance().getMailBadge(member_id,new ApiCallback<BaseModel<List<Map<String, String>>>>(basePresenter) {
-//            @Override
-//            public void onApiSuccess(BaseModel<List<Map<String, String>>> response) {
-//                super.onApiSuccess(response);
-//                if (response.getSuccess()) {
-//                    List<Map<String, String>> map = response.getItems();
-//                    if (map.get(0).containsKey("unReadNum")) {
-//                        valueCallback.onValueCallback(TASK_POST_GET_MAIL_BADGE, response.getItems().get(0).get("unReadNum"));
-//                    } else {
-//                        valueCallback.onValueCallback(TASK_POST_GET_MAIL_BADGE, "0");
-//                    }
-//                } else {
-//                    valueCallback.onValueCallback(TASK_POST_GET_MAIL_BADGE, "0");
-//                }
-//            }
-//        });
-//    }
+    public void callGetMailBadgeApi(final BaseContract.ValueCallback<String> valueCallback) {
+//        basePresenter.startCallApi();
+        String member_id = context.getSharedPreferences("MemberID", Context.MODE_PRIVATE).getString("MemberID", "");
+        MemberRepository.getInstance().getMailBadge(member_id,new ApiCallback<BaseModel<List<Map<String, String>>>>(basePresenter) {
+            @Override
+            public void onApiSuccess(BaseModel<List<Map<String, String>>> response) {
+                super.onApiSuccess(response);
+                if (response.getSuccess()) {
+                    List<Map<String, String>> map = response.getItems();
+                    if (map.get(0).containsKey("unReadNum")) {
+                        valueCallback.onValueCallback(TASK_POST_GET_MAIL_BADGE, response.getItems().get(0).get("unReadNum"));
+                    } else {
+                        valueCallback.onValueCallback(TASK_POST_GET_MAIL_BADGE, "0");
+                    }
+                } else {
+                    valueCallback.onValueCallback(TASK_POST_GET_MAIL_BADGE, "0");
+                }
+            }
+        });
+    }
 
-//    public void callGetMessageBadgeApi(final BaseContract.ValueCallback<String> valueCallback) {
-////        basePresenter.startCallApi();
-//        String member_id = context.getSharedPreferences("MemberID", Context.MODE_PRIVATE).getString("MemberID", "");
-//        MemberRepository.getInstance().getMessageBadge(member_id,new ApiCallback<BaseModel<List<Map<String, String>>>>(basePresenter) {
-//            @Override
-//            public void onApiSuccess(BaseModel<List<Map<String, String>>> response) {
-//                super.onApiSuccess(response);
-////                if (response.getCode() == 200) {
-//                if (response.getSuccess()) {
-//                    List<Map<String, String>> map = response.getItems();
-//                    if (map.get(0).containsKey("unReadNum")) {
-//                        valueCallback.onValueCallback(TASK_POST_GET_MESSAGE_BADGE, response.getItems().get(0).get("unReadNum"));
-////                        valueCallback.onValueCallback(TASK_POST_GET_MAIL_BADGE, "");
-//                    } else {
-//                        valueCallback.onValueCallback(TASK_POST_GET_MESSAGE_BADGE, "0");
-//                    }
-//                } else {
-//                    valueCallback.onValueCallback(TASK_POST_GET_MESSAGE_BADGE, "0");
-//                }
-//            }
-//        });
-//    }
+    public void callGetMessageBadgeApi(final BaseContract.ValueCallback<String> valueCallback) {
+//        basePresenter.startCallApi();
+        String member_id = context.getSharedPreferences("MemberID", Context.MODE_PRIVATE).getString("MemberID", "");
+        MemberRepository.getInstance().getMessageBadge(member_id,new ApiCallback<BaseModel<List<Map<String, String>>>>(basePresenter) {
+            @Override
+            public void onApiSuccess(BaseModel<List<Map<String, String>>> response) {
+                super.onApiSuccess(response);
+//                if (response.getCode() == 200) {
+                if (response.getSuccess()) {
+                    List<Map<String, String>> map = response.getItems();
+                    if (map.get(0).containsKey("unReadNum")) {
+                        valueCallback.onValueCallback(TASK_POST_GET_MESSAGE_BADGE, response.getItems().get(0).get("unReadNum"));
+//                        valueCallback.onValueCallback(TASK_POST_GET_MAIL_BADGE, "");
+                    } else {
+                        valueCallback.onValueCallback(TASK_POST_GET_MESSAGE_BADGE, "0");
+                    }
+                } else {
+                    valueCallback.onValueCallback(TASK_POST_GET_MESSAGE_BADGE, "0");
+                }
+            }
+        });
+    }
 
 
     public void callGetBadgeNumberApi(final BaseContract.ValueCallback<String> valueCallback) {
@@ -871,7 +871,7 @@ public class RepositoryManager {
 
     public void callGetCustomerDetailApi(String sCustomerID, final BaseContract.ValueCallback<Customer> valueCallback) {
         basePresenter.startCallApi();
-        ApiAdminRepository.getInstance().getCustomerDetail(sCustomerID, new ApiCallback<BaseModel<Customer>>(basePresenter) {
+        ApiAdminRepository.getInstance().getCustomerDetail(sCustomerID, "CustomerData", new ApiCallback<BaseModel<Customer>>(basePresenter) {
             @Override
             public void onApiSuccess(BaseModel <Customer> response) {
                 super.onApiSuccess(response);

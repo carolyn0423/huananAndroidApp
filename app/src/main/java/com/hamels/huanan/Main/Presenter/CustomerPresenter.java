@@ -32,7 +32,9 @@ public class CustomerPresenter extends BasePresenter<CustomerContract.View> impl
 
     public void goCustomer(String sCustomerID, String sCustomerName, String sApiUrl) {
         EOrderApplication.CUSTOMER_ID = sCustomerID;
-        EOrderApplication.DOMAIN = sApiUrl;
+        EOrderApplication.CUSTOMER_NAME = sCustomerName;
+        EOrderApplication.sApiUrl = sApiUrl;
+
         repositoryManager.saveCustomerID(sCustomerID);
         repositoryManager.saveCustomerName(sCustomerName);
         repositoryManager.saveApiUrl(sApiUrl);

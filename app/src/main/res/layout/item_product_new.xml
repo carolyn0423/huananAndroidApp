@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<android.support.constraint.ConstraintLayout
+<androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -8,7 +8,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
-    <android.support.constraint.ConstraintLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/layout_constraint"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -50,7 +50,6 @@
 
         <TextView
             android:id="@+id/tv_product_name"
-            style="@style/fontRobotoRegular.Purple"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="15dp"
@@ -60,6 +59,7 @@
             android:maxLines="2"
             android:singleLine="false"
             android:textSize="13sp"
+            android:textColor="@color/Black"
             app:layout_constraintStart_toEndOf="@id/img_product"
             app:layout_constraintEnd_toStartOf="@id/view_01"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -75,7 +75,7 @@
             app:layout_constraintBottom_toBottomOf="@+id/img_product"
             app:layout_constraintStart_toStartOf="@+id/guideline01" />
 
-        <android.support.constraint.Guideline
+        <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline01"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -94,12 +94,12 @@
 
         <TextView
             android:id="@+id/tv_sale_price"
-            style="@style/fontRobotoRegular.Purple"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
             android:textSize="13sp"
             android:textStyle="bold"
+            android:textColor="@color/Black"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="@+id/guideline01" />
@@ -119,7 +119,7 @@
             app:layout_constraintStart_toEndOf="@+id/guideline01"
             app:layout_constraintEnd_toEndOf="parent"/>
 
-    </android.support.constraint.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 
-</android.support.constraint.ConstraintLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

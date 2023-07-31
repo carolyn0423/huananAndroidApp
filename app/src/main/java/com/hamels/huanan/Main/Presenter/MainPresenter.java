@@ -16,61 +16,73 @@ import com.hamels.huanan.MemberCenter.View.MailFileFragment;
 import com.hamels.huanan.MemberCenter.View.MessageListFragment;
 import com.hamels.huanan.MemberCenter.View.WebViewFragment;
 import com.hamels.huanan.R;
+import com.hamels.huanan.Repository.ApiCallback;
+import com.hamels.huanan.Repository.ApiRepository.ApiAdminRepository;
+import com.hamels.huanan.Repository.Model.BaseModel;
 import com.hamels.huanan.Repository.Model.Customer;
 import com.hamels.huanan.Repository.Model.User;
 import com.hamels.huanan.Repository.Model.WebSetup;
 import com.hamels.huanan.Repository.RepositoryManager;
 import com.hamels.huanan.EOrderApplication;
 
+import static com.hamels.huanan.Constant.ApiConstant.TASK_POST_GET_CUSTOMER_DETAIL;
 import static com.hamels.huanan.Constant.Constant.REQUEST_COUPON;
 import static com.hamels.huanan.Constant.Constant.REQUEST_DONATE;
 import static com.hamels.huanan.Constant.Constant.REQUEST_LOT_LIST;
 import static com.hamels.huanan.Constant.Constant.REQUEST_MAIL;
+import static com.hamels.huanan.Constant.Constant.REQUEST_MAIN_INDEX;
 import static com.hamels.huanan.Constant.Constant.REQUEST_MEMBER_CARD;
 import static com.hamels.huanan.Constant.Constant.REQUEST_MEMBER_CENTER;
 import static com.hamels.huanan.Constant.Constant.REQUEST_MESSAGE;
 import static com.hamels.huanan.Constant.Constant.REQUEST_BUSINESS;
 import static com.hamels.huanan.Constant.Constant.REQUEST_SHOPPING_CART;
 
+import android.util.Log;
+
+import java.util.List;
+
 public class MainPresenter extends BasePresenter<MainContract.View> implements MainContract.Presenter {
     public static final String TAG = MainPresenter.class.getSimpleName();
-
     public MainPresenter(MainContract.View view, RepositoryManager repositoryManager) {
         super(view, repositoryManager);
     }
-//    @Override
-//    public void getMailBadgeFromApi() {
-//        if (repositoryManager.getUserLogin()) {
-//            repositoryManager.callGetMailBadgeApi(new BaseContract.ValueCallback<String>() {
-//                @Override
-//                public void onValueCallback(int task, String type) {
-//                    view.setMailBadge(type);
-//                }
-//            });
-//        } else {
-//            view.setMailBadge("0");
-//        }
-//    }
+    @Override
+    public void getMailBadgeFromApi() {
+        if (repositoryManager.getUserLogin()) {
+            repositoryManager.callGetMailBadgeApi(new BaseContract.ValueCallback<String>() {
+                @Override
+                public void onValueCallback(int task, String type) {
+                    view.setMailBadge(type);
+                }
+            });
+        } else {
+            view.setMailBadge("0");
+        }
+    }
 
-//    @Override
-//    public void getMessageBadgeFromApi() {
-//        if (repositoryManager.getUserLogin()) {
-//            repositoryManager.callGetMessageBadgeApi(new BaseContract.ValueCallback<String>() {
-//                @Override
-//                public void onValueCallback(int task, String type) {
-//                    view.setMessageBadge(type);
-//                }
-//            });
-//        } else {
-//            view.setMessageBadge("0");
-//        }
-//    }
+    @Override
+    public void getMessageBadgeFromApi() {
+        if (repositoryManager.getUserLogin()) {
+            repositoryManager.callGetMessageBadgeApi(new BaseContract.ValueCallback<String>() {
+                @Override
+                public void onValueCallback(int task, String type) {
+                    view.setMessageBadge(type);
+                }
+            });
+        } else {
+            view.setMessageBadge("0");
+        }
+    }
 
     public void setCustomerData(){
         //  初始設定
         repositoryManager.saveCustomerID(EOrderApplication.CUSTOMER_ID);
         repositoryManager.saveCustomerName(EOrderApplication.CUSTOMER_NAME);
-        repositoryManager.saveApiUrl(EOrderApplication.DOMAIN);
+        repositoryManager.saveCustomerName(EOrderApplication.sApiUrl);
+
+        if(EOrderApplication.sApiUrl.equals("")){
+            checkCustomerNo(EOrderApplication.sPecialCustomerNo);
+        }
     }
 
     @Override
@@ -106,7 +118,7 @@ public class MainPresenter extends BasePresenter<MainContract.View> implements M
     @Override
     public void checkLoginForCoupon() {
         if (repositoryManager.getUserLogin()) {
-            view.addFragment(WebViewFragment.getInstance(R.string.coupon, EOrderApplication.WEBVIEW_COUPONS_URL));
+            view.addFragment(WebViewFragment.getInstance(R.string.coupon, EOrderApplication.sApiUrl + EOrderApplication.WEBVIEW_COUPONS_URL));
         } else {
             view.intentToLogin(REQUEST_COUPON);
         }
@@ -132,7 +144,7 @@ public class MainPresenter extends BasePresenter<MainContract.View> implements M
 
     @Override
     public void goNewsDetail(String news_id) {
-        view.addFragment(WebViewFragment.getInstance(R.string.tab_news, EOrderApplication.WEBVIEW_NEWS_URL,news_id));
+        view.addFragment(WebViewFragment.getInstance(R.string.tab_news, EOrderApplication.sApiUrl + EOrderApplication.WEBVIEW_NEWS_URL,news_id));
     }
 
     @Override
@@ -243,11 +255,13 @@ public class MainPresenter extends BasePresenter<MainContract.View> implements M
                         if(sLoveCustomer.indexOf("|" + customers.getCustomerID() + "|") == -1) {
                             repositoryManager.saveLoveCustomer(customers.getCustomerID());
 
-                            view.showToast("AddLove");
+                            //view.showToast("AddLove");
                         }
 
                         EOrderApplication.CUSTOMER_ID = customers.getCustomerID();
-                        EOrderApplication.DOMAIN = customers.getApiUrl();
+                        EOrderApplication.CUSTOMER_NAME = customers.getCustomerName();
+                        EOrderApplication.sApiUrl = customers.getApiUrl();
+
                         repositoryManager.saveCustomerID(customers.getCustomerID());
                         repositoryManager.saveCustomerName(customers.getCustomerName());
                         repositoryManager.saveApiUrl(customers.getApiUrl());
@@ -266,8 +280,8 @@ public class MainPresenter extends BasePresenter<MainContract.View> implements M
 
         if(sCustomerID.equals((""))){
             EOrderApplication.CUSTOMER_ID = "";
-            //EOrderApplication.DOMAIN = EOrderApplication.isPrd ? EOrderApplication.DOMAIN_ADMIN_PRO : EOrderApplication.DOMAIN_ADMIN_SIT;
-            EOrderApplication.DOMAIN = EOrderApplication.ADMIN_DOMAIN;
+            EOrderApplication.CUSTOMER_NAME = "";
+            EOrderApplication.sApiUrl = "";
             if(LoveCustomer.length > 0 && !sLoveCustomer.equals((""))){
                 repositoryManager.callGetCustomerDetailApi(LoveCustomer[1], new BaseContract.ValueCallback<Customer>() {
                     @Override
@@ -284,11 +298,18 @@ public class MainPresenter extends BasePresenter<MainContract.View> implements M
     }
 
     public void getOnlineVision(){
-        repositoryManager.callGetOnlineVision("android_huanan_appstore_version", new BaseContract.ValueCallback<WebSetup>() {
+        repositoryManager.callGetCustomerDetailApi(EOrderApplication.CUSTOMER_ID, new BaseContract.ValueCallback<Customer>() {
             @Override
-            public void onValueCallback(int task, WebSetup websetup) {
-                view.getVersion(websetup.getSysContent());
+            public void onValueCallback(int task, Customer customers) {
+                view.getVersion(customers.getAppstoreVersion());
             }
         });
+
+//        repositoryManager.callGetOnlineVision("android_huanan_appstore_version", new BaseContract.ValueCallback<WebSetup>() {
+//            @Override
+//            public void onValueCallback(int task, WebSetup websetup) {
+//                view.getVersion(websetup.getSysContent());
+//            }
+//        });
     }
 }

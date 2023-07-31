@@ -1,6 +1,6 @@
 package com.hamels.huanan.Product.Adapter;
 
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -44,7 +44,7 @@ public class ProductMainTypeAdapter extends BaseAdapter<ProductMainTypeHolder> {
 
         String sImageUrl = presenter.getApiUrl();
 
-        sImageUrl = presenter.getUserLogin() ? EOrderApplication.DOMAIN : sImageUrl;
+        sImageUrl = presenter.getUserLogin() ? EOrderApplication.sApiUrl : sImageUrl;
 
         if(mainTypeleft.size() == mainTyperight.size()){
             productMainTypeHolder.setImg_ProductMainType_two(mainTypeleft.get(position) , mainTyperight.get(position), sImageUrl, isETicket);

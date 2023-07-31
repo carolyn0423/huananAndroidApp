@@ -1,9 +1,9 @@
 package com.hamels.huanan.Product.Holder;
 
 import android.graphics.Paint;
-import android.support.annotation.NonNull;
-import android.support.constraint.ConstraintLayout;
-import android.support.v7.widget.RecyclerView;
+import androidx.annotation.NonNull;
+import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.recyclerview.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -19,7 +19,6 @@ import java.text.DecimalFormat;
 
 public class ProductMerchantHolder extends RecyclerView.ViewHolder {
     public static final String TAG = ProductMerchantHolder.class.getSimpleName();
-
     public ImageView img_merchant_left , img_merchant_right;
     public ImageView img_product_left , img_product_right;
     public TextView tv_store_name_left ,tv_product_name_left ,tv_price_left , tv_sale_price_left;
@@ -106,8 +105,8 @@ public class ProductMerchantHolder extends RecyclerView.ViewHolder {
         tv_product_name_left.setVisibility(View.VISIBLE);
         img_merchant_left.setVisibility(View.INVISIBLE);
         img_merchant_right.setVisibility(View.INVISIBLE);
-        Glide.with(ProductMerchantFragment.getInstance()).load(EOrderApplication.DOMAIN + productleft.getPicture_url()).into(img_product_left);
-        Glide.with(ProductMerchantFragment.getInstance()).load(EOrderApplication.DOMAIN + productright.getPicture_url()).into(img_product_right);
+        Glide.with(ProductMerchantFragment.getInstance()).load(EOrderApplication.sApiUrl + productleft.getPicture_url()).into(img_product_left);
+        Glide.with(ProductMerchantFragment.getInstance()).load(EOrderApplication.sApiUrl + productright.getPicture_url()).into(img_product_right);
         tv_price_left.setText("NT$"+mDecimalFormat.format((double)productleft.getPrice()));
         tv_product_name_left.setText(productleft.getProduct_name());
         tv_sale_price_left.setText("NT$"+mDecimalFormat.format((double)productleft.getSale_price()));
@@ -131,7 +130,7 @@ public class ProductMerchantHolder extends RecyclerView.ViewHolder {
         tv_price_right.setVisibility(View.INVISIBLE);
         tv_sale_price_right.setVisibility(View.INVISIBLE);
         tv_product_name_right.setVisibility(View.INVISIBLE);
-        Glide.with(ProductMerchantFragment.getInstance()).load(EOrderApplication.DOMAIN + productleft.getPicture_url()).into(img_product_left);
+        Glide.with(ProductMerchantFragment.getInstance()).load(EOrderApplication.sApiUrl + productleft.getPicture_url()).into(img_product_left);
         img_product_left.setTag(R.id.img_product_left,productleft.getId());
         tv_price_left.setText("NT$"+mDecimalFormat.format((double)productleft.getPrice()));
         tv_product_name_left.setText(productleft.getProduct_name());

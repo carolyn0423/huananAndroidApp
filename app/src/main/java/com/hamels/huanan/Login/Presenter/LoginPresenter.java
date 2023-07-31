@@ -13,7 +13,6 @@ import java.util.List;
 
 public class LoginPresenter extends BasePresenter<LoginContract.View> implements LoginContract.Presenter {
     public static final String TAG = LoginPresenter.class.getSimpleName();
-
     public LoginPresenter(LoginContract.View view, RepositoryManager repositoryManager) {
         super(view, repositoryManager);
     }
@@ -38,7 +37,7 @@ public class LoginPresenter extends BasePresenter<LoginContract.View> implements
                     repositoryManager.saveAccountInfo(cellphone, password);
                     repositoryManager.saveUserID(Integer.toString(user.getMember()));
                     repositoryManager.saveVerifyCode(user.getVerifyCode());
-                    repositoryManager.saveApiUrl(EOrderApplication.DOMAIN);
+                    repositoryManager.saveApiUrl(EOrderApplication.sApiUrl);
                     if(task == ApiConstant.RESPONSE_CODE_LOGIN_VERIFIED_ERROR){
                         view.showVerifyErrorAlert("尚未完成簡訊驗證");
                     }
@@ -145,8 +144,10 @@ public class LoginPresenter extends BasePresenter<LoginContract.View> implements
                             view.showToast("AddLove");
                         }
 
-                        //EOrderApplication.CUSTOMER_ID = customers.getCustomerID();
-                        //EOrderApplication.DOMAIN = customers.getApiUrl();
+                        EOrderApplication.CUSTOMER_ID = customers.getCustomerID();
+                        EOrderApplication.CUSTOMER_NAME = customers.getCustomerName();
+                        EOrderApplication.sApiUrl = customers.getApiUrl();
+
                         repositoryManager.saveCustomerID(customers.getCustomerID());
                         repositoryManager.saveCustomerName(customers.getCustomerName());
                         repositoryManager.saveApiUrl(customers.getApiUrl());
@@ -164,9 +165,9 @@ public class LoginPresenter extends BasePresenter<LoginContract.View> implements
         String[] LoveCustomer = sLoveCustomer.split("\\|");
 
         if(sCustomerID.equals((""))){
-            //EOrderApplication.CUSTOMER_ID = "";
-            //EOrderApplication.DOMAIN = EOrderApplication.isPrd ? EOrderApplication.DOMAIN_ADMIN_PRO : EOrderApplication.DOMAIN_ADMIN_SIT;
-            //EOrderApplication.DOMAIN = EOrderApplication.ADMIN_DOMAIN;
+            EOrderApplication.CUSTOMER_ID = "";
+            EOrderApplication.CUSTOMER_NAME = "";
+            EOrderApplication.sApiUrl = "";
             if(LoveCustomer.length > 0 && !sLoveCustomer.equals((""))){
                 repositoryManager.callGetCustomerDetailApi(LoveCustomer[1], new BaseContract.ValueCallback<Customer>() {
                     @Override

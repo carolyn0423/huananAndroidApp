@@ -1,6 +1,6 @@
 package com.hamels.huanan.Main.Adapter;
 
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -99,8 +99,9 @@ public class CustomerAdapter extends BaseAdapter<CustomerHolder> {
                                 presenter.saveApiUrl(customers.get(position).getApiUrl());
                                 presenter.goLocationList(customers.get(position).getCustomerID());
 
+                                EOrderApplication.CUSTOMER_ID = customers.get(position).getCustomerID();
                                 EOrderApplication.isLogin = false;
-                                EOrderApplication.sApiUel = customers.get(position).getApiUrl();
+                                EOrderApplication.sApiUrl = customers.get(position).getApiUrl();
                                 break;
                             case "ETICKET_WELCOME":
                                 // 未登入 -> 買提貨卷
@@ -108,8 +109,9 @@ public class CustomerAdapter extends BaseAdapter<CustomerHolder> {
                                 presenter.saveApiUrl(customers.get(position).getApiUrl());
                                 presenter.goETicketProductMainType(customers.get(position).getCustomerID());
 
+                                EOrderApplication.CUSTOMER_ID = customers.get(position).getCustomerID();
                                 EOrderApplication.isLogin = false;
-                                EOrderApplication.sApiUel = customers.get(position).getApiUrl();
+                                EOrderApplication.sApiUrl = customers.get(position).getApiUrl();
                                 break;
                         }
                     }

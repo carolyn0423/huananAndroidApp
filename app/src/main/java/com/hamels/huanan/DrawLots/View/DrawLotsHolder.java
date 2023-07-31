@@ -1,8 +1,8 @@
 package com.hamels.huanan.DrawLots.View;
 
-import android.support.annotation.NonNull;
-import android.support.constraint.ConstraintLayout;
-import android.support.v7.widget.RecyclerView;
+import androidx.annotation.NonNull;
+import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.recyclerview.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
@@ -15,7 +15,6 @@ import com.hamels.huanan.EOrderApplication;
 
 public class DrawLotsHolder extends RecyclerView.ViewHolder {
     public static final String TAG = DrawLotsHolder.class.getSimpleName();
-
     public TextView tv_vip , tv_title , tv_location_name , tv_end_date;
     public ImageView img_lot;
     public ConstraintLayout layout_lot;
@@ -41,8 +40,8 @@ public class DrawLotsHolder extends RecyclerView.ViewHolder {
         if(drawLots.getLot_type().equals("1")){
             tv_vip.setVisibility(View.VISIBLE);
         }
-        Log.e(TAG, EOrderApplication.DOMAIN + drawLots.getLot_picture_url());
-        Glide.with(DrawLotsFragment.getInstance()).load(EOrderApplication.DOMAIN + drawLots.getLot_picture_url()).into(img_lot);
+        Log.e(TAG, EOrderApplication.sApiUrl + drawLots.getLot_picture_url());
+        Glide.with(DrawLotsFragment.getInstance()).load(EOrderApplication.sApiUrl + drawLots.getLot_picture_url()).into(img_lot);
         Log.e(TAG,drawLots.getLot_picture_url());
 
         layout_lot.setTag(R.id.layout_lot,drawLots.getId());

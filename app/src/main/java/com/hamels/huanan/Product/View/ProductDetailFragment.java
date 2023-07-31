@@ -5,11 +5,11 @@ import android.content.Intent;
 import android.database.DataSetObserver;
 import android.graphics.Paint;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.constraint.ConstraintLayout;
-import android.support.design.widget.TabLayout;
-import android.support.v7.app.AlertDialog;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.constraintlayout.widget.ConstraintLayout;
+import com.google.android.material.tabs.TabLayout;
+import androidx.appcompat.app.AlertDialog;
 import android.text.Html;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -30,6 +30,7 @@ import com.bumptech.glide.Glide;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.hamels.huanan.Base.BaseFragment;
+import com.hamels.huanan.EOrderApplication;
 import com.hamels.huanan.Login.VIew.LoginActivity;
 import com.hamels.huanan.Main.View.CustomViewsInfo;
 import com.hamels.huanan.Main.View.MainActivity;
@@ -50,8 +51,6 @@ import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-
-import static com.hamels.huanan.EOrderApplication.DOMAIN;
 
 public class ProductDetailFragment extends BaseFragment implements ProductDetailContract.View {
     public static final String TAG = ProductDetailFragment.class.getSimpleName();
@@ -77,6 +76,7 @@ public class ProductDetailFragment extends BaseFragment implements ProductDetail
     ProductConfList2Adapter adapter;
 
     private String location_id = "0";
+    private String product_type_main_id = "0";
     private int product_id = 0;
     private int quantity = 0;
     private int iAllConfPrice = 0;
@@ -119,7 +119,7 @@ public class ProductDetailFragment extends BaseFragment implements ProductDetail
     }
 
     private void initView(View view) {
-        ((MainActivity) getActivity()).setAppTitle(isETicket.equals("Y") ? R.string.tab_ticket : R.string.tab_shop);
+        ((MainActivity) getActivity()).setAppTitle(R.string.tab_shop);
         ((MainActivity) getActivity()).setBackButtonVisibility(true);
         ((MainActivity) getActivity()).setMessageButtonVisibility(true);
         ((MainActivity) getActivity()).setMailButtonVisibility(true);
@@ -176,9 +176,9 @@ public class ProductDetailFragment extends BaseFragment implements ProductDetail
                 for (int i = 0; i < productList.size(); i++) {
                     Log.e(TAG, "" + productList.get(i).getPrice());
 
-                    iAllConfPrice += Integer.parseInt(productList.get(i).getPrice().trim().split("\\$")[1]);
+                    iAllConfPrice += Integer.parseInt(productList.get(i).getPrice().trim().split("\\$")[1].replace(",", ""));
                 }
-                int subTotal = Integer.parseInt(tv_sale_price.getText().toString().trim().split("NT\\$")[1]);
+                int subTotal = Integer.parseInt(tv_sale_price.getText().toString().trim().split("NT\\$")[1].replace(",", ""));
                 tv_subtotal.setText("$" + ((subTotal * quantity) + iAllConfPrice));
             }
         });
@@ -198,9 +198,9 @@ public class ProductDetailFragment extends BaseFragment implements ProductDetail
                 for (int i = 0; i < productList.size(); i++) {
                     //Log.e(TAG, "" + productList.get(i).getPrice());
 
-                    iAllConfPrice += Integer.parseInt(productList.get(i).getPrice().trim().split("\\$")[1]);
+                    iAllConfPrice += Integer.parseInt(productList.get(i).getPrice().trim().split("\\$")[1].replace(",", ""));
                 }
-                int subTotal = Integer.parseInt(tv_sale_price.getText().toString().trim().split("NT\\$")[1]);
+                int subTotal = Integer.parseInt(tv_sale_price.getText().toString().trim().split("NT\\$")[1].replace(",", ""));
                 tv_subtotal.setText("$" + ((subTotal * quantity) + iAllConfPrice));
             }
         });
@@ -494,7 +494,7 @@ public class ProductDetailFragment extends BaseFragment implements ProductDetail
         List<CustomViewsInfo> data = new ArrayList<>();
         iAllSoldout = productDetail.get(0).getSoldoutToday().equals("Y") ? 1 : 0;
         for (int i = 0; i < productPictureList.size(); i++) {
-            data.add(new CustomViewsInfo(DOMAIN + productPictureList.get(i).getPictureurl(), productPictureList.get(i).getId()));
+            data.add(new CustomViewsInfo(EOrderApplication.sApiUrl + productPictureList.get(i).getPictureurl(), productPictureList.get(i).getId()));
         }
         mXBanner.setBannerData(R.layout.layout_main_activity, data);
         mXBanner.loadImage(new XBanner.XBannerAdapter() {
@@ -515,6 +515,7 @@ public class ProductDetailFragment extends BaseFragment implements ProductDetail
             tv_water_mask.setBackground(new WaterMaskUtils(getContext(),labels,-30,18));
         }
         location_id = productDetail.get(0).getLocation_id();
+        product_type_main_id = productDetail.get(0).getProductTypeMainID();
         tv_product_type.setText(productDetail.get(0).getProduct_name());
         tv_store_name.setText(productDetail.get(0).getProductTypeMainName() + " - " + productDetail.get(0).getTypeName());
         if (isETicket.equals("Y")) {
@@ -710,6 +711,17 @@ public class ProductDetailFragment extends BaseFragment implements ProductDetail
         new AlertDialog.Builder(fragment.getActivity()).setTitle(R.string.dialog_hint).setMessage(message).setPositiveButton(android.R.string.ok, null).show();
         edit_num.setText("1");
         ((MainActivity) getActivity()).refreshBadge();
+    }
+
+    public void showAddCartSuccess(String message){
+        new androidx.appcompat.app.AlertDialog.Builder(fragment.getActivity()).setTitle(R.string.dialog_hint).setMessage(message)
+                .setPositiveButton(R.string.verify, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        ((MainActivity) getActivity()).refreshBadge();
+                        ((MainActivity) getActivity()).addFragment(ProductFragment.getInstance(location_id, Integer.parseInt(product_type_main_id), isETicket));
+                    }
+                }).show();
     }
 
     private void setListViewHeight(ExpandableListView listView, int group) {

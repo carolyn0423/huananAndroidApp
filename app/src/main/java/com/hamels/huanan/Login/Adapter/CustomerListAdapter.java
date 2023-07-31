@@ -1,6 +1,6 @@
 package com.hamels.huanan.Login.Adapter;
 
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,6 +23,7 @@ public class CustomerListAdapter extends BaseAdapter<CustomerListHolder> {
     private String sMode;
     private String sLoveCustomer = "";
     private String sSourceActive = "";
+
     public CustomerListAdapter(CustomerListContract.View view, CustomerListContract.Presenter presenter, String Mode, String LoveCustomer) {
         this.view = view;
         this.presenter = presenter;

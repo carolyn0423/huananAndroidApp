@@ -3,10 +3,10 @@ package com.hamels.huanan.Business.View;
 import android.content.Intent;
 import android.graphics.Paint;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.constraint.ConstraintLayout;
-import android.support.v7.app.AlertDialog;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.appcompat.app.AlertDialog;
 import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -23,6 +23,7 @@ import com.bumptech.glide.Glide;
 import com.hamels.huanan.Base.BaseFragment;
 import com.hamels.huanan.Business.Contract.BusinessProductDetailContract;
 import com.hamels.huanan.Business.Presenter.BusinessProductDetailPresenter;
+import com.hamels.huanan.EOrderApplication;
 import com.hamels.huanan.Login.VIew.LoginActivity;
 import com.hamels.huanan.Main.View.CustomViewsInfo;
 import com.hamels.huanan.Main.View.MainActivity;
@@ -35,8 +36,6 @@ import com.stx.xhb.xbanner.XBanner;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
-
-import static com.hamels.huanan.EOrderApplication.DOMAIN;
 
 public class BusinessProductDetailFragment extends BaseFragment implements BusinessProductDetailContract.View {
     public static final String TAG = BusinessProductDetailFragment.class.getSimpleName();
@@ -159,7 +158,7 @@ public class BusinessProductDetailFragment extends BaseFragment implements Busin
 //        layout_size.setOnClickListener(new View.OnClickListener() {
 //            @Override
 //            public void onClick(View v) {
-//                ((MainActivity) getActivity()).addFragment(WebViewFragment.getInstance(R.string.tab_shop, EOrderApplication.WEBVIEW_SIZE_SPEC_URL));
+//                ((MainActivity) getActivity()).addFragment(WebViewFragment.getInstance(R.string.tab_shop, EOrderApplication.sApiUrl + EOrderApplication.WEBVIEW_SIZE_SPEC_URL));
 //            }
 //        });
     }
@@ -176,7 +175,7 @@ public class BusinessProductDetailFragment extends BaseFragment implements Busin
         List<ProductPicture> productPictureList = productDetail.get(0).getPicture_url_list();
         List<CustomViewsInfo> data = new ArrayList<>();
         for (int i = 0; i < productPictureList.size(); i++) {
-            data.add(new CustomViewsInfo(DOMAIN + productPictureList.get(i).getPictureurl(), productPictureList.get(i).getId()));
+            data.add(new CustomViewsInfo(EOrderApplication.sApiUrl + productPictureList.get(i).getPictureurl(), productPictureList.get(i).getId()));
         }
         mXBanner.setBannerData(R.layout.layout_main_activity, data);
         mXBanner.loadImage(new XBanner.XBannerAdapter() {

@@ -12,6 +12,8 @@ public interface ProductDetailContract {
         void intentToLogin(int requestCode);
 
         void showErrorAlert(String message);
+
+        void showAddCartSuccess(String message);
     }
 
     interface Presenter extends BaseContract.Presenter {

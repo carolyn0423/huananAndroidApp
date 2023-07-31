@@ -8,8 +8,8 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.ContactsContract;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -152,7 +152,7 @@ public class DonateDetail2Fragment extends BaseFragment implements DonateDetailC
     public void setDonateDetail(List<Donate> productDetail) {
         Log.e(TAG, Integer.toString(uid));
 
-        Glide.with(DonateDetail2Fragment.getInstance(uid)).load(EOrderApplication.DOMAIN + productDetail.get(0).getPictureUrl()).into(img_donate);
+        Glide.with(DonateDetail2Fragment.getInstance(uid)).load(EOrderApplication.sApiUrl + productDetail.get(0).getPictureUrl()).into(img_donate);
         tv_product_name.setText(productDetail.get(0).getProductName());
         tv_type_name_spec_name.setText(" ( " + productDetail.get(0).getTypeName() + " - " + productDetail.get(0).getSpecName() + " ) ");
         tv_eticket_due_date.setText(productDetail.get(0).getEticketDueDate());

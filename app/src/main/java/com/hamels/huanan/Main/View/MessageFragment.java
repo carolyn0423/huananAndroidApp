@@ -2,8 +2,8 @@ package com.hamels.huanan.Main.View;
 
 import android.graphics.Bitmap;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -73,7 +73,7 @@ public class MessageFragment extends BaseFragment {
                 }
             }
         });
-        webView.loadUrl(EOrderApplication.WEBVIEW_MESSAGE_URL);
+        webView.loadUrl(EOrderApplication.sApiUrl + EOrderApplication.WEBVIEW_MESSAGE_URL);
     }
 
     @Override

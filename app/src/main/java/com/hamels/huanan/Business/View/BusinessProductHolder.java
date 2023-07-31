@@ -1,9 +1,9 @@
 package com.hamels.huanan.Business.View;
 
 import android.graphics.Paint;
-import android.support.annotation.NonNull;
-import android.support.constraint.ConstraintLayout;
-import android.support.v7.widget.RecyclerView;
+import androidx.annotation.NonNull;
+import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.recyclerview.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -45,8 +45,8 @@ public class BusinessProductHolder extends RecyclerView.ViewHolder {
         tv_sale_price_right.setVisibility(View.VISIBLE);
         tv_product_name_right.setVisibility(View.VISIBLE);
         layout_right.setVisibility(View.VISIBLE);
-        Glide.with(BusinessProductFragment.getInstance()).load(EOrderApplication.DOMAIN + productleft.getPicture_url()).into(img_product_left);
-        Glide.with(BusinessProductFragment.getInstance()).load(EOrderApplication.DOMAIN + productright.getPicture_url()).into(img_product_right);
+        Glide.with(BusinessProductFragment.getInstance()).load(EOrderApplication.sApiUrl + productleft.getPicture_url()).into(img_product_left);
+        Glide.with(BusinessProductFragment.getInstance()).load(EOrderApplication.sApiUrl + productright.getPicture_url()).into(img_product_right);
         tv_price_left.setText("NT$" + mDecimalFormat.format((double)productleft.getPrice()));
         tv_product_name_left.setText(productleft.getProduct_name());
         tv_sale_price_left.setText("NT$" + mDecimalFormat.format((double)productleft.getSale_price()));
@@ -67,7 +67,7 @@ public class BusinessProductHolder extends RecyclerView.ViewHolder {
         tv_price_right.setVisibility(View.INVISIBLE);
         tv_sale_price_right.setVisibility(View.INVISIBLE);
         tv_product_name_right.setVisibility(View.INVISIBLE);
-        Glide.with(BusinessProductFragment.getInstance()).load(EOrderApplication.DOMAIN + productleft.getPicture_url()).into(img_product_left);
+        Glide.with(BusinessProductFragment.getInstance()).load(EOrderApplication.sApiUrl + productleft.getPicture_url()).into(img_product_left);
         img_product_left.setTag(R.id.img_product_left,productleft.getId());
         layout_left.setTag(R.id.constraintLayout_left,productleft.getId());
         tv_price_left.setText("NT$" + mDecimalFormat.format((double)productleft.getPrice()));

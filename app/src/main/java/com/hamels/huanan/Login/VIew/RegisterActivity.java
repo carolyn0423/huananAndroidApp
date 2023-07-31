@@ -4,8 +4,8 @@ import android.app.DatePickerDialog;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.constraint.ConstraintLayout;
+import androidx.annotation.NonNull;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import android.text.SpannableString;
 import android.text.Spanned;
 import android.text.TextPaint;
@@ -142,7 +142,7 @@ public class RegisterActivity extends BaseActivity implements RegisterContract.V
 
     @Override
     public void intentToTermsOfUse() {
-//        IntentUtils.intentToWebView(this, R.string.privacy_policy, EOrderApplication.WEBVIEW_TERMS_URL);
+//        IntentUtils.intentToWebView(this, R.string.privacy_policy, EOrderApplication.sApiUrl + EOrderApplication.WEBVIEW_TERMS_URL);
         IntentUtils.intentToTermsOfUse(this);
     }
 

@@ -4,8 +4,8 @@ import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.constraint.ConstraintLayout;
-import android.support.v7.app.AlertDialog;
+import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.appcompat.app.AlertDialog;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -29,7 +29,6 @@ import java.util.List;
 
 public class LoginActivity extends BaseActivity implements LoginContract.View{
     public static final String TAG = LoginActivity.class.getSimpleName();
-
     private TextView tvEOrder, tvTitleHint, tvTermsOfUse, tvForgetPsd, tvSearchCustomer, tvScan;
     private EditText etPhone, etPassword;
     private ConstraintLayout btnRegister, btnLogin;
@@ -244,10 +243,9 @@ public class LoginActivity extends BaseActivity implements LoginContract.View{
     public void setCustomerList(List<Customer> customers){
         if(customers.size() > 0) {
             //tvEOrder.setText(customers.get(0).getCustomerName());
-            //EOrderApplication.CUSTOMER_ID = customers.get(0).getCustomerID();
-            //EOrderApplication.DOMAIN = customers.get(0).getApiUrl();
-            //EOrderApplication.WEBVIEW_DOMAIN = customers.get(0).getApiUrl();
-            //EOrderApplication.sApiUel = customers.get(0).getApiUrl();
+            EOrderApplication.CUSTOMER_ID = customers.get(0).getCustomerID();
+            EOrderApplication.CUSTOMER_NAME = customers.get(0).getCustomerName();
+            EOrderApplication.sApiUrl = customers.get(0).getApiUrl();
 
             ApiRepository.repository = null;
             MemberRepository.memberRepository = null;
@@ -255,39 +253,36 @@ public class LoginActivity extends BaseActivity implements LoginContract.View{
             MemberRepository.getInstance();
         }else{
             //tvEOrder.setText("全部商家");
-            //EOrderApplication.CUSTOMER_ID = "";
-            //EOrderApplication.DOMAIN = EOrderApplication.ADMIN_DOMAIN;
-            //EOrderApplication.WEBVIEW_DOMAIN = EOrderApplication.DOMAIN;
+            EOrderApplication.CUSTOMER_ID = "";
+            EOrderApplication.CUSTOMER_NAME = "";
+            EOrderApplication.sApiUrl = "";
         }
     }
 
     @Override
     public void setCustomer(Customer customers, String sCustomerID, String sCustomerName, String sApiUrl) {
         //tvEOrder = findViewById(R.id.tv_eorder);
-        if((customers == null || customers.getCustomerName() == null) && (sCustomerID.equals("") || sCustomerName.equals("")) || EOrderApplication.sApiUel.equals("")){
+        if((customers == null || customers.getCustomerName() == null) && (sCustomerID.equals("") || sCustomerName.equals("")) || EOrderApplication.sApiUrl.equals("")){
             //  判斷是否有符合的最愛，若無則顯示 [全部商家]
             String sLoveCustomer = loginPresenter.getLoveCustomer();
             if(!sLoveCustomer.equals("")){
                 loginPresenter.getCustomerDetailList(sLoveCustomer);
             }else {
                 //tvEOrder.setText("全部商家");
-                //EOrderApplication.CUSTOMER_ID = "";
-                //EOrderApplication.DOMAIN = EOrderApplication.isPrd ? EOrderApplication.DOMAIN_ADMIN_PRO : EOrderApplication.DOMAIN_ADMIN_SIT;
-                //EOrderApplication.DOMAIN = EOrderApplication.ADMIN_DOMAIN;
-                //EOrderApplication.WEBVIEW_DOMAIN = EOrderApplication.DOMAIN;
+                EOrderApplication.CUSTOMER_ID = "";
+                EOrderApplication.CUSTOMER_NAME = "";
+                EOrderApplication.sApiUrl = "";
             }
         }else if(!sCustomerName.equals((""))){
             //tvEOrder.setText(sCustomerName);
-            //EOrderApplication.CUSTOMER_ID = sCustomerID;
-            //EOrderApplication.DOMAIN = sApiUrl;
-            //EOrderApplication.WEBVIEW_DOMAIN = sApiUrl;
-            //EOrderApplication.sApiUel = sApiUrl;
+            EOrderApplication.CUSTOMER_ID = sCustomerID;
+            EOrderApplication.CUSTOMER_NAME = sCustomerName;
+            EOrderApplication.sApiUrl = sApiUrl;
         }else{
             //tvEOrder.setText(customers.getCustomerName());
-            //EOrderApplication.CUSTOMER_ID = customers.getCustomerID();
-            //EOrderApplication.DOMAIN = customers.getApiUrl();
-            //EOrderApplication.WEBVIEW_DOMAIN = customers.getApiUrl();
-            //EOrderApplication.sApiUel = sApiUrl;
+            EOrderApplication.CUSTOMER_ID = customers.getCustomerID();
+            EOrderApplication.CUSTOMER_NAME = customers.getCustomerName();
+            EOrderApplication.sApiUrl = customers.getApiUrl();
         }
         ApiRepository.repository = null;
         MemberRepository.memberRepository = null;
@@ -323,7 +318,7 @@ public class LoginActivity extends BaseActivity implements LoginContract.View{
 
     @Override
     public void intentToTermsOfUse() {
-//        IntentUtils.intentToWebView(this, R.string.privacy_policy, EOrderApplication.WEBVIEW_TERMS_URL);
+//        IntentUtils.intentToWebView(this, R.string.privacy_policy, EOrderApplication.sApiUrl + EOrderApplication.WEBVIEW_TERMS_URL);
         IntentUtils.intentToTermsOfUse(this);
     }
 
