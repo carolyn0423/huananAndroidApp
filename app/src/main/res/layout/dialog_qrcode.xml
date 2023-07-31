@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#80000000">
+
+    <ImageView
+        android:id="@+id/bg_shadow_corner"
+        android:layout_width="330dp"
+        android:layout_height="400dp"
+        android:layout_centerInParent="true"
+        android:background="@drawable/bg_shadow_corner" />
+
+    <Button
+        android:id="@+id/dialog_btn_close"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:layout_alignLeft="@id/bg_shadow_corner"
+        android:layout_alignTop="@id/bg_shadow_corner"
+        android:layout_marginLeft="25dp"
+        android:layout_marginTop="15dp"
+        android:background="@drawable/circle2"
+        android:text="╳"
+        android:textColor="#000" />
+
+    <ImageView
+        android:id="@+id/dialog_img_qrcode"
+        android:layout_width="180dp"
+        android:layout_height="180dp"
+        android:layout_centerInParent="true" />
+
+</RelativeLayout>

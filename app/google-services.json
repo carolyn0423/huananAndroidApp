@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "258692447397",
+    "project_id": "huanan-9b740",
+    "storage_bucket": "huanan-9b740.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:258692447397:android:3184f8dd6f84a77d93214c",
+        "android_client_info": {
+          "package_name": "com.hamels.huanan"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "258692447397-e7ahdho8s4bvech89bfipqrqh44sirgk.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD7qZawCTb6LLZLYC_4n7aQZoQ5EKRM1dA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "258692447397-e7ahdho8s4bvech89bfipqrqh44sirgk.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "258692447397-e78hgiajitej0v5oq3qi7i5ghb38bfl5.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.hamels.huanan"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

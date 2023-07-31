@@ -1,0 +1,84 @@
+package com.hamels.huanan.Main.Presenter;
+
+import com.hamels.huanan.Base.BaseContract;
+import com.hamels.huanan.Base.BasePresenter;
+import com.hamels.huanan.Main.Contract.MainIndexContract;
+import com.hamels.huanan.Repository.Model.Carousel;
+import com.hamels.huanan.Repository.Model.User;
+import com.hamels.huanan.Repository.RepositoryManager;
+
+import java.util.List;
+
+public class MainIndexPresenter extends BasePresenter<MainIndexContract.View> implements MainIndexContract.Presenter {
+    public static final String TAG = MainIndexPresenter.class.getSimpleName();
+
+    public MainIndexPresenter(MainIndexContract.View view, RepositoryManager repositoryManager) {
+        super(view, repositoryManager);
+    }
+
+
+    @Override
+    public void getCarouselList(final String sCustomer_id) {
+
+        if(sCustomer_id.equals("")){
+            repositoryManager.callGetAdminCarouselListApi(new BaseContract.ValueCallback<List<Carousel>>() {
+                @Override
+                public void onValueCallback(int task, List<Carousel> type) {
+                    view.setCarouselList(type);
+
+                }
+            });
+        }else {
+            repositoryManager.callGetCarouselListApi(sCustomer_id, new BaseContract.ValueCallback<List<Carousel>>() {
+                @Override
+                public void onValueCallback(int task, List<Carousel> type) {
+                    view.setCarouselList(type);
+
+                }
+            });
+        }
+    }
+
+    @Override
+    public String getName() {
+        String Name = "";
+        if (repositoryManager.getUserLogin()) {
+            Name = repositoryManager.getUser().getName();
+        }
+        else{
+
+        }
+        return Name;
+    }
+
+    @Override
+    public String getGroup() {
+        String Group = "";
+        if (repositoryManager.getUserLogin()) {
+            Group = repositoryManager.getUser().getGroup();
+        }
+        else{
+
+        }
+        return Group;
+    }
+
+    @Override
+    public void checkMemberData() {
+        if(!repositoryManager.getUserID().equals("")){
+            repositoryManager.callGetMemberInfoApi(repositoryManager.getUserID(),new BaseContract.ValueCallback<User>() {
+                @Override
+                public void onValueCallback(int task, User user) {
+                    if(user != null && user.getOnlineEnabled().equals("Y")) {
+                        repositoryManager.saveUser(user);
+                        view.setMemberCardImg(user.getGroup());
+                    }else{
+                        view.CustomerOnlineISFalse();
+                    }
+                }
+            });
+        }
+    }
+
+    public boolean getUserLogin(){ return repositoryManager.getUserLogin(); }
+}
