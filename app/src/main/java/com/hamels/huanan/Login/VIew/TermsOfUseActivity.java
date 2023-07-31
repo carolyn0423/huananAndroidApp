@@ -3,7 +3,7 @@ package com.hamels.huanan.Login.VIew;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.support.constraint.ConstraintLayout;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import android.text.Html;
 import android.widget.TextView;
 

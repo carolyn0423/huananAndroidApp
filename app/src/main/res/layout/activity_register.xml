@@ -8,7 +8,7 @@
     android:overScrollMode="never"
     tools:context=".Login.VIew.RegisterActivity">
 
-    <android.support.constraint.ConstraintLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
@@ -46,7 +46,7 @@
             app:layout_constraintStart_toStartOf="@id/tv_hint"
             app:layout_constraintTop_toBottomOf="@id/tv_hint" />
 
-        <android.support.constraint.ConstraintLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/layout_info"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -97,7 +97,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <android.support.design.widget.TextInputLayout
+            <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/layout_name"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -122,7 +122,7 @@
                     android:text=""
                     android:textColorHint="@color/greyHint"
                     android:textSize="13sp" />
-            </android.support.design.widget.TextInputLayout>
+            </com.google.android.material.textfield.TextInputLayout>
 
             <TextView
                 android:visibility="gone"
@@ -234,7 +234,7 @@
                 app:layout_constraintStart_toEndOf="@+id/tv_phone"
                 app:layout_constraintTop_toTopOf="@+id/tv_phone" />
 
-            <android.support.design.widget.TextInputLayout
+            <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/layout_phone"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -259,7 +259,7 @@
                     android:text=""
                     android:textColorHint="@color/greyHint"
                     android:textSize="13sp" />
-            </android.support.design.widget.TextInputLayout>
+            </com.google.android.material.textfield.TextInputLayout>
 
             <TextView
                 android:id="@+id/tv_password"
@@ -284,7 +284,7 @@
                 app:layout_constraintStart_toEndOf="@+id/tv_password"
                 app:layout_constraintTop_toTopOf="@+id/tv_password" />
 
-            <android.support.design.widget.TextInputLayout
+            <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/layout_password"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -312,9 +312,9 @@
                     android:text=""
                     android:textColorHint="@color/greyHint"
                     android:textSize="13sp" />
-            </android.support.design.widget.TextInputLayout>
+            </com.google.android.material.textfield.TextInputLayout>
 
-        </android.support.constraint.ConstraintLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
         <CheckBox
             android:id="@+id/cb_terms_of_use"
@@ -328,7 +328,7 @@
             app:layout_constraintStart_toStartOf="@+id/layout_info"
             app:layout_constraintTop_toBottomOf="@+id/layout_info" />
 
-        <android.support.constraint.ConstraintLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/btn_register"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -359,6 +359,6 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
-        </android.support.constraint.ConstraintLayout>
-    </android.support.constraint.ConstraintLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

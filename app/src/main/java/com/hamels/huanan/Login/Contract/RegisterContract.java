@@ -1,7 +1,7 @@
 package com.hamels.huanan.Login.Contract;
 
-import android.support.annotation.IdRes;
-import android.support.annotation.StringRes;
+import androidx.annotation.IdRes;
+import androidx.annotation.StringRes;
 
 import com.hamels.huanan.Base.BaseContract;
 

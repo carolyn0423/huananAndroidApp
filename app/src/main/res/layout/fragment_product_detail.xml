@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
+<androidx.constraintlayout.widget.ConstraintLayout
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
@@ -15,11 +15,11 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toTopOf="@+id/layout_bottom">
 
-        <android.support.constraint.ConstraintLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            <android.support.constraint.ConstraintLayout
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/layout_main"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -28,7 +28,7 @@
                 app:layout_constraintTop_toTopOf="parent">
 
                 <!--        輪播-->
-                <android.support.constraint.ConstraintLayout
+                <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/layout_card_front"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -67,7 +67,7 @@
                         app:layout_constraintTop_toTopOf="parent"/>
 
                     <!--                名稱-->
-                    <android.support.constraint.ConstraintLayout
+                    <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:padding="5dp"
@@ -156,14 +156,14 @@
                             app:layout_constraintStart_toStartOf="@+id/guideline10"
                             app:layout_constraintTop_toBottomOf="@+id/tv_product_type" />
 
-                        <android.support.constraint.Guideline
+                        <androidx.constraintlayout.widget.Guideline
                             android:id="@+id/guideline10"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:orientation="vertical"
                             app:layout_constraintGuide_percent="0.5" />
 
-                        <android.support.design.widget.TabLayout
+                        <com.google.android.material.tabs.TabLayout
                             android:id="@+id/tab_layout"
                             android:layout_width="wrap_content"
                             android:layout_height="30dp"
@@ -194,14 +194,14 @@
 <!--                                android:tag="SPEC2"-->
 <!--                                android:text="規格2" />-->
 
-                        </android.support.design.widget.TabLayout>
+                        </com.google.android.material.tabs.TabLayout>
 
-                    </android.support.constraint.ConstraintLayout>
+                    </androidx.constraintlayout.widget.ConstraintLayout>
 
-                </android.support.constraint.ConstraintLayout>
+                </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <!--        尺寸數量-->
-                <android.support.constraint.ConstraintLayout
+                <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/layout_down"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -212,7 +212,7 @@
                     app:layout_constraintTop_toBottomOf="@+id/layout_card_front">
 
                     <!--            商品數量-->
-                    <android.support.constraint.ConstraintLayout
+                    <androidx.constraintlayout.widget.ConstraintLayout
                         android:id="@+id/constraintLayout7"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -235,7 +235,7 @@
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
 
-                        <android.support.constraint.ConstraintLayout
+                        <androidx.constraintlayout.widget.ConstraintLayout
                             android:layout_width="150dp"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="20dp"
@@ -247,7 +247,7 @@
                             app:layout_constraintTop_toTopOf="parent"
                             app:layout_constraintBottom_toBottomOf="parent">
 
-                            <android.support.constraint.ConstraintLayout
+                            <androidx.constraintlayout.widget.ConstraintLayout
                                 android:id="@+id/layout_plus"
                                 android:layout_width="50dp"
                                 android:layout_height="0dp"
@@ -266,7 +266,7 @@
                                     app:srcCompat="@drawable/plus"
                                     android:tint="@color/price_Purple"/>
 
-                            </android.support.constraint.ConstraintLayout>
+                            </androidx.constraintlayout.widget.ConstraintLayout>
 
                             <EditText
                                 android:id="@+id/edit_num"
@@ -286,7 +286,7 @@
                                 app:layout_constraintTop_toTopOf="parent"
                                 app:layout_constraintVertical_bias="0.0" />
 
-                            <android.support.constraint.ConstraintLayout
+                            <androidx.constraintlayout.widget.ConstraintLayout
                                 android:id="@+id/layout_minus"
                                 android:layout_width="50dp"
                                 android:layout_height="0dp"
@@ -305,14 +305,14 @@
                                     app:layout_constraintTop_toTopOf="parent"
                                     app:srcCompat="@drawable/minus" />
 
-                            </android.support.constraint.ConstraintLayout>
+                            </androidx.constraintlayout.widget.ConstraintLayout>
 
-                        </android.support.constraint.ConstraintLayout>
+                        </androidx.constraintlayout.widget.ConstraintLayout>
 
-                    </android.support.constraint.ConstraintLayout>
+                    </androidx.constraintlayout.widget.ConstraintLayout>
 
                     <!--            尺寸規格-->
-                    <android.support.constraint.ConstraintLayout
+                    <androidx.constraintlayout.widget.ConstraintLayout
                         android:id="@+id/constraintLayout6"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -353,7 +353,7 @@
                             app:layout_constraintStart_toEndOf="@id/tv_product_spec_hint"
                             app:layout_constraintTop_toTopOf="parent" />
 
-                        <android.support.constraint.ConstraintLayout
+                        <androidx.constraintlayout.widget.ConstraintLayout
                             android:id="@+id/layout_dropdown"
                             android:layout_width="50dp"
                             android:layout_height="0dp"
@@ -372,12 +372,12 @@
                                 app:srcCompat="@drawable/ic_arrow_down_black"
                                 android:tint="@color/main" />
 
-                        </android.support.constraint.ConstraintLayout>
+                        </androidx.constraintlayout.widget.ConstraintLayout>
 
-                    </android.support.constraint.ConstraintLayout>
+                    </androidx.constraintlayout.widget.ConstraintLayout>
 
                     <!-- CONF -->
-                    <android.support.constraint.ConstraintLayout
+                    <androidx.constraintlayout.widget.ConstraintLayout
                         android:id="@+id/constraintLayout_conf"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -398,7 +398,7 @@
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
 
-                        <android.support.constraint.ConstraintLayout
+                        <androidx.constraintlayout.widget.ConstraintLayout
                             android:id="@+id/ConstraintLayout_conf_qty"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -435,7 +435,7 @@
                                 app:layout_constraintTop_toTopOf="parent"
                                 app:layout_constraintBottom_toBottomOf="parent" />
 
-                            <android.support.constraint.ConstraintLayout
+                            <androidx.constraintlayout.widget.ConstraintLayout
                                 android:id="@+id/btn_conf_qty"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
@@ -458,9 +458,9 @@
                                     app:layout_constraintStart_toStartOf="parent"
                                     app:layout_constraintTop_toTopOf="parent" />
 
-                            </android.support.constraint.ConstraintLayout>
+                            </androidx.constraintlayout.widget.ConstraintLayout>
 
-                        </android.support.constraint.ConstraintLayout>
+                        </androidx.constraintlayout.widget.ConstraintLayout>
 
                         <View
                             android:id="@+id/view_tab_line"
@@ -471,7 +471,7 @@
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toBottomOf="@id/ConstraintLayout_conf_qty" />
 
-                        <android.support.constraint.ConstraintLayout
+                        <androidx.constraintlayout.widget.ConstraintLayout
                             android:id="@+id/ConstraintLayout_conf_list"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -490,14 +490,14 @@
                                 app:layout_constraintTop_toTopOf="parent"
                                 app:layout_constraintBottom_toBottomOf="parent" />
 
-                        </android.support.constraint.ConstraintLayout>
+                        </androidx.constraintlayout.widget.ConstraintLayout>
 
-                    </android.support.constraint.ConstraintLayout>
+                    </androidx.constraintlayout.widget.ConstraintLayout>
 
-                </android.support.constraint.ConstraintLayout>
+                </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <!--        商品介紹-->
-                <android.support.constraint.ConstraintLayout
+                <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/constraintLayout4"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -562,15 +562,15 @@
                         app:layout_constraintStart_toEndOf="@+id/textView8"
                         app:layout_constraintTop_toTopOf="@+id/textView8"/>
 
-                </android.support.constraint.ConstraintLayout>
+                </androidx.constraintlayout.widget.ConstraintLayout>
 
-            </android.support.constraint.ConstraintLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
-        </android.support.constraint.ConstraintLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
     </ScrollView>
 
-    <android.support.constraint.ConstraintLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/layout_bottom"
         android:layout_width="match_parent"
         android:layout_height="60dp"
@@ -603,7 +603,7 @@
             android:textStyle="bold"/>
 
         <!--        加入購物車-->
-        <android.support.constraint.ConstraintLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/btn_shopping"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -630,8 +630,8 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-        </android.support.constraint.ConstraintLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
-    </android.support.constraint.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
-</android.support.constraint.ConstraintLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

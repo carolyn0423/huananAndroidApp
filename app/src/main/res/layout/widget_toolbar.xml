@@ -13,7 +13,7 @@
     app:contentInsetRight="0dp"
     app:contentInsetStart="0dp">
 
-    <android.support.constraint.ConstraintLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -99,14 +99,14 @@
             app:layout_constraintTop_toTopOf="@+id/btn_message"
             app:layout_constraintVertical_bias="0.32" />
 
-        <android.support.constraint.Guideline
+        <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline12"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             app:layout_constraintGuide_percent="0.65" />
 
-        <android.support.constraint.Guideline
+        <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline13"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -125,5 +125,5 @@
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/sort"
             android:tint="@color/Black"/>
-    </android.support.constraint.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </Toolbar>

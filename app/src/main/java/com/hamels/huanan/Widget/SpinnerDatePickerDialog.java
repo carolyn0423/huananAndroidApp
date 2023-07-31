@@ -2,8 +2,8 @@ package com.hamels.huanan.Widget;
 
 import android.app.DatePickerDialog;
 import android.content.Context;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import android.content.res.TypedArray;
 import android.os.Build;

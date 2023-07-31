@@ -6,11 +6,11 @@
     android:overScrollMode="never"
     android:layout_height="match_parent">
 
-    <android.support.constraint.ConstraintLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <android.support.constraint.ConstraintLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/layout_info"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -183,7 +183,7 @@
                 app:layout_constraintStart_toStartOf="@id/tv_name_hint"
                 app:layout_constraintTop_toBottomOf="@+id/layout_address" />
 
-            <android.support.design.widget.TextInputLayout
+            <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/layout_mail"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -208,7 +208,7 @@
                     android:paddingTop="12dp"
                     android:paddingBottom="10dp"
                     android:textSize="13sp" />
-            </android.support.design.widget.TextInputLayout>
+            </com.google.android.material.textfield.TextInputLayout>
 
 
             <TextView
@@ -222,7 +222,7 @@
                 app:layout_constraintStart_toStartOf="@id/tv_name_hint"
                 app:layout_constraintTop_toBottomOf="@+id/group_gender" />
 
-            <android.support.design.widget.TextInputLayout
+            <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/layout_address"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -245,9 +245,9 @@
                     android:paddingTop="14dp"
                     android:paddingBottom="10dp"
                     android:textSize="13sp" />
-            </android.support.design.widget.TextInputLayout>
+            </com.google.android.material.textfield.TextInputLayout>
 
-            <android.support.constraint.ConstraintLayout
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/constraintLayout"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -283,16 +283,16 @@
                     app:layout_constraintStart_toStartOf="@+id/guideline2"
                     app:layout_constraintTop_toTopOf="parent" />
 
-                <android.support.constraint.Guideline
+                <androidx.constraintlayout.widget.Guideline
                     android:id="@+id/guideline2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
                     app:layout_constraintGuide_percent="0.5" />
-            </android.support.constraint.ConstraintLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
 
-        </android.support.constraint.ConstraintLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
         <TextView
             android:id="@+id/tv_send"
@@ -316,5 +316,5 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/layout_info" />
-    </android.support.constraint.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>
