@@ -2,6 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/fragment_product_detail"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/greyDoubleHint">
@@ -296,8 +297,8 @@
 
                                 <ImageView
                                     android:id="@+id/btn_minus"
-                                    android:layout_width="8dp"
-                                    android:layout_height="9dp"
+                                    android:layout_width="12dp"
+                                    android:layout_height="16dp"
                                     android:tint="@color/Black"
                                     app:layout_constraintBottom_toBottomOf="parent"
                                     app:layout_constraintEnd_toEndOf="parent"

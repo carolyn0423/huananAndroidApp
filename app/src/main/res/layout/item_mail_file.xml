@@ -60,7 +60,7 @@
             android:ellipsize="end"
             android:lines="1"
             android:textSize="16sp"
-            app:layout_constraintBottom_toTopOf="@+id/tv_mail_content"
+            android:text="xxxxxx"
             app:layout_constraintEnd_toStartOf="@+id/tv_mail_date"
             app:layout_constraintStart_toEndOf="@+id/img_mail_status"
             app:layout_constraintTop_toTopOf="parent"
@@ -71,15 +71,14 @@
             style="@style/fontRegularTw.greyDoubleDark"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
-            android:layout_marginBottom="16dp"
+            android:layout_marginBottom="10dp"
             android:ellipsize="end"
             android:lines="1"
             android:textSize="13sp"
+            android:text="xxxxxx"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="@id/tv_mail_title"
-            app:layout_constraintTop_toBottomOf="@id/tv_mail_title" />
+            app:layout_constraintStart_toStartOf="@id/tv_mail_title" />
 
         <TextView
             android:id="@+id/tv_mail_date"

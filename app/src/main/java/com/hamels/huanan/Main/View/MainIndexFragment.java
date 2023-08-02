@@ -126,7 +126,7 @@ public class MainIndexFragment extends BaseFragment implements MainIndexContract
 
         txt_name = view.findViewById(R.id.txt_name);
 
-        mainindexPresenter.getCarouselList(CUSTOMER_ID);
+        //mainindexPresenter.getCarouselList(CUSTOMER_ID);
     }
 
 
@@ -142,8 +142,14 @@ public class MainIndexFragment extends BaseFragment implements MainIndexContract
                 imv_membercard.setBackgroundResource(R.drawable.membercard_normal);
             }
         }
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
 
         mainindexPresenter.checkMemberData();
+        mainindexPresenter.getCarouselList(CUSTOMER_ID);
     }
 
     public void CustomerOnlineISFalse() {

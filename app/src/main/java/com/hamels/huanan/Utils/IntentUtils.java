@@ -9,6 +9,7 @@ import android.provider.Settings;
 import androidx.annotation.StringRes;
 import com.hamels.huanan.Base.BaseActivity;
 import com.hamels.huanan.Base.WebViewActivity;
+import com.hamels.huanan.EOrderApplication;
 import com.hamels.huanan.Init.NotificationControlActivity;
 import com.hamels.huanan.Login.VIew.ForgetPasswordActivity;
 import com.hamels.huanan.Login.VIew.LoginActivity;
@@ -107,7 +108,7 @@ public class IntentUtils {
         }
 
         if(showMemberCenter){
-            baseActivity.startActivityForResult(intent,REQUEST_MEMBER_CENTER);
+            baseActivity.startActivityForResult(intent, REQUEST_MEMBER_CENTER);
         }else{
             baseActivity.startActivity(intent);
         }

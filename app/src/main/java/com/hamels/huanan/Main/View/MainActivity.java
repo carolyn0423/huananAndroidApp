@@ -21,6 +21,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.appcompat.app.AlertDialog;
 import android.util.Log;
@@ -52,10 +53,12 @@ import com.google.zxing.MultiFormatWriter;
 import com.google.zxing.WriterException;
 import com.google.zxing.common.BitMatrix;
 import com.hamels.huanan.Donate.View.DonateFragment;
+import com.hamels.huanan.Product.View.ProductDetailFragment;
 import com.hamels.huanan.Product.View.ProductMainTypeFragment;
 import com.hamels.huanan.Repository.ApiRepository.ApiRepository;
 import com.hamels.huanan.Repository.ApiRepository.MemberRepository;
 import com.hamels.huanan.Repository.Model.Customer;
+import com.hamels.huanan.Repository.Model.Product;
 import com.hamels.huanan.Utils.SharedUtils;
 import com.ittianyu.bottomnavigationviewex.BottomNavigationViewEx;
 import com.hamels.huanan.Base.BaseActivity;
@@ -81,6 +84,7 @@ import java.util.List;
 
 import static com.hamels.huanan.Constant.Constant.REQUEST_COUPON;
 import static com.hamels.huanan.Constant.Constant.REQUEST_MAIL;
+import static com.hamels.huanan.Constant.Constant.REQUEST_MAIN_INDEX;
 import static com.hamels.huanan.Constant.Constant.REQUEST_MEMBER_CARD;
 import static com.hamels.huanan.Constant.Constant.REQUEST_MEMBER_CENTER;
 import static com.hamels.huanan.Constant.Constant.REQUEST_MESSAGE;
@@ -420,6 +424,7 @@ public class MainActivity extends BaseActivity implements MainContract.View {
                     changeTabFragment(ProductMainTypeFragment.getInstance());
                     break;
                 default:
+                    changeNavigationColor(R.id.home);
                     changeTabFragment(MainIndexFragment.getInstance());
                     break;
             }
@@ -474,7 +479,7 @@ public class MainActivity extends BaseActivity implements MainContract.View {
 
                     popupWindow.showAtLocation(view, Gravity.CENTER_HORIZONTAL, 0, 0);
                 } else {
-                    intentToLogin(0);
+                    intentToLogin(REQUEST_MAIN_INDEX);
                 }
             }else if (id == R.id.message){
                 setMainIndexMessageUnreadVisibility(false);
@@ -653,6 +658,9 @@ public class MainActivity extends BaseActivity implements MainContract.View {
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         switch (requestCode) {
+            case REQUEST_MAIN_INDEX:
+                changeTabFragment(MainIndexFragment.getInstance());
+                break;
             case REQUEST_MEMBER_CARD:
                 changeTabFragment(MemberCardFragment.getInstance());
                 break;
@@ -824,6 +832,7 @@ public class MainActivity extends BaseActivity implements MainContract.View {
     }
 
     private void removeAllStackFragment() {
+
         for (int i = 0; i < getSupportFragmentManager().getBackStackEntryCount(); i++) {
             getSupportFragmentManager().popBackStack();
         }
@@ -846,7 +855,7 @@ public class MainActivity extends BaseActivity implements MainContract.View {
     @Override
     public void changeTabFragment(BaseFragment willChangeFragment) {
         this.willChangeFragment = willChangeFragment;
-        Log.e(TAG, willChangeFragment + "");
+        Log.e(TAG, "changeTabFragment" + willChangeFragment + "");
         removeAllStackFragment();
     }
 
@@ -1032,7 +1041,8 @@ public class MainActivity extends BaseActivity implements MainContract.View {
         } else {
             if (getSupportFragmentManager().getBackStackEntryCount() == 0) {
                 // 首頁才顯示回上一頁
-                if (isMainIndex()) {                    new AlertDialog.Builder(this).setTitle(null).setMessage(R.string.close_hint)
+                if (isMainIndex()) {
+                    new AlertDialog.Builder(this).setTitle(null).setMessage(R.string.close_hint)
                         .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
@@ -1077,7 +1087,15 @@ public class MainActivity extends BaseActivity implements MainContract.View {
                     changeNavigationColor(R.id.home);
                     changeTabFragment(MainIndexFragment.getInstance());
                 } else {
-                    super.onBackPressed();
+                    Fragment currentFragment = getSupportFragmentManager().findFragmentById(R.id.frame);
+
+                    if(currentFragment instanceof ProductDetailFragment){   //  商品內頁
+                        addFragment(ProductFragment.getInstance());
+                    }else if(currentFragment instanceof ProductFragment){   //  商品列表
+                        addFragment(ProductMainTypeFragment.getInstance());
+                    }else{
+                        super.onBackPressed();
+                    }
                 }
             }
         }
