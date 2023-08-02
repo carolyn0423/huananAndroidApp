@@ -33,6 +33,7 @@ public class Product implements Parcelable {
     private int spec_cnt;
     private List<ProductConf> conf_list;
     private String soldout_flag = "";
+    private int limit_quantity = 1;
 
     public String getLocation_id() {
         return location_id;
@@ -176,10 +177,13 @@ public class Product implements Parcelable {
 
     public String getSoldoutToday() { return soldout_flag; }
 
+    public int getLimitQuantity() { return limit_quantity; }
+
     protected Product(Parcel in) {
         id = in.readInt();
         price = in.readInt();
         sale_price = in.readInt();
+        limit_quantity = in.readInt();
         picture_url = in.readString();
         product_name = in.readString();
         freight_title = in.readString();
@@ -215,6 +219,7 @@ public class Product implements Parcelable {
         dest.writeInt(id);
         dest.writeInt(price);
         dest.writeInt(sale_price);
+        dest.writeInt(limit_quantity);
         dest.writeString(picture_url);
         dest.writeString(product_name);
         dest.writeString(freight_title);
