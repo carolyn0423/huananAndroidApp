@@ -11,6 +11,7 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import com.google.android.material.tabs.TabLayout;
 import androidx.appcompat.app.AlertDialog;
 import android.text.Html;
+import android.text.InputType;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -92,7 +93,7 @@ public class ProductDetailFragment extends BaseFragment implements ProductDetail
     private List<ProductConf> confArrayList = new ArrayList<>();
     private List<ProductConf> SelectConf = new ArrayList<>();
     public int SoldOutQty = 0;
-
+    private int iLimitQuantity = 1;
 
     public static ProductDetailFragment getInstance(int product_id, String mIsETicket) {
         if (fragment == null) {
@@ -141,7 +142,8 @@ public class ProductDetailFragment extends BaseFragment implements ProductDetail
         layout_minus = view.findViewById(R.id.layout_minus);
         layout_plus = view.findViewById(R.id.layout_plus);
         edit_num = view.findViewById(R.id.edit_num);
-        edit_num.setText("1");
+        edit_num.setInputType(InputType.TYPE_NULL);
+        edit_num.setText(Integer.toString(1 * iLimitQuantity));
         tv_subtotal = view.findViewById(R.id.tv_subtotal);
         layout_shopping = view.findViewById(R.id.btn_shopping);
         layout_spec = view.findViewById(R.id.constraintLayout6);
@@ -149,7 +151,8 @@ public class ProductDetailFragment extends BaseFragment implements ProductDetail
         constraintLayout_conf = view.findViewById(R.id.constraintLayout_conf);
         expandableListView = view.findViewById(R.id.expandableListView);
         conf_qty = view.findViewById(R.id.conf_qty);
-        conf_qty.setText("1");
+        conf_qty.setInputType(InputType.TYPE_NULL);
+        conf_qty.setText(Integer.toString(1 * iLimitQuantity));
         btn_conf_qty = view.findViewById(R.id.btn_conf_qty);
         listview = view.findViewById(R.id.listview);
         view_scroll = view.findViewById(R.id.view_scroll);
@@ -168,7 +171,7 @@ public class ProductDetailFragment extends BaseFragment implements ProductDetail
             @Override
             public void onClick(View v) {
                 quantity = Integer.valueOf(edit_num.getText().toString());
-                quantity++;
+                quantity = quantity + 1 * iLimitQuantity;
                 edit_num.setText(Integer.toString(quantity));
                 // Leslie 客製數量 連動商品數量
                 conf_qty.setText(Integer.toString(quantity));
@@ -188,7 +191,7 @@ public class ProductDetailFragment extends BaseFragment implements ProductDetail
             public void onClick(View v) {
                 quantity = Integer.valueOf(edit_num.getText().toString());
                 if (quantity > 0) {
-                    quantity--;
+                    quantity = quantity - (1 * iLimitQuantity);
                 }
                 edit_num.setText(Integer.toString(quantity));
                 // Leslie 客製數量 連動商品數量
@@ -396,8 +399,8 @@ public class ProductDetailFragment extends BaseFragment implements ProductDetail
         presenter.addShoppingCart(Integer.toString(product_id), Spec_ID[0], location_id, SpecQty[0], Stock[0], edit_num.getText().toString(), isETicket.equals("Y") ? "E" : "G", conf_list, iQtySum);
 
         // set default
-        edit_num.setText("1");
-        conf_qty.setText("1");
+        edit_num.setText(Integer.toString(1 * iLimitQuantity));
+        conf_qty.setText(Integer.toString(1 * iLimitQuantity));
         int subTotal = Integer.parseInt(tv_sale_price.getText().toString().trim().split("NT\\$")[1].replace(",", ""));
         tv_subtotal.setText("$" + subTotal);
     }
@@ -492,6 +495,7 @@ public class ProductDetailFragment extends BaseFragment implements ProductDetail
     public void setProductDetail(List<Product> productDetail) {
         List<ProductPicture> productPictureList = productDetail.get(0).getPicture_url_list();
         List<CustomViewsInfo> data = new ArrayList<>();
+        iLimitQuantity = productDetail.get(0).getLimitQuantity();
         iAllSoldout = productDetail.get(0).getSoldoutToday().equals("Y") ? 1 : 0;
         for (int i = 0; i < productPictureList.size(); i++) {
             data.add(new CustomViewsInfo(EOrderApplication.sApiUrl + productPictureList.get(i).getPictureurl(), productPictureList.get(i).getId()));
@@ -529,13 +533,13 @@ public class ProductDetailFragment extends BaseFragment implements ProductDetail
         tv_dealer_product_id.setText(productDetail.get(0).getDealer_product_id());
         tv_desc.setText(Html.fromHtml(productDetail.get(0).getDesc()));
         tv_price.getPaint().setFlags(Paint.STRIKE_THRU_TEXT_FLAG);
-        edit_num.setText("1");
+        edit_num.setText(Integer.toString(1 * iLimitQuantity));
         if (isETicket.equals("Y")) {
-            tv_subtotal.setText("$" + mDecimalFormat.format((double) productDetail.get(0).getticket_sales_price()));
+            tv_subtotal.setText("$" + mDecimalFormat.format((double) productDetail.get(0).getticket_sales_price() * iLimitQuantity));
         } else {
-            tv_subtotal.setText("$" + mDecimalFormat.format((double) productDetail.get(0).getSale_price()));
+            tv_subtotal.setText("$" + mDecimalFormat.format((double) productDetail.get(0).getSale_price() * iLimitQuantity));
         }
-        conf_qty.setText("1");
+        conf_qty.setText(Integer.toString(1 * iLimitQuantity));
 
         if (productDetail.get(0).getSale_price() == productDetail.get(0).getPrice()) {
             tv_same_price.setVisibility(View.VISIBLE);
@@ -709,7 +713,7 @@ public class ProductDetailFragment extends BaseFragment implements ProductDetail
     @Override
     public void showErrorAlert(String message) {
         new AlertDialog.Builder(fragment.getActivity()).setTitle(R.string.dialog_hint).setMessage(message).setPositiveButton(android.R.string.ok, null).show();
-        edit_num.setText("1");
+        edit_num.setText(Integer.toString(1 * iLimitQuantity));
         ((MainActivity) getActivity()).refreshBadge();
     }
 
