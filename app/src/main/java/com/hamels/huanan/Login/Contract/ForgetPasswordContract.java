@@ -19,6 +19,8 @@ public interface ForgetPasswordContract {
         void intentToRegister();
 
         void finishActivity();
+
+        void showSUCCESSToLogin(String message);
     }
 
     interface Presenter extends BaseContract.Presenter {

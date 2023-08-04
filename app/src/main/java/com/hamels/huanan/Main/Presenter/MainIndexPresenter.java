@@ -75,9 +75,11 @@ public class MainIndexPresenter extends BasePresenter<MainIndexContract.View> im
             repositoryManager.callGetMemberInfoApi(repositoryManager.getUserID(),new BaseContract.ValueCallback<User>() {
                 @Override
                 public void onValueCallback(int task, User user) {
-                    if(user != null && user.getOnlineEnabled().equals("Y")) {
-                        repositoryManager.saveUser(user);
-                        view.setMemberCardImg(user.getGroup());
+                    if(user != null) {
+                        if(user.getOnlineEnabled() != null && user.getOnlineEnabled().equals("Y")) {
+                            repositoryManager.saveUser(user);
+                            view.setMemberCardImg(user.getGroup());
+                        }
                     }else{
                         view.CustomerOnlineISFalse();
                     }

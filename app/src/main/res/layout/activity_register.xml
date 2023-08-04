@@ -314,6 +314,59 @@
                     android:textSize="13sp" />
             </com.google.android.material.textfield.TextInputLayout>
 
+            <TextView
+                android:id="@+id/tv_repassword"
+                style="@style/fontRegularTw.greyDoubleDark"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="@string/repassword"
+                android:textSize="13sp"
+                app:layout_constraintStart_toStartOf="@id/tv_name"
+                app:layout_constraintTop_toBottomOf="@+id/layout_password" />
+
+            <TextView
+                android:id="@+id/tv_repassword_required"
+                style="@style/fontRegularTw.greyDoubleDark"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingLeft="1dp"
+                android:text="*"
+                android:textSize="13sp"
+                android:textColor="@color/redHint"
+                app:layout_constraintStart_toEndOf="@+id/tv_repassword"
+                app:layout_constraintTop_toTopOf="@+id/tv_repassword" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/layout_repassword"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="20dp"
+                android:theme="@style/EditTextBlack"
+                app:hintEnabled="false"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@id/tv_name"
+                app:layout_constraintTop_toBottomOf="@id/tv_repassword"
+                app:passwordToggleDrawable="@drawable/selec_eye_psd"
+                app:passwordToggleEnabled="true">
+
+                <EditText
+                    android:id="@+id/et_repassword"
+                    style="@style/fontRegularTw.GreyDark"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/selec_et_line"
+                    android:hint="@string/hint_input_password"
+                    android:imeOptions="actionDone"
+                    android:inputType="textPassword"
+                    android:paddingTop="10dp"
+                    android:paddingBottom="10dp"
+                    android:lines="1"
+                    android:text=""
+                    android:textColorHint="@color/greyHint"
+                    android:textSize="13sp" />
+            </com.google.android.material.textfield.TextInputLayout>
+
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <CheckBox

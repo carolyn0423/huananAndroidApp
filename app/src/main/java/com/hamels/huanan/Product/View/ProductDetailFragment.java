@@ -399,10 +399,10 @@ public class ProductDetailFragment extends BaseFragment implements ProductDetail
         presenter.addShoppingCart(Integer.toString(product_id), Spec_ID[0], location_id, SpecQty[0], Stock[0], edit_num.getText().toString(), isETicket.equals("Y") ? "E" : "G", conf_list, iQtySum);
 
         // set default
-        edit_num.setText(Integer.toString(1 * iLimitQuantity));
-        conf_qty.setText(Integer.toString(1 * iLimitQuantity));
-        int subTotal = Integer.parseInt(tv_sale_price.getText().toString().trim().split("NT\\$")[1].replace(",", ""));
-        tv_subtotal.setText("$" + subTotal);
+        //edit_num.setText(Integer.toString(1 * iLimitQuantity));
+        //conf_qty.setText(Integer.toString(1 * iLimitQuantity));
+        //int subTotal = Integer.parseInt(tv_sale_price.getText().toString().trim().split("NT\\$")[1].replace(",", ""));
+        //tv_subtotal.setText("$" + subTotal);
     }
 
     private void addConf(@NonNull View v){

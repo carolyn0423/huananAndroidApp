@@ -29,7 +29,7 @@ public class ForgetPasswordPresenter extends BasePresenter<ForgetPasswordContrac
             repositoryManager.callVerifyForgetPsdApi(EOrderApplication.CUSTOMER_ID, cellphone, password, verifyCode, new BaseContract.ValueCallback<String>() {
                 @Override
                 public void onValueCallback(int task, String type) {
-                    view.finishActivity();
+                    view.showSUCCESSToLogin("重設密碼成功，請重新登入。");
                 }
             }, new BaseContract.ValueCallback<String>() {
                 @Override

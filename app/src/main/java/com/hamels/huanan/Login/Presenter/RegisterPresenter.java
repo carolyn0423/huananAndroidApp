@@ -17,7 +17,7 @@ public class RegisterPresenter extends BasePresenter<RegisterContract.View> impl
 
     @Override
     public void checkInputValue(String name, int selectRadioId, String birth,
-                                String phone, String password, boolean isAgreeTermsOfUse) {
+                                String phone, String password, String repassword, boolean isAgreeTermsOfUse) {
         if (name.isEmpty()) {
             view.showErrorMessage(R.string.name_empty);
         }
@@ -31,6 +31,8 @@ public class RegisterPresenter extends BasePresenter<RegisterContract.View> impl
             view.showErrorMessage(R.string.phone_format_error);
         } else if (password.isEmpty() || !FormatUtils.isPasswordFormat(password)) {
             view.showErrorMessage(R.string.password_format_error);
+        } else if (!password.equals(repassword)) {
+            view.showErrorMessage(R.string.password_different);
         } else if (!isAgreeTermsOfUse) {
             view.showErrorMessage(R.string.not_yet_check_terms_of_use);
         } else {

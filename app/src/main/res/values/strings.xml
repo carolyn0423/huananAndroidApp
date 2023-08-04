@@ -16,6 +16,7 @@
     <string name="prepaid_amount">微笑幣</string>
     <string name="login">登入</string>
     <string name="password">密碼</string>
+    <string name="repassword">確認密碼</string>
     <string name="dialog_hint">提醒</string>
     <string name="terms_of_use">紅利點數與購物規範</string>
     <string name="forget_password">忘記密碼</string>

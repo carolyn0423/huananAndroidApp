@@ -81,6 +81,17 @@ public class ForgetPasswordActivity extends BaseActivity implements ForgetPasswo
                 .show();
     }
 
+    @Override
+    public void showSUCCESSToLogin(String message) {
+        new AlertDialog.Builder(this).setTitle(R.string.dialog_hint).setMessage(message)
+                .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        finishActivity();
+                    }
+                })
+                .show();
+    }
 
     @Override
     public void showEmptyVerifyCodeAlert() {

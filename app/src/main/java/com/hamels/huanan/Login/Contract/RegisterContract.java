@@ -17,6 +17,6 @@ public interface RegisterContract {
     }
 
     interface Presenter extends BaseContract.Presenter {
-        void checkInputValue(String name, @IdRes int selectRadioId, String birth, String phone, String password, boolean isAgreeTermsOfUse);
+        void checkInputValue(String name, @IdRes int selectRadioId, String birth, String phone, String password, String repassword, boolean isAgreeTermsOfUse);
     }
 }
