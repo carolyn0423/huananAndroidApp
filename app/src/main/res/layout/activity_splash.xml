@@ -7,21 +7,11 @@
     android:background="@null"
     tools:context=".Init.SplashActivity">
 
-    <ImageView
-        android:id="@+id/img_logo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/ic_logo"
-        android:visibility="gone"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <pl.droidsonroids.gif.GifImageView
         android:scaleType="fitCenter"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:src="@drawable/app_splash"
-        />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
