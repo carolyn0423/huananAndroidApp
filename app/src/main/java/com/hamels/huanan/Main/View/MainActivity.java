@@ -1093,7 +1093,9 @@ public class MainActivity extends BaseActivity implements MainContract.View {
                         addFragment(ProductFragment.getInstance());
                     }else if(currentFragment instanceof ProductFragment){   //  商品列表
                         addFragment(ProductMainTypeFragment.getInstance());
-                    }else{
+                    }else if(currentFragment instanceof ProductMainTypeFragment){
+                        changeTabFragment(MainIndexFragment.getInstance());
+                    } else{
                         super.onBackPressed();
                     }
                 }
