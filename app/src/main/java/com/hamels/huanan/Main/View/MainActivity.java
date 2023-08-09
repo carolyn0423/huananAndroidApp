@@ -883,6 +883,13 @@ public class MainActivity extends BaseActivity implements MainContract.View {
                 result.cancel();
                 return true;
             }
+            @Override
+            public void onReceivedTitle(WebView view, String title) {
+                super.onReceivedTitle(view, title);
+                if(title.indexOf("html") == -1 && title.indexOf("com") == -1) {
+                    setAppTitleString(title);
+                }
+            }
         });
         webView.getSettings().setUseWideViewPort(true);
         webView.addJavascriptInterface(new AndroidJsInterface(), "hamels");
