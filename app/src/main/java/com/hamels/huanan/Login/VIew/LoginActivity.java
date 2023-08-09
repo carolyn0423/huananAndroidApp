@@ -81,7 +81,7 @@ public class LoginActivity extends BaseActivity implements LoginContract.View{
     private void initView() {
         setAppToolbar(R.id.toolbar);
         setAppTitle(R.string.login);
-        setBackButtonVisibility(false);
+        setBackButtonVisibility(true);
         setMailButtonVisibility(false);
         setMessageButtonVisibility(false);
         setSortButtonVisibility(false);
