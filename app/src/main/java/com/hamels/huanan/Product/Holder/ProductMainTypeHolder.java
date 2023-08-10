@@ -3,12 +3,17 @@ package com.hamels.huanan.Product.Holder;
 import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
+
+import android.graphics.Bitmap;
+import android.graphics.RectF;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
+import com.bumptech.glide.request.RequestOptions;
 import com.hamels.huanan.Product.View.ProductMainTypeFragment;
 import com.hamels.huanan.R;
 import com.hamels.huanan.Repository.Model.ProductMainType;
@@ -44,7 +49,12 @@ public class ProductMainTypeHolder extends RecyclerView.ViewHolder {
         img_productMainType_left.setVisibility(View.VISIBLE);
         img_productMainType_right.setVisibility(View.VISIBLE);
 
-        Glide.with(ProductMainTypeFragment.getInstance()).load(sImageUrl + mainTypeleft.getPicture_url()).into(img_productMainType_left);
+        // 应用圆角转换的 RequestOptions
+        RequestOptions requestOptions_left = new RequestOptions()
+                .transform(new RoundedCorners(20));
+
+        Glide.with(ProductMainTypeFragment.getInstance()).load(sImageUrl + mainTypeleft.getPicture_url()).apply(requestOptions_left).into(img_productMainType_left);
+
         img_productMainType_left.setTag(R.id.img_productMainType_left,mainTypeleft.getId());
         constraintLayout_left.setTag(R.id.constraintLayout_left,mainTypeleft.getId());
 
@@ -56,8 +66,14 @@ public class ProductMainTypeHolder extends RecyclerView.ViewHolder {
         img_productMainType_left.setVisibility(View.VISIBLE);
         img_productMainType_right.setVisibility(View.VISIBLE);
 
-        Glide.with(ProductMainTypeFragment.getInstance()).load(sImageUrl + mainTypeleft.getPicture_url()).into(img_productMainType_left);
-        Glide.with(ProductMainTypeFragment.getInstance()).load(sImageUrl + mainTyperight.getPicture_url()).into(img_productMainType_right);
+        // 应用圆角转换的 RequestOptions
+        RequestOptions requestOptions_left = new RequestOptions()
+                .transform(new RoundedCorners(20));
+        RequestOptions requestOptions_right = new RequestOptions()
+                .transform(new RoundedCorners(20));
+
+        Glide.with(ProductMainTypeFragment.getInstance()).load(sImageUrl + mainTypeleft.getPicture_url()).apply(requestOptions_left).into(img_productMainType_left);
+        Glide.with(ProductMainTypeFragment.getInstance()).load(sImageUrl + mainTyperight.getPicture_url()).apply(requestOptions_right).into(img_productMainType_right);
 
         img_productMainType_left.setTag(R.id.img_productMainType_left, mainTypeleft.getId());
         img_productMainType_right.setTag(R.id.img_productMainType_right, mainTyperight.getId());

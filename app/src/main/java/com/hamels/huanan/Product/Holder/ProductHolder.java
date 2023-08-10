@@ -9,6 +9,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
+import com.bumptech.glide.request.RequestOptions;
 import com.hamels.huanan.Product.View.ProductFragment;
 import com.hamels.huanan.R;
 import com.hamels.huanan.Repository.Model.Product;
@@ -37,7 +39,12 @@ public class ProductHolder extends RecyclerView.ViewHolder {
     }
 
     public void setImg_product(Product product) {
-        Glide.with(ProductFragment.getInstance()).load(EOrderApplication.sApiUrl + product.getPicture_url()).into(img_product);
+        // 应用圆角转换的 RequestOptions
+        RequestOptions requestOptions = new RequestOptions()
+                .transform(new RoundedCorners(20));
+
+        Glide.with(ProductFragment.getInstance()).load(EOrderApplication.sApiUrl + product.getPicture_url()).apply(requestOptions).into(img_product);
+
         if (product.getSoldoutToday().equals("Y")){
             List<String> labels = new ArrayList<>();
             labels.add("今日完售");
