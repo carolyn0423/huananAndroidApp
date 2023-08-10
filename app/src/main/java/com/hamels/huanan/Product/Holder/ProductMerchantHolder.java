@@ -9,6 +9,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
+import com.bumptech.glide.request.RequestOptions;
 import com.hamels.huanan.Product.View.ProductMerchantFragment;
 import com.hamels.huanan.R;
 import com.hamels.huanan.Repository.Model.Merchant;
@@ -105,8 +107,16 @@ public class ProductMerchantHolder extends RecyclerView.ViewHolder {
         tv_product_name_left.setVisibility(View.VISIBLE);
         img_merchant_left.setVisibility(View.INVISIBLE);
         img_merchant_right.setVisibility(View.INVISIBLE);
-        Glide.with(ProductMerchantFragment.getInstance()).load(EOrderApplication.sApiUrl + productleft.getPicture_url()).into(img_product_left);
-        Glide.with(ProductMerchantFragment.getInstance()).load(EOrderApplication.sApiUrl + productright.getPicture_url()).into(img_product_right);
+
+        // 应用圆角转换的 RequestOptions
+        RequestOptions requestOptions_left = new RequestOptions()
+                .transform(new RoundedCorners(20));
+        RequestOptions requestOptions_right = new RequestOptions()
+                .transform(new RoundedCorners(20));
+
+        Glide.with(ProductMerchantFragment.getInstance()).load(EOrderApplication.sApiUrl + productleft.getPicture_url()).apply(requestOptions_left).into(img_product_left);
+        Glide.with(ProductMerchantFragment.getInstance()).load(EOrderApplication.sApiUrl + productright.getPicture_url()).apply(requestOptions_right).into(img_product_right);
+
         tv_price_left.setText("NT$"+mDecimalFormat.format((double)productleft.getPrice()));
         tv_product_name_left.setText(productleft.getProduct_name());
         tv_sale_price_left.setText("NT$"+mDecimalFormat.format((double)productleft.getSale_price()));
@@ -130,7 +140,12 @@ public class ProductMerchantHolder extends RecyclerView.ViewHolder {
         tv_price_right.setVisibility(View.INVISIBLE);
         tv_sale_price_right.setVisibility(View.INVISIBLE);
         tv_product_name_right.setVisibility(View.INVISIBLE);
-        Glide.with(ProductMerchantFragment.getInstance()).load(EOrderApplication.sApiUrl + productleft.getPicture_url()).into(img_product_left);
+
+        // 应用圆角转换的 RequestOptions
+        RequestOptions requestOptions_left = new RequestOptions()
+                .transform(new RoundedCorners(20));
+        Glide.with(ProductMerchantFragment.getInstance()).load(EOrderApplication.sApiUrl + productleft.getPicture_url()).apply(requestOptions_left).into(img_product_left);
+
         img_product_left.setTag(R.id.img_product_left,productleft.getId());
         tv_price_left.setText("NT$"+mDecimalFormat.format((double)productleft.getPrice()));
         tv_product_name_left.setText(productleft.getProduct_name());

@@ -192,7 +192,6 @@ public class MainActivity extends BaseActivity implements MainContract.View {
 
                 try {
                     VersionCode = getPackageManager().getPackageInfo(getPackageName(), 0).versionCode;
-
                     ChkVision();
                 } catch (PackageManager.NameNotFoundException e) {
                     e.printStackTrace();
@@ -657,6 +656,7 @@ public class MainActivity extends BaseActivity implements MainContract.View {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+
         switch (requestCode) {
             case REQUEST_MAIN_INDEX:
                 changeTabFragment(MainIndexFragment.getInstance());

@@ -1,5 +1,6 @@
 package com.hamels.huanan.Main.View;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.os.Bundle;
 import androidx.annotation.NonNull;
@@ -194,6 +195,11 @@ public class MainIndexFragment extends BaseFragment implements MainIndexContract
 //                ((MainActivity) getActivity()).goNewsDetail(((CustomViewsInfo)model).getXBannerTitle());
             }
         });
+
+        Activity activity = getActivity();
+        if (activity instanceof MainActivity) {
+            ((MainActivity) activity).refreshBadge();
+        }
     }
 }
 
