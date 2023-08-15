@@ -122,6 +122,7 @@ public class MainActivity extends BaseActivity implements MainContract.View {
     private int barcodeHeight = 300;
     private int brightnessNow = 0;
 
+
     public static String sSourceActive = "";
     public static String sCustomerID = "";
     private Boolean isUpdate = false;
@@ -486,7 +487,7 @@ public class MainActivity extends BaseActivity implements MainContract.View {
                 mainPresenter.checkLoginForMail(fragment.getClass().getSimpleName());
             }else if (id == R.id.go_url){
                 //  開啟外部網址
-                String url = "https://www.yunlinhn.com.tw/";
+                String url = "https://lin.ee/ez3y1OW";
                 Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
                 startActivity(intent);
             }
