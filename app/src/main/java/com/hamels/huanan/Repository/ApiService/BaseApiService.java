@@ -19,16 +19,15 @@ public interface BaseApiService {
     @POST("v1/auth/{action}")
     Call<BaseModel<Map<String, String>>> postGetMemberToken(@Path("action") String action, @Body RequestBody body);
 
-    @Headers("Authorization: Basic ZG91Ymxlc2VydmljZTp2T2x1TjN4T3Nt")
     @POST("Location/GetList")
     Call<BaseModel<List<Store>>> postGetLocationList(@Body RequestBody body);
 
-    @Headers("Authorization: Basic ZG91Ymxlc2VydmljZTp2T2x1TjN4T3Nt")
     @POST("Location/SaveDetail")
     Call<BaseModel> postSetStoreOften(@Body RequestBody body);
 
     @POST("Customer/GetList")
     Call<BaseModel<List<Customer>>> GetCustomerList(@Body RequestBody body);
+
     @POST("Customer/GetDetail")
     Call<BaseModel<Customer>> GetCustomerDetail(@Body RequestBody body);
 }

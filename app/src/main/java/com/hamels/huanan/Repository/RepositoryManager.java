@@ -906,12 +906,6 @@ public class RepositoryManager {
                 Log.e(TAG, "onApiSuccess : " + response);
                 valueCallback.onValueCallback(TASK_POST_GET_LOCATION_LIST, response.getItems());
             }
-
-//            @Override
-//            public void onApiFail(int errorCode, BaseModel failBaseModel) {
-//                super.onApiFail(errorCode, failBaseModel);
-//                valueCallback.onValueCallback(TASK_FAIL, failBaseModel.getMessage());
-//            }
         });
     }
 

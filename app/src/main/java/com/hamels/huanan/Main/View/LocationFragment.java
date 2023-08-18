@@ -233,13 +233,14 @@ public class LocationFragment extends BaseFragment implements LocationListContra
     }
 
     public void setOnlineShoppingFlag(boolean isFlag, List<Store> stores){
+        if(stores.size() > 0) {
+            location_count = stores.size();
+            location_id = stores.get(0).getLocationID();
+        }
 
-        location_count = stores.size();
-        location_id = stores.get(0).getLocationID();
-
-        if(isFlag) {
+        if (isFlag) {
             noLocationGroup.setVisibility(getView().GONE);
-        }else{
+        } else {
             noLocationGroup.setVisibility(getView().VISIBLE);
         }
     }

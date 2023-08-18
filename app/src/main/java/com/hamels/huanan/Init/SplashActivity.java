@@ -9,8 +9,7 @@ import android.util.Log;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 
-import com.google.firebase.iid.FirebaseInstanceId;
-import com.google.firebase.iid.InstanceIdResult;
+import com.google.firebase.messaging.FirebaseMessaging;
 import com.hamels.huanan.Base.BaseActivity;
 import com.hamels.huanan.EOrderApplication;
 import com.hamels.huanan.R;
@@ -24,7 +23,7 @@ public class SplashActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
-
+/*
         FirebaseInstanceId.getInstance().getInstanceId()
                 .addOnCompleteListener(new OnCompleteListener<InstanceIdResult>() {
                     @Override
@@ -39,6 +38,18 @@ public class SplashActivity extends BaseActivity {
                         startInitApp();
                     }
                 });
+*/
+        FirebaseMessaging.getInstance().getToken().addOnCompleteListener(task -> {
+            if (!task.isSuccessful()) {
+                Log.e(TAG, "getInstanceId failed", task.getException());
+                startInitApp();
+                return;
+            }
+            String token = task.getResult();
+            Log.e(TAG, "token : " + token);
+            SharedUtils.getInstance().setFirebaseToken(SplashActivity.this, token);
+            startInitApp();
+        });
 
         // 避免从桌面启动程序后，会重新实例化入口类的activity
         if (!this.isTaskRoot()) {

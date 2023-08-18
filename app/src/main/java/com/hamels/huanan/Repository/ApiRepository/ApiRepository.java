@@ -151,7 +151,8 @@ public class ApiRepository {
         map.put("head_location_flag", sHeadLocationFlag);
         map.put("lon", Double.toString(EOrderApplication.lon));
         map.put("lat", Double.toString(EOrderApplication.lat));
-        Log.e(TAG,"map : " + map.toString());
+
+        Log.e(TAG,"API getLocationList : " + map.toString());
 
         RequestBody requestBody = RequestBody.create(MediaType.parse("text/plain"), ApiUtils.getEncodeStringParams(map));
         retrofit.create(BaseApiService.class).postGetLocationList(requestBody).enqueue(apiCallback);

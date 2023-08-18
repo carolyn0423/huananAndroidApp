@@ -225,6 +225,10 @@ public class MainPresenter extends BasePresenter<MainContract.View> implements M
 
     public String getApiUrl() { return repositoryManager.getApiUrl(); }
 
+    public String getUserAccount() { return repositoryManager.getUserAccount(); }
+
+    public String getUserPw() { return repositoryManager.getUserPassword(); }
+
     public void saveSourceActive(String sSourceActive) { repositoryManager.saveSourceActive(sSourceActive); }
 
     public void saveFragmentMainType(String sLocationID, String IsETicket) { repositoryManager.saveFragmentMainType(sLocationID, IsETicket); }
@@ -266,7 +270,34 @@ public class MainPresenter extends BasePresenter<MainContract.View> implements M
                         repositoryManager.saveCustomerName(customers.getCustomerName());
                         repositoryManager.saveApiUrl(customers.getApiUrl());
 
-                        getCustomer();
+                        //  自動重新登入
+                        if(!getUserAccount().equals("") && !getUserPw().equals("")) {
+                            repositoryManager.callLoginApi(customers.getCustomerID(), getUserAccount(), getUserPw(), new BaseContract.ValueCallback<User>() {
+                                @Override
+                                public void onValueCallback(int task, User user) {
+                                    repositoryManager.saveCustomerID(Integer.toString(user.getCustomer()));
+                                    repositoryManager.saveAccountInfo(getUserAccount(), getUserPw());
+                                    repositoryManager.saveUserID(Integer.toString(user.getMember()));
+                                    repositoryManager.saveVerifyCode(user.getVerifyCode());
+                                    repositoryManager.saveApiUrl(customers.getApiUrl());
+                                }
+                            }, new BaseContract.ValueCallback<String>() {
+                                @Override
+                                public void onValueCallback(int task, String message) {
+                                    repositoryManager.saveAccountInfo("", "");
+                                    repositoryManager.saveUserID("");
+                                    repositoryManager.saveVerifyCode("");
+
+                                    getCustomer();
+                                }
+                            });
+                        }else{
+                            repositoryManager.saveAccountInfo("", "");
+                            repositoryManager.saveUserID("");
+                            repositoryManager.saveVerifyCode("");
+
+                            getCustomer();
+                        }
                     }
                 }
             });
