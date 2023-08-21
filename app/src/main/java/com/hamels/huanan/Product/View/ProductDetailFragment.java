@@ -12,6 +12,7 @@ import com.google.android.material.tabs.TabLayout;
 import androidx.appcompat.app.AlertDialog;
 import android.text.Html;
 import android.text.InputType;
+import android.text.Spannable;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -45,6 +46,7 @@ import com.hamels.huanan.Repository.Model.ProductConf;
 import com.hamels.huanan.Repository.Model.ProductConfAmout;
 import com.hamels.huanan.Repository.Model.ProductPicture;
 import com.hamels.huanan.Repository.Model.ProductSpec;
+import com.hamels.huanan.Utils.PicassoImageGetter;
 import com.hamels.huanan.Utils.WaterMaskUtils;
 import com.stx.xhb.xbanner.XBanner;
 
@@ -137,8 +139,8 @@ public class ProductDetailFragment extends BaseFragment implements ProductDetail
         tv_same_price = view.findViewById(R.id.tv_same_price);
         tv_store_name = view.findViewById(R.id.tv_store_name);
         tv_product_type = view.findViewById(R.id.tv_product_type);
-        //tv_desc = view.findViewById(R.id.tv_desc);
-        tv_show_desc = view.findViewById(R.id.tv_show_desc);
+        tv_desc = view.findViewById(R.id.tv_desc);
+        //tv_show_desc = view.findViewById(R.id.tv_show_desc);
         spinner_spec = view.findViewById(R.id.spinner_spec);
         layout_minus = view.findViewById(R.id.layout_minus);
         layout_plus = view.findViewById(R.id.layout_plus);
@@ -170,12 +172,12 @@ public class ProductDetailFragment extends BaseFragment implements ProductDetail
             constraintLayout_conf.setVisibility(View.VISIBLE);
         }
 
-        tv_show_desc.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                ((MainActivity) getActivity()).addFragment(ProductDetailDescFragment.getInstance(product));
-            }
-        });
+//        tv_show_desc.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                ((MainActivity) getActivity()).addFragment(ProductDetailDescFragment.getInstance(product));
+//            }
+//        });
 
         layout_plus.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -550,6 +552,14 @@ public class ProductDetailFragment extends BaseFragment implements ProductDetail
         }
         tv_price.setText("NT$" + sPrice);
         //tv_dealer_product_id.setText(productDetail.get(0).getDealer_product_id());
+        PicassoImageGetter imageGetter = new PicassoImageGetter(this.getContext(), tv_desc);
+        Spannable html;
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
+            html = (Spannable) Html.fromHtml(product.getDesc(), Html.FROM_HTML_MODE_LEGACY, imageGetter, null);
+        } else {
+            html = (Spannable) Html.fromHtml(product.getDesc(), imageGetter, null);
+        }
+        tv_desc.setText(html);
         //tv_desc.setText(Html.fromHtml(productDetail.get(0).getDesc()));
         tv_price.getPaint().setFlags(Paint.STRIKE_THRU_TEXT_FLAG);
         edit_num.setText(Integer.toString(1));

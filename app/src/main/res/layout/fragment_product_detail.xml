@@ -99,20 +99,20 @@
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
 
-                        <TextView
-                            android:id="@+id/tv_show_desc"
-                            style="@style/fontBoldTw.GreyDoubleDark"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="8dp"
-                            android:textSize="14sp"
-                            android:text="詳細介紹"
-                            android:gravity="end"
-                            android:textColor="@color/blue"
-                            android:layout_marginRight="15dp"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent" />
+<!--                        <TextView-->
+<!--                            android:id="@+id/tv_show_desc"-->
+<!--                            style="@style/fontBoldTw.GreyDoubleDark"-->
+<!--                            android:layout_width="0dp"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:layout_marginTop="8dp"-->
+<!--                            android:textSize="14sp"-->
+<!--                            android:text="詳細介紹"-->
+<!--                            android:gravity="end"-->
+<!--                            android:textColor="@color/blue"-->
+<!--                            android:layout_marginRight="15dp"-->
+<!--                            app:layout_constraintEnd_toEndOf="parent"-->
+<!--                            app:layout_constraintStart_toStartOf="parent"-->
+<!--                            app:layout_constraintTop_toTopOf="parent" />-->
 
                         <TextView
                             android:id="@+id/tv_product_type"
@@ -123,7 +123,7 @@
                             android:text="圓形精緻餐盒"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@+id/tv_show_desc" />
+                            app:layout_constraintTop_toBottomOf="@+id/tv_store_name" />
 
                         <TextView
                             android:id="@+id/tv_same_price"
@@ -512,73 +512,73 @@
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
-                <!--                &lt;!&ndash;        商品介紹&ndash;&gt;-->
-                <!--                <androidx.constraintlayout.widget.ConstraintLayout-->
-                <!--                    android:id="@+id/constraintLayout4"-->
-                <!--                    android:layout_width="match_parent"-->
-                <!--                    android:layout_height="wrap_content"-->
-                <!--                    android:layout_marginTop="16dp"-->
-                <!--                    android:layout_marginStart="8dp"-->
-                <!--                    android:layout_marginEnd="8dp"-->
-                <!--                    android:layout_marginBottom="16dp"-->
-                <!--                    android:background="@drawable/rec_solid_white"-->
-                <!--                    app:layout_constraintEnd_toEndOf="parent"-->
-                <!--                    app:layout_constraintStart_toStartOf="parent"-->
-                <!--                    app:layout_constraintTop_toBottomOf="@+id/layout_down"-->
-                <!--                    app:layout_constraintBottom_toBottomOf="parent">-->
+                                <!--        商品介紹-->
+                                <androidx.constraintlayout.widget.ConstraintLayout
+                                    android:id="@+id/constraintLayout4"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="16dp"
+                                    android:layout_marginStart="8dp"
+                                    android:layout_marginEnd="8dp"
+                                    android:layout_marginBottom="16dp"
+                                    android:background="@drawable/rec_solid_white"
+                                    app:layout_constraintEnd_toEndOf="parent"
+                                    app:layout_constraintStart_toStartOf="parent"
+                                    app:layout_constraintTop_toBottomOf="@+id/layout_down"
+                                    app:layout_constraintBottom_toBottomOf="parent">
 
-                <!--                    <TextView-->
-                <!--                        android:visibility="gone"-->
-                <!--                        android:id="@+id/textView10"-->
-                <!--                        android:layout_width="wrap_content"-->
-                <!--                        android:layout_height="21dp"-->
-                <!--                        android:layout_marginStart="20dp"-->
-                <!--                        android:layout_marginTop="20dp"-->
-                <!--                        style="@style/fontRegularTw.GreyDoubleDark"-->
-                <!--                        android:textSize="14sp"-->
-                <!--                        android:text="商品型號"-->
-                <!--                        app:layout_constraintStart_toStartOf="parent"-->
-                <!--                        app:layout_constraintTop_toTopOf="parent" />-->
+                                    <TextView
+                                        android:visibility="gone"
+                                        android:id="@+id/textView10"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="21dp"
+                                        android:layout_marginStart="20dp"
+                                        android:layout_marginTop="20dp"
+                                        style="@style/fontRegularTw.GreyDoubleDark"
+                                        android:textSize="14sp"
+                                        android:text="商品型號"
+                                        app:layout_constraintStart_toStartOf="parent"
+                                        app:layout_constraintTop_toTopOf="parent" />
 
-                <!--                    <TextView-->
-                <!--                        android:visibility="gone"-->
-                <!--                        android:id="@+id/tv_dealer_product_id"-->
-                <!--                        android:layout_width="0dp"-->
-                <!--                        android:layout_height="wrap_content"-->
-                <!--                        android:layout_marginStart="20dp"-->
-                <!--                        android:layout_marginEnd="20dp"-->
-                <!--                        android:layout_marginTop="4dp"-->
-                <!--                        android:textSize="12sp"-->
-                <!--                        style="@style/fontRobotoRegular.GreyDark"-->
-                <!--                        app:layout_constraintEnd_toEndOf="parent"-->
-                <!--                        app:layout_constraintStart_toEndOf="@+id/textView10"-->
-                <!--                        app:layout_constraintTop_toTopOf="@+id/textView10"/>-->
+                                    <TextView
+                                        android:visibility="gone"
+                                        android:id="@+id/tv_dealer_product_id"
+                                        android:layout_width="0dp"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginStart="20dp"
+                                        android:layout_marginEnd="20dp"
+                                        android:layout_marginTop="4dp"
+                                        android:textSize="12sp"
+                                        style="@style/fontRobotoRegular.GreyDark"
+                                        app:layout_constraintEnd_toEndOf="parent"
+                                        app:layout_constraintStart_toEndOf="@+id/textView10"
+                                        app:layout_constraintTop_toTopOf="@+id/textView10"/>
 
-                <!--                    <TextView-->
-                <!--                        android:id="@+id/textView8"-->
-                <!--                        android:layout_width="wrap_content"-->
-                <!--                        android:layout_height="wrap_content"-->
-                <!--                        android:layout_margin="20dp"-->
-                <!--                        style="@style/fontRegularTw.GreyDoubleDark"-->
-                <!--                        android:textSize="14sp"-->
-                <!--                        android:text="商品介紹"-->
-                <!--                        app:layout_constraintStart_toStartOf="parent"-->
-                <!--                        app:layout_constraintTop_toBottomOf="@+id/textView10"/>-->
+                                    <TextView
+                                        android:id="@+id/textView8"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_margin="20dp"
+                                        style="@style/fontRegularTw.GreyDoubleDark"
+                                        android:textSize="14sp"
+                                        android:text="商品介紹"
+                                        app:layout_constraintStart_toStartOf="parent"
+                                        app:layout_constraintTop_toBottomOf="@+id/textView10"/>
 
-                <!--                    <TextView-->
-                <!--                        android:id="@+id/tv_desc"-->
-                <!--                        android:layout_width="0dp"-->
-                <!--                        android:layout_height="wrap_content"-->
-                <!--                        android:layout_marginStart="20dp"-->
-                <!--                        android:layout_marginEnd="20dp"-->
-                <!--                        android:layout_marginTop="4dp"-->
-                <!--                        android:textSize="12sp"-->
-                <!--                        style="@style/fontRobotoRegular.GreyDark"-->
-                <!--                        app:layout_constraintEnd_toEndOf="parent"-->
-                <!--                        app:layout_constraintStart_toEndOf="@+id/textView8"-->
-                <!--                        app:layout_constraintTop_toTopOf="@+id/textView8"/>-->
+                                    <TextView
+                                        android:id="@+id/tv_desc"
+                                        android:layout_width="0dp"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginStart="20dp"
+                                        android:layout_marginEnd="20dp"
+                                        android:layout_marginTop="4dp"
+                                        android:textSize="12sp"
+                                        style="@style/fontRobotoRegular.GreyDark"
+                                        app:layout_constraintEnd_toEndOf="parent"
+                                        app:layout_constraintStart_toEndOf="@+id/textView8"
+                                        app:layout_constraintTop_toTopOf="@+id/textView8"/>
 
-                <!--                </androidx.constraintlayout.widget.ConstraintLayout>-->
+                                </androidx.constraintlayout.widget.ConstraintLayout>
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
