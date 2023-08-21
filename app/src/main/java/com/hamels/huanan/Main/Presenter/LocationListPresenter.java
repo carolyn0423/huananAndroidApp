@@ -62,7 +62,7 @@ public class LocationListPresenter extends BasePresenter<LocationListContract.Vi
                 boolean isOnlineShopping = type.size() > 0 ? true : false;
                 view.setOnlineShoppingFlag(isOnlineShopping, type);
 
-                repositoryManager.callGetLocationApi(finalTmpfunctionname, sCustomerID, location_id, finalSKilometer, "", new BaseContract.ValueCallback<List<Store>>() {
+                repositoryManager.callGetLocationApi(finalTmpfunctionname, sCustomerID, "", finalSKilometer, "", new BaseContract.ValueCallback<List<Store>>() {
                     @Override
                     public void onValueCallback(int task, List<Store> type) {
                         view.setLocationList(type);
