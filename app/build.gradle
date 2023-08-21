@@ -60,6 +60,7 @@ dependencies {
 
     // gif
     implementation 'pl.droidsonroids.gif:android-gif-drawable:1.2.22'
+    implementation 'com.squareup.picasso:picasso:2.71828'
 
     //bottomNavigationViewEx
     implementation 'com.github.ittianyu:BottomNavigationViewEx:2.0.2'
@@ -98,4 +99,7 @@ dependencies {
     implementation 'me.gujun.android.taggroup:library:1.4@aar'
 
     implementation 'org.jsoup:jsoup:1.10.2'
+
+    //ImageGetter
+    implementation 'com.squareup.picasso:picasso:2.8'
 }

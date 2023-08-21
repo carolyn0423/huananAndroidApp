@@ -63,7 +63,7 @@ public class ProductDetailFragment extends BaseFragment implements ProductDetail
     private EditText edit_num, conf_qty;
     private ConstraintLayout layout_shopping, btn_conf_qty;
     private Button btn_freight_title;
-    private TextView tv_price, tv_sale_price, tv_same_price, tv_store_name, tv_product_type, tv_dealer_product_id, tv_desc, tv_subtotal,tv_water_mask;
+    private TextView tv_price, tv_sale_price, tv_same_price, tv_store_name, tv_product_type, tv_dealer_product_id, tv_desc, tv_subtotal,tv_water_mask, tv_show_desc;
     private ImageView img_product_ribbon;
     private ProductDetailContract.Presenter presenter;
     private TabLayout tabLayout;
@@ -94,6 +94,7 @@ public class ProductDetailFragment extends BaseFragment implements ProductDetail
     private List<ProductConf> SelectConf = new ArrayList<>();
     public int SoldOutQty = 0;
     private int iLimitQuantity = 1;
+    private Product product;
 
     public static ProductDetailFragment getInstance(int product_id, String mIsETicket) {
         if (fragment == null) {
@@ -120,7 +121,6 @@ public class ProductDetailFragment extends BaseFragment implements ProductDetail
     }
 
     private void initView(View view) {
-        ((MainActivity) getActivity()).setAppTitle(R.string.tab_shop);
         ((MainActivity) getActivity()).setBackButtonVisibility(true);
         ((MainActivity) getActivity()).setMessageButtonVisibility(true);
         ((MainActivity) getActivity()).setMailButtonVisibility(true);
@@ -131,13 +131,14 @@ public class ProductDetailFragment extends BaseFragment implements ProductDetail
 
         mXBanner = view.findViewById(R.id.xbanner);
         img_product_ribbon = view.findViewById(R.id.img_product_ribbon);
-        tv_dealer_product_id = view.findViewById(R.id.tv_dealer_product_id);
+        //tv_dealer_product_id = view.findViewById(R.id.tv_dealer_product_id);
         tv_price = view.findViewById(R.id.tv_price);
         tv_sale_price = view.findViewById(R.id.tv_sale_price);
         tv_same_price = view.findViewById(R.id.tv_same_price);
         tv_store_name = view.findViewById(R.id.tv_store_name);
         tv_product_type = view.findViewById(R.id.tv_product_type);
-        tv_desc = view.findViewById(R.id.tv_desc);
+        //tv_desc = view.findViewById(R.id.tv_desc);
+        tv_show_desc = view.findViewById(R.id.tv_show_desc);
         spinner_spec = view.findViewById(R.id.spinner_spec);
         layout_minus = view.findViewById(R.id.layout_minus);
         layout_plus = view.findViewById(R.id.layout_plus);
@@ -158,20 +159,29 @@ public class ProductDetailFragment extends BaseFragment implements ProductDetail
         view_scroll = view.findViewById(R.id.view_scroll);
         tv_water_mask = view.findViewById(R.id.tv_water_mask);
         if (isETicket.equals("Y")) {
+            ((MainActivity) getActivity()).setAppTitle(R.string.tab_ticket);
             layout_spec.setVisibility(View.GONE);
             img_product_ribbon.setVisibility(View.VISIBLE);
             constraintLayout_conf.setVisibility(View.GONE);
         } else {
+            ((MainActivity) getActivity()).setAppTitle(R.string.tab_shop);
             layout_spec.setVisibility(View.VISIBLE);
             img_product_ribbon.setVisibility(View.GONE);
             constraintLayout_conf.setVisibility(View.VISIBLE);
         }
 
+        tv_show_desc.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ((MainActivity) getActivity()).addFragment(ProductDetailDescFragment.getInstance(product));
+            }
+        });
+
         layout_plus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 quantity = Integer.valueOf(edit_num.getText().toString());
-                quantity = quantity + 1 * iLimitQuantity;
+                quantity = quantity + 1;
                 edit_num.setText(Integer.toString(quantity));
                 // Leslie 客製數量 連動商品數量
                 conf_qty.setText(Integer.toString(quantity));
@@ -191,7 +201,7 @@ public class ProductDetailFragment extends BaseFragment implements ProductDetail
             public void onClick(View v) {
                 quantity = Integer.valueOf(edit_num.getText().toString());
                 if (quantity > 0) {
-                    quantity = quantity - (1 * iLimitQuantity);
+                    quantity = quantity - 1;
                 }
                 edit_num.setText(Integer.toString(quantity));
                 // Leslie 客製數量 連動商品數量
@@ -204,7 +214,7 @@ public class ProductDetailFragment extends BaseFragment implements ProductDetail
                     iAllConfPrice += Integer.parseInt(productList.get(i).getPrice().trim().split("\\$")[1].replace(",", ""));
                 }
                 int subTotal = Integer.parseInt(tv_sale_price.getText().toString().trim().split("NT\\$")[1].replace(",", ""));
-                tv_subtotal.setText("$" + ((subTotal * quantity) + iAllConfPrice));
+                tv_subtotal.setText("$" + ((subTotal * quantity) + iAllConfPrice * iLimitQuantity));
             }
         });
 
@@ -393,10 +403,13 @@ public class ProductDetailFragment extends BaseFragment implements ProductDetail
 
         int iQtySum = 0;
         for (int i = 0; i < productList.size(); i++) {
+            productList.get(i).setQty("" + Integer.parseInt(productList.get(i).getQty()) * iLimitQuantity);
             iQtySum += Integer.parseInt(productList.get(i).getQty());
         }
 
-        presenter.addShoppingCart(Integer.toString(product_id), Spec_ID[0], location_id, SpecQty[0], Stock[0], edit_num.getText().toString(), isETicket.equals("Y") ? "E" : "G", conf_list, iQtySum);
+        String sQuantity = "" + (Integer.parseInt(edit_num.getText().toString()) * iLimitQuantity);
+
+        presenter.addShoppingCart(Integer.toString(product_id), Spec_ID[0], location_id, SpecQty[0], Stock[0], sQuantity, isETicket.equals("Y") ? "E" : "G", conf_list, iQtySum);
 
         // set default
         //edit_num.setText(Integer.toString(1 * iLimitQuantity));
@@ -412,9 +425,9 @@ public class ProductDetailFragment extends BaseFragment implements ProductDetail
                 iQtySum += Integer.parseInt(productList.get(i).getQty());
             }
 
-            iQtySum += Integer.parseInt(conf_qty.getText().toString());
+            iQtySum += Integer.parseInt(conf_qty.getText().toString()) * iLimitQuantity;
 
-            if (iQtySum > Integer.parseInt(edit_num.getText().toString())) {
+            if (iQtySum > Integer.parseInt(edit_num.getText().toString()) * iLimitQuantity) {
                 new AlertDialog.Builder(fragment.getActivity()).setTitle(R.string.dialog_hint).setMessage("數量超過").setPositiveButton(android.R.string.ok, null).show();
             } else {
                 String sTmpAllConfID = "";
@@ -430,13 +443,13 @@ public class ProductDetailFragment extends BaseFragment implements ProductDetail
                     if (!(i == (SelectConf.size() - 1))) {
                         sTmpAllConfName += "/";
                     }
-                    iTmpAllPrice += SelectConf.get(i).getprice();
+                    iTmpAllPrice += SelectConf.get(i).getprice() * iLimitQuantity;
 
                     if(SelectConf.get(i).getSoldOutQty().equals("Y")){
                         iAllSoldout += SelectConf.get(i).getSoldOutQty().equals("Y") ? 1 : 0;
                     }
                 }
-                iTmpAllPrice = iTmpAllPrice * Integer.parseInt(conf_qty.getText().toString());
+                iTmpAllPrice = iTmpAllPrice * Integer.parseInt(conf_qty.getText().toString()) * iTmpAllPrice;
                 // Leslie 增加總客製數量
                 //conf_quantity += Integer.parseInt(conf_qty.getText().toString());
                 //Log.e(TAG, "conf_quantity: " + conf_quantity);
@@ -493,6 +506,7 @@ public class ProductDetailFragment extends BaseFragment implements ProductDetail
 
     @Override
     public void setProductDetail(List<Product> productDetail) {
+        this.product = productDetail.get(0);
         List<ProductPicture> productPictureList = productDetail.get(0).getPicture_url_list();
         List<CustomViewsInfo> data = new ArrayList<>();
         iLimitQuantity = productDetail.get(0).getLimitQuantity();
@@ -522,24 +536,29 @@ public class ProductDetailFragment extends BaseFragment implements ProductDetail
         product_type_main_id = productDetail.get(0).getProductTypeMainID();
         tv_product_type.setText(productDetail.get(0).getProduct_name());
         tv_store_name.setText(productDetail.get(0).getProductTypeMainName() + " - " + productDetail.get(0).getTypeName());
+
+        String sTicketSalePrice = mDecimalFormat.format((double) (product.getticket_sales_price() * iLimitQuantity));
+        String sSalePrice = mDecimalFormat.format((double) (product.getSale_price() * iLimitQuantity));
+        String sPrice = mDecimalFormat.format((double) (product.getPrice() * iLimitQuantity));
+
         if (isETicket.equals("Y")) {
-            tv_same_price.setText("NT$" + mDecimalFormat.format((double) productDetail.get(0).getticket_sales_price()));
-            tv_sale_price.setText("NT$" + mDecimalFormat.format((double) productDetail.get(0).getticket_sales_price()));
+            tv_same_price.setText("NT$" + sTicketSalePrice);
+            tv_sale_price.setText("NT$" + sTicketSalePrice);
         } else {
-            tv_same_price.setText("NT$" + mDecimalFormat.format((double) productDetail.get(0).getSale_price()));
-            tv_sale_price.setText("NT$" + mDecimalFormat.format((double) productDetail.get(0).getSale_price()));
+            tv_same_price.setText("NT$" + sSalePrice);
+            tv_sale_price.setText("NT$" + sSalePrice);
         }
-        tv_price.setText("NT$" + mDecimalFormat.format((double) productDetail.get(0).getPrice()));
-        tv_dealer_product_id.setText(productDetail.get(0).getDealer_product_id());
-        tv_desc.setText(Html.fromHtml(productDetail.get(0).getDesc()));
+        tv_price.setText("NT$" + sPrice);
+        //tv_dealer_product_id.setText(productDetail.get(0).getDealer_product_id());
+        //tv_desc.setText(Html.fromHtml(productDetail.get(0).getDesc()));
         tv_price.getPaint().setFlags(Paint.STRIKE_THRU_TEXT_FLAG);
-        edit_num.setText(Integer.toString(1 * iLimitQuantity));
+        edit_num.setText(Integer.toString(1));
         if (isETicket.equals("Y")) {
-            tv_subtotal.setText("$" + mDecimalFormat.format((double) productDetail.get(0).getticket_sales_price() * iLimitQuantity));
+            tv_subtotal.setText("$" + sTicketSalePrice);
         } else {
-            tv_subtotal.setText("$" + mDecimalFormat.format((double) productDetail.get(0).getSale_price() * iLimitQuantity));
+            tv_subtotal.setText("$" + sSalePrice);
         }
-        conf_qty.setText(Integer.toString(1 * iLimitQuantity));
+        conf_qty.setText(Integer.toString(1));
 
         if (productDetail.get(0).getSale_price() == productDetail.get(0).getPrice()) {
             tv_same_price.setVisibility(View.VISIBLE);
@@ -596,14 +615,18 @@ public class ProductDetailFragment extends BaseFragment implements ProductDetail
                     Stock[0] = specArrayList.get(iSpecKey).getStock();
                 }
 
+                String sTicketSalePrice = mDecimalFormat.format((double) (specArrayList.get(iSpecKey).getticket_sales_price() * iLimitQuantity));
+                String sSalePrice = mDecimalFormat.format((double) (specArrayList.get(iSpecKey).getsale_price() * iLimitQuantity));
+                String sPrice = mDecimalFormat.format((double) (specArrayList.get(iSpecKey).getprice() * iLimitQuantity));
+
                 if (isETicket.equals("Y")) {
-                    tv_same_price.setText("NT$" + mDecimalFormat.format((double) specArrayList.get(iSpecKey).getticket_sales_price()));
-                    tv_sale_price.setText("NT$" + mDecimalFormat.format((double) specArrayList.get(iSpecKey).getticket_sales_price()));
+                    tv_same_price.setText("NT$" + sTicketSalePrice);
+                    tv_sale_price.setText("NT$" + sTicketSalePrice);
                 } else {
-                    tv_same_price.setText("NT$" + mDecimalFormat.format((double) specArrayList.get(iSpecKey).getsale_price()));
-                    tv_sale_price.setText("NT$" + mDecimalFormat.format((double) specArrayList.get(iSpecKey).getsale_price()));
+                    tv_same_price.setText("NT$" + sSalePrice);
+                    tv_sale_price.setText("NT$" + sSalePrice);
                 }
-                tv_price.setText("NT$" + mDecimalFormat.format((double) specArrayList.get(iSpecKey).getprice()));
+                tv_price.setText("NT$" + sPrice);
 
                 if (specArrayList.get(iSpecKey).getsale_price() == specArrayList.get(iSpecKey).getprice()) {
                     tv_same_price.setVisibility(View.VISIBLE);
@@ -689,9 +712,9 @@ public class ProductDetailFragment extends BaseFragment implements ProductDetail
                 for (int i = 0; i < productList.size(); i++) {
                     //Log.e(TAG, "" + productList.get(i).getPrice());
 
-                    iAllConfPrice += Integer.parseInt(productList.get(i).getPrice().trim().split("\\$")[1]);
+                    iAllConfPrice += Integer.parseInt(productList.get(i).getPrice().trim().split("\\$")[1]) * iLimitQuantity;
                 }
-                int subTotal = Integer.parseInt(tv_sale_price.getText().toString().trim().split("NT\\$")[1]);
+                int subTotal = Integer.parseInt(tv_sale_price.getText().toString().trim().split("NT\\$")[1]) * iLimitQuantity;
 
                 tv_subtotal.setText("$" + ((subTotal * quantity) + iAllConfPrice));
             }
@@ -713,7 +736,7 @@ public class ProductDetailFragment extends BaseFragment implements ProductDetail
     @Override
     public void showErrorAlert(String message) {
         new AlertDialog.Builder(fragment.getActivity()).setTitle(R.string.dialog_hint).setMessage(message).setPositiveButton(android.R.string.ok, null).show();
-        edit_num.setText(Integer.toString(1 * iLimitQuantity));
+        edit_num.setText(Integer.toString(1));
         ((MainActivity) getActivity()).refreshBadge();
     }
 

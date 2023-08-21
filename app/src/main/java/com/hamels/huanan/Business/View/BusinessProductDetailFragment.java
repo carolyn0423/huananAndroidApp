@@ -107,12 +107,12 @@ public class BusinessProductDetailFragment extends BaseFragment implements Busin
         ((MainActivity) getActivity()).setMainIndexMessageUnreadVisibility(false);
 
         mXBanner = view.findViewById(R.id.xbanner);
-        tv_dealer_product_id = view.findViewById(R.id.tv_dealer_product_id);
+        //tv_dealer_product_id = view.findViewById(R.id.tv_dealer_product_id);
         tv_price = view.findViewById(R.id.tv_price);
         tv_sale_price = view.findViewById(R.id.tv_sale_price);
         tv_store_name = view.findViewById(R.id.tv_store_name);
         tv_product_type = view.findViewById(R.id.tv_product_type);
-        tv_desc = view.findViewById(R.id.tv_desc);
+        //tv_desc = view.findViewById(R.id.tv_desc);
         spinner_spec = view.findViewById(R.id.spinner_spec);
         layout_minus = view.findViewById(R.id.layout_minus);
         layout_plus = view.findViewById(R.id.layout_plus);
@@ -195,9 +195,9 @@ public class BusinessProductDetailFragment extends BaseFragment implements Busin
         tv_store_name.setText(productDetail.get(0).getProductTypeMainName() + " - " + productDetail.get(0).getTypeName());
         tv_sale_price.setText("NT$" + mDecimalFormat.format((double) productDetail.get(0).getSale_price()));
         tv_price.setText("NT$" + mDecimalFormat.format((double) productDetail.get(0).getPrice()));
-        tv_dealer_product_id.setText(productDetail.get(0).getDealer_product_id());
+        //tv_dealer_product_id.setText(productDetail.get(0).getDealer_product_id());
         //btn_freight_title.setText(productDetail.get(0).getFreight_title());
-        tv_desc.setText(Html.fromHtml(productDetail.get(0).getDesc()));
+        //tv_desc.setText(Html.fromHtml(productDetail.get(0).getDesc()));
         tv_price.getPaint().setFlags(Paint.STRIKE_THRU_TEXT_FLAG);
         edit_num.setText("1");
         tv_subtotal.setText("$" + mDecimalFormat.format((double) productDetail.get(0).getSale_price()));
