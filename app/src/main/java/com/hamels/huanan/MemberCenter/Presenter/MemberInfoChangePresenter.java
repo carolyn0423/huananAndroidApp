@@ -2,7 +2,7 @@ package com.hamels.huanan.MemberCenter.Presenter;
 
 import com.hamels.huanan.Base.BaseContract;
 import com.hamels.huanan.Base.BasePresenter;
-import com.hamels.huanan.MemberCenter.MemberInfoChangeContract;
+import com.hamels.huanan.MemberCenter.Contract.MemberInfoChangeContract;
 import com.hamels.huanan.R;
 import com.hamels.huanan.Repository.Model.Address;
 import com.hamels.huanan.Repository.Model.User;

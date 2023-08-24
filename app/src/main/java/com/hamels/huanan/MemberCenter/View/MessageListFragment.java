@@ -14,7 +14,7 @@ import android.widget.ImageButton;
 import com.hamels.huanan.Base.BaseFragment;
 import com.hamels.huanan.Main.View.MainActivity;
 import com.hamels.huanan.MemberCenter.Adapter.MessageListAdapter;
-import com.hamels.huanan.MemberCenter.MessageListContract;
+import com.hamels.huanan.MemberCenter.Contract.MessageListContract;
 import com.hamels.huanan.MemberCenter.Presenter.MessageListPresenter;
 import com.hamels.huanan.R;
 import com.hamels.huanan.Repository.Model.Message;

@@ -15,7 +15,7 @@ import android.widget.TextView;
 import com.hamels.huanan.Base.BaseFragment;
 import com.hamels.huanan.Main.View.MainActivity;
 import com.hamels.huanan.MemberCenter.Adapter.PointRecordAdapter;
-import com.hamels.huanan.MemberCenter.MemberPointContract;
+import com.hamels.huanan.MemberCenter.Contract.MemberPointContract;
 import com.hamels.huanan.MemberCenter.Presenter.MemberPointPresenter;
 import com.hamels.huanan.R;
 import com.hamels.huanan.Repository.Model.PointHistory;

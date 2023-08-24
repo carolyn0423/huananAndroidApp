@@ -22,7 +22,7 @@ import android.widget.TextView;
 import com.hamels.huanan.Base.BaseFragment;
 import com.hamels.huanan.EOrderApplication;
 import com.hamels.huanan.Main.View.MainActivity;
-import com.hamels.huanan.MemberCenter.MemberInfoChangeContract;
+import com.hamels.huanan.MemberCenter.Contract.MemberInfoChangeContract;
 import com.hamels.huanan.MemberCenter.Presenter.MemberInfoChangePresenter;
 import com.hamels.huanan.R;
 import com.hamels.huanan.Repository.Model.Address;

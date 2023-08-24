@@ -2,7 +2,7 @@ package com.hamels.huanan.MemberCenter.Presenter;
 
 import com.hamels.huanan.Base.BaseContract;
 import com.hamels.huanan.Base.BasePresenter;
-import com.hamels.huanan.MemberCenter.FaqContract;
+import com.hamels.huanan.MemberCenter.Contract.FaqContract;
 import com.hamels.huanan.Repository.Model.Faq;
 import com.hamels.huanan.Repository.RepositoryManager;
 

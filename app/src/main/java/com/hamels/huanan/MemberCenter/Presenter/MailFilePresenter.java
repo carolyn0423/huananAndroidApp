@@ -2,7 +2,7 @@ package com.hamels.huanan.MemberCenter.Presenter;
 
 import com.hamels.huanan.Base.BaseContract;
 import com.hamels.huanan.Base.BasePresenter;
-import com.hamels.huanan.MemberCenter.MailFileContract;
+import com.hamels.huanan.MemberCenter.Contract.MailFileContract;
 import com.hamels.huanan.Repository.Model.MemberMessage;
 import com.hamels.huanan.Repository.RepositoryManager;
 

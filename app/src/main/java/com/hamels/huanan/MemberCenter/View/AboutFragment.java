@@ -11,7 +11,7 @@ import android.widget.TextView;
 import com.hamels.huanan.Base.BaseActivity;
 import com.hamels.huanan.Base.BaseFragment;
 import com.hamels.huanan.Main.View.MainActivity;
-import com.hamels.huanan.MemberCenter.AboutContract;
+import com.hamels.huanan.MemberCenter.Contract.AboutContract;
 import com.hamels.huanan.MemberCenter.Presenter.AboutPresenter;
 import com.hamels.huanan.R;
 import com.hamels.huanan.Repository.Model.About;

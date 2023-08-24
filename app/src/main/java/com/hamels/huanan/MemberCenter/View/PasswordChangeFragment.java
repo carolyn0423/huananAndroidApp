@@ -13,7 +13,7 @@ import android.widget.TextView;
 
 import com.hamels.huanan.Base.BaseFragment;
 import com.hamels.huanan.Main.View.MainActivity;
-import com.hamels.huanan.MemberCenter.PasswordChangeContract;
+import com.hamels.huanan.MemberCenter.Contract.PasswordChangeContract;
 import com.hamels.huanan.MemberCenter.Presenter.PasswordChangePresenter;
 import com.hamels.huanan.R;
 

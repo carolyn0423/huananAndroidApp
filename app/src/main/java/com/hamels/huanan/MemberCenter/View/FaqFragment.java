@@ -12,7 +12,7 @@ import android.widget.TextView;
 
 import com.hamels.huanan.Base.BaseFragment;
 import com.hamels.huanan.Main.View.MainActivity;
-import com.hamels.huanan.MemberCenter.FaqContract;
+import com.hamels.huanan.MemberCenter.Contract.FaqContract;
 import com.hamels.huanan.MemberCenter.Presenter.FaqPresenter;
 import com.hamels.huanan.R;
 import com.hamels.huanan.Repository.Model.Faq;

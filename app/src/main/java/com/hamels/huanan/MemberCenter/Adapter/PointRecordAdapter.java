@@ -7,7 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.hamels.huanan.Base.BaseAdapter;
-import com.hamels.huanan.MemberCenter.MemberPointContract;
+import com.hamels.huanan.MemberCenter.Contract.MemberPointContract;
 import com.hamels.huanan.MemberCenter.Holder.PointRecordHolder;
 import com.hamels.huanan.R;
 import com.hamels.huanan.Repository.Model.PointHistory;

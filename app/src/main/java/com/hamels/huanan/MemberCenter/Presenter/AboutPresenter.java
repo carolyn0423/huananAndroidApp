@@ -4,7 +4,7 @@ import android.Manifest;
 
 import com.hamels.huanan.Base.BaseContract;
 import com.hamels.huanan.Base.BasePresenter;
-import com.hamels.huanan.MemberCenter.AboutContract;
+import com.hamels.huanan.MemberCenter.Contract.AboutContract;
 import com.hamels.huanan.Repository.Model.About;
 import com.hamels.huanan.Repository.RepositoryManager;
 

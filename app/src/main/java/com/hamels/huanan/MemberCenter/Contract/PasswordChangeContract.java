@@ -1,4 +1,4 @@
-package com.hamels.huanan.MemberCenter;
+package com.hamels.huanan.MemberCenter.Contract;
 
 import androidx.annotation.StringRes;
 

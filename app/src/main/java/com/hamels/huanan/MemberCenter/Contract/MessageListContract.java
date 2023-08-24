@@ -1,4 +1,4 @@
-package com.hamels.huanan.MemberCenter;
+package com.hamels.huanan.MemberCenter.Contract;
 
 import com.hamels.huanan.Base.BaseContract;
 import com.hamels.huanan.Repository.Model.Message;

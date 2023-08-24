@@ -7,7 +7,7 @@ import android.view.ViewGroup;
 
 import com.hamels.huanan.Base.BaseAdapter;
 import com.hamels.huanan.Base.BaseContract;
-import com.hamels.huanan.MemberCenter.MailFileContract;
+import com.hamels.huanan.MemberCenter.Contract.MailFileContract;
 import com.hamels.huanan.MemberCenter.Holder.MailFileHolder;
 import com.hamels.huanan.R;
 import com.hamels.huanan.Repository.Model.MemberMessage;

@@ -4,7 +4,7 @@ import android.util.Log;
 
 import com.hamels.huanan.Base.BaseContract;
 import com.hamels.huanan.Base.BasePresenter;
-import com.hamels.huanan.MemberCenter.MessageListContract;
+import com.hamels.huanan.MemberCenter.Contract.MessageListContract;
 import com.hamels.huanan.Repository.Model.Message;
 import com.hamels.huanan.Repository.RepositoryManager;
 
