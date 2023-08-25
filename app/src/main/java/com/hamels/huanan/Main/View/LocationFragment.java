@@ -2,6 +2,7 @@ package com.hamels.huanan.Main.View;
 
 import android.Manifest;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.location.Location;
@@ -25,6 +26,7 @@ import android.widget.TextView;
 import com.hamels.huanan.Base.BaseActivity;
 import com.hamels.huanan.Base.BaseFragment;
 import com.hamels.huanan.EOrderApplication;
+import com.hamels.huanan.Login.VIew.LoginActivity;
 import com.hamels.huanan.Main.Adapter.LocationListAdapter;
 import com.hamels.huanan.Main.Contract.LocationListContract;
 import com.hamels.huanan.Main.Presenter.LocationListPresenter;
@@ -102,7 +104,12 @@ public class LocationFragment extends BaseFragment implements LocationListContra
         btn_functionname_1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                storeListPresenter.setFunctionname(FUNCTIONNAME_1, location_id);
+                if(storeListPresenter.getUserLogin()) {
+                    storeListPresenter.setFunctionname(FUNCTIONNAME_1, location_id);
+                }else{
+                    Intent intent = new Intent(fragment.getActivity(), LoginActivity.class);
+                    fragment.getActivity().startActivityForResult(intent, LocationFragment.REQUEST_LOCATION_PERMISSION);
+                }
             }
         });
 
@@ -149,25 +156,8 @@ public class LocationFragment extends BaseFragment implements LocationListContra
                     ((MainActivity) getActivity()).setAppTitle(R.string.tab_store);
                     break;
             }
-
-            btn_functionname_1.setVisibility(view.GONE);
-
-            clFunctionname_2.endToStart = R.id.guideline_mid;
-            clFunctionname_2.width = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 150, getResources().getDisplayMetrics());
-
-            clFunctionname_3.startToEnd = R.id.guideline_mid;
-            clFunctionname_3.endToEnd = R.id.fragment_store;
-            clFunctionname_3.width = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 150, getResources().getDisplayMetrics());
         }else{
             ((MainActivity) getActivity()).setAppTitle(R.string.tab_store);
-
-            btn_functionname_1.setVisibility(view.GONE);
-            clFunctionname_2.width = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 110, getResources().getDisplayMetrics());
-            clFunctionname_2.endToStart = clFunctionname_2.UNSET;
-
-            clFunctionname_3.startToEnd = R.id.btn_functionname_2;
-            clFunctionname_3.endToEnd = clFunctionname_3.UNSET;
-            clFunctionname_3.width = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 110, getResources().getDisplayMetrics());
         }
 
         storeListPresenter.saveSourceActive("");
@@ -202,19 +192,9 @@ public class LocationFragment extends BaseFragment implements LocationListContra
             //  門市僅有一個，直接Go
             storeListPresenter.saveFragmentMainType(location_id, "N");
             ((MainActivity) getActivity()).addFragment(ProductMainTypeFragment.getInstance());
-        }else if(location_count > 1 && stores.size() == 0){
-            // 若門市有多個, 但無常用門市時，頁籤default 在全部門市
-            ((MainActivity) getActivity()).setAppToolbarVisibility(true);
-            storeListPresenter.setFunctionname(FUNCTIONNAME_3, location_id);
-            btn_functionname_1.setVisibility(getView().VISIBLE);
-            btn_functionname_2.setVisibility(getView().VISIBLE);
-            btn_functionname_3.setVisibility(getView().VISIBLE);
         }else {
             ((MainActivity) getActivity()).setAppToolbarVisibility(true);
             locationListAdapter.setData(stores);
-            btn_functionname_1.setVisibility(getView().VISIBLE);
-            btn_functionname_2.setVisibility(getView().VISIBLE);
-            btn_functionname_3.setVisibility(getView().VISIBLE);
         }
     }
 

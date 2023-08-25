@@ -27,7 +27,6 @@
         android:text="常用門市"
         android:textColor="#808080"
         android:textSize="15sp"
-        android:visibility="gone"
         app:layout_constraintEnd_toStartOf="@+id/btn_functionname_2"
         app:layout_constraintTop_toTopOf="@+id/btn_functionname_2"  />
 
@@ -45,7 +44,6 @@
         android:text="最近五公里"
         android:textColor="@color/white"
         android:textSize="15sp"
-        android:visibility="gone"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -65,7 +63,6 @@
         android:text="全門市清單"
         android:textColor="#808080"
         android:textSize="15sp"
-        android:visibility="gone"
         app:layout_constraintStart_toEndOf="@+id/btn_functionname_2"
         app:layout_constraintTop_toTopOf="@+id/btn_functionname_2" />
 
