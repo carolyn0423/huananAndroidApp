@@ -16,28 +16,21 @@ import com.hamels.huanan.MemberCenter.View.MailFileFragment;
 import com.hamels.huanan.MemberCenter.View.MessageListFragment;
 import com.hamels.huanan.MemberCenter.View.WebViewFragment;
 import com.hamels.huanan.R;
-import com.hamels.huanan.Repository.ApiCallback;
-import com.hamels.huanan.Repository.ApiRepository.ApiAdminRepository;
-import com.hamels.huanan.Repository.Model.BaseModel;
 import com.hamels.huanan.Repository.Model.Customer;
+import com.hamels.huanan.Repository.Model.Store;
 import com.hamels.huanan.Repository.Model.User;
-import com.hamels.huanan.Repository.Model.WebSetup;
 import com.hamels.huanan.Repository.RepositoryManager;
 import com.hamels.huanan.EOrderApplication;
 
-import static com.hamels.huanan.Constant.ApiConstant.TASK_POST_GET_CUSTOMER_DETAIL;
 import static com.hamels.huanan.Constant.Constant.REQUEST_COUPON;
 import static com.hamels.huanan.Constant.Constant.REQUEST_DONATE;
 import static com.hamels.huanan.Constant.Constant.REQUEST_LOT_LIST;
 import static com.hamels.huanan.Constant.Constant.REQUEST_MAIL;
-import static com.hamels.huanan.Constant.Constant.REQUEST_MAIN_INDEX;
 import static com.hamels.huanan.Constant.Constant.REQUEST_MEMBER_CARD;
 import static com.hamels.huanan.Constant.Constant.REQUEST_MEMBER_CENTER;
 import static com.hamels.huanan.Constant.Constant.REQUEST_MESSAGE;
 import static com.hamels.huanan.Constant.Constant.REQUEST_BUSINESS;
 import static com.hamels.huanan.Constant.Constant.REQUEST_SHOPPING_CART;
-
-import android.util.Log;
 
 import java.util.List;
 
@@ -104,6 +97,18 @@ public class MainPresenter extends BasePresenter<MainContract.View> implements M
         } else {
             view.setAllBadge("0_0_0_0");
         }
+    }
+
+    public void getLocationList() {
+        String sCustomerID = repositoryManager.getCustomerID();
+
+        //  先取得該商家的全門市清單
+        repositoryManager.callGetLocationApi("AppLocation", sCustomerID, "", "0", "", new BaseContract.ValueCallback<List<Store>>() {
+            @Override
+            public void onValueCallback(int task, List<Store> type) {
+                view.ProductLocationFragment(type.size());
+            }
+        });
     }
 
     @Override
@@ -265,6 +270,7 @@ public class MainPresenter extends BasePresenter<MainContract.View> implements M
                         EOrderApplication.CUSTOMER_ID = customers.getCustomerID();
                         EOrderApplication.CUSTOMER_NAME = customers.getCustomerName();
                         EOrderApplication.sApiUrl = customers.getApiUrl();
+                        EOrderApplication.dbConnectName = customers.getdbConnectName();
 
                         repositoryManager.saveCustomerID(customers.getCustomerID());
                         repositoryManager.saveCustomerName(customers.getCustomerName());

@@ -53,6 +53,7 @@ public class AboutFragment extends BaseFragment implements AboutContract.View{
     }
 
     private void initView(View view) {
+        ((MainActivity) getActivity()).EditFragmentBottom(false);
         ((MainActivity) getActivity()).setAppTitle(R.string.contact_us);
         ((MainActivity) getActivity()).setBackButtonVisibility(true);
         ((MainActivity) getActivity()).setMessageButtonVisibility(true);

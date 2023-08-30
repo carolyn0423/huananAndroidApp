@@ -59,6 +59,7 @@ public class MemberCardFragment extends BaseFragment implements MemberCardContra
     }
 
     private void initView(View view) {
+        ((MainActivity) getActivity()).EditFragmentBottom(false);
         ((MainActivity) getActivity()).setAppTitle(R.string.tab_member_card);
         ((MainActivity) getActivity()).refreshBadge();
         ((MainActivity) getActivity()).setBackButtonVisibility(false);

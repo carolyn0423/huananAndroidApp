@@ -22,6 +22,7 @@ public class EOrderApplication extends Application {
     public static String CUSTOMER_NAME = "學田泉";
     public static String sApiUrl = "";
     public static boolean isLogin = false;
+    public static String dbConnectName = "";
 
     public static String WEBVIEW_COUPONS_URL = "/coupon.html";
     public static String WEBVIEW_TERMS_URL = "/faq.html?id=1";

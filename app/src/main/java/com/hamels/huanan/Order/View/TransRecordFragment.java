@@ -54,6 +54,7 @@ public class TransRecordFragment extends BaseFragment implements TransRecordCont
     }
 
     private void initView(View view) {
+        ((MainActivity) getActivity()).EditFragmentBottom(false);
         ((MainActivity) getActivity()).setAppTitle(R.string.trans_record);
         ((MainActivity) getActivity()).setBackButtonVisibility(true);
         ((MainActivity) getActivity()).setMessageButtonVisibility(true);

@@ -79,6 +79,7 @@ public class WebViewFragment extends BaseFragment {
 
     @SuppressLint("SetJavaScriptEnabled")
     private void initView(View view) {
+        ((MainActivity) getActivity()).EditFragmentBottom(false);
         WebView webView = view.findViewById(R.id.web_view);
         setAppTitle(resTitleString);
         setBackButtonVisibility(true);

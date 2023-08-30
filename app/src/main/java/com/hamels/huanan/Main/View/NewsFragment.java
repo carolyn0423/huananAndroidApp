@@ -50,6 +50,7 @@ public class NewsFragment extends BaseFragment implements NewsContract.View {
     }
 
     private void initView(View view) {
+        ((MainActivity) getActivity()).EditFragmentBottom(false);
 //        webView = view.findViewById(R.id.web_view);
         setAppTitle(R.string.tab_news);
         setBackButtonVisibility(true);

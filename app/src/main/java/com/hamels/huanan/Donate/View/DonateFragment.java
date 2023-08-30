@@ -76,7 +76,7 @@ public class DonateFragment extends BaseFragment implements DonateContract.View{
 
     private void initView(View view) {
         Log.e(TAG, "initView");
-
+        ((MainActivity) getActivity()).EditFragmentBottom(false);
         ((MainActivity) getActivity()).setTopBarVisibility(false);
         ((MainActivity) getActivity()).setAppToolbarVisibility(true);
 

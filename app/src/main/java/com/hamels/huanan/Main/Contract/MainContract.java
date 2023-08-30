@@ -26,6 +26,8 @@ public interface MainContract {
         void setCustomer(Customer customers, String sCustomerID, String sCustomerName, String sApiUrl);
 
         void getVersion(String sOnlineVision);
+
+        void ProductLocationFragment(int size);
     }
 
     interface Presenter extends BaseContract.Presenter {
@@ -82,5 +84,7 @@ public interface MainContract {
         String getCustomerID();
 
         String getApiUrl();
+
+        void getLocationList();
     }
 }

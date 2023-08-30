@@ -92,7 +92,7 @@ public class ProductMerchantFragment extends BaseFragment implements ProductMerc
                 ((MainActivity) getActivity()).setAppTitle(R.string.tab_store);
                 break;
         }
-
+        ((MainActivity) getActivity()).EditFragmentBottom(false);
         ((MainActivity) getActivity()).refreshBadge();
         ((MainActivity) getActivity()).setBackButtonVisibility(false);
         ((MainActivity) getActivity()).setMessageButtonVisibility(true);

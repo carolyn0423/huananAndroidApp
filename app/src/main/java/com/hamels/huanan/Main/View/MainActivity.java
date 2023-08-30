@@ -21,7 +21,6 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.appcompat.app.AlertDialog;
 import android.util.Log;
@@ -41,6 +40,7 @@ import android.webkit.WebChromeClient;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.Button;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.PopupMenu;
@@ -58,7 +58,6 @@ import com.hamels.huanan.Product.View.ProductMainTypeFragment;
 import com.hamels.huanan.Repository.ApiRepository.ApiRepository;
 import com.hamels.huanan.Repository.ApiRepository.MemberRepository;
 import com.hamels.huanan.Repository.Model.Customer;
-import com.hamels.huanan.Repository.Model.Product;
 import com.hamels.huanan.Utils.SharedUtils;
 import com.ittianyu.bottomnavigationviewex.BottomNavigationViewEx;
 import com.hamels.huanan.Base.BaseActivity;
@@ -76,7 +75,6 @@ import com.hamels.huanan.R;
 import com.hamels.huanan.Repository.Model.User;
 import com.hamels.huanan.EOrderApplication;
 import com.hamels.huanan.Utils.IntentUtils;
-import com.journeyapps.barcodescanner.BarcodeEncoder;
 
 import org.json.JSONObject;
 
@@ -1102,12 +1100,21 @@ public class MainActivity extends BaseActivity implements MainContract.View {
                     }else if(currentFragment instanceof ProductFragment){   //  商品列表
                         addFragment(ProductMainTypeFragment.getInstance());
                     }else if(currentFragment instanceof ProductMainTypeFragment){
-                        changeTabFragment(MainIndexFragment.getInstance());
+                        mainPresenter.getLocationList();
+                        //  changeTabFragment(MainIndexFragment.getInstance());
                     } else{
                         super.onBackPressed();
                     }
                 }
             }
+        }
+    }
+
+    public void ProductLocationFragment(int location_count){
+        if(location_count == 1 || location_count == 0){
+            changeTabFragment(MainIndexFragment.getInstance());
+        }else{
+            changeTabFragment(LocationFragment.getInstance());
         }
     }
 
@@ -1376,5 +1383,23 @@ public class MainActivity extends BaseActivity implements MainContract.View {
         }else{
             return true;
         }
+    }
+
+    public void EditFragmentBottom(boolean isParent){
+        // 找到 FrameLayout 的引用
+        FrameLayout frameLayout = findViewById(R.id.frame);
+        // 取得 FrameLayout 的父容器 (ConstraintLayout) 的參數
+        ConstraintLayout.LayoutParams layoutParams = (ConstraintLayout.LayoutParams) frameLayout.getLayoutParams();
+
+        if (isParent) {
+            layoutParams.topMargin = (int) (0 * getResources().getDisplayMetrics().density);
+            layoutParams.bottomMargin = (int) (0 * getResources().getDisplayMetrics().density);
+        } else {
+            layoutParams.topMargin = (int) (50 * getResources().getDisplayMetrics().density);
+            layoutParams.bottomMargin = (int) (60 * getResources().getDisplayMetrics().density);
+        }
+
+        // 更新 FrameLayout 的父容器的參數
+        frameLayout.setLayoutParams(layoutParams);
     }
 }
