@@ -64,6 +64,7 @@ public class OrderDetailFragment extends BaseFragment {
     }
 
     private void initView(View view) {
+        ((MainActivity) getActivity()).EditFragmentBottom(false);
         webView = view.findViewById(R.id.web_view);
         setAppTitle(R.string.trans_record);
         ((MainActivity) getActivity()).refreshBadge();

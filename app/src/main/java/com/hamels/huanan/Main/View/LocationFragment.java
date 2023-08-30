@@ -76,6 +76,8 @@ public class LocationFragment extends BaseFragment implements LocationListContra
 
 
     private void initView(View view) {
+        ((MainActivity) getActivity()).EditFragmentBottom(false);
+        ((MainActivity) getActivity()).setAppTitle(R.string.tab_shop);
         ((MainActivity) getActivity()).refreshBadge();
 
         ((MainActivity) getActivity()).setBackButtonVisibility(true);
@@ -84,7 +86,7 @@ public class LocationFragment extends BaseFragment implements LocationListContra
         ((MainActivity) getActivity()).setSortButtonVisibility(false);
 
         ((MainActivity) getActivity()).setTopBarVisibility(false);
-        ((MainActivity) getActivity()).setAppToolbarVisibility(false);
+        ((MainActivity) getActivity()).setAppToolbarVisibility(true);
         ((MainActivity) getActivity()).setMainIndexMessageUnreadVisibility(false);
 
         noLocationGroup = view.findViewById(R.id.no_location_group);
@@ -145,20 +147,6 @@ public class LocationFragment extends BaseFragment implements LocationListContra
 
         ConstraintLayout.LayoutParams clFunctionname_2 = (ConstraintLayout.LayoutParams) btn_functionname_2.getLayoutParams();
         ConstraintLayout.LayoutParams clFunctionname_3 = (ConstraintLayout.LayoutParams) btn_functionname_3.getLayoutParams();
-
-        if(!storeListPresenter.getUserLogin()){
-            String sSourceActive = storeListPresenter.getSourceActive();
-            switch (sSourceActive){
-                case "PRODUCT_WELCOME":
-                    ((MainActivity) getActivity()).setAppTitle(R.string.tab_shop);
-                    break;
-                default:
-                    ((MainActivity) getActivity()).setAppTitle(R.string.tab_store);
-                    break;
-            }
-        }else{
-            ((MainActivity) getActivity()).setAppTitle(R.string.tab_store);
-        }
 
         storeListPresenter.saveSourceActive("");
 

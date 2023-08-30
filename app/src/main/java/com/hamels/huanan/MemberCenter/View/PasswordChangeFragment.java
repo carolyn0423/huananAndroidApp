@@ -45,6 +45,7 @@ public class PasswordChangeFragment extends BaseFragment implements PasswordChan
     }
 
     private void initView(View view) {
+        ((MainActivity) getActivity()).EditFragmentBottom(false);
         changePresenter = new PasswordChangePresenter(this, getRepositoryManager(getContext()));
         ((MainActivity) getActivity()).setAppTitle(R.string.title_password_change);
         ((MainActivity) getActivity()).setBackButtonVisibility(true);

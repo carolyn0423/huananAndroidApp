@@ -84,7 +84,7 @@ public class DonateCartFragment extends BaseFragment implements DonateCartContra
 
     private void initView(final View view) {
         Log.e(TAG, "initView");
-
+        ((MainActivity) getActivity()).EditFragmentBottom(false);
         ((MainActivity) getActivity()).setTopBarVisibility(false);
         ((MainActivity) getActivity()).setAppToolbarVisibility(true);
 

@@ -56,6 +56,7 @@ public class MailFileFragment extends BaseFragment implements MailFileContract.V
     }
 
     private void initView(View view) {
+        ((MainActivity) getActivity()).EditFragmentBottom(false);
         ((MainActivity) getActivity()).setAppTitle(R.string.mail_file);
         ((MainActivity) getActivity()).setBackButtonVisibility(true);
         ((MainActivity) getActivity()).setMessageButtonVisibility(true);

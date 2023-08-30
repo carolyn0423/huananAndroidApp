@@ -74,6 +74,7 @@ public class LotDetailFragment extends BaseFragment implements LotDetailContract
         return view;
     }
     private void initView(View view) {
+        ((MainActivity) getActivity()).EditFragmentBottom(false);
         ((MainActivity) getActivity()).setAppTitle(R.string.tab_lot);
         ((MainActivity) getActivity()).setBackButtonVisibility(true);
         ((MainActivity) getActivity()).setMessageButtonVisibility(true);
