@@ -10,6 +10,7 @@ import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 import androidx.appcompat.app.AppCompatActivity;
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.hamels.huanan.Repository.RepositoryManager;
@@ -27,6 +28,7 @@ public class BaseActivity extends AppCompatActivity implements BaseContract.View
     protected AppToolbar appToolbar;
     private BaseContract.ValueCallback<Boolean> callback;
     private ProgressDialog progressDialog;
+    private LinearLayout bottomNavigation;
 
     @Override
     public RepositoryManager getRepositoryManager(Context context) {
@@ -46,6 +48,11 @@ public class BaseActivity extends AppCompatActivity implements BaseContract.View
     @Override
     public void setAppToolbar(@IdRes int appToolbarId) {
         appToolbar = findViewById(appToolbarId);
+    }
+
+    @Override
+    public void setBottomNavigation(@IdRes int BottomNavigationID) {
+        bottomNavigation = findViewById(BottomNavigationID);
     }
 
     @Override
@@ -74,6 +81,13 @@ public class BaseActivity extends AppCompatActivity implements BaseContract.View
     public void setAppToolbarVisibility(boolean isVisible) {
         if (appToolbar != null) {
             appToolbar.setVisibility(isVisible ? View.VISIBLE : View.GONE);
+        }
+    }
+
+    @Override
+    public void setBottomNavigationVisibility(boolean isVisible) {
+        if (bottomNavigation != null) {
+            bottomNavigation.setVisibility(isVisible ? View.VISIBLE : View.GONE);
         }
     }
 

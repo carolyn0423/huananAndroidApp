@@ -272,8 +272,8 @@ public class MainActivity extends BaseActivity implements MainContract.View {
         qrcode.setOnClickListener(onClickListener);
         LinearLayout message = findViewById(R.id.message);
         message.setOnClickListener(onClickListener);
-        LinearLayout go_url = findViewById(R.id.go_url);
-        go_url.setOnClickListener(onClickListener);
+        LinearLayout what_coffee = findViewById(R.id.what_coffee);
+        what_coffee.setOnClickListener(onClickListener);
         //LinearLayout donate = findViewById(R.id.donate);
         //donate.setOnClickListener(onClickListener);
 
@@ -483,11 +483,8 @@ public class MainActivity extends BaseActivity implements MainContract.View {
                 setMainIndexMessageUnreadVisibility(false);
                 Fragment fragment = getSupportFragmentManager().findFragmentById(R.id.frame);
                 mainPresenter.checkLoginForMail(fragment.getClass().getSimpleName());
-            }else if (id == R.id.go_url){
-                //  開啟外部網址
-                String url = "https://lin.ee/ez3y1OW";
-                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
-                startActivity(intent);
+            }else if (id == R.id.what_coffee){
+                changeTabFragment(WhatCoffeeFragment.getInstance());
             }
         }
     };
@@ -960,6 +957,9 @@ public class MainActivity extends BaseActivity implements MainContract.View {
         }
 
         @JavascriptInterface
+        public void jsCall_showCustomerService() { goMessagePage(); }
+
+        @JavascriptInterface
         public void jsCall_goShopPage(String salesType) {
             String isETicket = salesType.equals("E") ? "Y" : "N";
             goProductPage(isETicket);
@@ -1157,6 +1157,10 @@ public class MainActivity extends BaseActivity implements MainContract.View {
 
     public void goPage() {
         mainPresenter.checkLoginForMemberCenter();
+    }
+
+    public void goMessagePage() {
+        mainPresenter.checkLoginForMessage();
     }
 
     public void goOrderPage(String orderType, String sOrderID, String sMealNo) {
