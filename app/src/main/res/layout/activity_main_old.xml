@@ -129,7 +129,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="5dp"
                         android:gravity="center"
-                        android:text="你是甚麼咖"
+                        android:text="你是什麼咖"
                         android:textColor="@color/white"
                         android:textSize="13sp" />
                 </LinearLayout>
