@@ -69,7 +69,7 @@ public class WhatCoffeeFragment extends BaseFragment {
             public void run() {
                 ((MainActivity) getActivity()).setCartBadgeVisibility(false);
             }
-        }, 1000);
+        }, 1500);
 
         webView.loadUrl(EOrderApplication.sApiUrl + EOrderApplication.WEBVIEW_WHATCOFFEE_URL);
     }

@@ -700,11 +700,11 @@ public class MainActivity extends BaseActivity implements MainContract.View {
 
     @Override
     public void refreshBadge() {
-        mainPresenter.getMailBadgeFromApi();
-        mainPresenter.getMessageBadgeFromApi();
+        //mainPresenter.getMailBadgeFromApi();
+        //mainPresenter.getMessageBadgeFromApi();
         mainPresenter.getBadgeNumberFromApi();
 
-        setAppBadge();
+        //setAppBadge();
     }
 
     @Override

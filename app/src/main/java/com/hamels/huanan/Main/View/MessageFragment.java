@@ -49,6 +49,7 @@ public class MessageFragment extends BaseFragment {
         ((MainActivity) getActivity()).bindWebView(webView);
         ((MainActivity) getActivity()).setBottomNavigationVisibility(true);
         ((MainActivity) getActivity()).setCartBadgeVisibility(true);
+        ((MainActivity) getActivity()).refreshBadge();
 
         webView.getSettings().setUseWideViewPort(true);
         webView.getSettings().setLoadWithOverviewMode(true);
