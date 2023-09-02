@@ -56,6 +56,7 @@ public class DrawLotsFragment extends BaseFragment implements DrawLotsContract.V
         ((MainActivity) getActivity()).setAppToolbarVisibility(true);
         ((MainActivity) getActivity()).setMainIndexMessageUnreadVisibility(false);
         ((MainActivity) getActivity()).setBottomNavigationVisibility(true);
+        ((MainActivity) getActivity()).setCartBadgeVisibility(true);
         recyclerView = view.findViewById(R.id.dwawlots_recycler_view);
         constraintLayoutEmpty = view.findViewById(R.id.layout_empty);
         drawlotsPresenter = new DrawLotsPresenter(this, getRepositoryManager(getContext()));

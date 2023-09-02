@@ -79,6 +79,7 @@ public class MemberInfoChangeFragment extends BaseFragment implements MemberInfo
         ((MainActivity) getActivity()).setAppToolbarVisibility(true);
         ((MainActivity) getActivity()).setMainIndexMessageUnreadVisibility(false);
         ((MainActivity) getActivity()).setBottomNavigationVisibility(true);
+        ((MainActivity) getActivity()).setCartBadgeVisibility(true);
 
         spinner_city = view.findViewById(R.id.spinner_city);
         spinner_area = view.findViewById(R.id.spinner_area);

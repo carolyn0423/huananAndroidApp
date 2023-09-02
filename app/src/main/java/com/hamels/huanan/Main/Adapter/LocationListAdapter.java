@@ -46,8 +46,8 @@ public class LocationListAdapter extends BaseAdapter<LocationListHolder> {
                 storeListHolder.tv_storefavorite.setImageResource(R.drawable.favoritesgr);
             }
 
-            storeListHolder.btn_storemap.setVisibility(View.VISIBLE);
-            storeListHolder.btn_storecall.setVisibility(View.VISIBLE);
+            storeListHolder.btn_storemap.setVisibility(View.GONE);
+            storeListHolder.btn_storecall.setVisibility(View.GONE);
             storeListHolder.tv_storefavorite.setVisibility(View.VISIBLE);
         }else{
             storeListHolder.tv_storefavorite.setVisibility(View.GONE);

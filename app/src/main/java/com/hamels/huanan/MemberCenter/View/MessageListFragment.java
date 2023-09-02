@@ -72,6 +72,7 @@ public class MessageListFragment extends BaseFragment implements MessageListCont
         ((MainActivity) getActivity()).setAppToolbarVisibility(true);
         ((MainActivity) getActivity()).setMainIndexMessageUnreadVisibility(false);
         ((MainActivity) getActivity()).setBottomNavigationVisibility(true);
+        ((MainActivity) getActivity()).setCartBadgeVisibility(true);
 
         etMessage = view.findViewById(R.id.et_message);
         btnSend = view.findViewById(R.id.btn_send);

@@ -16,11 +16,15 @@ public interface BaseContract {
 
         void setBottomNavigation(@IdRes int BottomNavigationID);
 
+        void setCartBadge(@IdRes int CartBadgeID);
+
         void setAppBadge();
 
         void setAppToolbarVisibility(boolean isVisible);
 
         void setBottomNavigationVisibility(boolean isVisible);
+
+        void setCartBadgeVisibility(boolean isVisible);
 
         void setBackButtonVisibility(boolean isVisible);
 

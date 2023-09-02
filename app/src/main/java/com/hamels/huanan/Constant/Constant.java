@@ -25,6 +25,7 @@ public class Constant {
     public static final int REQUEST_BUSINESS = 1008;
     public static final int REQUEST_LOT_LIST = 1009;
     public static final int REQUEST_DONATE = 1010;
+    public static final int REQUEST_MESSAGE_LIST = 1011;
 
     public static final int REQUEST_MAIN_INDEX = 2000;
 

@@ -32,6 +32,7 @@ import static com.hamels.huanan.Constant.Constant.REQUEST_MEMBER_CENTER;
 import static com.hamels.huanan.Constant.Constant.REQUEST_MESSAGE;
 import static com.hamels.huanan.Constant.Constant.REQUEST_BUSINESS;
 import static com.hamels.huanan.Constant.Constant.REQUEST_SHOPPING_CART;
+import static com.hamels.huanan.Constant.Constant.REQUEST_MESSAGE_LIST;
 
 import java.util.List;
 
@@ -173,6 +174,15 @@ public class MainPresenter extends BasePresenter<MainContract.View> implements M
             view.changeTabFragment(MessageFragment.getInstance());
         } else {
             view.intentToLogin(REQUEST_MESSAGE);
+        }
+    }
+
+    @Override
+    public void checkLoginForMessageList() {
+        if (repositoryManager.getUserLogin()) {
+            view.changeTabFragment(MessageListFragment.getInstance());
+        } else {
+            view.intentToLogin(REQUEST_MESSAGE_LIST);
         }
     }
 

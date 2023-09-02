@@ -1,5 +1,7 @@
 package com.hamels.huanan.Main.View;
 
+import android.content.res.Resources;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.text.Html;
 import android.text.Spannable;
@@ -10,6 +12,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.constraintlayout.widget.ConstraintLayout;
 
 import com.hamels.huanan.Base.BaseFragment;
 import com.hamels.huanan.R;
@@ -21,8 +24,9 @@ public class LocationDescFragment extends BaseFragment {
 
     private static LocationDescFragment fragment;
     private Store store;
-
+    private ConstraintLayout layoutContent;
     private TextView tvContent;
+    Drawable drawable;
 
     public static LocationDescFragment getInstance(Store store) {
         if (fragment == null) {
@@ -61,6 +65,10 @@ public class LocationDescFragment extends BaseFragment {
 
             tvContent.setText(html);
         }
+
+        Resources res = this.getResources();
+        drawable = res.getDrawable(R.drawable.bg_shadow_corner);
+        layoutContent.setBackground(drawable);
     }
 
     private void initView(View view) {
@@ -74,9 +82,11 @@ public class LocationDescFragment extends BaseFragment {
         ((MainActivity) getActivity()).setAppToolbarVisibility(true);
         ((MainActivity) getActivity()).setMainIndexMessageUnreadVisibility(false);
         ((MainActivity) getActivity()).setBottomNavigationVisibility(true);
+        ((MainActivity) getActivity()).setCartBadgeVisibility(true);
 
         ((MainActivity) getActivity()).setAppTitleString(store.getName());
 
+        layoutContent = view.findViewById(R.id.layout_content);
         tvContent = view.findViewById(R.id.tv_content);
     }
 }

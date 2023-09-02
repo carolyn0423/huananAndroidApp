@@ -29,6 +29,11 @@ public class BaseFragment extends Fragment implements BaseContract.View {
         ((BaseActivity) Objects.requireNonNull(getActivity())).setBottomNavigation(BottomNavigationID);
     }
 
+    @Override
+    public void setCartBadge(int CartBadgeID) {
+        ((BaseActivity) Objects.requireNonNull(getActivity())).setCartBadge(CartBadgeID);
+    }
+
     public void setAppTitleString(String sAppTitle) {
         ((BaseActivity) Objects.requireNonNull(getActivity())).setAppTitleString(sAppTitle);
     }
@@ -46,6 +51,11 @@ public class BaseFragment extends Fragment implements BaseContract.View {
     @Override
     public void setBottomNavigationVisibility(boolean isVisible) {
         ((BaseActivity) Objects.requireNonNull(getActivity())).setBottomNavigationVisibility(isVisible);
+    }
+
+    @Override
+    public void setCartBadgeVisibility(boolean isVisible) {
+        ((BaseActivity) Objects.requireNonNull(getActivity())).setCartBadgeVisibility(isVisible);
     }
 
     @Override

@@ -82,10 +82,34 @@
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/layout_dinosaur"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:visibility="visible"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:id="@+id/img_dinosaur"
+                android:layout_width="135dp"
+                android:layout_height="0dp"
+                android:layout_marginTop="30dp"
+                android:layout_marginEnd="5dp"
+                android:adjustViewBounds="true"
+                android:scaleType="fitXY"
+                app:srcCompat="@drawable/dinosaur"
+                app:layout_constraintDimensionRatio="1:0.9"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
         <LinearLayout
             android:id="@+id/controlcenter"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="vertical"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -93,8 +117,6 @@
 
             <LinearLayout
                 style="@style/user_function_form">
-
-
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
@@ -373,18 +395,24 @@
 
             </LinearLayout>
 
-<!--            <TextView-->
-<!--                android:id="@+id/btn_logout"-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:layout_marginTop="20dp"-->
-<!--                android:layout_marginEnd="24dp"-->
-<!--                android:drawableStart="@drawable/logout"-->
-<!--                android:textSize="25sp"-->
-<!--                app:layout_constraintEnd_toEndOf="parent"-->
-<!--                app:layout_constraintTop_toTopOf="parent" />-->
+            <LinearLayout
+                android:id="@+id/coffee"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="100dp"
+                    android:scaleType="centerCrop"
+                    app:srcCompat="@drawable/coffee" />
+
+            </LinearLayout>
 
         </LinearLayout>
+
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/btn_logout"

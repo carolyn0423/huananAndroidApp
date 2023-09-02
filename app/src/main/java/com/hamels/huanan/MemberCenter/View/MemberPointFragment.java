@@ -73,6 +73,7 @@ public class MemberPointFragment extends BaseFragment implements MemberPointCont
         ((MainActivity) getActivity()).setAppToolbarVisibility(true);
         ((MainActivity) getActivity()).setMainIndexMessageUnreadVisibility(false);
         ((MainActivity) getActivity()).setBottomNavigationVisibility(true);
+        ((MainActivity) getActivity()).setCartBadgeVisibility(true);
 
         String[] vYear = new String[7];
         String[] vMonth = new String[7];

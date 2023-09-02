@@ -77,6 +77,7 @@ public class OrderDetailFragment extends BaseFragment {
         ((MainActivity) getActivity()).bindWebView(webView);
         ((MainActivity) getActivity()).setMainIndexMessageUnreadVisibility(false);
         ((MainActivity) getActivity()).setBottomNavigationVisibility(true);
+        ((MainActivity) getActivity()).setCartBadgeVisibility(true);
         //Toast.makeText(getActivity(), "order_id: " + orderid, Toast.LENGTH_LONG).show();
         //Toast.makeText(getActivity(), "meal_no: " + meal_no, Toast.LENGTH_LONG).show();
 

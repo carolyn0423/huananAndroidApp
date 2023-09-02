@@ -92,6 +92,7 @@ public class ProductFragment extends BaseFragment implements ProductContract.Vie
         ((MainActivity) getActivity()).setAppToolbarVisibility(true);
         ((MainActivity) getActivity()).setMainIndexMessageUnreadVisibility(false);
         ((MainActivity) getActivity()).setBottomNavigationVisibility(true);
+        ((MainActivity) getActivity()).setCartBadgeVisibility(true);
 
         tabLayout = view.findViewById(R.id.tab_layout);
         recyclerView = view.findViewById(R.id.product_recycler_view);

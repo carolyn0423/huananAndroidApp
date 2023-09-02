@@ -69,7 +69,7 @@ public class MemberCardFragment extends BaseFragment implements MemberCardContra
         ((MainActivity) getActivity()).setAppToolbarVisibility(true);
         ((MainActivity) getActivity()).setMainIndexMessageUnreadVisibility(false);
         ((MainActivity) getActivity()).setBottomNavigationVisibility(true);
-
+        ((MainActivity) getActivity()).setCartBadgeVisibility(true);
 
         memberCardFront = view.findViewById(R.id.layout_card_front);
         memberCardBack = view.findViewById(R.id.layout_card_back);

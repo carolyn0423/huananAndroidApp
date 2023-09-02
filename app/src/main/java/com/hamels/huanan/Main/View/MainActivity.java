@@ -91,6 +91,7 @@ import static com.hamels.huanan.Constant.Constant.REQUEST_SHOPPING_CART;
 import static com.hamels.huanan.Constant.Constant.REQUEST_BUSINESS;
 import static com.hamels.huanan.Constant.Constant.REQUEST_LOT_LIST;
 import static com.hamels.huanan.Constant.Constant.REQUEST_DONATE;
+import static com.hamels.huanan.Constant.Constant.REQUEST_MESSAGE_LIST;
 
 public class MainActivity extends BaseActivity implements MainContract.View {
     public static final String TAG = MainActivity.class.getSimpleName();
@@ -279,6 +280,7 @@ public class MainActivity extends BaseActivity implements MainContract.View {
 
         setAppToolbar(R.id.toolbar);
         setBottomNavigation(R.id.tab_bar);
+        setCartBadge(R.id.tv_shopping_cart);
 
         appToolbar.getBtnMail().setOnClickListener(new View.OnClickListener() {
             @Override
@@ -675,7 +677,7 @@ public class MainActivity extends BaseActivity implements MainContract.View {
                 addFragment(MailFileFragment.getInstance());
                 break;
             case REQUEST_MESSAGE:
-                addFragment(MessageListFragment.getInstance());
+                addFragment(MessageFragment.getInstance());
                 break;
             case REQUEST_SHOPPING_CART:
                 changeTabFragment(ShoppingCartFragment.getInstance());
@@ -689,6 +691,9 @@ public class MainActivity extends BaseActivity implements MainContract.View {
             case REQUEST_DONATE:
                 DonateFragment.getInstance().type_idMode("0");
                 addFragment(DonateFragment.getInstance());
+                break;
+            case REQUEST_MESSAGE_LIST:
+                changeTabFragment(MessageListFragment.getInstance());
                 break;
         }
     }
@@ -971,7 +976,8 @@ public class MainActivity extends BaseActivity implements MainContract.View {
         @JavascriptInterface
         public void jsCall_showCustomerService(String page) {
             if(page.equals("")) {
-                goMessagePage();
+                //showErrorAlert("登入後才可使用");
+                mainPresenter.checkLoginForMessageList();
             }else{
                 //  開啟外部網址
                 Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(page));
@@ -1181,9 +1187,9 @@ public class MainActivity extends BaseActivity implements MainContract.View {
         mainPresenter.checkLoginForMemberCenter();
     }
 
-    public void goMessagePage() {
-        mainPresenter.checkLoginForMessage();
-    }
+//    public void goMessagePage() {
+//        mainPresenter.checkLoginForMessage();
+//    }
 
     public void goOrderPage(String orderType, String sOrderID, String sMealNo) {
         runOnUiThread(new Runnable() {

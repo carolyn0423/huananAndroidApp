@@ -6,6 +6,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.appcompat.app.AlertDialog;
+
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -72,7 +74,14 @@ public class MemberCenterFragment extends BaseFragment implements View.OnClickLi
 
     private void initView(View view) {
         ((MainActivity) getActivity()).EditFragmentBottom(false);
-        ((MainActivity) getActivity()).setAppTitle(R.string.tab_member_info);
+        Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                ((MainActivity) getActivity()).setAppTitle(R.string.tab_member_info);
+            }
+        }, 1000);
+
         ((MainActivity) getActivity()).refreshBadge();
 
         ((MainActivity) getActivity()).setBackButtonVisibility(true);
@@ -84,6 +93,7 @@ public class MemberCenterFragment extends BaseFragment implements View.OnClickLi
         ((MainActivity) getActivity()).setAppToolbarVisibility(true);
         ((MainActivity) getActivity()).setMainIndexMessageUnreadVisibility(false);
         ((MainActivity) getActivity()).setBottomNavigationVisibility(true);
+        ((MainActivity) getActivity()).setCartBadgeVisibility(true);
 
         memberPresenter = new MemberCenterPresenter(this, getRepositoryManager(getContext()));
 

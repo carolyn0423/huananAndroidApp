@@ -132,6 +132,7 @@ public class ProductDetailFragment extends BaseFragment implements ProductDetail
         ((MainActivity) getActivity()).setAppToolbarVisibility(true);
         ((MainActivity) getActivity()).setMainIndexMessageUnreadVisibility(false);
         ((MainActivity) getActivity()).setBottomNavigationVisibility(true);
+        ((MainActivity) getActivity()).setCartBadgeVisibility(true);
 
         mXBanner = view.findViewById(R.id.xbanner);
         img_product_ribbon = view.findViewById(R.id.img_product_ribbon);

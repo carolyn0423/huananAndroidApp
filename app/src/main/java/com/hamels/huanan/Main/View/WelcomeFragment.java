@@ -68,6 +68,7 @@ public class WelcomeFragment extends BaseFragment implements WelcomeContract.Vie
         ((MainActivity) getActivity()).setAppToolbarVisibility(false);
         ((MainActivity) getActivity()).setMainIndexMessageUnreadVisibility(false);
         ((MainActivity) getActivity()).setBottomNavigationVisibility(true);
+        ((MainActivity) getActivity()).setCartBadgeVisibility(true);
 
         tvTitleHint = view.findViewById(R.id.tv_title_hint);
         ViewUtils.addUnderLine(tvTitleHint);

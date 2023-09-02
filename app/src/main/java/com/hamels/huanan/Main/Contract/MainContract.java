@@ -53,6 +53,8 @@ public interface MainContract {
 
         void checkLoginForMessage();
 
+        void checkLoginForMessageList();
+
         void checkLoginForShoppingCart(String orderType);
 
         void checkLoginForMail(String fragmentName);

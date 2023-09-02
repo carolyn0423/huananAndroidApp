@@ -11,6 +11,7 @@ import androidx.annotation.StringRes;
 import androidx.appcompat.app.AppCompatActivity;
 import android.view.View;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.hamels.huanan.Repository.RepositoryManager;
@@ -29,6 +30,7 @@ public class BaseActivity extends AppCompatActivity implements BaseContract.View
     private BaseContract.ValueCallback<Boolean> callback;
     private ProgressDialog progressDialog;
     private LinearLayout bottomNavigation;
+    private TextView tvShoppingCart;
 
     @Override
     public RepositoryManager getRepositoryManager(Context context) {
@@ -53,6 +55,11 @@ public class BaseActivity extends AppCompatActivity implements BaseContract.View
     @Override
     public void setBottomNavigation(@IdRes int BottomNavigationID) {
         bottomNavigation = findViewById(BottomNavigationID);
+    }
+
+    @Override
+    public void setCartBadge(@IdRes int CartBadgeID) {
+        tvShoppingCart = findViewById(CartBadgeID);
     }
 
     @Override
@@ -88,6 +95,13 @@ public class BaseActivity extends AppCompatActivity implements BaseContract.View
     public void setBottomNavigationVisibility(boolean isVisible) {
         if (bottomNavigation != null) {
             bottomNavigation.setVisibility(isVisible ? View.VISIBLE : View.GONE);
+        }
+    }
+
+    @Override
+    public void setCartBadgeVisibility(boolean isVisible) {
+        if (tvShoppingCart != null) {
+            tvShoppingCart.setVisibility(isVisible ? View.VISIBLE : View.GONE);
         }
     }
 
