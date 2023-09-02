@@ -1,5 +1,6 @@
 package com.hamels.huanan.Main.View;
 
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -13,6 +14,7 @@ import androidx.annotation.Nullable;
 import com.hamels.huanan.Base.BaseFragment;
 import com.hamels.huanan.EOrderApplication;
 import com.hamels.huanan.R;
+import com.hamels.huanan.Widget.AppToolbar;
 
 import java.util.Objects;
 
@@ -21,6 +23,7 @@ public class WhatCoffeeFragment extends BaseFragment {
 
     private static WhatCoffeeFragment fragment;
     private WebView webView;
+    protected AppToolbar appToolbar;
 
     public static WhatCoffeeFragment getInstance() {
         if (fragment == null) {
@@ -40,6 +43,7 @@ public class WhatCoffeeFragment extends BaseFragment {
     }
 
     private void initView(View view) {
+
         ((MainActivity) getActivity()).EditFragmentBottom(false);
         webView = view.findViewById(R.id.web_view);
         setAppTitle(R.string.title_what_coffee);
@@ -52,6 +56,11 @@ public class WhatCoffeeFragment extends BaseFragment {
         setAppToolbarVisibility(true);
         ((MainActivity) getActivity()).bindWebView(webView);
         ((MainActivity) getActivity()).setMainIndexMessageUnreadVisibility(false);
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            webView.setWebContentsDebuggingEnabled(false); // 關閉調試模式以提高性能
+        }
+        ((MainActivity) getActivity()).setBottomNavigationVisibility(false);
 
         webView.loadUrl(EOrderApplication.sApiUrl + EOrderApplication.WEBVIEW_WHATCOFFEE_URL);
     }

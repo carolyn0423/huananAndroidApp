@@ -278,6 +278,8 @@ public class MainActivity extends BaseActivity implements MainContract.View {
         //donate.setOnClickListener(onClickListener);
 
         setAppToolbar(R.id.toolbar);
+        setBottomNavigation(R.id.tab_bar);
+
         appToolbar.getBtnMail().setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -937,8 +939,18 @@ public class MainActivity extends BaseActivity implements MainContract.View {
         public String jsCall_getVariable(String Info) {
             String sData = "";
             try {
-                JSONObject oMemberData = new JSONObject(getUser().toString());
-                sData = oMemberData.getString(Info);
+                switch (Info){
+                    case "customer_id":
+                        sData = EOrderApplication.CUSTOMER_ID;
+                        break;
+                    case "connection_name":
+                        sData = EOrderApplication.dbConnectName;
+                        break;
+                    default:
+                        JSONObject oMemberData = new JSONObject(getUser().toString());
+                        sData = oMemberData.getString(Info);
+                        break;
+                }
             } catch (Exception e) {
 //                e.printStackTrace();
             }
@@ -957,7 +969,15 @@ public class MainActivity extends BaseActivity implements MainContract.View {
         }
 
         @JavascriptInterface
-        public void jsCall_showCustomerService() { goMessagePage(); }
+        public void jsCall_showCustomerService(String page) {
+            if(page.equals("")) {
+                goMessagePage();
+            }else{
+                //  開啟外部網址
+                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(page));
+                startActivity(intent);
+            }
+        }
 
         @JavascriptInterface
         public void jsCall_goShopPage(String salesType) {
@@ -1041,6 +1061,8 @@ public class MainActivity extends BaseActivity implements MainContract.View {
             } else if (currentPage.indexOf("order.html") > 0) {
                 changeTabFragment(MemberCenterFragment.getInstance());
                 webView = null;
+            } else if(currentPage.indexOf("ebook.html") > 0){
+                changeTabFragment(MainIndexFragment.getInstance());
             } else {
                 webView.goBack();
             }

@@ -60,6 +60,7 @@ public class NewsFragment extends BaseFragment implements NewsContract.View {
         ((MainActivity) getActivity()).setTopBarVisibility(false);
         ((MainActivity) getActivity()).setMainIndexMessageUnreadVisibility(false);
         setAppToolbarVisibility(false);
+        ((MainActivity) getActivity()).setBottomNavigationVisibility(true);
         imageView = view.findViewById(R.id.imageView);
         tv_news_content = view.findViewById(R.id.tv_news_content);
         tv_news_title = view.findViewById(R.id.tv_news_title);

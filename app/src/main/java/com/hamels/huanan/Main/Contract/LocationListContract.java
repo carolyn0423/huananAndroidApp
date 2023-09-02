@@ -18,6 +18,8 @@ public interface LocationListContract {
         void goProductMainType(String sLocationID);
 
         void setOnlineShoppingFlag(boolean isOnlineShopping, List<Store> Count);
+
+        void goLocationDesc(Store store);
     }
 
     interface Presenter extends BaseContract.Presenter {
@@ -36,5 +38,7 @@ public interface LocationListContract {
         void saveFragmentMainType(String sLocationID, String IsETicket);
 
         String getFragmentLocation();
+
+        void goLocationDesc(Store store);
     }
 }

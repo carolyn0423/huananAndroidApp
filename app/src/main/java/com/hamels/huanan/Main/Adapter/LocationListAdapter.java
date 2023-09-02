@@ -96,6 +96,13 @@ public class LocationListAdapter extends BaseAdapter<LocationListHolder> {
                 presenter.goProductMainType(stores.get(position).getLocationID());
             }
         });
+
+        storeListHolder.ivLocationPicturl.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                presenter.goLocationDesc(stores.get(position));
+            }
+        });
     }
 
     @Override

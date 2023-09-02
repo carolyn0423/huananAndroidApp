@@ -23,7 +23,7 @@ public class ProductDetailDescFragment extends BaseFragment {
     private static ProductDetailDescFragment fragment;
     private Product product;
 
-    private TextView tvTitle, tvContent;
+    private TextView tvContent;
 
     public static ProductDetailDescFragment getInstance(Product product) {
         if (fragment == null) {
@@ -52,7 +52,6 @@ public class ProductDetailDescFragment extends BaseFragment {
         super.onViewCreated(view, savedInstanceState);
 
         if (product != null) {
-            tvTitle.setText(product.getProduct_name());
             PicassoImageGetter imageGetter = new PicassoImageGetter(this.getContext(), tvContent);
             Spannable html;
             if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
@@ -76,8 +75,8 @@ public class ProductDetailDescFragment extends BaseFragment {
         ((MainActivity) getActivity()).setTopBarVisibility(false);
         ((MainActivity) getActivity()).setAppToolbarVisibility(true);
         ((MainActivity) getActivity()).setMainIndexMessageUnreadVisibility(false);
+        ((MainActivity) getActivity()).setBottomNavigationVisibility(true);
 
-        tvTitle = view.findViewById(R.id.tv_product_title);
         tvContent = view.findViewById(R.id.tv_product_content);
     }
 }

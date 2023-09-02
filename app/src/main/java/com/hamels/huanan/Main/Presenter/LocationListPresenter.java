@@ -32,6 +32,8 @@ public class LocationListPresenter extends BasePresenter<LocationListContract.Vi
 
     public void goProductMainType(String sLocationID){ view.goProductMainType(sLocationID); }
 
+    public void goLocationDesc(Store store){ view.goLocationDesc(store); }
+
     private void getLocationList() {
         String tmpfunctionname = functionname;
         String sKilometer = "";

@@ -65,7 +65,7 @@ public class MailDetailFragment extends BaseFragment {
         ((MainActivity) getActivity()).setTopBarVisibility(false);
         ((MainActivity) getActivity()).setAppToolbarVisibility(true);
         ((MainActivity) getActivity()).setMainIndexMessageUnreadVisibility(false);
-
+        ((MainActivity) getActivity()).setBottomNavigationVisibility(true);
 
         tvMailTitle = view.findViewById(R.id.tv_mail_title);
         tvMailContent = view.findViewById(R.id.tv_mail_content);

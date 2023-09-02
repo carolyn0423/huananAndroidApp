@@ -1,8 +1,11 @@
 package com.hamels.huanan.Repository.Model;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import com.google.gson.annotations.SerializedName;
 
-public class Store {
+public class Store implements Parcelable {
     public static final String TAG = Store.class.getSimpleName();
 
     @SerializedName("location_name")
@@ -27,7 +30,8 @@ public class Store {
     private String HeadLocationFlag;
     @SerializedName("order_source")
     private String order_source;
-
+    @SerializedName("picture_url")
+    private String picture_url;
 
     public String getName() {
         return name;
@@ -105,5 +109,29 @@ public class Store {
 
     public String getOrderSource() {
         return order_source;
+    }
+
+    public String getPictureUrl() {
+        return picture_url;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(name);
+        dest.writeString(phone);
+        dest.writeString(address);
+        dest.writeString(opening);
+        dest.writeString(description);
+        dest.writeDouble(distance);
+        dest.writeString(isOften);
+        dest.writeString(Often_uid);
+        dest.writeString(HeadLocationFlag);
+        dest.writeString(order_source);
+        dest.writeString(picture_url);
     }
 }

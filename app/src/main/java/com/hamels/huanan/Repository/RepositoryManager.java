@@ -1049,9 +1049,7 @@ public class RepositoryManager {
 
     public void savePaySchemeOrderData(String sPaySchemeOrderData) { SharedUtils.getInstance().savePaySchemeOrderData(context, sPaySchemeOrderData); }
 
-    public void saveUser(User user) {
-        SharedUtils.getInstance().saveUser(context, user);
-    }
+    public void saveUser(User user) { SharedUtils.getInstance().saveUser(context, user); }
 
     /* ------------------------------------------------------------------------- */
 

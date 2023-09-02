@@ -88,6 +88,7 @@ public class LocationFragment extends BaseFragment implements LocationListContra
         ((MainActivity) getActivity()).setTopBarVisibility(false);
         ((MainActivity) getActivity()).setAppToolbarVisibility(true);
         ((MainActivity) getActivity()).setMainIndexMessageUnreadVisibility(false);
+        ((MainActivity) getActivity()).setBottomNavigationVisibility(true);
 
         noLocationGroup = view.findViewById(R.id.no_location_group);
 
@@ -189,6 +190,9 @@ public class LocationFragment extends BaseFragment implements LocationListContra
     public void goProductMainType(String sLocationID) {
         storeListPresenter.saveFragmentMainType(sLocationID, "N");
         ((MainActivity) getActivity()).addFragment(ProductMainTypeFragment.getInstance());
+    }
+    public void goLocationDesc(Store store) {
+        ((MainActivity) getActivity()).addFragment(LocationDescFragment.getInstance(store));
     }
     @Override
     public void intentToGoogleMap(String address) {
