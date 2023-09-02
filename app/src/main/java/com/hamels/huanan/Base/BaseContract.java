@@ -14,9 +14,13 @@ public interface BaseContract {
 
         void setAppTitle(@StringRes int resString);
 
+        void setBottomNavigation(@IdRes int BottomNavigationID);
+
         void setAppBadge();
 
         void setAppToolbarVisibility(boolean isVisible);
+
+        void setBottomNavigationVisibility(boolean isVisible);
 
         void setBackButtonVisibility(boolean isVisible);
 

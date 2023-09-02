@@ -10,6 +10,7 @@ import com.hamels.huanan.Main.Contract.MainContract;
 import com.hamels.huanan.Main.View.MemberCardFragment;
 import com.hamels.huanan.Main.View.MemberCenterFragment;
 
+import com.hamels.huanan.Main.View.MessageFragment;
 import com.hamels.huanan.Main.View.ShoppingCartFragment;
 import com.hamels.huanan.MemberCenter.View.MailDetailFragment;
 import com.hamels.huanan.MemberCenter.View.MailFileFragment;
@@ -163,6 +164,15 @@ public class MainPresenter extends BasePresenter<MainContract.View> implements M
             view.changeTabFragment(MemberCenterFragment.getInstance());
         } else {
             view.intentToLogin(REQUEST_MEMBER_CENTER);
+        }
+    }
+
+    @Override
+    public void checkLoginForMessage() {
+        if (repositoryManager.getUserLogin()) {
+            view.changeTabFragment(MessageFragment.getInstance());
+        } else {
+            view.intentToLogin(REQUEST_MESSAGE);
         }
     }
 

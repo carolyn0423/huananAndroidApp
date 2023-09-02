@@ -48,6 +48,7 @@
     <!-- title -->
     <string name="title_member_info_change">修改會員資料</string>
     <string name="title_password_change">修改密碼</string>
+    <string name="title_what_coffee">你是甚麼咖</string>
 
     <!-- login -->
     <string name="welcome_back">全部商家</string>

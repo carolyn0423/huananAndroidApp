@@ -101,7 +101,7 @@
                     android:background="@color/white" />
 
                 <LinearLayout
-                    android:id="@+id/go_url"
+                    android:id="@+id/what_coffee"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
