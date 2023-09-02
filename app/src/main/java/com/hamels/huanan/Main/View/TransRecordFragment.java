@@ -70,7 +70,7 @@ public class TransRecordFragment extends BaseFragment {
 
     private void initView(View view) {
         webView = view.findViewById(R.id.web_view);
-        ((MainActivity) getActivity()).EditFragmentBottom(false);
+        ((MainActivity) getActivity()).EditFragmentBottom(true, true);
         ((MainActivity) getActivity()).setAppTitle(R.string.trans_record);
         ((MainActivity) getActivity()).setBackButtonVisibility(true);
         ((MainActivity) getActivity()).setMailButtonVisibility(true);

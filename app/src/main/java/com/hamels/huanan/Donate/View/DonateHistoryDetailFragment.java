@@ -85,7 +85,7 @@ public class DonateHistoryDetailFragment extends BaseFragment implements DonateC
 
     private void initView(View view) {
         Log.e(TAG, "initView");
-        ((MainActivity) getActivity()).EditFragmentBottom(false);
+        ((MainActivity) getActivity()).EditFragmentBottom(true, true);
         ((MainActivity) getActivity()).setTopBarVisibility(false);
         ((MainActivity) getActivity()).setAppToolbarVisibility(true);
 

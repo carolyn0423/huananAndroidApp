@@ -72,7 +72,7 @@ public class LocationDescFragment extends BaseFragment {
     }
 
     private void initView(View view) {
-        ((MainActivity) getActivity()).EditFragmentBottom(false);
+        ((MainActivity) getActivity()).EditFragmentBottom(true, true);
         ((MainActivity) getActivity()).refreshBadge();
         ((MainActivity) getActivity()).setBackButtonVisibility(true);
         ((MainActivity) getActivity()).setMessageButtonVisibility(true);

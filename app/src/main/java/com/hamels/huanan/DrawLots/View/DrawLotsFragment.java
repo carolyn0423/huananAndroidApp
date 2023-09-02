@@ -46,7 +46,7 @@ public class DrawLotsFragment extends BaseFragment implements DrawLotsContract.V
     }
 
     private void initView(View view) {
-        ((MainActivity) getActivity()).EditFragmentBottom(false);
+        ((MainActivity) getActivity()).EditFragmentBottom(true, true);
         ((MainActivity) getActivity()).setAppTitle(R.string.tab_lot);
         ((MainActivity) getActivity()).setBackButtonVisibility(true);
         ((MainActivity) getActivity()).setMessageButtonVisibility(true);

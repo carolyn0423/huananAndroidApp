@@ -2,6 +2,7 @@ package com.hamels.huanan.Main.View;
 
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -45,7 +46,7 @@ public class WhatCoffeeFragment extends BaseFragment {
 
     private void initView(View view) {
 
-        ((MainActivity) getActivity()).EditFragmentBottom(false);
+        ((MainActivity) getActivity()).EditFragmentBottom(true, false);
         webView = view.findViewById(R.id.web_view);
         //((MainActivity) getActivity()).refreshBadge();
         setBackButtonVisibility(true);
@@ -62,7 +63,13 @@ public class WhatCoffeeFragment extends BaseFragment {
         }
 
         ((MainActivity) getActivity()).setBottomNavigationVisibility(false);
-        ((MainActivity) getActivity()).setCartBadgeVisibility(false);
+        Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                ((MainActivity) getActivity()).setCartBadgeVisibility(false);
+            }
+        }, 1000);
 
         webView.loadUrl(EOrderApplication.sApiUrl + EOrderApplication.WEBVIEW_WHATCOFFEE_URL);
     }

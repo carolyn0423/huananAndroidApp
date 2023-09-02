@@ -57,7 +57,7 @@ public class FaqFragment extends BaseFragment implements FaqContract.View{
     }
 
     private void initView(View view) {
-        ((MainActivity) getActivity()).EditFragmentBottom(false);
+        ((MainActivity) getActivity()).EditFragmentBottom(true, true);
         switch (faq_id){
             case "1":
                 ((MainActivity) getActivity()).setAppTitle(R.string.privacy_policy);

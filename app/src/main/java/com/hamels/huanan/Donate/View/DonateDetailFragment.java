@@ -81,7 +81,7 @@ public class DonateDetailFragment extends BaseFragment implements DonateDetailCo
     }
 
     private void initView(View view) {
-        ((MainActivity) getActivity()).EditFragmentBottom(false);
+        ((MainActivity) getActivity()).EditFragmentBottom(true, true);
         ((MainActivity) getActivity()).setTopBarVisibility(false);
         ((MainActivity) getActivity()).setAppToolbarVisibility(false);
 

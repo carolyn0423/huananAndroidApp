@@ -65,7 +65,7 @@ public class ProductDetailDescFragment extends BaseFragment {
     }
 
     private void initView(View view) {
-        ((MainActivity) getActivity()).EditFragmentBottom(false);
+        ((MainActivity) getActivity()).EditFragmentBottom(true, true);
         ((MainActivity) getActivity()).setAppTitle(R.string.product_desc);
         ((MainActivity) getActivity()).refreshBadge();
         ((MainActivity) getActivity()).setBackButtonVisibility(true);

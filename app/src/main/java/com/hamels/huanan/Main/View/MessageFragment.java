@@ -39,7 +39,7 @@ public class MessageFragment extends BaseFragment {
 
     private void initView(View view) {
         webView = view.findViewById(R.id.web_view);
-        ((MainActivity) getActivity()).EditFragmentBottom(false);
+        ((MainActivity) getActivity()).EditFragmentBottom(true, true);
         setAppTitle(R.string.message_list);
         setBackButtonVisibility(true);
         setMailButtonVisibility(true);

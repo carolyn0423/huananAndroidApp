@@ -73,7 +73,7 @@ public class MemberCenterFragment extends BaseFragment implements View.OnClickLi
     }
 
     private void initView(View view) {
-        ((MainActivity) getActivity()).EditFragmentBottom(false);
+        ((MainActivity) getActivity()).EditFragmentBottom(true, true);
         Handler handler = new Handler();
         handler.postDelayed(new Runnable() {
             @Override

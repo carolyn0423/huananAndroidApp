@@ -59,7 +59,7 @@ public class MainIndexFragment extends BaseFragment implements MainIndexContract
         return view;
     }
     private void initView(View view) {
-        ((MainActivity) getActivity()).EditFragmentBottom(true);
+        //((MainActivity) getActivity()).EditFragmentBottom(true);
         ((MainActivity) getActivity()).setAppTitle(R.string.tab_index);
         ((MainActivity) getActivity()).refreshBadge();
         ((MainActivity) getActivity()).setBackButtonVisibility(false);
