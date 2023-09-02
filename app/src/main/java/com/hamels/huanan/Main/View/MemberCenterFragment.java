@@ -74,13 +74,7 @@ public class MemberCenterFragment extends BaseFragment implements View.OnClickLi
 
     private void initView(View view) {
         ((MainActivity) getActivity()).EditFragmentBottom(true, true);
-        Handler handler = new Handler();
-        handler.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                ((MainActivity) getActivity()).setAppTitle(R.string.tab_member_info);
-            }
-        }, 1000);
+        ((MainActivity) getActivity()).setAppTitle(R.string.tab_member_info);
 
         ((MainActivity) getActivity()).refreshBadge();
 
