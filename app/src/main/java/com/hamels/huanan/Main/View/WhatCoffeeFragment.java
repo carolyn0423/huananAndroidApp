@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.WebView;
+import android.webkit.WebViewClient;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -63,13 +64,16 @@ public class WhatCoffeeFragment extends BaseFragment {
         }
 
         ((MainActivity) getActivity()).setBottomNavigationVisibility(false);
-        Handler handler = new Handler();
-        handler.postDelayed(new Runnable() {
+
+        // 使用WebViewClient監聽載入事件
+        webView.setWebViewClient(new WebViewClient() {
             @Override
-            public void run() {
-                ((MainActivity) getActivity()).setCartBadgeVisibility(false);
+            public void onPageFinished(WebView view, String url) {
+                if(((MainActivity) getActivity()) != null) {
+                    ((MainActivity) getActivity()).setCartBadgeVisibility(false);
+                }
             }
-        }, 1500);
+        });
 
         webView.loadUrl(EOrderApplication.sApiUrl + EOrderApplication.WEBVIEW_WHATCOFFEE_URL);
     }

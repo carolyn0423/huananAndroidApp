@@ -890,7 +890,13 @@ public class MainActivity extends BaseActivity implements MainContract.View {
             public void onReceivedTitle(WebView view, String title) {
                 super.onReceivedTitle(view, title);
                 if(title.indexOf("html") == -1 && title.indexOf("com") == -1) {
-                    setAppTitleString(title);
+                    Handler handler = new Handler();
+                    handler.postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            setAppTitleString(title);
+                        }
+                    }, 1500);
                 }
             }
         });
