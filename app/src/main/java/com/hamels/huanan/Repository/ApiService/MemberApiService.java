@@ -179,4 +179,7 @@ public interface MemberApiService {
 
     @POST("Message/UpdateMessageReadFlag")
     Call<BaseModel> updateReadMessage(@Body RequestBody body);
+
+    @POST("Shopping/GetShopCartLocationQuantity")
+    Call<BaseModel> GetShopCartLocationQuantity(@Body RequestBody body);
 }

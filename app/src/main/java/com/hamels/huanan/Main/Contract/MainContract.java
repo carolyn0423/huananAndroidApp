@@ -28,6 +28,8 @@ public interface MainContract {
         void getVersion(String sOnlineVision);
 
         void ProductLocationFragment(int size);
+
+        void ShoppingBackPage(String type);
     }
 
     interface Presenter extends BaseContract.Presenter {

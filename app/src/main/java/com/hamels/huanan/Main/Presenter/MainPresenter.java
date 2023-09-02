@@ -17,12 +17,16 @@ import com.hamels.huanan.MemberCenter.View.MailFileFragment;
 import com.hamels.huanan.MemberCenter.View.MessageListFragment;
 import com.hamels.huanan.MemberCenter.View.WebViewFragment;
 import com.hamels.huanan.R;
+import com.hamels.huanan.Repository.ApiCallback;
+import com.hamels.huanan.Repository.ApiRepository.MemberRepository;
+import com.hamels.huanan.Repository.Model.BaseModel;
 import com.hamels.huanan.Repository.Model.Customer;
 import com.hamels.huanan.Repository.Model.Store;
 import com.hamels.huanan.Repository.Model.User;
 import com.hamels.huanan.Repository.RepositoryManager;
 import com.hamels.huanan.EOrderApplication;
 
+import static com.hamels.huanan.Constant.ApiConstant.TASK_POST_READ_MESSAGE;
 import static com.hamels.huanan.Constant.Constant.REQUEST_COUPON;
 import static com.hamels.huanan.Constant.Constant.REQUEST_DONATE;
 import static com.hamels.huanan.Constant.Constant.REQUEST_LOT_LIST;
@@ -33,6 +37,8 @@ import static com.hamels.huanan.Constant.Constant.REQUEST_MESSAGE;
 import static com.hamels.huanan.Constant.Constant.REQUEST_BUSINESS;
 import static com.hamels.huanan.Constant.Constant.REQUEST_SHOPPING_CART;
 import static com.hamels.huanan.Constant.Constant.REQUEST_MESSAGE_LIST;
+
+import android.content.Context;
 
 import java.util.List;
 
@@ -368,5 +374,14 @@ public class MainPresenter extends BasePresenter<MainContract.View> implements M
 //                view.getVersion(websetup.getSysContent());
 //            }
 //        });
+    }
+
+    public void GetShopCartLocationQuantity() {
+        repositoryManager.GetShopCartLocationQuantity(new BaseContract.ValueCallback<String>() {
+            @Override
+            public void onValueCallback(int task, String type) {
+                view.ShoppingBackPage(type);
+            }
+        });
     }
 }

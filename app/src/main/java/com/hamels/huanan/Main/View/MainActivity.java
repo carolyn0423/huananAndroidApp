@@ -890,7 +890,13 @@ public class MainActivity extends BaseActivity implements MainContract.View {
             public void onReceivedTitle(WebView view, String title) {
                 super.onReceivedTitle(view, title);
                 if(title.indexOf("html") == -1 && title.indexOf("com") == -1) {
-                    setAppTitleString(title);
+                    Handler handler = new Handler();
+                    handler.postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            setAppTitleString(title);
+                        }
+                    }, 1500);
                 }
             }
         });
@@ -1062,13 +1068,19 @@ public class MainActivity extends BaseActivity implements MainContract.View {
                 currentPage = mWebBackForwardList.getItemAtIndex(mWebBackForwardList.getCurrentIndex()).getUrl();
                 goBackPage = mWebBackForwardList.getItemAtIndex(mWebBackForwardList.getCurrentIndex() - 1).getUrl();
             }
-            if (currentPage.indexOf("orderDetail.html") > 0 && goBackPage.indexOf("order.html") > 0) {
+            if (currentPage.indexOf("orderDetail.html") > 0
+                    || goBackPage.indexOf("order.html") > 0
+                    || currentPage.indexOf("pay_complete.html") > 0) {
                 webView.loadUrl(EOrderApplication.sApiUrl + EOrderApplication.WEBVIEW_ORDER_URL + "?orderType=" + "");
             } else if (currentPage.indexOf("order.html") > 0) {
                 changeTabFragment(MemberCenterFragment.getInstance());
                 webView = null;
             } else if(currentPage.indexOf("ebook.html") > 0){
                 changeTabFragment(MainIndexFragment.getInstance());
+            } else if(currentPage.indexOf("shoppingcart_list_product.html") > 0){
+                changeTabFragment(ShoppingCartFragment.getInstance());
+            } else if(currentPage.indexOf("ecpay.com.tw") > 0){
+                webView.loadUrl(EOrderApplication.sApiUrl + EOrderApplication.WEBVIEW_PAY_COMPLETE_URL + "?isSuccess=false" + "");
             } else {
                 webView.goBack();
             }
@@ -1136,6 +1148,10 @@ public class MainActivity extends BaseActivity implements MainContract.View {
                 }
             }
         }
+    }
+
+    public void ShoppingBackPage(String LocationQuantity){
+        int iLocationQuantity = Integer.parseInt(LocationQuantity);
     }
 
     public void ProductLocationFragment(int location_count){
