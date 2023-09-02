@@ -76,7 +76,7 @@ public class LocationFragment extends BaseFragment implements LocationListContra
 
 
     private void initView(View view) {
-        ((MainActivity) getActivity()).EditFragmentBottom(false);
+        ((MainActivity) getActivity()).EditFragmentBottom(true, true);
         ((MainActivity) getActivity()).setAppTitle(R.string.tab_shop);
         ((MainActivity) getActivity()).refreshBadge();
 

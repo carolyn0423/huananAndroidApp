@@ -58,7 +58,7 @@ public class WelcomeFragment extends BaseFragment implements WelcomeContract.Vie
 
     private void initView(View view) {
         sSourceActive = welcomePresenter.getSourceActive();
-        ((MainActivity) getActivity()).EditFragmentBottom(false);
+        ((MainActivity) getActivity()).EditFragmentBottom(true, true);
         ((MainActivity) getActivity()).setAppTitle(R.string.select_customer);
         ((MainActivity) getActivity()).refreshBadge();
         ((MainActivity) getActivity()).setBackButtonVisibility(false);

@@ -44,7 +44,7 @@ public class WhatCoffeeFragment extends BaseFragment {
 
     private void initView(View view) {
 
-        ((MainActivity) getActivity()).EditFragmentBottom(false);
+        ((MainActivity) getActivity()).EditFragmentBottom(true, false);
         webView = view.findViewById(R.id.web_view);
         setAppTitle(R.string.title_what_coffee);
         ((MainActivity) getActivity()).refreshBadge();

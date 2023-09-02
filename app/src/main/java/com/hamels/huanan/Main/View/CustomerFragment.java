@@ -69,7 +69,7 @@ public class CustomerFragment extends BaseFragment implements CustomerContract.V
     }
 
     private void initView(View view) {
-        ((MainActivity) getActivity()).EditFragmentBottom(false);
+        ((MainActivity) getActivity()).EditFragmentBottom(true, true);
         ((MainActivity) getActivity()).setAppTitle(R.string.tab_customer);
         ((MainActivity) getActivity()).refreshBadge();
 

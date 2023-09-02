@@ -1411,18 +1411,20 @@ public class MainActivity extends BaseActivity implements MainContract.View {
         }
     }
 
-    public void EditFragmentBottom(boolean isParent){
+    public void EditFragmentBottom(boolean showTop,boolean showBottom) {
         // 找到 FrameLayout 的引用
         FrameLayout frameLayout = findViewById(R.id.frame);
         // 取得 FrameLayout 的父容器 (ConstraintLayout) 的參數
         ConstraintLayout.LayoutParams layoutParams = (ConstraintLayout.LayoutParams) frameLayout.getLayoutParams();
-
-        if (isParent) {
-            layoutParams.topMargin = (int) (0 * getResources().getDisplayMetrics().density);
-            layoutParams.bottomMargin = (int) (0 * getResources().getDisplayMetrics().density);
-        } else {
+        if(showTop){
             layoutParams.topMargin = (int) (50 * getResources().getDisplayMetrics().density);
-            layoutParams.bottomMargin = (int) (60 * getResources().getDisplayMetrics().density);
+        }else{
+            layoutParams.topMargin = (int) (0 * getResources().getDisplayMetrics().density);
+        }
+        if(showBottom){
+            layoutParams.bottomMargin = (int) (65 * getResources().getDisplayMetrics().density);
+        }else{
+            layoutParams.bottomMargin = (int) (0 * getResources().getDisplayMetrics().density);
         }
 
         // 更新 FrameLayout 的父容器的參數

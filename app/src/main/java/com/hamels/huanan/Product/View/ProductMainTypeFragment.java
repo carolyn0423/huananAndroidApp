@@ -70,7 +70,7 @@ public class ProductMainTypeFragment extends BaseFragment implements ProductMain
     }
 
     private void initView(View view) {
-        ((MainActivity) getActivity()).EditFragmentBottom(false);
+        ((MainActivity) getActivity()).EditFragmentBottom(true, true);
         ((MainActivity) getActivity()).setAppTitle(R.string.main_type_name);
 
         ((MainActivity) getActivity()).setBackButtonVisibility(true);

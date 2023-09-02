@@ -62,7 +62,7 @@ public class ShoppingCartFragment extends BaseFragment {
     }
 
     private void initView(View view) {
-        ((MainActivity) getActivity()).EditFragmentBottom(false);
+        ((MainActivity) getActivity()).EditFragmentBottom(true, true);
         webView = view.findViewById(R.id.web_view);
         setAppTitle(R.string.tab_shopping_cart);
         ((MainActivity) getActivity()).refreshBadge();
