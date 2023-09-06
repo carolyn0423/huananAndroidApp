@@ -186,7 +186,6 @@ public class LocationFragment extends BaseFragment implements LocationListContra
             storeListPresenter.saveFragmentMainType(location_id, "N");
             ((MainActivity) getActivity()).addFragment(ProductMainTypeFragment.getInstance());
         }else {
-            ((MainActivity) getActivity()).setAppToolbarVisibility(true);
             locationListAdapter.setData(stores);
         }
     }

@@ -743,7 +743,7 @@ public class MemberRepository extends ApiRepository {
         map.put("isApp", "true");
         map.put("member_id", sMemberID);
 
-        Log.e(TAG, "API getMessageList : " + map);
+        Log.e(TAG, "API GetShopCartLocationQuantity : " + map);
         RequestBody requestBody = RequestBody.create(MediaType.parse("text/plain"), ApiUtils.getEncodeStringParams(map));
         retrofit.create(MemberApiService.class).GetShopCartLocationQuantity(requestBody).enqueue(callback);
     }

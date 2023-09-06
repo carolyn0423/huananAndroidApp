@@ -996,11 +996,11 @@ public class RepositoryManager {
     public void GetShopCartLocationQuantity(final BaseContract.ValueCallback<String> valueCallback) {
         basePresenter.startCallApi();
         String member_id = context.getSharedPreferences("MemberID", Context.MODE_PRIVATE).getString("MemberID", "");
-        MemberRepository.getInstance().GetShopCartLocationQuantity(member_id, new ApiCallback<BaseModel>(basePresenter) {
+        MemberRepository.getInstance().GetShopCartLocationQuantity(member_id, new ApiCallback<BaseModel<String>>(basePresenter) {
             @Override
-            public void onApiSuccess(BaseModel response) {
+            public void onApiSuccess(BaseModel<String> response) {
                 super.onApiSuccess(response);
-                valueCallback.onValueCallback(TASK_POST_GET_SHOPCARTLOCATIONQUANTITY, response.getMessage());
+                valueCallback.onValueCallback(TASK_POST_GET_SHOPCARTLOCATIONQUANTITY, response.getItems());
             }
         });
     }
