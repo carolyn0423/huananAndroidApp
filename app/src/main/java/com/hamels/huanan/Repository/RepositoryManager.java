@@ -956,8 +956,10 @@ public class RepositoryManager {
 
     public void callGetMessageListApi(final BaseContract.ValueCallback<List<Message>> valueCallback) {
         basePresenter.startCallApi();
+        String customer_id = context.getSharedPreferences("CustomerID", Context.MODE_PRIVATE).getString("CustomerID", "");
         String member_id = context.getSharedPreferences("MemberID", Context.MODE_PRIVATE).getString("MemberID", "");
-        MemberRepository.getInstance().getMessageList(member_id, new ApiCallback<BaseModel<List<Message>>>(basePresenter) {
+        String canned_message_type = "";
+        MemberRepository.getInstance().getMessageList(customer_id,member_id, canned_message_type,new ApiCallback<BaseModel<List<Message>>>(basePresenter) {
             @Override
             public void onApiSuccess(BaseModel<List<Message>> response) {
                 super.onApiSuccess(response);

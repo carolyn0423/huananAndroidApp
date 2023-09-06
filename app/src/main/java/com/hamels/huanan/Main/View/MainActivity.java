@@ -770,6 +770,7 @@ public class MainActivity extends BaseActivity implements MainContract.View {
 
         // 購物車商品數量
         if (array.length == 4) {
+            EOrderApplication.cartBadgeCount = array[3];
             if (array[3].equals("0")) {
                 tvShoppingCart.setVisibility(View.GONE);
             } else {

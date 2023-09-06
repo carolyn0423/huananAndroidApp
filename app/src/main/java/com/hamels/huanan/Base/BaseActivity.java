@@ -14,6 +14,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.hamels.huanan.EOrderApplication;
 import com.hamels.huanan.Repository.RepositoryManager;
 import com.hamels.huanan.Widget.AppToolbar;
 import me.leolin.shortcutbadger.ShortcutBadger;
@@ -101,7 +102,11 @@ public class BaseActivity extends AppCompatActivity implements BaseContract.View
     @Override
     public void setCartBadgeVisibility(boolean isVisible) {
         if (tvShoppingCart != null) {
-            tvShoppingCart.setVisibility(isVisible ? View.VISIBLE : View.GONE);
+            if(isVisible && EOrderApplication.cartBadgeCount.equals("0")==false){
+                tvShoppingCart.setVisibility(View.VISIBLE);
+            }else{
+                tvShoppingCart.setVisibility(View.GONE);
+            }
         }
     }
 
