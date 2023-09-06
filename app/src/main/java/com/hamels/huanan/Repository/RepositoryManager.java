@@ -956,8 +956,10 @@ public class RepositoryManager {
 
     public void callGetMessageListApi(final BaseContract.ValueCallback<List<Message>> valueCallback) {
         basePresenter.startCallApi();
+        String customer_id = context.getSharedPreferences("CustomerID", Context.MODE_PRIVATE).getString("CustomerID", "");
         String member_id = context.getSharedPreferences("MemberID", Context.MODE_PRIVATE).getString("MemberID", "");
-        MemberRepository.getInstance().getMessageList(member_id, new ApiCallback<BaseModel<List<Message>>>(basePresenter) {
+        String canned_message_type = "";
+        MemberRepository.getInstance().getMessageList(customer_id,member_id, canned_message_type,new ApiCallback<BaseModel<List<Message>>>(basePresenter) {
             @Override
             public void onApiSuccess(BaseModel<List<Message>> response) {
                 super.onApiSuccess(response);
@@ -994,11 +996,11 @@ public class RepositoryManager {
     public void GetShopCartLocationQuantity(final BaseContract.ValueCallback<String> valueCallback) {
         basePresenter.startCallApi();
         String member_id = context.getSharedPreferences("MemberID", Context.MODE_PRIVATE).getString("MemberID", "");
-        MemberRepository.getInstance().GetShopCartLocationQuantity(member_id, new ApiCallback<BaseModel>(basePresenter) {
+        MemberRepository.getInstance().GetShopCartLocationQuantity(member_id, new ApiCallback<BaseModel<String>>(basePresenter) {
             @Override
-            public void onApiSuccess(BaseModel response) {
+            public void onApiSuccess(BaseModel<String> response) {
                 super.onApiSuccess(response);
-                valueCallback.onValueCallback(TASK_POST_GET_SHOPCARTLOCATIONQUANTITY, response.getMessage());
+                valueCallback.onValueCallback(TASK_POST_GET_SHOPCARTLOCATIONQUANTITY, response.getItems());
             }
         });
     }

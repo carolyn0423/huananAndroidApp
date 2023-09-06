@@ -181,5 +181,5 @@ public interface MemberApiService {
     Call<BaseModel> updateReadMessage(@Body RequestBody body);
 
     @POST("Shopping/GetShopCartLocationQuantity")
-    Call<BaseModel> GetShopCartLocationQuantity(@Body RequestBody body);
+    Call<BaseModel<String>> GetShopCartLocationQuantity(@Body RequestBody body);
 }

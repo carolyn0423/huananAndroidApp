@@ -92,5 +92,7 @@ public interface MainContract {
         String getApiUrl();
 
         void getLocationList();
+
+        void GetShopCartLocationQuantity();
     }
 }

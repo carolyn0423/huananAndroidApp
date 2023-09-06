@@ -151,12 +151,15 @@ public class LocationFragment extends BaseFragment implements LocationListContra
         ConstraintLayout.LayoutParams clFunctionname_3 = (ConstraintLayout.LayoutParams) btn_functionname_3.getLayoutParams();
 
         storeListPresenter.saveSourceActive("");
-
+        storeListPresenter.setFunctionname(FUNCTIONNAME_3, location_id);
+/*
         if(storeListPresenter.getUserLogin()) {
             storeListPresenter.setFunctionname(FUNCTIONNAME_1, location_id);
         }else{
             storeListPresenter.setFunctionname(FUNCTIONNAME_3, location_id);
         }
+
+ */
     }
 
     public void changeToNewFunctionName(String functionname) {
@@ -183,7 +186,6 @@ public class LocationFragment extends BaseFragment implements LocationListContra
             storeListPresenter.saveFragmentMainType(location_id, "N");
             ((MainActivity) getActivity()).addFragment(ProductMainTypeFragment.getInstance());
         }else {
-            ((MainActivity) getActivity()).setAppToolbarVisibility(true);
             locationListAdapter.setData(stores);
         }
     }

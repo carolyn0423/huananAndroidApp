@@ -697,13 +697,14 @@ public class MemberRepository extends ApiRepository {
         }, callback);
     }
 
-    public void getMessageList(final String member_id, final AbsApiCallback callback) {
+    public void getMessageList(final String customer_id,final String member_id, final String canned_message_type, final AbsApiCallback callback) {
         Map<String, String> map = new HashMap<>();
         map.put("connection_name", EOrderApplication.dbConnectName);
         map.put("modified_user", member_id);
         map.put("isApp", "true");
+        map.put("customer_id", customer_id);
         map.put("member_id", member_id);
-
+        map.put("canned_message_type", canned_message_type);
         Log.e(TAG, "API getMessageList : " + map);
         RequestBody requestBody = RequestBody.create(MediaType.parse("text/plain"), ApiUtils.getEncodeStringParams(map));
         retrofit.create(MemberApiService.class).postGetMessageList(requestBody).enqueue(callback);
@@ -742,7 +743,7 @@ public class MemberRepository extends ApiRepository {
         map.put("isApp", "true");
         map.put("member_id", sMemberID);
 
-        Log.e(TAG, "API getMessageList : " + map);
+        Log.e(TAG, "API GetShopCartLocationQuantity : " + map);
         RequestBody requestBody = RequestBody.create(MediaType.parse("text/plain"), ApiUtils.getEncodeStringParams(map));
         retrofit.create(MemberApiService.class).GetShopCartLocationQuantity(requestBody).enqueue(callback);
     }
