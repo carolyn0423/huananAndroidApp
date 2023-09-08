@@ -153,6 +153,7 @@ public class MemberCenterFragment extends BaseFragment implements View.OnClickLi
         }else if (id == R.id.btn_logout){
             memberPresenter.logout();
         }else if (id == R.id.btn_customerservice){
+            EOrderApplication.MESSAGE_TAG = "";
             ((MainActivity) getActivity()).addFragment(MessageListFragment.getInstance());
 //                Toast.makeText(getActivity(), "此功能未開放", Toast.LENGTH_LONG).show();
         }else if(id == R.id.btn_member_logout){

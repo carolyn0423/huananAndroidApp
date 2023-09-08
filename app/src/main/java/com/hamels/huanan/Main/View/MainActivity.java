@@ -292,6 +292,7 @@ public class MainActivity extends BaseActivity implements MainContract.View {
         appToolbar.getBtnMessage().setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                EOrderApplication.MESSAGE_TAG = "";
                 Fragment fragment = getSupportFragmentManager().findFragmentById(R.id.frame);
                 mainPresenter.checkLoginForMessage(fragment.getClass().getSimpleName());
                 appToolbar.setMessageBadgeCount(Integer.parseInt("0"));
@@ -984,6 +985,7 @@ public class MainActivity extends BaseActivity implements MainContract.View {
         public void jsCall_showCustomerService(String page) {
             if(page.equals("")) {
                 //showErrorAlert("登入後才可使用");
+                EOrderApplication.MESSAGE_TAG = "coffee";
                 mainPresenter.checkLoginForMessageList();
             }else{
                 //  開啟外部網址
