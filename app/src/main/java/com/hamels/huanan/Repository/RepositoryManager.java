@@ -958,7 +958,7 @@ public class RepositoryManager {
         basePresenter.startCallApi();
         String customer_id = context.getSharedPreferences("CustomerID", Context.MODE_PRIVATE).getString("CustomerID", "");
         String member_id = context.getSharedPreferences("MemberID", Context.MODE_PRIVATE).getString("MemberID", "");
-        String canned_message_type = "";
+        String canned_message_type = EOrderApplication.MESSAGE_TAG;
         MemberRepository.getInstance().getMessageList(customer_id,member_id, canned_message_type,new ApiCallback<BaseModel<List<Message>>>(basePresenter) {
             @Override
             public void onApiSuccess(BaseModel<List<Message>> response) {

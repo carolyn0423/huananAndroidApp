@@ -2,6 +2,7 @@ package com.hamels.huanan.Main.View;
 
 import android.Manifest;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
@@ -11,6 +12,7 @@ import android.location.LocationManager;
 import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.constraintlayout.widget.Group;
 import androidx.core.app.ActivityCompat;
@@ -18,9 +20,12 @@ import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 import android.util.Log;
 import android.util.TypedValue;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.PopupWindow;
 import android.widget.TextView;
 
 import com.hamels.huanan.Base.BaseActivity;
@@ -38,6 +43,7 @@ import com.hamels.huanan.Repository.Model.Store;
 import com.hamels.huanan.Utils.IntentUtils;
 
 import java.util.List;
+import java.util.UUID;
 
 import static com.hamels.huanan.Main.Presenter.LocationListPresenter.FUNCTIONNAME_1;
 import static com.hamels.huanan.Main.Presenter.LocationListPresenter.FUNCTIONNAME_2;
@@ -111,8 +117,20 @@ public class LocationFragment extends BaseFragment implements LocationListContra
                 if(storeListPresenter.getUserLogin()) {
                     storeListPresenter.setFunctionname(FUNCTIONNAME_1, location_id);
                 }else{
-                    Intent intent = new Intent(fragment.getActivity(), LoginActivity.class);
-                    fragment.getActivity().startActivityForResult(intent, LocationFragment.REQUEST_LOCATION_PERMISSION);
+                    new AlertDialog.Builder(fragment.getActivity()).setTitle(R.string.dialog_hint).setMessage("此功能需登入，您要登入嗎?")
+                            .setPositiveButton(R.string.verify, new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    Intent intent = new Intent(fragment.getActivity(), LoginActivity.class);
+                                    fragment.getActivity().startActivityForResult(intent, LocationFragment.REQUEST_LOCATION_PERMISSION);
+
+                                }
+                            })
+                            .setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int id) {
+                                    // User cancelled the dialog
+                                }
+                            }).show();
                 }
             }
         });
@@ -152,14 +170,24 @@ public class LocationFragment extends BaseFragment implements LocationListContra
 
         storeListPresenter.saveSourceActive("");
         storeListPresenter.setFunctionname(FUNCTIONNAME_3, location_id);
-/*
-        if(storeListPresenter.getUserLogin()) {
-            storeListPresenter.setFunctionname(FUNCTIONNAME_1, location_id);
-        }else{
-            storeListPresenter.setFunctionname(FUNCTIONNAME_3, location_id);
-        }
 
- */
+        if(!storeListPresenter.getUserLogin()) {
+            btn_functionname_1.setVisibility(View.GONE);
+
+            clFunctionname_2.endToStart = R.id.guideline_mid;
+            clFunctionname_2.width = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 150, getResources().getDisplayMetrics());
+
+            clFunctionname_3.startToEnd = R.id.guideline_mid;
+            clFunctionname_3.width = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 150, getResources().getDisplayMetrics());
+        }else{
+            btn_functionname_1.setVisibility(View.VISIBLE);
+
+            clFunctionname_2.endToStart = clFunctionname_2.UNSET;
+            clFunctionname_2.width = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 110, getResources().getDisplayMetrics());
+
+            clFunctionname_3.startToEnd = R.id.btn_functionname_2;
+            clFunctionname_3.width = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 110, getResources().getDisplayMetrics());
+        }
     }
 
     public void changeToNewFunctionName(String functionname) {
