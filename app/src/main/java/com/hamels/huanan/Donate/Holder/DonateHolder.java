@@ -111,8 +111,11 @@ public class DonateHolder extends RecyclerView.ViewHolder {
     public void setImg_product_two(Donate productleft, Donate productright) {
         img_donate_left.setTag(R.id.img_donate_left, productleft.getUid());
         img_donate_right.setTag(R.id.img_donate_right, productright.getUid());
-        Glide.with(DonateFragment.getInstance()).load(EOrderApplication.sApiUrl + productleft.getPictureUrl()).into(img_donate_left);
-        Glide.with(DonateFragment.getInstance()).load(EOrderApplication.sApiUrl + productright.getPictureUrl()).into(img_donate_right);
+        String sLeftPictureUrl = productleft.getPictureUrl().equals("") ? EOrderApplication.DEFAULT_PICTURE_URL : productleft.getPictureUrl();
+        String sRightPictureUrl = productright.getPictureUrl().equals("") ? EOrderApplication.DEFAULT_PICTURE_URL : productright.getPictureUrl();
+
+        Glide.with(DonateFragment.getInstance()).load(EOrderApplication.sApiUrl + sLeftPictureUrl).into(img_donate_left);
+        Glide.with(DonateFragment.getInstance()).load(EOrderApplication.sApiUrl + sRightPictureUrl).into(img_donate_right);
 
         tv_eticket_due_date_left.setText(productleft.getEticketDueDate());
         tv_eticket_due_date_right.setText(productright.getEticketDueDate());
@@ -176,7 +179,9 @@ public class DonateHolder extends RecyclerView.ViewHolder {
     public void setImg_product_one(Donate productleft) {
         img_donate_right.setVisibility(View.INVISIBLE);
         img_donate_left.setTag(R.id.img_donate_left, productleft.getUid());
-        Glide.with(DonateFragment.getInstance()).load(EOrderApplication.sApiUrl + productleft.getPictureUrl()).into(img_donate_left);
+        String sLeftPictureUrl = productleft.getPictureUrl().equals("") ? EOrderApplication.DEFAULT_PICTURE_URL : productleft.getPictureUrl();
+
+        Glide.with(DonateFragment.getInstance()).load(EOrderApplication.sApiUrl + sLeftPictureUrl).into(img_donate_left);
 
         tv_product_name_left.setText(productleft.getProductName());
         tv_product_name_right.setVisibility(View.INVISIBLE);

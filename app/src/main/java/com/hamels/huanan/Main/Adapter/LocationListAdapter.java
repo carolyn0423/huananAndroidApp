@@ -97,7 +97,7 @@ public class LocationListAdapter extends BaseAdapter<LocationListHolder> {
             }
         });
 
-        storeListHolder.ivLocationPicturl.setOnClickListener(new View.OnClickListener() {
+        storeListHolder.llBrandLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 presenter.goLocationDesc(stores.get(position));

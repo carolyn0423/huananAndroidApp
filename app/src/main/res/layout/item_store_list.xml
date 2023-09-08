@@ -104,13 +104,56 @@
         app:layout_constraintStart_toEndOf="@+id/tv_img"
         app:layout_constraintTop_toTopOf="@+id/tv_img" />
 
-    <ImageView
-        android:id="@+id/location_picturl"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
+    <LinearLayout
+        android:id="@+id/brand_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="10dp"
+        app:layout_constraintTop_toBottomOf="@id/tv_storefavorite"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        />
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <ImageView
+            android:id="@+id/location_picturl"
+            android:layout_width="70dp"
+            android:layout_height="70dp" />
+
+        <TextView
+            android:id="@+id/brand_description"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="點擊看品牌介紹"
+            android:textSize="11sp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="5dp" />
+
+    </LinearLayout>
+
+<!--    <ImageView-->
+<!--        android:id="@+id/location_picturl"-->
+<!--        android:layout_width="70dp"-->
+<!--        android:layout_height="70dp"-->
+<!--        android:layout_marginBottom="35dp"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--        />-->
+
+<!--    <TextView-->
+<!--        android:id="@+id/brand_description"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:text="點擊看品牌介紹"-->
+<!--        android:textSize="11sp"-->
+<!--        android:layout_marginTop="5dp"-->
+<!--        android:layout_marginBottom="10dp"-->
+<!--        android:layout_marginRight="25dp"-->
+<!--        app:layout_constraintTop_toBottomOf="@id/location_picturl"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="@id/location_picturl"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent" />-->
 
     <TextView
         android:id="@+id/btn_storecall"

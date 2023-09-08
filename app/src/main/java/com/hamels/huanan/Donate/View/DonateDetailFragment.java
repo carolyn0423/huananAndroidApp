@@ -168,7 +168,8 @@ public class DonateDetailFragment extends BaseFragment implements DonateDetailCo
 
     @Override
     public void setDonateDetail(List<Donate> productDetail) {
-        Glide.with(DonateDetailFragment.getInstance(uid)).load(EOrderApplication.sApiUrl + productDetail.get(0).getPictureUrl()).into(img_donate);
+        String sPictureUrl = productDetail.get(0).getPictureUrl().equals("") ? EOrderApplication.DEFAULT_PICTURE_URL : productDetail.get(0).getPictureUrl();
+        Glide.with(DonateDetailFragment.getInstance(uid)).load(EOrderApplication.sApiUrl + sPictureUrl).into(img_donate);
 
         ticket_code = productDetail.get(0).getTicketCode();
 

@@ -154,7 +154,7 @@
             android:layout_width="match_parent"
             android:layout_height="65dp"
             android:orientation="horizontal"
-            android:background="@drawable/bottomappbar"
+            android:background="@color/colorYunlinhn"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent">

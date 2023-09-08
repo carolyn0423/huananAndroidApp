@@ -153,8 +153,9 @@ public class DonateDetail2Fragment extends BaseFragment implements DonateDetailC
     @Override
     public void setDonateDetail(List<Donate> productDetail) {
         Log.e(TAG, Integer.toString(uid));
+        String sPictureUrl = productDetail.get(0).getPictureUrl().equals("") ? EOrderApplication.DEFAULT_PICTURE_URL : productDetail.get(0).getPictureUrl();
 
-        Glide.with(DonateDetail2Fragment.getInstance(uid)).load(EOrderApplication.sApiUrl + productDetail.get(0).getPictureUrl()).into(img_donate);
+        Glide.with(DonateDetail2Fragment.getInstance(uid)).load(EOrderApplication.sApiUrl + sPictureUrl).into(img_donate);
         tv_product_name.setText(productDetail.get(0).getProductName());
         tv_type_name_spec_name.setText(" ( " + productDetail.get(0).getTypeName() + " - " + productDetail.get(0).getSpecName() + " ) ");
         tv_eticket_due_date.setText(productDetail.get(0).getEticketDueDate());

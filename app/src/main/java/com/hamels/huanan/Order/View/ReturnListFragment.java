@@ -16,6 +16,7 @@ import com.bumptech.glide.Glide;
 import com.hamels.huanan.Base.BaseContract;
 import com.hamels.huanan.Base.BaseFragment;
 import com.hamels.huanan.Constant.Constant;
+import com.hamels.huanan.EOrderApplication;
 import com.hamels.huanan.Main.View.MainActivity;
 import com.hamels.huanan.Order.Adapter.ReturnListAdapter;
 import com.hamels.huanan.R;
@@ -95,7 +96,8 @@ public class ReturnListFragment extends BaseFragment implements View.OnClickList
     }
 
     private void setOrders(Order order) {
-        Glide.with(this).load(order.getPreviewImageUrl()).into(imgOrder);
+        String sPictureUrl = order.getPreviewImageUrl().equals("") ? EOrderApplication.sApiUrl + EOrderApplication.DEFAULT_PICTURE_URL : order.getPreviewImageUrl();
+        Glide.with(this).load(sPictureUrl).into(imgOrder);
 
         tvOrderNo.setText(String.format(getContext().getString(R.string.order_no), order.getId()));
         tvOrderTime.setText(String.format(getContext().getString(R.string.order_time), order.getOrderTime()));

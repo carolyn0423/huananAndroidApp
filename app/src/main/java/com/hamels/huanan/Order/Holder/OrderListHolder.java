@@ -11,6 +11,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.hamels.huanan.EOrderApplication;
 import com.hamels.huanan.Order.Adapter.ProductOrderDetailAdapter;
 import com.hamels.huanan.R;
 import com.hamels.huanan.Repository.Model.Order;
@@ -68,8 +69,8 @@ public class OrderListHolder extends RecyclerView.ViewHolder implements View.OnC
     private void setOrderInfo(Order order, int status) {
         setButtonVisible(status == ORDER_STATUS_TRANS_FINISH && order.canReturn());
         isDetailShow(order.showDetail);
-
-        Glide.with(itemView).load(order.getPreviewImageUrl()).into(imgItem);
+        String sPictureUrl = order.getPreviewImageUrl().equals("") ? EOrderApplication.sApiUrl + EOrderApplication.DEFAULT_PICTURE_URL : order.getPreviewImageUrl();
+        Glide.with(itemView).load(sPictureUrl).into(imgItem);
         tvOrderNo.setText(String.format(itemView.getContext().getString(R.string.order_no), order.getId()));
         tvOrderTime.setText(String.format(itemView.getContext().getString(R.string.order_time), order.getOrderTime()));
         tvOrderPrice.setText(String.format(itemView.getContext().getString(R.string.order_price), order.getRealPayTotal()));
