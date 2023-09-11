@@ -17,6 +17,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.WebView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -46,6 +47,7 @@ import com.hamels.huanan.Repository.Model.ProductConf;
 import com.hamels.huanan.Repository.Model.ProductConfAmout;
 import com.hamels.huanan.Repository.Model.ProductPicture;
 import com.hamels.huanan.Repository.Model.ProductSpec;
+import com.hamels.huanan.Utils.ArticleWebViewClient;
 import com.hamels.huanan.Utils.PicassoImageGetter;
 import com.hamels.huanan.Utils.WaterMaskUtils;
 import com.stx.xhb.xbanner.XBanner;
@@ -71,6 +73,7 @@ public class ProductDetailFragment extends BaseFragment implements ProductDetail
     private TabLayout tabLayout;
     private ListView listview;
     private ScrollView view_scroll;
+    private WebView webView;
 
     ExpandableListView expandableListView;
     ExpandableListAdapter expandableListAdapter;
@@ -142,7 +145,8 @@ public class ProductDetailFragment extends BaseFragment implements ProductDetail
         tv_same_price = view.findViewById(R.id.tv_same_price);
         tv_store_name = view.findViewById(R.id.tv_store_name);
         tv_product_type = view.findViewById(R.id.tv_product_type);
-        tv_desc = view.findViewById(R.id.tv_desc);
+        //tv_desc = view.findViewById(R.id.tv_desc);
+        webView = view.findViewById(R.id.web_view);
         //tv_show_desc = view.findViewById(R.id.tv_show_desc);
         spinner_spec = view.findViewById(R.id.spinner_spec);
         layout_minus = view.findViewById(R.id.layout_minus);
@@ -555,15 +559,21 @@ public class ProductDetailFragment extends BaseFragment implements ProductDetail
         }
         tv_price.setText("NT$" + sPrice);
         //tv_dealer_product_id.setText(productDetail.get(0).getDealer_product_id());
-        PicassoImageGetter imageGetter = new PicassoImageGetter(this.getContext(), tv_desc);
-        Spannable html;
-        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
-            html = (Spannable) Html.fromHtml(product.getDesc(), Html.FROM_HTML_MODE_LEGACY, imageGetter, null);
-        } else {
-            html = (Spannable) Html.fromHtml(product.getDesc(), imageGetter, null);
-        }
-        tv_desc.setText(html);
+
+//        PicassoImageGetter imageGetter = new PicassoImageGetter(this.getContext(), tv_desc);
+//        Spannable html;
+//        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
+//            html = (Spannable) Html.fromHtml(product.getDesc(), Html.FROM_HTML_MODE_LEGACY, imageGetter, null);
+//        } else {
+//            html = (Spannable) Html.fromHtml(product.getDesc(), imageGetter, null);
+//        }
+//        tv_desc.setText(html);
         //tv_desc.setText(Html.fromHtml(productDetail.get(0).getDesc()));
+
+        webView.getSettings().setJavaScriptEnabled(true);   //支持javascript
+        webView.setWebViewClient(new ArticleWebViewClient());
+        webView.loadData(productDetail.get(0).getDesc(), "text/html", "UTF-8");
+
         tv_price.getPaint().setFlags(Paint.STRIKE_THRU_TEXT_FLAG);
         edit_num.setText(Integer.toString(1));
         if (isETicket.equals("Y")) {

@@ -6,6 +6,7 @@ import android.text.Spannable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.WebView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -15,6 +16,7 @@ import com.hamels.huanan.Base.BaseFragment;
 import com.hamels.huanan.Main.View.MainActivity;
 import com.hamels.huanan.R;
 import com.hamels.huanan.Repository.Model.Product;
+import com.hamels.huanan.Utils.ArticleWebViewClient;
 import com.hamels.huanan.Utils.PicassoImageGetter;
 
 public class ProductDetailDescFragment extends BaseFragment {
@@ -22,7 +24,7 @@ public class ProductDetailDescFragment extends BaseFragment {
 
     private static ProductDetailDescFragment fragment;
     private Product product;
-
+    private WebView webView;
     private TextView tvContent;
 
     public static ProductDetailDescFragment getInstance(Product product) {
@@ -52,15 +54,19 @@ public class ProductDetailDescFragment extends BaseFragment {
         super.onViewCreated(view, savedInstanceState);
 
         if (product != null) {
-            PicassoImageGetter imageGetter = new PicassoImageGetter(this.getContext(), tvContent);
-            Spannable html;
-            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
-                html = (Spannable) Html.fromHtml(product.getDesc(), Html.FROM_HTML_MODE_LEGACY, imageGetter, null);
-            } else {
-                html = (Spannable) Html.fromHtml(product.getDesc(), imageGetter, null);
-            }
+//            PicassoImageGetter imageGetter = new PicassoImageGetter(this.getContext(), tvContent);
+//            Spannable html;
+//            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
+//                html = (Spannable) Html.fromHtml(product.getDesc(), Html.FROM_HTML_MODE_LEGACY, imageGetter, null);
+//            } else {
+//                html = (Spannable) Html.fromHtml(product.getDesc(), imageGetter, null);
+//            }
+//
+//            tvContent.setText(html);
 
-            tvContent.setText(html);
+            webView.getSettings().setJavaScriptEnabled(true);   //支持javascript
+            webView.setWebViewClient(new ArticleWebViewClient());
+            webView.loadData(product.getDesc(), "text/html", "UTF-8");
         }
     }
 
@@ -78,6 +84,7 @@ public class ProductDetailDescFragment extends BaseFragment {
         ((MainActivity) getActivity()).setBottomNavigationVisibility(true);
         ((MainActivity) getActivity()).setCartBadgeVisibility(true);
 
-        tvContent = view.findViewById(R.id.tv_product_content);
+        //tvContent = view.findViewById(R.id.tv_product_content);
+        webView = view.findViewById(R.id.web_view);
     }
 }

@@ -39,7 +39,7 @@ public class MemberCenterFragment extends BaseFragment implements View.OnClickLi
     private TextView tvName, tvPoint, tvPhone;
     private ImageView btnMemberInfo;
     private PopupWindow popupWindow;
-    private ConstraintLayout btnlogout;
+    private ConstraintLayout btnlogout, btndelete;
 
     private int barcodeWidth = 350;
     private int barcodeHeight = 350;
@@ -93,6 +93,9 @@ public class MemberCenterFragment extends BaseFragment implements View.OnClickLi
 
         btnlogout = view.findViewById(R.id.btn_logout);
         btnlogout.setOnClickListener(this);
+
+        btndelete = view.findViewById(R.id.btn_delete);
+        btndelete.setOnClickListener(this);
 
 //        img_qrcode = view.findViewById(R.id.img_qrcode);
 //        img_qrcode.setOnClickListener(this);
@@ -156,9 +159,9 @@ public class MemberCenterFragment extends BaseFragment implements View.OnClickLi
             EOrderApplication.MESSAGE_TAG = "";
             ((MainActivity) getActivity()).addFragment(MessageListFragment.getInstance());
 //                Toast.makeText(getActivity(), "此功能未開放", Toast.LENGTH_LONG).show();
-        }else if(id == R.id.btn_member_logout){
+        }else if(id == R.id.btn_member_logout || id == R.id.btn_delete){
             //  刪除會員
-            new AlertDialog.Builder(getContext()).setTitle("確定退出會員?").setMessage(R.string.delete_member)
+            new AlertDialog.Builder(getContext()).setTitle("確定刪除帳號?").setMessage(R.string.delete_member)
                     .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {

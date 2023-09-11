@@ -3,21 +3,21 @@ package com.hamels.huanan.Main.View;
 import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import android.text.Html;
-import android.text.Spannable;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.WebView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.hamels.huanan.Utils.ArticleWebViewClient;
 import com.hamels.huanan.Base.BaseFragment;
 import com.hamels.huanan.EOrderApplication;
 import com.hamels.huanan.Main.Contract.NewsContract;
 import com.hamels.huanan.R;
 import com.hamels.huanan.Repository.Model.Carousel;
-import com.hamels.huanan.Utils.PicassoImageGetter;
 
 public class NewsFragment extends BaseFragment implements NewsContract.View {
     public static final String TAG = NewsFragment.class.getSimpleName();
@@ -27,6 +27,7 @@ public class NewsFragment extends BaseFragment implements NewsContract.View {
     private TextView  tv_news_title ,tv_news_content;
     private ImageView imageView;
     private Carousel carousel;
+    private WebView webView;
 
     public static NewsFragment getInstance(Carousel carousel) {
         if (fragment == null) {
@@ -64,8 +65,9 @@ public class NewsFragment extends BaseFragment implements NewsContract.View {
         ((MainActivity) getActivity()).setCartBadgeVisibility(true);
 
         imageView = view.findViewById(R.id.imageView);
-        tv_news_content = view.findViewById(R.id.tv_news_content);
+        //tv_news_content = view.findViewById(R.id.tv_news_content);
         tv_news_title = view.findViewById(R.id.tv_news_title);
+        webView = view.findViewById(R.id.web_view);
     }
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
@@ -73,14 +75,17 @@ public class NewsFragment extends BaseFragment implements NewsContract.View {
         String sPictureUrl = carousel.getPicture_url2().equals("") ? EOrderApplication.DEFAULT_PICTURE_URL : carousel.getPicture_url2();
         Glide.with(getActivity()).load(EOrderApplication.sApiUrl + sPictureUrl).into(imageView);
         tv_news_title.setText(carousel.getTitle());
-        PicassoImageGetter imageGetter = new PicassoImageGetter(this.getContext(),tv_news_content);
-        Spannable html;
-        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
-            html = (Spannable) Html.fromHtml(carousel.getContent(), Html.FROM_HTML_MODE_LEGACY, imageGetter, null);
-        } else {
-            html = (Spannable) Html.fromHtml(carousel.getContent(), imageGetter, null);
-        }
-
-        tv_news_content.setText(html);
+        webView.getSettings().setJavaScriptEnabled(true);   //支持javascript
+        webView.setWebViewClient(new ArticleWebViewClient());
+        webView.loadData(carousel.getContent(), "text/html", "UTF-8");
+//        PicassoImageGetter imageGetter = new PicassoImageGetter(this.getContext(),tv_news_content);
+//        Spannable html;
+//        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
+//            html = (Spannable) Html.fromHtml(carousel.getContent(), Html.FROM_HTML_MODE_LEGACY, imageGetter, null);
+//        } else {
+//            html = (Spannable) Html.fromHtml(carousel.getContent(), imageGetter, null);
+//        }
+//
+//        tv_news_content.setText(html);
     }
 }
