@@ -182,12 +182,13 @@ public class MainIndexFragment extends BaseFragment implements MainIndexContract
             @Override
             public void loadBanner(XBanner banner, Object model, View view, int position) {
                 ImageView img_carousel = (ImageView) view.findViewById(R.id.img_carousel);
+                img_carousel.setAdjustViewBounds(true);
+                img_carousel.setScaleType(ImageView.ScaleType.FIT_XY);
                 Glide
                     .with(getActivity())
                         .load(((CustomViewsInfo) model).getXBannerUrl())
                         // .load(R.drawable.e_order)
                     .into(img_carousel);
-                img_carousel.setScaleType(ImageView.ScaleType.FIT_XY);
             }
         });
         mXBanner.setOnItemClickListener(new XBanner.OnItemClickListener() {
