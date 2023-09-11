@@ -75,16 +75,16 @@ public class MainIndexFragment extends BaseFragment implements MainIndexContract
 
         mXBanner = view.findViewById(R.id.xbanner);
 
-        // 獲取屏幕高度
-        DisplayMetrics displayMetrics = new DisplayMetrics();
-        getActivity().getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
-        int screenHeight = displayMetrics.heightPixels - (int) (70 * getResources().getDisplayMetrics().density);
-
-        // 設置 mXBanner 的高度為屏幕高度
-        mXBanner.setLayoutParams(new ConstraintLayout.LayoutParams(
-                ConstraintLayout.LayoutParams.MATCH_PARENT,
-                screenHeight
-        ));
+//        // 獲取屏幕高度
+//        DisplayMetrics displayMetrics = new DisplayMetrics();
+//        getActivity().getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
+//        int screenHeight = displayMetrics.heightPixels - (int) (65 * getResources().getDisplayMetrics().density);
+//
+//        // 設置 mXBanner 的高度為屏幕高度
+//        mXBanner.setLayoutParams(new ConstraintLayout.LayoutParams(
+//                ConstraintLayout.LayoutParams.MATCH_PARENT,
+//                screenHeight
+//        ));
 
         imv_membercard = view.findViewById(R.id.img_member_card);
         imv_membercard.setOnClickListener(new View.OnClickListener() {
@@ -181,9 +181,19 @@ public class MainIndexFragment extends BaseFragment implements MainIndexContract
         mXBanner.loadImage(new XBanner.XBannerAdapter() {
             @Override
             public void loadBanner(XBanner banner, Object model, View view, int position) {
+                // 獲取屏幕的高度
+                int screenHeight = getResources().getDisplayMetrics().heightPixels - (int) (65 * getResources().getDisplayMetrics().density);
+
                 ImageView img_carousel = (ImageView) view.findViewById(R.id.img_carousel);
-                img_carousel.setAdjustViewBounds(true);
+                img_carousel.setAdjustViewBounds(false);
                 img_carousel.setScaleType(ImageView.ScaleType.FIT_XY);
+
+                // 創建ImageView的佈局參數
+                ConstraintLayout.LayoutParams params = new ConstraintLayout.LayoutParams(ConstraintLayout.LayoutParams.MATCH_PARENT, screenHeight);
+
+                // 設置ImageView的佈局參數
+                img_carousel.setLayoutParams(params);
+
                 Glide
                     .with(getActivity())
                         .load(((CustomViewsInfo) model).getXBannerUrl())
@@ -196,8 +206,8 @@ public class MainIndexFragment extends BaseFragment implements MainIndexContract
             public void onItemClick(XBanner banner, Object model, View view, int position) {
                 Log.e(TAG,carouselList.get(position).getTitle());
                 ((MainActivity) getActivity()).addFragment(NewsFragment.getInstance(carouselList.get(position)));
-//                ((MainActivity) getActivity()).addFragment(NewsFragment.getInstance(((CustomViewsInfo)model).getXBannerTitle()));
-//                ((MainActivity) getActivity()).goNewsDetail(((CustomViewsInfo)model).getXBannerTitle());
+                //  ((MainActivity) getActivity()).addFragment(NewsFragment.getInstance(((CustomViewsInfo)model).getXBannerTitle()));
+                //  ((MainActivity) getActivity()).goNewsDetail(((CustomViewsInfo)model).getXBannerTitle());
             }
         });
 
