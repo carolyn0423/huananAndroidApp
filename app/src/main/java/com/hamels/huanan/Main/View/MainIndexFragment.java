@@ -78,7 +78,7 @@ public class MainIndexFragment extends BaseFragment implements MainIndexContract
         // 獲取屏幕高度
         DisplayMetrics displayMetrics = new DisplayMetrics();
         getActivity().getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
-        int screenHeight = displayMetrics.heightPixels - (int) (80 * getResources().getDisplayMetrics().density);
+        int screenHeight = displayMetrics.heightPixels - (int) (70 * getResources().getDisplayMetrics().density);
 
         // 設置 mXBanner 的高度為屏幕高度
         mXBanner.setLayoutParams(new ConstraintLayout.LayoutParams(
