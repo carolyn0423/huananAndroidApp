@@ -1452,6 +1452,7 @@ public class MainActivity extends BaseActivity implements MainContract.View {
         }else{
             layoutParams.topMargin = (int) (0 * getResources().getDisplayMetrics().density);
         }
+
         if(showBottom){
             layoutParams.bottomMargin = (int) (65 * getResources().getDisplayMetrics().density);
         }else{

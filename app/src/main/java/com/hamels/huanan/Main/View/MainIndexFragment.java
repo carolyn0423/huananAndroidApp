@@ -11,6 +11,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -59,7 +60,7 @@ public class MainIndexFragment extends BaseFragment implements MainIndexContract
         return view;
     }
     private void initView(View view) {
-        ((MainActivity) getActivity()).EditFragmentBottom(true,true);
+        ((MainActivity) getActivity()).EditFragmentBottom(false,false);
         ((MainActivity) getActivity()).setAppTitle(R.string.tab_index);
         ((MainActivity) getActivity()).refreshBadge();
         ((MainActivity) getActivity()).setBackButtonVisibility(false);
@@ -77,7 +78,7 @@ public class MainIndexFragment extends BaseFragment implements MainIndexContract
         // 獲取屏幕高度
         DisplayMetrics displayMetrics = new DisplayMetrics();
         getActivity().getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
-        int screenHeight = displayMetrics.heightPixels;
+        int screenHeight = displayMetrics.heightPixels - (int) (80 * getResources().getDisplayMetrics().density);
 
         // 設置 mXBanner 的高度為屏幕高度
         mXBanner.setLayoutParams(new ConstraintLayout.LayoutParams(
@@ -186,6 +187,7 @@ public class MainIndexFragment extends BaseFragment implements MainIndexContract
                         .load(((CustomViewsInfo) model).getXBannerUrl())
                         // .load(R.drawable.e_order)
                     .into(img_carousel);
+                img_carousel.setScaleType(ImageView.ScaleType.FIT_XY);
             }
         });
         mXBanner.setOnItemClickListener(new XBanner.OnItemClickListener() {
