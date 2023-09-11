@@ -285,159 +285,159 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-<!--    <androidx.coordinatorlayout.widget.CoordinatorLayout-->
-<!--        android:id="@+id/layout_bottom_navigation"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintBottom_toBottomOf="parent">-->
+    <!--    <androidx.coordinatorlayout.widget.CoordinatorLayout-->
+    <!--        android:id="@+id/layout_bottom_navigation"-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        app:layout_constraintStart_toStartOf="parent"-->
+    <!--        app:layout_constraintEnd_toEndOf="parent"-->
+    <!--        app:layout_constraintBottom_toBottomOf="parent">-->
 
-<!--        <com.google.android.material.bottomappbar.BottomAppBar-->
-<!--            android:id="@+id/bar"-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="60dp"-->
-<!--            android:layout_gravity="bottom"-->
-<!--            app:fabCradleMargin="8dp"-->
-<!--            app:fabCradleRoundedCornerRadius="8dp"-->
-<!--            app:fabCradleVerticalOffset="0dp">-->
+    <!--        <com.google.android.material.bottomappbar.BottomAppBar-->
+    <!--            android:id="@+id/bar"-->
+    <!--            android:layout_width="match_parent"-->
+    <!--            android:layout_height="60dp"-->
+    <!--            android:layout_gravity="bottom"-->
+    <!--            app:fabCradleMargin="8dp"-->
+    <!--            app:fabCradleRoundedCornerRadius="8dp"-->
+    <!--            app:fabCradleVerticalOffset="0dp">-->
 
-<!--            <LinearLayout-->
-<!--                android:id="@+id/tab_bar"-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="60dp"-->
-<!--                android:orientation="horizontal"-->
-<!--                android:background="@drawable/bottomappbar"-->
-<!--                app:layout_constraintBottom_toBottomOf="parent"-->
-<!--                app:layout_constraintEnd_toEndOf="parent"-->
-<!--                app:layout_constraintStart_toStartOf="parent">-->
+    <!--            <LinearLayout-->
+    <!--                android:id="@+id/tab_bar"-->
+    <!--                android:layout_width="match_parent"-->
+    <!--                android:layout_height="60dp"-->
+    <!--                android:orientation="horizontal"-->
+    <!--                android:background="@drawable/bottomappbar"-->
+    <!--                app:layout_constraintBottom_toBottomOf="parent"-->
+    <!--                app:layout_constraintEnd_toEndOf="parent"-->
+    <!--                app:layout_constraintStart_toStartOf="parent">-->
 
-<!--                <LinearLayout-->
-<!--                    android:id="@+id/ll_item"-->
-<!--                    android:layout_width="match_parent"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:orientation="horizontal"-->
-<!--                    android:layout_marginLeft="20dp"-->
-<!--                    android:layout_marginRight="20dp">-->
+    <!--                <LinearLayout-->
+    <!--                    android:id="@+id/ll_item"-->
+    <!--                    android:layout_width="match_parent"-->
+    <!--                    android:layout_height="wrap_content"-->
+    <!--                    android:orientation="horizontal"-->
+    <!--                    android:layout_marginLeft="20dp"-->
+    <!--                    android:layout_marginRight="20dp">-->
 
-<!--                    <LinearLayout-->
-<!--                        android:id="@+id/home"-->
-<!--                        android:layout_width="wrap_content"-->
-<!--                        android:layout_height="wrap_content"-->
-<!--                        android:orientation="vertical"-->
-<!--                        android:layout_weight="1"-->
-<!--                        android:padding="5dp"-->
-<!--                        android:gravity="center">-->
-<!--                        <ImageView-->
-<!--                            android:id="@+id/img_home"-->
-<!--                            android:layout_width="25dp"-->
-<!--                            android:layout_height="25dp"-->
-<!--                            android:duplicateParentState="true"-->
-<!--                            android:src="@drawable/home_fill" />-->
-<!--                        <TextView-->
-<!--                            android:id="@+id/txt_home"-->
-<!--                            android:layout_width="match_parent"-->
-<!--                            android:layout_height="wrap_content"-->
-<!--                            android:text="@string/tab_main"-->
-<!--                            android:textSize="13sp"-->
-<!--                            android:layout_marginTop="5dp"-->
-<!--                            android:gravity="center"-->
-<!--                            android:textColor="#FFFFFF" />-->
-<!--                    </LinearLayout>-->
+    <!--                    <LinearLayout-->
+    <!--                        android:id="@+id/home"-->
+    <!--                        android:layout_width="wrap_content"-->
+    <!--                        android:layout_height="wrap_content"-->
+    <!--                        android:orientation="vertical"-->
+    <!--                        android:layout_weight="1"-->
+    <!--                        android:padding="5dp"-->
+    <!--                        android:gravity="center">-->
+    <!--                        <ImageView-->
+    <!--                            android:id="@+id/img_home"-->
+    <!--                            android:layout_width="25dp"-->
+    <!--                            android:layout_height="25dp"-->
+    <!--                            android:duplicateParentState="true"-->
+    <!--                            android:src="@drawable/home_fill" />-->
+    <!--                        <TextView-->
+    <!--                            android:id="@+id/txt_home"-->
+    <!--                            android:layout_width="match_parent"-->
+    <!--                            android:layout_height="wrap_content"-->
+    <!--                            android:text="@string/tab_main"-->
+    <!--                            android:textSize="13sp"-->
+    <!--                            android:layout_marginTop="5dp"-->
+    <!--                            android:gravity="center"-->
+    <!--                            android:textColor="#FFFFFF" />-->
+    <!--                    </LinearLayout>-->
 
-<!--                    <LinearLayout-->
-<!--                        android:id="@+id/order"-->
-<!--                        android:layout_width="wrap_content"-->
-<!--                        android:layout_height="wrap_content"-->
-<!--                        android:orientation="vertical"-->
-<!--                        android:layout_weight="1"-->
-<!--                        android:padding="5dp"-->
-<!--                        android:gravity="center">-->
+    <!--                    <LinearLayout-->
+    <!--                        android:id="@+id/order"-->
+    <!--                        android:layout_width="wrap_content"-->
+    <!--                        android:layout_height="wrap_content"-->
+    <!--                        android:orientation="vertical"-->
+    <!--                        android:layout_weight="1"-->
+    <!--                        android:padding="5dp"-->
+    <!--                        android:gravity="center">-->
 
-<!--                        <ImageView-->
-<!--                            android:id="@+id/img_order"-->
-<!--                            android:layout_width="25dp"-->
-<!--                            android:layout_height="25dp"-->
-<!--                            app:layout_constraintStart_toEndOf="@+id/imageView"-->
-<!--                            app:layout_constraintTop_toTopOf="parent"-->
-<!--                            android:duplicateParentState="true"-->
-<!--                            android:src="@drawable/bag_line" />-->
+    <!--                        <ImageView-->
+    <!--                            android:id="@+id/img_order"-->
+    <!--                            android:layout_width="25dp"-->
+    <!--                            android:layout_height="25dp"-->
+    <!--                            app:layout_constraintStart_toEndOf="@+id/imageView"-->
+    <!--                            app:layout_constraintTop_toTopOf="parent"-->
+    <!--                            android:duplicateParentState="true"-->
+    <!--                            android:src="@drawable/bag_line" />-->
 
-<!--                        <TextView-->
-<!--                            android:id="@+id/txt_order"-->
-<!--                            android:layout_width="match_parent"-->
-<!--                            android:layout_height="wrap_content"-->
-<!--                            android:text="產品專區"-->
-<!--                            android:textSize="13sp"-->
-<!--                            android:layout_marginTop="5dp"-->
-<!--                            android:gravity="center"-->
-<!--                            android:textColor="#FFFFFF" />-->
-<!--                    </LinearLayout>-->
+    <!--                        <TextView-->
+    <!--                            android:id="@+id/txt_order"-->
+    <!--                            android:layout_width="match_parent"-->
+    <!--                            android:layout_height="wrap_content"-->
+    <!--                            android:text="產品專區"-->
+    <!--                            android:textSize="13sp"-->
+    <!--                            android:layout_marginTop="5dp"-->
+    <!--                            android:gravity="center"-->
+    <!--                            android:textColor="#FFFFFF" />-->
+    <!--                    </LinearLayout>-->
 
-<!--                    <LinearLayout-->
-<!--                        android:id="@+id/purchase"-->
-<!--                        android:layout_width="wrap_content"-->
-<!--                        android:layout_height="wrap_content"-->
-<!--                        android:orientation="vertical"-->
-<!--                        android:layout_weight="1"-->
-<!--                        android:padding="5dp"-->
-<!--                        android:gravity="center">-->
+    <!--                    <LinearLayout-->
+    <!--                        android:id="@+id/purchase"-->
+    <!--                        android:layout_width="wrap_content"-->
+    <!--                        android:layout_height="wrap_content"-->
+    <!--                        android:orientation="vertical"-->
+    <!--                        android:layout_weight="1"-->
+    <!--                        android:padding="5dp"-->
+    <!--                        android:gravity="center">-->
 
-<!--                        <ImageView-->
-<!--                            android:id="@+id/img_purchase"-->
-<!--                            android:layout_width="25dp"-->
-<!--                            android:layout_height="25dp"-->
-<!--                            app:layout_constraintStart_toEndOf="parent"-->
-<!--                            app:layout_constraintTop_toTopOf="parent"-->
-<!--                            android:duplicateParentState="true"-->
-<!--                            android:src="@drawable/cart_line" />-->
+    <!--                        <ImageView-->
+    <!--                            android:id="@+id/img_purchase"-->
+    <!--                            android:layout_width="25dp"-->
+    <!--                            android:layout_height="25dp"-->
+    <!--                            app:layout_constraintStart_toEndOf="parent"-->
+    <!--                            app:layout_constraintTop_toTopOf="parent"-->
+    <!--                            android:duplicateParentState="true"-->
+    <!--                            android:src="@drawable/cart_line" />-->
 
-<!--                        <TextView-->
-<!--                            android:id="@+id/txt_purchase"-->
-<!--                            android:layout_width="match_parent"-->
-<!--                            android:layout_height="wrap_content"-->
-<!--                            android:text="購物車"-->
-<!--                            android:textSize="13sp"-->
-<!--                            android:layout_marginTop="5dp"-->
-<!--                            android:gravity="center"-->
-<!--                            android:textColor="#FFFFFF" />-->
-<!--                    </LinearLayout>-->
+    <!--                        <TextView-->
+    <!--                            android:id="@+id/txt_purchase"-->
+    <!--                            android:layout_width="match_parent"-->
+    <!--                            android:layout_height="wrap_content"-->
+    <!--                            android:text="購物車"-->
+    <!--                            android:textSize="13sp"-->
+    <!--                            android:layout_marginTop="5dp"-->
+    <!--                            android:gravity="center"-->
+    <!--                            android:textColor="#FFFFFF" />-->
+    <!--                    </LinearLayout>-->
 
-<!--                    <LinearLayout-->
-<!--                        android:id="@+id/member"-->
-<!--                        android:layout_width="wrap_content"-->
-<!--                        android:layout_height="wrap_content"-->
-<!--                        android:orientation="vertical"-->
-<!--                        android:layout_weight="1"-->
-<!--                        android:padding="5dp"-->
-<!--                        android:gravity="center">-->
+    <!--                    <LinearLayout-->
+    <!--                        android:id="@+id/member"-->
+    <!--                        android:layout_width="wrap_content"-->
+    <!--                        android:layout_height="wrap_content"-->
+    <!--                        android:orientation="vertical"-->
+    <!--                        android:layout_weight="1"-->
+    <!--                        android:padding="5dp"-->
+    <!--                        android:gravity="center">-->
 
-<!--                        <ImageView-->
-<!--                            android:id="@+id/img_member"-->
-<!--                            android:layout_width="25dp"-->
-<!--                            android:layout_height="25dp"-->
-<!--                            app:layout_constraintStart_toEndOf="@+id/imageView"-->
-<!--                            app:layout_constraintTop_toTopOf="parent"-->
-<!--                            android:duplicateParentState="true"-->
-<!--                            android:src="@drawable/member_line" />-->
+    <!--                        <ImageView-->
+    <!--                            android:id="@+id/img_member"-->
+    <!--                            android:layout_width="25dp"-->
+    <!--                            android:layout_height="25dp"-->
+    <!--                            app:layout_constraintStart_toEndOf="@+id/imageView"-->
+    <!--                            app:layout_constraintTop_toTopOf="parent"-->
+    <!--                            android:duplicateParentState="true"-->
+    <!--                            android:src="@drawable/member_line" />-->
 
-<!--                        <TextView-->
-<!--                            android:id="@+id/txt_member"-->
-<!--                            android:layout_width="match_parent"-->
-<!--                            android:layout_height="wrap_content"-->
-<!--                            android:text="@string/tab_member_info"-->
-<!--                            android:textSize="13sp"-->
-<!--                            android:layout_marginTop="5dp"-->
-<!--                            android:gravity="center"-->
-<!--                            android:textColor="#FFFFFF" />-->
-<!--                    </LinearLayout>-->
+    <!--                        <TextView-->
+    <!--                            android:id="@+id/txt_member"-->
+    <!--                            android:layout_width="match_parent"-->
+    <!--                            android:layout_height="wrap_content"-->
+    <!--                            android:text="@string/tab_member_info"-->
+    <!--                            android:textSize="13sp"-->
+    <!--                            android:layout_marginTop="5dp"-->
+    <!--                            android:gravity="center"-->
+    <!--                            android:textColor="#FFFFFF" />-->
+    <!--                    </LinearLayout>-->
 
-<!--                </LinearLayout>-->
+    <!--                </LinearLayout>-->
 
-<!--            </LinearLayout>-->
+    <!--            </LinearLayout>-->
 
-<!--        </com.google.android.material.bottomappbar.BottomAppBar>-->
-<!--    </androidx.coordinatorlayout.widget.CoordinatorLayout>-->
+    <!--        </com.google.android.material.bottomappbar.BottomAppBar>-->
+    <!--    </androidx.coordinatorlayout.widget.CoordinatorLayout>-->
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"

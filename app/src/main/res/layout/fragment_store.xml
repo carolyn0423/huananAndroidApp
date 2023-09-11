@@ -97,7 +97,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_chainStyle="packed"
-        app:srcCompat="@drawable/icon_bag" />
+          app:srcCompat="@drawable/icon_bag" />
 
     <TextView
         android:id="@+id/tv_no_location"
