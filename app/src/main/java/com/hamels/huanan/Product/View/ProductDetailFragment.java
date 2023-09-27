@@ -65,7 +65,7 @@ public class ProductDetailFragment extends BaseFragment implements ProductDetail
     private EditText edit_num, conf_qty;
     private ConstraintLayout layout_shopping, btn_conf_qty;
     private Button btn_freight_title;
-    private TextView tv_price, tv_sale_price, tv_same_price, tv_store_name, tv_product_type, tv_dealer_product_id, tv_desc, tv_subtotal,tv_water_mask, tv_show_desc;
+    private TextView tv_price, tv_sale_price, tv_same_price, tv_store_name, tv_product_type, tv_dealer_product_id, tv_desc, tv_subtotal,tv_water_mask, tv_show_desc,tv_coupon_name;
     private ImageView img_product_ribbon;
     private ProductDetailContract.Presenter presenter;
     private TabLayout tabLayout;
@@ -143,6 +143,7 @@ public class ProductDetailFragment extends BaseFragment implements ProductDetail
         tv_store_name = view.findViewById(R.id.tv_store_name);
         tv_product_type = view.findViewById(R.id.tv_product_type);
         tv_desc = view.findViewById(R.id.tv_desc);
+        tv_coupon_name = view.findViewById(R.id.tv_coupon_name);
         //tv_show_desc = view.findViewById(R.id.tv_show_desc);
         spinner_spec = view.findViewById(R.id.spinner_spec);
         layout_minus = view.findViewById(R.id.layout_minus);
@@ -540,6 +541,7 @@ public class ProductDetailFragment extends BaseFragment implements ProductDetail
         location_id = productDetail.get(0).getLocation_id();
         product_type_main_id = productDetail.get(0).getProductTypeMainID();
         tv_product_type.setText(productDetail.get(0).getProduct_name());
+        tv_coupon_name.setText(productDetail.get(0).getCoupon_title());
         tv_store_name.setText(productDetail.get(0).getProductTypeMainName() + " - " + productDetail.get(0).getTypeName());
 
         String sTicketSalePrice = mDecimalFormat.format((double) (product.getticket_sales_price() * iLimitQuantity));
