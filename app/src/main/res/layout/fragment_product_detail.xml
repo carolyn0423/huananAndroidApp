@@ -186,7 +186,7 @@
                             android:maxEms="25"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@+id/tv_same_price"/>
+                            app:layout_constraintTop_toBottomOf="@+id/tv_price"/>
 
                         <androidx.constraintlayout.widget.Guideline
                             android:id="@+id/guideline10"
