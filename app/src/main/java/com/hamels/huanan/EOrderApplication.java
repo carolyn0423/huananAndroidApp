@@ -38,6 +38,7 @@ public class EOrderApplication extends Application {
     public static String WEBVIEW_ORDER_URL = "/order.html";
     public static String WEBVIEW_ORDERDETAIL_URL = "/orderDetail.html";
     public static String WEBVIEW_PAY_COMPLETE_URL = "/pay_complete.html";
+    public static String WEBVIEW_CONTENT_URL = "/content.html";
     public static String DEFAULT_PICTURE_URL = "/UploadImages/Product/default.png";
     public static String MESSAGE_TAG = "";
 

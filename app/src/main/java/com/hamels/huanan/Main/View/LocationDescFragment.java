@@ -2,6 +2,7 @@ package com.hamels.huanan.Main.View;
 
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.os.Bundle;
 import android.text.Html;
 import android.text.Spannable;
@@ -18,10 +19,13 @@ import androidx.annotation.Nullable;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
 import com.hamels.huanan.Base.BaseFragment;
+import com.hamels.huanan.EOrderApplication;
 import com.hamels.huanan.R;
 import com.hamels.huanan.Repository.Model.Store;
 import com.hamels.huanan.Utils.ArticleWebViewClient;
 import com.hamels.huanan.Utils.PicassoImageGetter;
+
+import java.util.Objects;
 
 public class LocationDescFragment extends BaseFragment {
     public static final String TAG = LocationDescFragment.class.getSimpleName();
@@ -72,9 +76,15 @@ public class LocationDescFragment extends BaseFragment {
 
             // urlWebView.loadUrl("https://www.google.com/"); //For URL
 
-            webView.getSettings().setJavaScriptEnabled(true);   //支持javascript
-            webView.setWebViewClient(new ArticleWebViewClient());
-            webView.loadData(store.getDescription(), "text/html", "UTF-8");
+            //webView.getSettings().setJavaScriptEnabled(true);   //支持javascript
+            //webView.setWebViewClient(new ArticleWebViewClient());
+            //webView.loadData(store.getDescription(), "text/html", "UTF-8");
+
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+                webView.setWebContentsDebuggingEnabled(false); // 關閉調試模式以提高性能
+            }
+
+            webView.loadUrl(EOrderApplication.sApiUrl + EOrderApplication.WEBVIEW_CONTENT_URL + "?mode=Location&id=" + store.getLocationID());
         }
 
         Resources res = this.getResources();
@@ -97,8 +107,16 @@ public class LocationDescFragment extends BaseFragment {
 
         ((MainActivity) getActivity()).setAppTitleString(store.getName());
 
+        webView = view.findViewById(R.id.web_view);
+        ((MainActivity) getActivity()).bindWebView(webView);
+
         layoutContent = view.findViewById(R.id.layout_content);
         //tvContent = view.findViewById(R.id.tv_content);
-        webView = view.findViewById(R.id.web_view);
+    }
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        ((MainActivity) Objects.requireNonNull(getActivity())).detachWebView();
     }
 }
