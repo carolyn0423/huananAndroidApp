@@ -6,6 +6,7 @@ import android.os.Bundle;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import android.text.Html;
 import android.text.Spannable;
+import android.webkit.WebView;
 import android.widget.TextView;
 
 import com.hamels.huanan.Base.BaseActivity;
@@ -14,6 +15,7 @@ import com.hamels.huanan.MemberCenter.Contract.FaqContract;
 import com.hamels.huanan.MemberCenter.Presenter.FaqPresenter;
 import com.hamels.huanan.R;
 import com.hamels.huanan.Repository.Model.Faq;
+import com.hamels.huanan.Utils.ArticleWebViewClient;
 import com.hamels.huanan.Utils.PicassoImageGetter;
 
 public class TermsOfUseActivity extends BaseActivity implements FaqContract.View{
@@ -22,6 +24,7 @@ public class TermsOfUseActivity extends BaseActivity implements FaqContract.View
     private TextView tv_faq_data;
     private FaqContract.Presenter presenter;
     private ConstraintLayout layoutContent;
+    private WebView webView;
     Drawable drawable;
 
     @Override
@@ -44,23 +47,28 @@ public class TermsOfUseActivity extends BaseActivity implements FaqContract.View
         setSortButtonVisibility(false);
         setAppToolbarVisibility(true);
 
-        tv_faq_data = findViewById(R.id.tv_faq_data);
+        //tv_faq_data = findViewById(R.id.tv_faq_data);
         layoutContent = findViewById(R.id.layout_content);
+        webView = findViewById(R.id.web_view);
     }
 
     @Override
     public void setFaqData(Faq faq) {
-        PicassoImageGetter imageGetter = new PicassoImageGetter(this, tv_faq_data);
-        Spannable html;
-        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
-            html = (Spannable) Html.fromHtml(faq.getAnswer(), Html.FROM_HTML_MODE_LEGACY, imageGetter, null);
-        } else {
-            html = (Spannable) Html.fromHtml(faq.getAnswer(), imageGetter, null);
-        }
-
-        tv_faq_data.setText(html);
+//        PicassoImageGetter imageGetter = new PicassoImageGetter(this, tv_faq_data);
+//        Spannable html;
+//        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
+//            html = (Spannable) Html.fromHtml(faq.getAnswer(), Html.FROM_HTML_MODE_LEGACY, imageGetter, null);
+//        } else {
+//            html = (Spannable) Html.fromHtml(faq.getAnswer(), imageGetter, null);
+//        }
+//
+//        tv_faq_data.setText(html);
 
         //tv_faq_data.setText(Html.fromHtml(faq.getAnswer()));
+
+        webView.getSettings().setJavaScriptEnabled(true);   //支持javascript
+        webView.setWebViewClient(new ArticleWebViewClient());
+        webView.loadData(faq.getAnswer(), "text/html", "UTF-8");
 
         Resources res = this.getResources();
         drawable = res.getDrawable(R.drawable.bg_shadow_corner);
