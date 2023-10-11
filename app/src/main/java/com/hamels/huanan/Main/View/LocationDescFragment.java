@@ -35,10 +35,7 @@ public class LocationDescFragment extends BaseFragment {
 
     private static LocationDescFragment fragment;
     private Store store;
-    private ConstraintLayout layoutContent;
-    private TextView tvContent;
     private WebView webView;
-    Drawable drawable;
 
     public static LocationDescFragment getInstance(Store store) {
         if (fragment == null) {
@@ -54,7 +51,7 @@ public class LocationDescFragment extends BaseFragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_location_desc, container, false);
+        View view = inflater.inflate(R.layout.fragment_news, container, false);
         if (getArguments() != null && getArguments().containsKey(Store.TAG)) {
             store = getArguments().getParcelable(Store.TAG);
         }
@@ -83,27 +80,10 @@ public class LocationDescFragment extends BaseFragment {
             //webView.setWebViewClient(new ArticleWebViewClient());
             //webView.loadData(store.getDescription(), "text/html", "UTF-8");
 
-            Resources res = this.getResources();
-            layoutContent.setVisibility(view.GONE);
 
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
                 webView.setWebContentsDebuggingEnabled(false); // 關閉調試模式以提高性能
             }
-
-            webView.setWebViewClient(new WebViewClient() {
-                @Override
-                public void onPageFinished(WebView view, String url) {
-                    layoutContent.setVisibility(view.VISIBLE);
-
-                    new Handler().postDelayed(new Runnable() {
-                        @Override
-                        public void run() {
-                            drawable = res.getDrawable(R.drawable.bg_shadow_corner);
-                            layoutContent.setBackground(drawable);
-                        }
-                    }, 1000); // 2000毫秒（2秒）的延遲
-                }
-            });
 
             webView.loadUrl(EOrderApplication.sApiUrl + EOrderApplication.WEBVIEW_CONTENT_URL + "?mode=Location&id=" + store.getLocationID());
         }
@@ -126,9 +106,6 @@ public class LocationDescFragment extends BaseFragment {
 
         webView = view.findViewById(R.id.web_view);
         ((MainActivity) getActivity()).bindWebView(webView);
-
-        layoutContent = view.findViewById(R.id.layout_content);
-        //tvContent = view.findViewById(R.id.tv_content);
     }
 
     @Override
