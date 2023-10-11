@@ -15,6 +15,7 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import android.os.Handler;
 import android.text.Html;
 import android.text.Spannable;
+import android.view.View;
 import android.webkit.JavascriptInterface;
 import android.webkit.JsResult;
 import android.webkit.WebChromeClient;

@@ -582,7 +582,13 @@ public class ProductDetailFragment extends BaseFragment implements ProductDetail
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
             webView.setWebContentsDebuggingEnabled(false); // 關閉調試模式以提高性能
         }
+        webView.setOverScrollMode(View.OVER_SCROLL_NEVER);
+        // 禁用滾動條
+        webView.setVerticalScrollBarEnabled(false);
+        webView.setHorizontalScrollBarEnabled(false);
 
+        // 禁用觸摸滾動
+        webView.setOnTouchListener((v, event) -> true);
         webView.loadUrl(EOrderApplication.sApiUrl + EOrderApplication.WEBVIEW_CONTENT_URL + "?mode=Product&id=" + productDetail.get(0).getId());
 
         tv_price.getPaint().setFlags(Paint.STRIKE_THRU_TEXT_FLAG);
