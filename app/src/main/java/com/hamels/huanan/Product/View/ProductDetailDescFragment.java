@@ -1,8 +1,6 @@
 package com.hamels.huanan.Product.View;
 
 import android.os.Bundle;
-import android.text.Html;
-import android.text.Spannable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,7 +15,6 @@ import com.hamels.huanan.Main.View.MainActivity;
 import com.hamels.huanan.R;
 import com.hamels.huanan.Repository.Model.Product;
 import com.hamels.huanan.Utils.ArticleWebViewClient;
-import com.hamels.huanan.Utils.PicassoImageGetter;
 
 public class ProductDetailDescFragment extends BaseFragment {
     public static final String TAG = ProductDetailDescFragment.class.getSimpleName();
@@ -41,7 +38,7 @@ public class ProductDetailDescFragment extends BaseFragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_product_detail_desc, container, false);
+        View view = inflater.inflate(R.layout.fragment_cketitor, container, false);
         if (getArguments() != null && getArguments().containsKey(Product.TAG)) {
             product = getArguments().getParcelable(Product.TAG);
         }
