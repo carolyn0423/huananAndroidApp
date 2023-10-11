@@ -1,6 +1,8 @@
 package com.hamels.huanan.Base;
 
 import android.content.Context;
+import android.view.MotionEvent;
+
 import androidx.annotation.IdRes;
 import androidx.fragment.app.Fragment;
 
