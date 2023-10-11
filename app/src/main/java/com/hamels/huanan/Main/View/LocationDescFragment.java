@@ -4,15 +4,18 @@ import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.text.Html;
 import android.text.Spannable;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.WebChromeClient;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -80,16 +83,30 @@ public class LocationDescFragment extends BaseFragment {
             //webView.setWebViewClient(new ArticleWebViewClient());
             //webView.loadData(store.getDescription(), "text/html", "UTF-8");
 
+            Resources res = this.getResources();
+            layoutContent.setVisibility(view.GONE);
+
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
                 webView.setWebContentsDebuggingEnabled(false); // 關閉調試模式以提高性能
             }
 
+            webView.setWebViewClient(new WebViewClient() {
+                @Override
+                public void onPageFinished(WebView view, String url) {
+                    layoutContent.setVisibility(view.VISIBLE);
+
+                    new Handler().postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            drawable = res.getDrawable(R.drawable.bg_shadow_corner);
+                            layoutContent.setBackground(drawable);
+                        }
+                    }, 1000); // 2000毫秒（2秒）的延遲
+                }
+            });
+
             webView.loadUrl(EOrderApplication.sApiUrl + EOrderApplication.WEBVIEW_CONTENT_URL + "?mode=Location&id=" + store.getLocationID());
         }
-
-        Resources res = this.getResources();
-        drawable = res.getDrawable(R.drawable.bg_shadow_corner);
-        layoutContent.setBackground(drawable);
     }
 
     private void initView(View view) {

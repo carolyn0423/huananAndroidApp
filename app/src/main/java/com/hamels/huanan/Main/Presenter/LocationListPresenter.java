@@ -58,7 +58,7 @@ public class LocationListPresenter extends BasePresenter<LocationListContract.Vi
         //  先取得該商家的全門市清單
         String finalTmpfunctionname = tmpfunctionname;
         String finalSKilometer = sKilometer;
-        repositoryManager.callGetLocationApi("AppLocation", sCustomerID, "", "0", "", new BaseContract.ValueCallback<List<Store>>() {
+        repositoryManager.callGetLocationApi("AppLocationCount", sCustomerID, "", "0", "", new BaseContract.ValueCallback<List<Store>>() {
             @Override
             public void onValueCallback(int task, List<Store> type) {
                 boolean isOnlineShopping = type.size() > 0 ? true : false;

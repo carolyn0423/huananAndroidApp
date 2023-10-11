@@ -253,18 +253,15 @@ public class DonateCartFragment extends BaseFragment implements DonateCartContra
             if (isAdded()) {
                 MultiFormatWriter multiFormatWriter = new MultiFormatWriter();
                 try {
+                    // 建议使用合适的尺寸
+                    int barcodeWidth = 400; // 设置合适的宽度
+                    int barcodeHeight = 400; // 设置合适的高度
                     BitMatrix bitMatrix = multiFormatWriter.encode(barcodeNum, BarcodeFormat.QR_CODE, barcodeWidth, barcodeHeight);
-                    int height = bitMatrix.getHeight();
-                    int width = bitMatrix.getWidth();
+
                     BarcodeEncoder barcodeEncoder = new BarcodeEncoder();
                     Bitmap bitmap = barcodeEncoder.createBitmap(bitMatrix);
-                    for (int x = 0; x < width; x++) {
-                        for (int y = 0; y < height; y++) {
-                            bitmap.setPixel(x, y, bitMatrix.get(x, y) ? Color.BLACK : Color.WHITE);
-                        }
-                    }
-                    dialog_img_qrcode.setImageBitmap(bitmap);
 
+                    dialog_img_qrcode.setImageBitmap(bitmap);
                 } catch (WriterException e) {
                     e.printStackTrace();
                 }
