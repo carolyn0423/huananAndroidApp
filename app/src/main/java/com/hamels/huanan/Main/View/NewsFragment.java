@@ -87,7 +87,6 @@ public class NewsFragment extends BaseFragment implements NewsContract.View {
             webView.setWebContentsDebuggingEnabled(false); // 關閉調試模式以提高性能
         }
 
-
         webView.loadUrl(EOrderApplication.sApiUrl + EOrderApplication.WEBVIEW_CONTENT_URL + "?mode=News&id=" + carousel.getId());
 //        String sContent = carousel.getContent();
 //        webView.clearCache(true);

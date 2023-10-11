@@ -4,22 +4,18 @@ import android.os.Build;
 import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import android.text.Html;
-import android.text.Spannable;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.WebView;
-import android.widget.TextView;
 
 import com.hamels.huanan.Base.BaseFragment;
 import com.hamels.huanan.EOrderApplication;
 import com.hamels.huanan.Main.View.MainActivity;
 import com.hamels.huanan.MemberCenter.Contract.FaqContract;
-import com.hamels.huanan.MemberCenter.Presenter.FaqPresenter;
 import com.hamels.huanan.R;
 import com.hamels.huanan.Repository.Model.Faq;
-import com.hamels.huanan.Utils.PicassoImageGetter;
 
 import java.util.Objects;
 
@@ -46,7 +42,7 @@ public class FaqFragment extends BaseFragment implements FaqContract.View{
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_news, container, false);
+        View view = inflater.inflate(R.layout.fragment_cketitor, container, false);
         if (getArguments() != null) {
             faq_id = getArguments().getString(FAQ_ID, "");
             initView(view);

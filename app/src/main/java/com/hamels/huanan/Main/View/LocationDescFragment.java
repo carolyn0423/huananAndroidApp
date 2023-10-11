@@ -1,32 +1,19 @@
 package com.hamels.huanan.Main.View;
 
-import android.content.res.Resources;
-import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.Handler;
-import android.text.Html;
-import android.text.Spannable;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.webkit.WebChromeClient;
 import android.webkit.WebView;
-import android.webkit.WebViewClient;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.constraintlayout.widget.ConstraintLayout;
 
 import com.hamels.huanan.Base.BaseFragment;
 import com.hamels.huanan.EOrderApplication;
 import com.hamels.huanan.R;
 import com.hamels.huanan.Repository.Model.Store;
-import com.hamels.huanan.Utils.ArticleWebViewClient;
-import com.hamels.huanan.Utils.PicassoImageGetter;
 
 import java.util.Objects;
 
@@ -51,7 +38,7 @@ public class LocationDescFragment extends BaseFragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_news, container, false);
+        View view = inflater.inflate(R.layout.fragment_cketitor, container, false);
         if (getArguments() != null && getArguments().containsKey(Store.TAG)) {
             store = getArguments().getParcelable(Store.TAG);
         }
