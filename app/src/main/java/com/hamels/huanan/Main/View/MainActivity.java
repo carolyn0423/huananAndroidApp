@@ -1145,7 +1145,8 @@ public class MainActivity extends BaseActivity implements MainContract.View {
                         addFragment(ProductMainTypeFragment.getInstance());
                     }else if(currentFragment instanceof ProductMainTypeFragment){
                         mainPresenter.getLocationList();
-                        //  changeTabFragment(MainIndexFragment.getInstance());
+                    }else if(currentFragment instanceof LocationFragment){
+                        addFragment(MainIndexFragment.getInstance());
                     } else{
                         super.onBackPressed();
                     }

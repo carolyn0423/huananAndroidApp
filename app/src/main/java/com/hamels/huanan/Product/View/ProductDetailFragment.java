@@ -4,6 +4,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.DataSetObserver;
 import android.graphics.Paint;
+import android.os.Build;
 import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -56,6 +57,7 @@ import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Objects;
 
 public class ProductDetailFragment extends BaseFragment implements ProductDetailContract.View {
     public static final String TAG = ProductDetailFragment.class.getSimpleName();
@@ -146,7 +148,10 @@ public class ProductDetailFragment extends BaseFragment implements ProductDetail
         tv_store_name = view.findViewById(R.id.tv_store_name);
         tv_product_type = view.findViewById(R.id.tv_product_type);
         //tv_desc = view.findViewById(R.id.tv_desc);
+
         webView = view.findViewById(R.id.web_view);
+        ((MainActivity) getActivity()).bindWebView(webView);
+
         //tv_show_desc = view.findViewById(R.id.tv_show_desc);
         spinner_spec = view.findViewById(R.id.spinner_spec);
         layout_minus = view.findViewById(R.id.layout_minus);
@@ -570,9 +575,15 @@ public class ProductDetailFragment extends BaseFragment implements ProductDetail
 //        tv_desc.setText(html);
         //tv_desc.setText(Html.fromHtml(productDetail.get(0).getDesc()));
 
-        webView.getSettings().setJavaScriptEnabled(true);   //支持javascript
-        webView.setWebViewClient(new ArticleWebViewClient());
-        webView.loadData(productDetail.get(0).getDesc(), "text/html", "UTF-8");
+//        webView.getSettings().setJavaScriptEnabled(true);   //支持javascript
+//        webView.setWebViewClient(new ArticleWebViewClient());
+//        webView.loadData(productDetail.get(0).getDesc(), "text/html", "UTF-8");
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            webView.setWebContentsDebuggingEnabled(false); // 關閉調試模式以提高性能
+        }
+
+        webView.loadUrl(EOrderApplication.sApiUrl + EOrderApplication.WEBVIEW_CONTENT_URL + "?mode=Product&id=" + productDetail.get(0).getId());
 
         tv_price.getPaint().setFlags(Paint.STRIKE_THRU_TEXT_FLAG);
         edit_num.setText(Integer.toString(1));
@@ -835,5 +846,11 @@ public class ProductDetailFragment extends BaseFragment implements ProductDetail
     public void onDestroy() {
         fragment = null;
         super.onDestroy();
+    }
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        ((MainActivity) Objects.requireNonNull(getActivity())).detachWebView();
     }
 }

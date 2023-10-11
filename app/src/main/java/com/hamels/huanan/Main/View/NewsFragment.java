@@ -1,5 +1,6 @@
 package com.hamels.huanan.Main.View;
 
+import android.os.Build;
 import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -19,6 +20,7 @@ import com.hamels.huanan.Main.Contract.NewsContract;
 import com.hamels.huanan.R;
 import com.hamels.huanan.Repository.Model.Carousel;
 
+import java.util.Objects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -67,10 +69,12 @@ public class NewsFragment extends BaseFragment implements NewsContract.View {
         ((MainActivity) getActivity()).setBottomNavigationVisibility(true);
         ((MainActivity) getActivity()).setCartBadgeVisibility(true);
 
+        webView = view.findViewById(R.id.web_view);
+        ((MainActivity) getActivity()).bindWebView(webView);
+
         imageView = view.findViewById(R.id.imageView);
         //tv_news_content = view.findViewById(R.id.tv_news_content);
         tv_news_title = view.findViewById(R.id.tv_news_title);
-        webView = view.findViewById(R.id.web_view);
     }
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
@@ -79,15 +83,17 @@ public class NewsFragment extends BaseFragment implements NewsContract.View {
         Glide.with(getActivity()).load(EOrderApplication.sApiUrl + sPictureUrl).into(imageView);
         tv_news_title.setText(carousel.getTitle());
 
-        String sContent = carousel.getContent();
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            webView.setWebContentsDebuggingEnabled(false); // 關閉調試模式以提高性能
+        }
 
-        // 执行颜色转换
-        sContent = convertHexColorToRgba(sContent);
 
-        webView.clearCache(true);
-        webView.getSettings().setJavaScriptEnabled(true);   //支持javascript
-        webView.setWebViewClient(new ArticleWebViewClient());
-        webView.loadData(sContent, "text/html", "UTF-8");
+        webView.loadUrl(EOrderApplication.sApiUrl + EOrderApplication.WEBVIEW_CONTENT_URL + "?mode=News&id=" + carousel.getId());
+//        String sContent = carousel.getContent();
+//        webView.clearCache(true);
+//        webView.getSettings().setJavaScriptEnabled(true);   //支持javascript
+//        webView.setWebViewClient(new ArticleWebViewClient());
+//        webView.loadData(sContent, "text/html", "UTF-8");
 //        PicassoImageGetter imageGetter = new PicassoImageGetter(this.getContext(),tv_news_content);
 //        Spannable html;
 //        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
@@ -99,14 +105,9 @@ public class NewsFragment extends BaseFragment implements NewsContract.View {
 //        tv_news_content.setText(html);
     }
 
-    private String convertHexColorToRgba(String htmlContent) {
-        // 正则表达式查找HTML中的颜色代码
-        String pattern = "#([0-9A-Fa-f]{6})";
-        htmlContent = htmlContent.replaceAll(pattern, "#$1FF"); // 在颜色代码后添加FF，表示不透明
-
-        // 使用HTML解析库处理HTML内容
-        // 这里可以使用Jsoup或其他库来解析和修改HTML内容
-
-        return htmlContent;
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        ((MainActivity) Objects.requireNonNull(getActivity())).detachWebView();
     }
 }
