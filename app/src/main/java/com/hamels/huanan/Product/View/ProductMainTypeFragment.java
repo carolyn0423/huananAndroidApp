@@ -74,7 +74,6 @@ public class ProductMainTypeFragment extends BaseFragment implements ProductMain
         ((MainActivity) getActivity()).setAppTitle(R.string.main_type_name);
 
         ((MainActivity) getActivity()).setBackButtonVisibility(true);
-        ((MainActivity) getActivity()).setMessageButtonVisibility(true);
         ((MainActivity) getActivity()).setMailButtonVisibility(true);
         ((MainActivity) getActivity()).setSortButtonVisibility(false);
         ((MainActivity) getActivity()).setTopBarVisibility(false);
@@ -156,6 +155,8 @@ public class ProductMainTypeFragment extends BaseFragment implements ProductMain
             productMainTypeAdapter.setProductMainType(mainTypeleft ,mainTyperight);
             recyclerView.scrollToPosition(0);
         }
+
+        ((MainActivity) getActivity()).setMessageButtonVisibility(true);
     }
 
     @Override

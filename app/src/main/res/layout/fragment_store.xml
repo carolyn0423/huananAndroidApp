@@ -13,6 +13,13 @@
         android:orientation="vertical"
         app:layout_constraintGuide_percent="0.5" />
 
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_right"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.3" />
+
     <TextView
         android:id="@+id/btn_functionname_1"
         android:layout_width="110dp"
@@ -24,7 +31,7 @@
         android:paddingTop="8dp"
         android:paddingEnd="10dp"
         android:paddingBottom="8dp"
-        android:text="常用品牌"
+        android:text="我的最愛"
         android:textColor="#808080"
         android:textSize="15sp"
         app:layout_constraintEnd_toStartOf="@+id/btn_functionname_2"

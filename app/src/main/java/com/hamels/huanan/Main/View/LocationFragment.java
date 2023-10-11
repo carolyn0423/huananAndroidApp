@@ -14,6 +14,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.constraintlayout.widget.ConstraintSet;
 import androidx.constraintlayout.widget.Group;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
@@ -165,6 +166,7 @@ public class LocationFragment extends BaseFragment implements LocationListContra
         recyclerView.setHasFixedSize(true);
         recyclerView.setAdapter(locationListAdapter);
 
+        ConstraintLayout.LayoutParams clFunctionname_1 = (ConstraintLayout.LayoutParams) btn_functionname_1.getLayoutParams();
         ConstraintLayout.LayoutParams clFunctionname_2 = (ConstraintLayout.LayoutParams) btn_functionname_2.getLayoutParams();
         ConstraintLayout.LayoutParams clFunctionname_3 = (ConstraintLayout.LayoutParams) btn_functionname_3.getLayoutParams();
 
@@ -173,20 +175,25 @@ public class LocationFragment extends BaseFragment implements LocationListContra
 
         if(!storeListPresenter.getUserLogin()) {
             btn_functionname_1.setVisibility(View.GONE);
+            btn_functionname_2.setVisibility(View.GONE);
 
-            clFunctionname_2.endToStart = R.id.guideline_mid;
-            clFunctionname_2.width = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 150, getResources().getDisplayMetrics());
+//            clFunctionname_2.endToStart = R.id.guideline_mid;
+//            clFunctionname_2.width = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 150, getResources().getDisplayMetrics());
 
-            clFunctionname_3.startToEnd = R.id.guideline_mid;
+            clFunctionname_3.startToEnd = R.id.guideline_right;
             clFunctionname_3.width = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 150, getResources().getDisplayMetrics());
         }else{
             btn_functionname_1.setVisibility(View.VISIBLE);
+            btn_functionname_2.setVisibility(View.GONE);
 
-            clFunctionname_2.endToStart = clFunctionname_2.UNSET;
-            clFunctionname_2.width = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 110, getResources().getDisplayMetrics());
+//            clFunctionname_2.endToStart = clFunctionname_2.UNSET;
+//            clFunctionname_2.width = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 110, getResources().getDisplayMetrics());
 
-            clFunctionname_3.startToEnd = R.id.btn_functionname_2;
-            clFunctionname_3.width = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 110, getResources().getDisplayMetrics());
+            clFunctionname_1.endToStart = R.id.guideline_mid;
+            clFunctionname_1.width = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 150, getResources().getDisplayMetrics());
+
+            clFunctionname_3.startToEnd = R.id.btn_functionname_1;
+            clFunctionname_3.width = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 150, getResources().getDisplayMetrics());
         }
     }
 

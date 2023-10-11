@@ -28,7 +28,7 @@
     <string name="otp">OTP</string>
     <string name="resend">重新發送</string>
     <string name="coupon">優惠券</string>
-    <string name="privacy_policy">會員公告與隱私權條款</string>
+    <string name="privacy_policy">會員公告與隱私條款</string>
     <string name="logout">登出</string>
     <string name="store_title">商品清單</string>
     <string name="force_logout_message">連線逾時 請重新登入</string>
