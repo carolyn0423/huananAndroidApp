@@ -58,6 +58,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:hardwareAccelerated="false"
+        android:largeHeap="true"
         tools:replace="android:icon, android:label, android:theme">
         <activity
             android:name="com.hamels.huanan.Init.SplashActivity"
