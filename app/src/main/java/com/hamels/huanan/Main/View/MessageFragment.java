@@ -46,15 +46,15 @@ public class MessageFragment extends BaseFragment {
         setMessageButtonVisibility(true);
         ((MainActivity) getActivity()).setTopBarVisibility(false);
         setAppToolbarVisibility(true);
-        ((MainActivity) getActivity()).bindWebView(webView);
         ((MainActivity) getActivity()).setBottomNavigationVisibility(true);
         ((MainActivity) getActivity()).setCartBadgeVisibility(true);
         ((MainActivity) getActivity()).refreshBadge();
 
-        webView.getSettings().setUseWideViewPort(true);
-        webView.getSettings().setLoadWithOverviewMode(true);
-        webView.getSettings().setJavaScriptEnabled(true);
-        webView.getSettings().setJavaScriptCanOpenWindowsAutomatically(true);
+        ((MainActivity) getActivity()).bindWebView(webView);
+//        webView.getSettings().setUseWideViewPort(true);
+//        webView.getSettings().setLoadWithOverviewMode(true);
+//        webView.getSettings().setJavaScriptEnabled(true);
+//        webView.getSettings().setJavaScriptCanOpenWindowsAutomatically(true);
         webView.setWebViewClient(new WebViewClient() {
             @Override
             public void onPageStarted(WebView view, String url, Bitmap favicon) {

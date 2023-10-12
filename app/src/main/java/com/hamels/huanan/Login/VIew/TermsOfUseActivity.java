@@ -19,6 +19,7 @@ import android.view.View;
 import android.webkit.JavascriptInterface;
 import android.webkit.JsResult;
 import android.webkit.WebChromeClient;
+import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.TextView;
@@ -67,11 +68,6 @@ public class TermsOfUseActivity extends BaseActivity implements FaqContract.View
 
         webView = findViewById(R.id.web_view);
         bindWebView(webView);
-
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-            webView.setWebContentsDebuggingEnabled(false); // 關閉調試模式以提高性能
-        }
-        webView.setNestedScrollingEnabled(true);
         webView.loadUrl(EOrderApplication.sApiUrl + EOrderApplication.WEBVIEW_CONTENT_URL + "?mode=Faq&id=1");
     }
 
@@ -106,6 +102,12 @@ public class TermsOfUseActivity extends BaseActivity implements FaqContract.View
                 }
             }
         });
+        webView.setOverScrollMode(View.OVER_SCROLL_NEVER);
+        // 禁用滾動條
+        webView.setVerticalScrollBarEnabled(false);
+        webView.setHorizontalScrollBarEnabled(false);
+        // WebView启用混合内容
+        webView.getSettings().setMixedContentMode(WebSettings.MIXED_CONTENT_ALWAYS_ALLOW);
         webView.getSettings().setUseWideViewPort(true);
         webView.addJavascriptInterface(new AndroidJsInterface(), "hamels");
         webView.getSettings().setLoadWithOverviewMode(true);

@@ -9,6 +9,7 @@ import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -37,6 +38,7 @@ import android.webkit.JavascriptInterface;
 import android.webkit.JsResult;
 import android.webkit.WebBackForwardList;
 import android.webkit.WebChromeClient;
+import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.Button;
@@ -902,6 +904,16 @@ public class MainActivity extends BaseActivity implements MainContract.View {
                 }
             }
         });
+        // 關閉調試模式以提高性能
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            webView.setWebContentsDebuggingEnabled(false);
+        }
+        webView.setOverScrollMode(View.OVER_SCROLL_NEVER);
+        // 禁用滾動條
+        webView.setVerticalScrollBarEnabled(false);
+        webView.setHorizontalScrollBarEnabled(false);
+        // WebView启用混合内容
+        webView.getSettings().setMixedContentMode(WebSettings.MIXED_CONTENT_ALWAYS_ALLOW);
         webView.getSettings().setUseWideViewPort(true);
         webView.addJavascriptInterface(new AndroidJsInterface(), "hamels");
         webView.getSettings().setLoadWithOverviewMode(true);

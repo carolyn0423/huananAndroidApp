@@ -5,7 +5,9 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.WebSettings;
 import android.webkit.WebView;
+import android.webkit.WebViewClient;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -51,33 +53,6 @@ public class LocationDescFragment extends BaseFragment {
         super.onViewCreated(view, savedInstanceState);
 
         if (store != null) {
-//            PicassoImageGetter imageGetter = new PicassoImageGetter(this.getContext(), tvContent);
-//            Spannable html;
-//            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
-//                html = (Spannable) Html.fromHtml(store.getDescription(), Html.FROM_HTML_MODE_LEGACY, imageGetter, null);
-//            } else {
-//                html = (Spannable) Html.fromHtml(store.getDescription(), imageGetter, null);
-//            }
-//
-//            tvContent.setText(html);
-
-            // urlWebView.loadUrl("https://www.google.com/"); //For URL
-
-            //webView.getSettings().setJavaScriptEnabled(true);   //支持javascript
-            //webView.setWebViewClient(new ArticleWebViewClient());
-            //webView.loadData(store.getDescription(), "text/html", "UTF-8");
-
-
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-                webView.setWebContentsDebuggingEnabled(false); // 關閉調試模式以提高性能
-            }
-            webView.setOverScrollMode(View.OVER_SCROLL_NEVER);
-            // 禁用滾動條
-            webView.setVerticalScrollBarEnabled(false);
-            webView.setHorizontalScrollBarEnabled(false);
-
-            // 禁用觸摸滾動
-            webView.setOnTouchListener((v, event) -> true);
             webView.loadUrl(EOrderApplication.sApiUrl + EOrderApplication.WEBVIEW_CONTENT_URL + "?mode=Location&id=" + store.getLocationID());
         }
     }
