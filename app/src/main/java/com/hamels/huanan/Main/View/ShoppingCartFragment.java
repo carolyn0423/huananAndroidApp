@@ -49,7 +49,7 @@ public class ShoppingCartFragment extends BaseFragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_cketitor, container, false);
+        View view = inflater.inflate(R.layout.fragment_webview, container, false);
 
         orderType = "G";
 
@@ -75,10 +75,6 @@ public class ShoppingCartFragment extends BaseFragment {
         ((MainActivity) getActivity()).setMainIndexMessageUnreadVisibility(false);
         ((MainActivity) getActivity()).setBottomNavigationVisibility(true);
         ((MainActivity) getActivity()).setCartBadgeVisibility(true);
-
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-            webView.setWebContentsDebuggingEnabled(false); // 關閉調試模式以提高性能
-        }
 
         switch (orderType) {
             case "G":
