@@ -7,8 +7,6 @@ import java.util.List;
 
 public interface LocationListContract {
     interface View extends BaseContract.View {
-        void changeToNewFunctionName(String area);
-
         void setLocationList(List<Store> stores);
 
         void intentToGoogleMap(String address);
@@ -23,8 +21,6 @@ public interface LocationListContract {
     }
 
     interface Presenter extends BaseContract.Presenter {
-        void setFunctionname(String functionname, String location_id);
-
         void setStoreOften(String location_id, String uid);
 
         boolean getUserLogin();
@@ -37,8 +33,8 @@ public interface LocationListContract {
 
         void saveFragmentMainType(String sLocationID, String IsETicket);
 
-        String getFragmentLocation();
-
         void goLocationDesc(Store store);
+
+        void getLocationList();
     }
 }

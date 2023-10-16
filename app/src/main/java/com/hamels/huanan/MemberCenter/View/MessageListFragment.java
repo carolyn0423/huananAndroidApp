@@ -5,6 +5,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -31,6 +33,7 @@ public class MessageListFragment extends BaseFragment implements MessageListCont
 
     private MessageListAdapter messageListAdapter;
     private MessageListContract.Presenter messagePresenter;
+    private Handler handler = new Handler();
 
     public static MessageListFragment getInstance() {
         if (fragment == null) {
@@ -52,7 +55,7 @@ public class MessageListFragment extends BaseFragment implements MessageListCont
     @Override
     public void onResume() {
         super.onResume();
-        messagePresenter.getMessageList();
+        startAutoRefresh();
     }
 
     @Override
@@ -94,6 +97,18 @@ public class MessageListFragment extends BaseFragment implements MessageListCont
         messageListAdapter = new MessageListAdapter();
         recyclerView.setHasFixedSize(true);
         recyclerView.setAdapter(messageListAdapter);
+    }
+
+    private void startAutoRefresh() {
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                // 在此处执行API请求以刷新数据
+                messagePresenter.getMessageList();
+                // 完成后再次调度自动刷新
+                startAutoRefresh();
+            }
+        }, 1000);
     }
 
     @Override

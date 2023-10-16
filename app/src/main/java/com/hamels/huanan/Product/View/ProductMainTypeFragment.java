@@ -68,8 +68,9 @@ public class ProductMainTypeFragment extends BaseFragment implements ProductMain
         return view;
 
     }
-
-    private void initView(View view) {
+    @Override
+    public void onResume() {
+        super.onResume();
         ((MainActivity) getActivity()).EditFragmentBottom(true, true);
         ((MainActivity) getActivity()).setAppTitle(R.string.main_type_name);
 
@@ -81,7 +82,9 @@ public class ProductMainTypeFragment extends BaseFragment implements ProductMain
         ((MainActivity) getActivity()).setMainIndexMessageUnreadVisibility(false);
         ((MainActivity) getActivity()).setBottomNavigationVisibility(true);
         ((MainActivity) getActivity()).setCartBadgeVisibility(true);
-
+        ((MainActivity) getActivity()).setMessageButtonVisibility(true);
+    }
+    private void initView(View view) {
         noLocationGroup = view.findViewById(R.id.no_location_group);
 
         //  清除API 暫存
@@ -155,8 +158,6 @@ public class ProductMainTypeFragment extends BaseFragment implements ProductMain
             productMainTypeAdapter.setProductMainType(mainTypeleft ,mainTyperight);
             recyclerView.scrollToPosition(0);
         }
-
-        ((MainActivity) getActivity()).setMessageButtonVisibility(true);
     }
 
     @Override
