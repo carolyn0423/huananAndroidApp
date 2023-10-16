@@ -7,6 +7,8 @@ import androidx.annotation.Nullable;
 import androidx.constraintlayout.widget.Group;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import android.os.Handler;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -68,9 +70,7 @@ public class ProductMainTypeFragment extends BaseFragment implements ProductMain
         return view;
 
     }
-    @Override
-    public void onResume() {
-        super.onResume();
+    private void initView(View view) {
         ((MainActivity) getActivity()).EditFragmentBottom(true, true);
         ((MainActivity) getActivity()).setAppTitle(R.string.main_type_name);
 
@@ -82,9 +82,7 @@ public class ProductMainTypeFragment extends BaseFragment implements ProductMain
         ((MainActivity) getActivity()).setMainIndexMessageUnreadVisibility(false);
         ((MainActivity) getActivity()).setBottomNavigationVisibility(true);
         ((MainActivity) getActivity()).setCartBadgeVisibility(true);
-        ((MainActivity) getActivity()).setMessageButtonVisibility(true);
-    }
-    private void initView(View view) {
+
         noLocationGroup = view.findViewById(R.id.no_location_group);
 
         //  清除API 暫存
@@ -158,6 +156,18 @@ public class ProductMainTypeFragment extends BaseFragment implements ProductMain
             productMainTypeAdapter.setProductMainType(mainTypeleft ,mainTyperight);
             recyclerView.scrollToPosition(0);
         }
+
+        // 延遲執行程式碼，例如 2000 毫秒（2秒）
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                MainActivity mainActivity = (MainActivity) getActivity();
+                if(mainActivity != null) {
+                    mainActivity.refreshBadge();
+                    mainActivity.setMessageButtonVisibility(true);
+                }
+            }
+        }, 100); // 2000 毫秒 = 2秒
     }
 
     @Override
