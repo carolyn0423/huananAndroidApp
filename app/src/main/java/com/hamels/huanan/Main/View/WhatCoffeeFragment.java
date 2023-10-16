@@ -1,23 +1,19 @@
 package com.hamels.huanan.Main.View;
 
-import android.os.Build;
 import android.os.Bundle;
-import android.os.Handler;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.constraintlayout.widget.ConstraintLayout;
 
 import com.hamels.huanan.Base.BaseFragment;
 import com.hamels.huanan.EOrderApplication;
 import com.hamels.huanan.R;
-import com.hamels.huanan.Widget.AppToolbar;
 
 import java.util.Objects;
 
@@ -26,7 +22,6 @@ public class WhatCoffeeFragment extends BaseFragment {
 
     private static WhatCoffeeFragment fragment;
     private WebView webView;
-    protected AppToolbar appToolbar;
 
     public static WhatCoffeeFragment getInstance() {
         if (fragment == null) {
@@ -38,7 +33,7 @@ public class WhatCoffeeFragment extends BaseFragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_what_coffee, container, false);
+        View view = inflater.inflate(R.layout.fragment_webview, container, false);
 
         initView(view);
 
@@ -46,24 +41,19 @@ public class WhatCoffeeFragment extends BaseFragment {
     }
 
     private void initView(View view) {
-
-        ((MainActivity) getActivity()).EditFragmentBottom(true, false);
-        webView = view.findViewById(R.id.web_view);
-        //((MainActivity) getActivity()).refreshBadge();
+        ((MainActivity) getActivity()).EditFragmentBottom(true, true);
         setBackButtonVisibility(true);
         setMailButtonVisibility(true);
         setMessageButtonVisibility(true);
         setSortButtonVisibility(false);
         ((MainActivity) getActivity()).setTopBarVisibility(false);
-        setAppToolbarVisibility(true);
-        ((MainActivity) getActivity()).bindWebView(webView);
         ((MainActivity) getActivity()).setMainIndexMessageUnreadVisibility(false);
+        setAppToolbarVisibility(true);
+        ((MainActivity) getActivity()).setBottomNavigationVisibility(true);
+        ((MainActivity) getActivity()).setCartBadgeVisibility(true);
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-            webView.setWebContentsDebuggingEnabled(false); // 關閉調試模式以提高性能
-        }
-
-        ((MainActivity) getActivity()).setBottomNavigationVisibility(false);
+        webView = view.findViewById(R.id.web_view);
+        ((MainActivity) getActivity()).bindWebView(webView);
 
         // 使用WebViewClient監聽載入事件
         webView.setWebViewClient(new WebViewClient() {
@@ -75,7 +65,27 @@ public class WhatCoffeeFragment extends BaseFragment {
             }
         });
 
-        webView.loadUrl(EOrderApplication.sApiUrl + EOrderApplication.WEBVIEW_WHATCOFFEE_URL);
+        webView.getSettings().setLayoutAlgorithm(WebSettings.LayoutAlgorithm.NARROW_COLUMNS);
+
+        webView.getSettings().setUseWideViewPort(true);
+
+        webView.getSettings().setLoadWithOverviewMode(true);
+
+        webView.getSettings().setJavaScriptEnabled(true);
+
+        webView.getSettings().setGeolocationEnabled(true);
+
+        webView.getSettings().setDomStorageEnabled(true);
+
+        webView.requestFocus();
+
+        //webView.setScrollBarStyle(0);
+
+        // 啟用滾動條
+        webView.setVerticalScrollBarEnabled(true);
+        webView.setHorizontalScrollBarEnabled(true);
+
+        webView.loadUrl(EOrderApplication.sApiUrl + EOrderApplication.WEBVIEW_WHATCOFFEE_URL + "?mode=About&id=" + EOrderApplication.CUSTOMER_ID);
     }
 
     @Override
