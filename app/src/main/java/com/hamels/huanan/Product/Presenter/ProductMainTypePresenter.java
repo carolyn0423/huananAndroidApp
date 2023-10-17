@@ -24,7 +24,7 @@ public class ProductMainTypePresenter extends BasePresenter<ProductMainTypeContr
         String isETicket = getFragmentMainType("ISETICKET");
         if(isETicket.equals("Y")) {
             //  先取得該商家的門市總店
-            repositoryManager.callGetLocationApi("AppLocation", sCustomerID, "", "0", "Y", new BaseContract.ValueCallback<List<Store>>() {
+            repositoryManager.callGetLocationApi("AppLocation", sCustomerID, "", "0", "Y", "", new BaseContract.ValueCallback<List<Store>>() {
                 @Override
                 public void onValueCallback(int task, List<Store> type) {
                     if(type.get(0).getHeadLocationFlag().equals("Y")){

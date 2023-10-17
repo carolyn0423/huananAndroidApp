@@ -111,7 +111,7 @@ public class MainPresenter extends BasePresenter<MainContract.View> implements M
         String sCustomerID = repositoryManager.getCustomerID();
 
         //  先取得該商家的全門市清單
-        repositoryManager.callGetLocationApi("AppLocation", sCustomerID, "", "0", "", new BaseContract.ValueCallback<List<Store>>() {
+        repositoryManager.callGetLocationApi("AppLocation", sCustomerID, "", "0", "", "", new BaseContract.ValueCallback<List<Store>>() {
             @Override
             public void onValueCallback(int task, List<Store> type) {
                 view.ProductLocationFragment(type.size());

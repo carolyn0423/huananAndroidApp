@@ -1116,9 +1116,14 @@ public class MainActivity extends BaseActivity implements MainContract.View {
                         .show();
 
                 } else {
-                    // 其他就顯示首頁
-                    changeNavigationColor(R.id.home);
-                    changeTabFragment(MainIndexFragment.getInstance());
+                    Fragment currentFragment = getSupportFragmentManager().findFragmentById(R.id.frame);
+                    if(currentFragment instanceof MessageListFragment) {   //  商品內頁
+                        MessageListBack("1");
+                    }else {
+                        // 其他就顯示首頁
+                        changeNavigationColor(R.id.home);
+                        changeTabFragment(MainIndexFragment.getInstance());
+                    }
                 }
 
 //                boolean isAlert= false;
@@ -1158,12 +1163,27 @@ public class MainActivity extends BaseActivity implements MainContract.View {
                         addFragment(ProductMainTypeFragment.getInstance());
                     }else if(currentFragment instanceof ProductMainTypeFragment){
                         mainPresenter.getLocationList();
-                    }else if(currentFragment instanceof LocationFragment){
+                    }else if(currentFragment instanceof LocationFragment || currentFragment instanceof WhatCoffeeFragment){
                         addFragment(MainIndexFragment.getInstance());
-                    } else{
+                    }else if(currentFragment instanceof MessageListFragment){
+                        MessageListBack("2");
+                    }else{
                         super.onBackPressed();
                     }
                 }
+            }
+        }
+    }
+    public void MessageListBack(String sType){
+        if(EOrderApplication.MESSAGE_TAG.equals("coffee")){
+            addFragment(WhatCoffeeFragment.getInstance());
+        }else{
+            if(sType.equals("1")){
+                // 其他就顯示首頁
+                changeNavigationColor(R.id.home);
+                changeTabFragment(MainIndexFragment.getInstance());
+            }else {
+                super.onBackPressed();
             }
         }
     }

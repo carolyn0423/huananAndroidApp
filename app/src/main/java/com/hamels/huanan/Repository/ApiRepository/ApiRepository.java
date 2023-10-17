@@ -127,7 +127,7 @@ public class ApiRepository {
 //        retrofit.create(BaseApiService.class).GetCustomerDetail(requestBody).enqueue(apiCallback);
 //    }
 
-    public void getLocationList(String functionname, String customer_id, String member_id, String location_id, String sKilometer, String sHeadLocationFlag, AbsApiCallback apiCallback) {
+    public void getLocationList(String functionname, String customer_id, String member_id, String location_id, String sKilometer, String sHeadLocationFlag, String sKeyword, AbsApiCallback apiCallback) {
         Map<String, String> map = new HashMap<>();
         map.put("connection_name", EOrderApplication.dbConnectName);
         switch (functionname){
@@ -154,6 +154,7 @@ public class ApiRepository {
         map.put("head_location_flag", sHeadLocationFlag);
         map.put("lon", Double.toString(EOrderApplication.lon));
         map.put("lat", Double.toString(EOrderApplication.lat));
+        map.put("keyword", sKeyword);
 
         Log.e(TAG,"API getLocationList : " + map.toString());
 

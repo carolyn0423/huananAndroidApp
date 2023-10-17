@@ -3,14 +3,21 @@ package com.hamels.huanan.Main.View;
 import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.constraintlayout.widget.Group;
 import androidx.recyclerview.widget.RecyclerView;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.EditorInfo;
+import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.google.android.material.textfield.TextInputEditText;
+import com.google.android.material.textfield.TextInputLayout;
 import com.hamels.huanan.Base.BaseActivity;
 import com.hamels.huanan.Base.BaseFragment;
 import com.hamels.huanan.Main.Adapter.LocationListAdapter;
@@ -20,9 +27,11 @@ import com.hamels.huanan.Product.View.ProductMainTypeFragment;
 import com.hamels.huanan.R;
 import com.hamels.huanan.Repository.ApiRepository.ApiRepository;
 import com.hamels.huanan.Repository.ApiRepository.MemberRepository;
+import com.hamels.huanan.Repository.Model.ProductMainType;
 import com.hamels.huanan.Repository.Model.Store;
 import com.hamels.huanan.Utils.IntentUtils;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class LocationFragment extends BaseFragment implements LocationListContract.View {
@@ -34,7 +43,13 @@ public class LocationFragment extends BaseFragment implements LocationListContra
 
     private LocationListAdapter locationListAdapter;
     private LocationListContract.Presenter storeListPresenter;
-    private TextView tvFunctionname_1, tvFunctionname_2, tvFunctionname_3, tvViewBlack;
+
+    private ConstraintLayout clSearch;
+    private TextInputLayout tlProductKeyword;
+    private EditText etProductKeyword;
+    private ImageView ivImgSearch;
+    private TextView ivCancelText;
+
 
     public static LocationFragment getInstance() {
         if (fragment == null) {
@@ -70,6 +85,14 @@ public class LocationFragment extends BaseFragment implements LocationListContra
 
         noLocationGroup = view.findViewById(R.id.no_location_group);
 
+        clSearch = view.findViewById(R.id.ct_search);
+
+        tlProductKeyword = view.findViewById(R.id.tl_product_keyword);
+        etProductKeyword = view.findViewById(R.id.et_product_keyword);
+
+        ivImgSearch = view.findViewById(R.id.img_search);
+        ivCancelText = view.findViewById(R.id.cancelText);
+
         //  清除API 暫存, 重新取得URL
         ApiRepository.repository = null;
         MemberRepository.memberRepository = null;
@@ -83,7 +106,33 @@ public class LocationFragment extends BaseFragment implements LocationListContra
         recyclerView.setHasFixedSize(true);
         recyclerView.setAdapter(locationListAdapter);
 
-        storeListPresenter.getLocationList();
+        storeListPresenter.getLocationList("");
+
+        tlProductKeyword.getEditText().setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView textView, int actionId , KeyEvent keyEvent) {
+                if (actionId == EditorInfo.IME_ACTION_GO || actionId == EditorInfo.IME_ACTION_NEXT || actionId == EditorInfo.IME_ACTION_DONE) {
+                    storeListPresenter.getLocationList(etProductKeyword.getText().toString());
+                    return true;
+                }
+                return false;
+            }
+        });
+
+        ivCancelText.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                etProductKeyword.setText("");
+                storeListPresenter.getLocationList("");
+            }
+        });
+
+        ivImgSearch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                storeListPresenter.getLocationList(etProductKeyword.getText().toString());
+            }
+        });
     }
     @Override
     public void setLocationList(List<Store> stores) {
@@ -91,7 +140,20 @@ public class LocationFragment extends BaseFragment implements LocationListContra
             Log.e(TAG, store.getName());
         }
 
-        locationListAdapter.setData(stores);
+        List<Store> dataleft = new ArrayList<>();
+        List<Store> dataright = new ArrayList<>();
+        for(int i = 0 ; i < stores.size() ; i++){
+            //  Log.e(TAG,stores.get(i).getLocationID());
+            recyclerView.setBackgroundResource(R.color.white);
+            if(i % 2 == 0){
+                dataleft.add(stores.get(i));
+            }
+            else{
+                dataright.add(stores.get(i));
+            }
+        }
+        locationListAdapter.setData(dataleft ,dataright);
+        recyclerView.scrollToPosition(0);
     }
 
     public void goProductMainType(String sLocationID) {
