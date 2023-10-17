@@ -895,10 +895,10 @@ public class RepositoryManager {
         });
     }
 
-    public void callGetLocationApi(String functionname, String sCustomerID, String location_id, String sKilometer, String sHeadLocationFlag, final BaseContract.ValueCallback<List<Store>> valueCallback) {
+    public void callGetLocationApi(String functionname, String sCustomerID, String location_id, String sKilometer, String sHeadLocationFlag, String sKeyword, final BaseContract.ValueCallback<List<Store>> valueCallback) {
         basePresenter.startCallApi();
         String member_id = getUserLogin() ? context.getSharedPreferences("MemberID", Context.MODE_PRIVATE).getString("MemberID", "") : "";
-        ApiRepository.getInstance().getLocationList(functionname, sCustomerID, member_id, location_id, sKilometer, sHeadLocationFlag, new ApiCallback<BaseModel<List<Store>>>(basePresenter) {
+        ApiRepository.getInstance().getLocationList(functionname, sCustomerID, member_id, location_id, sKilometer, sHeadLocationFlag, sKeyword, new ApiCallback<BaseModel<List<Store>>>(basePresenter) {
             @Override
             public void onApiSuccess(BaseModel<List<Store>> response) {
                 super.onApiSuccess(response);

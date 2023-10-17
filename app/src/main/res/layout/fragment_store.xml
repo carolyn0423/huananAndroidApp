@@ -3,8 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/fragment_store"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="#f2f2f2">
+    android:layout_height="match_parent">
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline_mid"
@@ -20,69 +19,79 @@
         android:orientation="vertical"
         app:layout_constraintGuide_percent="0.27" />
 
-<!--    <TextView-->
-<!--        android:id="@+id/btn_functionname_1"-->
-<!--        android:layout_width="110dp"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_marginTop="15dp"-->
-<!--        android:layout_marginEnd="8dp"-->
-<!--        android:background="@drawable/bg_bluegreen_gradient_borderbar"-->
-<!--        android:gravity="center"-->
-<!--        android:paddingStart="10dp"-->
-<!--        android:paddingTop="8dp"-->
-<!--        android:paddingEnd="10dp"-->
-<!--        android:paddingBottom="8dp"-->
-<!--        android:text="我的最愛"-->
-<!--        android:textColor="#808080"-->
-<!--        android:textSize="15sp"-->
-<!--        app:layout_constraintEnd_toStartOf="@+id/btn_functionname_2"-->
-<!--        app:layout_constraintTop_toTopOf="parent"  />-->
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/ct_search"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:background="@drawable/black_border_radius"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginTop="10dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
 
-<!--    <TextView-->
-<!--        android:id="@+id/btn_functionname_2"-->
-<!--        android:layout_width="110dp"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_marginTop="15dp"-->
-<!--        android:background="@drawable/bg_bluegreen_gradient_bar"-->
-<!--        android:gravity="center"-->
-<!--        android:paddingStart="10dp"-->
-<!--        android:paddingTop="8dp"-->
-<!--        android:paddingEnd="10dp"-->
-<!--        android:paddingBottom="8dp"-->
-<!--        android:text="最近五公里"-->
-<!--        android:textColor="@color/white"-->
-<!--        android:textSize="15sp"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintTop_toTopOf="parent" />-->
+        <ImageView
+            android:id="@+id/img_search"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginStart="5dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/searchxhdpi" />
 
-<!--    <TextView-->
-<!--        android:id="@+id/btn_functionname_3"-->
-<!--        android:layout_width="110dp"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_marginTop="15dp"-->
-<!--        android:layout_marginStart="8dp"-->
-<!--        android:background="@drawable/bg_bluegreen_gradient_borderbar"-->
-<!--        android:gravity="center"-->
-<!--        android:paddingStart="10dp"-->
-<!--        android:paddingTop="8dp"-->
-<!--        android:paddingEnd="10dp"-->
-<!--        android:paddingBottom="8dp"-->
-<!--        android:text="共好品牌"-->
-<!--        android:textColor="#808080"-->
-<!--        android:textSize="15sp"-->
-<!--        app:layout_constraintStart_toEndOf="@+id/btn_functionname_2"-->
-<!--        app:layout_constraintTop_toTopOf="parent" />-->
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/tl_product_keyword"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint=""
+            android:layout_marginStart="30dp"
+            android:layout_marginEnd="50dp"
+            android:background="@android:color/transparent"
+            android:text=""
+            app:boxStrokeWidth="0dp"
+            app:boxStrokeColor="@android:color/transparent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/img_search"
+            app:layout_constraintTop_toTopOf="parent">
 
-<!--    <View-->
-<!--        android:id="@+id/view_black"-->
-<!--        android:layout_width="0dp"-->
-<!--        android:layout_height="2dp"-->
-<!--        android:layout_marginTop="10dp"-->
-<!--        android:background="#E3E3E3"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintTop_toBottomOf="@id/btn_functionname_3" />-->
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/et_product_keyword"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="text"
+                android:background="@android:color/transparent"
+                android:layout_marginStart="5dp"
+                android:layout_marginBottom="10dp"
+                android:hint="請輸入商品關鍵字"
+                android:textSize="14dp"
+                android:textColor="@color/greyText"
+                app:boxStrokeWidth="0dp"
+                app:boxStrokeColor="@android:color/transparent" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <TextView
+            android:id="@+id/cancelText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="取消"
+            android:textColor="@color/orangeText"
+            android:textSize="16dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/tl_product_keyword"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <View
+        android:id="@+id/view_black"
+        android:layout_width="0dp"
+        android:layout_height="2dp"
+        android:layout_marginTop="10dp"
+        android:background="#E3E3E3"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/ct_search" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/product_recycler_view"
@@ -93,7 +102,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/view_black"/>
 
     <ImageView
         android:id="@+id/img_no_online"
@@ -105,7 +114,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_chainStyle="packed"
-          app:srcCompat="@drawable/icon_bag" />
+        app:srcCompat="@drawable/icon_bag" />
 
     <TextView
         android:id="@+id/tv_no_location"

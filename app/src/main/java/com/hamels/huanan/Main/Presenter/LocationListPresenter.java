@@ -21,8 +21,8 @@ public class LocationListPresenter extends BasePresenter<LocationListContract.Vi
 
     public void goLocationDesc(Store store){ view.goLocationDesc(store); }
 
-    public void getLocationList() {
-        repositoryManager.callGetLocationApi("AppLocation", repositoryManager.getCustomerID(), "", "0", "", new BaseContract.ValueCallback<List<Store>>() {
+    public void getLocationList(String sKeyword) {
+        repositoryManager.callGetLocationApi("AppLocation", repositoryManager.getCustomerID(), "", "0", "", sKeyword, new BaseContract.ValueCallback<List<Store>>() {
             @Override
             public void onValueCallback(int task, List<Store> type) {
                 boolean isOnlineShopping = type.size() > 0 ? true : false;
@@ -38,7 +38,7 @@ public class LocationListPresenter extends BasePresenter<LocationListContract.Vi
             repositoryManager.callSetLocationOftenApi(location_id, uid, new BaseContract.ValueCallback<Boolean>() {
                 @Override
                 public void onValueCallback(int task, Boolean bSuccess) {
-                    getLocationList();
+                    getLocationList("");
                 }
             });
         }

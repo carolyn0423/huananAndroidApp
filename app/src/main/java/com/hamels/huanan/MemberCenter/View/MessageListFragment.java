@@ -61,13 +61,14 @@ public class MessageListFragment extends BaseFragment implements MessageListCont
     @Override
     public void onPause() {
         super.onPause();
+        handler.removeCallbacksAndMessages(null); // 取消所有待执行的任务
     }
 
     private void initView(View view) {
         ((MainActivity) getActivity()).EditFragmentBottom(true, true);
         ((MainActivity) getActivity()).setAppTitle(R.string.message_list);
         ((MainActivity) getActivity()).setBackButtonVisibility(true);
-        ((MainActivity) getActivity()).setMessageButtonVisibility(true);
+        ((MainActivity) getActivity()).setMessageButtonVisibility(false);
         ((MainActivity) getActivity()).setMailButtonVisibility(true);
         ((MainActivity) getActivity()).setSortButtonVisibility(false);
         ((MainActivity) getActivity()).setTopBarVisibility(false);
