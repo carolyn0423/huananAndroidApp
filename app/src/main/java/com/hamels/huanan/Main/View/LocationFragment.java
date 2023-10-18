@@ -169,6 +169,7 @@ public class LocationFragment extends BaseFragment implements LocationListContra
         });
     }
     public void getSearchKeyword(){
+        String sKeyword = etProductKeyword.getText().toString();
         InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
         imm.hideSoftInputFromWindow(etProductKeyword.getWindowToken(), 0);
 
