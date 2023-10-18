@@ -77,27 +77,27 @@
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/xbanner">
 
-                        <ImageView
-                            android:id="@+id/img_product_ribbon"
-                            android:layout_width="wrap_content"
-                            android:layout_height="match_parent"
-                            android:src="@drawable/product_ribbon"
-                            android:visibility="gone"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintTop_toTopOf="parent" />
+<!--                        <ImageView-->
+<!--                            android:id="@+id/img_product_ribbon"-->
+<!--                            android:layout_width="wrap_content"-->
+<!--                            android:layout_height="match_parent"-->
+<!--                            android:src="@drawable/product_ribbon"-->
+<!--                            android:visibility="invisible"-->
+<!--                            app:layout_constraintEnd_toEndOf="parent"-->
+<!--                            app:layout_constraintTop_toTopOf="parent" />-->
 
-                        <TextView
-                            android:id="@+id/tv_store_name"
-                            style="@style/fontBoldTw.GreyDoubleDark"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="8dp"
-                            android:textSize="14sp"
-                            android:visibility="gone"
-                            android:text="復興店"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent" />
+<!--                        <TextView-->
+<!--                            android:id="@+id/tv_store_name"-->
+<!--                            style="@style/fontBoldTw.GreyDoubleDark"-->
+<!--                            android:layout_width="wrap_content"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:layout_marginTop="8dp"-->
+<!--                            android:textSize="14sp"-->
+<!--                            android:visibility="invisible"-->
+<!--                            android:text="復興店"-->
+<!--                            app:layout_constraintEnd_toEndOf="parent"-->
+<!--                            app:layout_constraintStart_toStartOf="parent"-->
+<!--                            app:layout_constraintTop_toTopOf="parent" />-->
 
 <!--                        <TextView-->
 <!--                            android:id="@+id/tv_show_desc"-->

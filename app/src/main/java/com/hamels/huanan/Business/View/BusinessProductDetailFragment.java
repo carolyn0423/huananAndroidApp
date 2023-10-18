@@ -193,8 +193,8 @@ public class BusinessProductDetailFragment extends BaseFragment implements Busin
         location_id = productDetail.get(0).getLocation_id();
         tv_product_type.setText(productDetail.get(0).getProduct_name());
         tv_store_name.setText(productDetail.get(0).getProductTypeMainName() + " - " + productDetail.get(0).getTypeName());
-        tv_sale_price.setText("NT$" + mDecimalFormat.format((double) productDetail.get(0).getSale_price()));
-        tv_price.setText("NT$" + mDecimalFormat.format((double) productDetail.get(0).getPrice()));
+        tv_sale_price.setText("$" + mDecimalFormat.format((double) productDetail.get(0).getSale_price()));
+        tv_price.setText("$" + mDecimalFormat.format((double) productDetail.get(0).getPrice()));
         //tv_dealer_product_id.setText(productDetail.get(0).getDealer_product_id());
         //btn_freight_title.setText(productDetail.get(0).getFreight_title());
         //tv_desc.setText(Html.fromHtml(productDetail.get(0).getDesc()));

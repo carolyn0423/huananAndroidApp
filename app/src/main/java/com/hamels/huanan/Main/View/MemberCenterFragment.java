@@ -154,6 +154,7 @@ public class MemberCenterFragment extends BaseFragment implements View.OnClickLi
         }else if (id == R.id.btn_trans_record){
             ((MainActivity) getActivity()).addFragment(TransRecordFragment.getInstance("G", "", ""));
         }else if (id == R.id.btn_logout){
+
             memberPresenter.logout();
         }else if (id == R.id.btn_customerservice){
             EOrderApplication.MESSAGE_TAG = "";

@@ -140,12 +140,12 @@ public class ProductDetailFragment extends BaseFragment implements ProductDetail
         ((MainActivity) getActivity()).setCartBadgeVisibility(true);
 
         mXBanner = view.findViewById(R.id.xbanner);
-        img_product_ribbon = view.findViewById(R.id.img_product_ribbon);
+        //img_product_ribbon = view.findViewById(R.id.img_product_ribbon);
         //tv_dealer_product_id = view.findViewById(R.id.tv_dealer_product_id);
         tv_price = view.findViewById(R.id.tv_price);
         tv_sale_price = view.findViewById(R.id.tv_sale_price);
         tv_same_price = view.findViewById(R.id.tv_same_price);
-        tv_store_name = view.findViewById(R.id.tv_store_name);
+        //tv_store_name = view.findViewById(R.id.tv_store_name);
         tv_product_type = view.findViewById(R.id.tv_product_type);
         //tv_desc = view.findViewById(R.id.tv_desc);
 
@@ -175,12 +175,12 @@ public class ProductDetailFragment extends BaseFragment implements ProductDetail
         if (isETicket.equals("Y")) {
             ((MainActivity) getActivity()).setAppTitle(R.string.tab_ticket);
             layout_spec.setVisibility(View.GONE);
-            img_product_ribbon.setVisibility(View.VISIBLE);
+            //img_product_ribbon.setVisibility(View.VISIBLE);
             constraintLayout_conf.setVisibility(View.GONE);
         } else {
             ((MainActivity) getActivity()).setAppTitle(R.string.tab_shop);
             layout_spec.setVisibility(View.VISIBLE);
-            img_product_ribbon.setVisibility(View.GONE);
+            //img_product_ribbon.setVisibility(View.GONE);
             constraintLayout_conf.setVisibility(View.VISIBLE);
         }
 
@@ -549,7 +549,7 @@ public class ProductDetailFragment extends BaseFragment implements ProductDetail
         location_id = productDetail.get(0).getLocation_id();
         product_type_main_id = productDetail.get(0).getProductTypeMainID();
         tv_product_type.setText(productDetail.get(0).getProduct_name());
-        tv_store_name.setText(productDetail.get(0).getProductTypeMainName() + " - " + productDetail.get(0).getTypeName());
+        //tv_store_name.setText(productDetail.get(0).getProductTypeMainName() + " - " + productDetail.get(0).getTypeName());
 
         String sTicketSalePrice = mDecimalFormat.format((double) (product.getticket_sales_price() * iLimitQuantity));
         String sSalePrice = mDecimalFormat.format((double) (product.getSale_price() * iLimitQuantity));

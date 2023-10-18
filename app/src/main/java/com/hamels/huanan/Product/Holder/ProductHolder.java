@@ -60,11 +60,11 @@ public class ProductHolder extends RecyclerView.ViewHolder {
         String sPrice = mDecimalFormat.format((double) (product.getPrice() * product.getLimitQuantity()));
 
         if (1 < product.getspec_cnt()) {
-            tv_sale_price.setText("NT$" + sSalePrice + " 起");
+            tv_sale_price.setText("$" + sSalePrice + " 起");
 
             if (product.getSale_price() != product.getPrice()) {
                 tv_price.setVisibility(View.VISIBLE);
-                tv_price.setText("NT$" + sPrice);
+                tv_price.setText("$" + sPrice);
                 tv_price.getPaint().setFlags(Paint.STRIKE_THRU_TEXT_FLAG);
 
                 tv_price.setPadding(0, 50, 0, 0);
@@ -73,11 +73,11 @@ public class ProductHolder extends RecyclerView.ViewHolder {
                 tv_price.setVisibility(View.GONE);
             }
         } else {
-            tv_sale_price.setText("NT$" + sSalePrice);
+            tv_sale_price.setText("$" + sSalePrice);
 
             if (product.getSale_price() != product.getPrice()) {
                 tv_price.setVisibility(View.VISIBLE);
-                tv_price.setText("NT$" + sPrice);
+                tv_price.setText("$" + sPrice);
                 tv_price.getPaint().setFlags(Paint.STRIKE_THRU_TEXT_FLAG);
 
                 tv_price.setPadding(0, 50, 0, 0);

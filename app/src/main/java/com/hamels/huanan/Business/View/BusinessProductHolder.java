@@ -51,17 +51,17 @@ public class BusinessProductHolder extends RecyclerView.ViewHolder {
 
         Glide.with(BusinessProductFragment.getInstance()).load(EOrderApplication.sApiUrl + sLeftPictureUrl).into(img_product_left);
         Glide.with(BusinessProductFragment.getInstance()).load(EOrderApplication.sApiUrl + sRightPictureUrl).into(img_product_right);
-        tv_price_left.setText("NT$" + mDecimalFormat.format((double)productleft.getPrice()));
+        tv_price_left.setText("$" + mDecimalFormat.format((double)productleft.getPrice()));
         tv_product_name_left.setText(productleft.getProduct_name());
-        tv_sale_price_left.setText("NT$" + mDecimalFormat.format((double)productleft.getSale_price()));
+        tv_sale_price_left.setText("$" + mDecimalFormat.format((double)productleft.getSale_price()));
         tv_price_left.getPaint().setFlags(Paint.STRIKE_THRU_TEXT_FLAG);
         img_product_left.setTag(R.id.img_product_left,productleft.getId());
         img_product_right.setTag(R.id.img_product_right,productright.getId());
         layout_left.setTag(R.id.constraintLayout_left,productleft.getId());
         layout_right.setTag(R.id.constraintLayout_right,productright.getId());
-        tv_price_right.setText("NT$" + mDecimalFormat.format((double)productright.getPrice()));
+        tv_price_right.setText("$" + mDecimalFormat.format((double)productright.getPrice()));
         tv_product_name_right.setText(productright.getProduct_name());
-        tv_sale_price_right.setText("NT$" + mDecimalFormat.format((double)productright.getSale_price()));
+        tv_sale_price_right.setText("$" + mDecimalFormat.format((double)productright.getSale_price()));
         tv_price_right.getPaint().setFlags(Paint.STRIKE_THRU_TEXT_FLAG);
     }
 
@@ -76,9 +76,9 @@ public class BusinessProductHolder extends RecyclerView.ViewHolder {
         Glide.with(BusinessProductFragment.getInstance()).load(EOrderApplication.sApiUrl + sLeftPictureUrl).into(img_product_left);
         img_product_left.setTag(R.id.img_product_left,productleft.getId());
         layout_left.setTag(R.id.constraintLayout_left,productleft.getId());
-        tv_price_left.setText("NT$" + mDecimalFormat.format((double)productleft.getPrice()));
+        tv_price_left.setText("$" + mDecimalFormat.format((double)productleft.getPrice()));
         tv_product_name_left.setText(productleft.getProduct_name());
-        tv_sale_price_left.setText("NT$" + mDecimalFormat.format((double)productleft.getSale_price()));
+        tv_sale_price_left.setText("$" + mDecimalFormat.format((double)productleft.getSale_price()));
         tv_price_left.getPaint().setFlags(Paint.STRIKE_THRU_TEXT_FLAG);
     }
 }
