@@ -56,6 +56,10 @@ import com.google.zxing.MultiFormatWriter;
 import com.google.zxing.WriterException;
 import com.google.zxing.common.BitMatrix;
 import com.hamels.huanan.Donate.View.DonateFragment;
+import com.hamels.huanan.MemberCenter.View.AboutFragment;
+import com.hamels.huanan.MemberCenter.View.MemberInfoChangeFragment;
+import com.hamels.huanan.MemberCenter.View.MemberPointFragment;
+import com.hamels.huanan.MemberCenter.View.PasswordChangeFragment;
 import com.hamels.huanan.Product.View.ProductDetailFragment;
 import com.hamels.huanan.Product.View.ProductMainTypeFragment;
 import com.hamels.huanan.Repository.ApiRepository.ApiRepository;
@@ -1170,13 +1174,14 @@ public class MainActivity extends BaseActivity implements MainContract.View {
                         addFragment(MainIndexFragment.getInstance());
                     }else if(currentFragment instanceof MessageListFragment){
                         MessageListBack("2");
+                    }else if(currentFragment instanceof MemberInfoChangeFragment
+                    || currentFragment instanceof PasswordChangeFragment
+                    || currentFragment instanceof MemberPointFragment
+                    || currentFragment instanceof AboutFragment
+                    || currentFragment instanceof TransRecordFragment){
+                        addFragment(MemberCenterFragment.getInstance());
                     }else{
-                        if(!getSupportFragmentManager().isStateSaved()){
-                            changeNavigationColor(R.id.home);
-                            changeTabFragment(MainIndexFragment.getInstance());
-                        }else {
-                            super.onBackPressed();
-                        }
+                        super.onBackPressed();
                     }
                 }
             }
@@ -1191,12 +1196,13 @@ public class MainActivity extends BaseActivity implements MainContract.View {
                 changeNavigationColor(R.id.home);
                 changeTabFragment(MainIndexFragment.getInstance());
             }else {
-                if(!getSupportFragmentManager().isStateSaved()){
-                    changeNavigationColor(R.id.home);
-                    changeTabFragment(MainIndexFragment.getInstance());
-                }else {
-                    super.onBackPressed();
-                }
+                super.onBackPressed();
+//                if(!getSupportFragmentManager().isStateSaved()){
+//                    changeNavigationColor(R.id.home);
+//                    changeTabFragment(MainIndexFragment.getInstance());
+//                }else {
+//                    super.onBackPressed();
+//                }
             }
         }
     }
