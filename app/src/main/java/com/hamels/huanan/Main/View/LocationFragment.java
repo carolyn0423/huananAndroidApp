@@ -78,8 +78,13 @@ public class LocationFragment extends BaseFragment implements LocationListContra
 
         return view;
     }
+    @Override
+    public void onResume() {
+        super.onResume();
+        Log.e(TAG, "onResume");
 
-
+        getSearchKeyword();
+    }
     private void initView(View view) {
         ((MainActivity) getActivity()).EditFragmentBottom(true, true);
         ((MainActivity) getActivity()).setAppTitle(R.string.tab_shop);
@@ -121,8 +126,6 @@ public class LocationFragment extends BaseFragment implements LocationListContra
         recyclerView.setHasFixedSize(true);
         recyclerView.setAdapter(locationListAdapter);
 
-        storeListPresenter.getLocationList("");
-
         tlProductKeyword.getEditText().setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
@@ -159,6 +162,7 @@ public class LocationFragment extends BaseFragment implements LocationListContra
         });
     }
     public void getSearchKeyword(){
+        String sKeyword = etProductKeyword.getText().toString();
         InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
         imm.hideSoftInputFromWindow(etProductKeyword.getWindowToken(), 0);
         storeListPresenter.getLocationList(etProductKeyword.getText().toString());
