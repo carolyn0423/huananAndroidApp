@@ -124,7 +124,7 @@ public class CustomerFragment extends BaseFragment implements CustomerContract.V
     }
 
     public void goLocation(String sCustomerID){
-        ((MainActivity) getActivity()).addFragment(LocationFragment.getInstance());
+        ((MainActivity) getActivity()).addFragment(LocationFragment.getInstance(""));
     }
 
     public void goETicketProductMainType(String sCustomerID){

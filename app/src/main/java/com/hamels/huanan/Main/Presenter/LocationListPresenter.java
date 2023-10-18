@@ -3,6 +3,7 @@ package com.hamels.huanan.Main.Presenter;
 import com.hamels.huanan.Base.BaseContract;
 import com.hamels.huanan.Base.BasePresenter;
 import com.hamels.huanan.Main.Contract.LocationListContract;
+import com.hamels.huanan.Main.View.LocationFragment;
 import com.hamels.huanan.Repository.Model.Store;
 import com.hamels.huanan.Repository.RepositoryManager;
 
@@ -21,7 +22,9 @@ public class LocationListPresenter extends BasePresenter<LocationListContract.Vi
 
     public void goLocationDesc(Store store){ view.goLocationDesc(store); }
 
-    public void eventKeyword() { view.getSearchKeyword(); }
+    public void eventKeyword() {
+        view.getSearchKeyword();
+    }
 
     public void getLocationList(String sKeyword) {
         repositoryManager.callGetLocationApi("AppLocation", repositoryManager.getCustomerID(), "", "0", "", sKeyword, new BaseContract.ValueCallback<List<Store>>() {

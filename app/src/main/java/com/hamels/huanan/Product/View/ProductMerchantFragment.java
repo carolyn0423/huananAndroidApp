@@ -207,7 +207,7 @@ public class ProductMerchantFragment extends BaseFragment implements ProductMerc
                 break;
             case "STORE":
                 productmerchantPresenter.saveFragmentLocation(Integer.toString(location_id));
-                ((MainActivity) getActivity()).addFragment(LocationFragment.getInstance());
+                ((MainActivity) getActivity()).addFragment(LocationFragment.getInstance("Menu"));
                 break;
         }
     }

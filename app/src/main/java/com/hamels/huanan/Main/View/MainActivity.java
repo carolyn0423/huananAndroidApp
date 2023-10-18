@@ -392,7 +392,7 @@ public class MainActivity extends BaseActivity implements MainContract.View {
                 }else if (id == R.id.item_location){
                     setMainIndexMessageUnreadVisibility(false);
                     mainPresenter.saveFragmentLocation("");
-                    changeTabFragment(LocationFragment.getInstance());
+                    changeTabFragment(LocationFragment.getInstance("Menu"));
                 }
                 return true;
             }
@@ -420,7 +420,7 @@ public class MainActivity extends BaseActivity implements MainContract.View {
                     }
                     mainPresenter.saveSourceActive("");
                     mainPresenter.saveFragmentLocation("");
-                    changeTabFragment(LocationFragment.getInstance());
+                    changeTabFragment(LocationFragment.getInstance("Menu"));
                     break;
                 case "ETICKET_WELCOME":
                     //  買提貨卷 未登入的情況
@@ -1164,7 +1164,7 @@ public class MainActivity extends BaseActivity implements MainContract.View {
                         addFragment(ProductFragment.getInstance());
                     }else if(currentFragment instanceof ProductFragment){   //  商品列表
                         addFragment(ProductMainTypeFragment.getInstance());
-                    }else if(currentFragment instanceof ProductMainTypeFragment){
+                    }else if(currentFragment instanceof ProductMainTypeFragment || currentFragment instanceof LocationDescFragment){
                         mainPresenter.getLocationList();
                     }else if(currentFragment instanceof LocationFragment || currentFragment instanceof WhatCoffeeFragment){
                         addFragment(MainIndexFragment.getInstance());
@@ -1214,7 +1214,7 @@ public class MainActivity extends BaseActivity implements MainContract.View {
         if(location_count == 1 || location_count == 0){
             changeTabFragment(MainIndexFragment.getInstance());
         }else{
-            changeTabFragment(LocationFragment.getInstance());
+            changeTabFragment(LocationFragment.getInstance(""));
         }
     }
 
@@ -1296,7 +1296,7 @@ public class MainActivity extends BaseActivity implements MainContract.View {
         } else {
             //  外帶外送
             mainPresenter.saveFragmentLocation("");
-            addFragment(LocationFragment.getInstance());
+            addFragment(LocationFragment.getInstance("Menu"));
         }
 
 

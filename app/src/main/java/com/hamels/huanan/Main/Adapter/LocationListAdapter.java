@@ -53,6 +53,9 @@ public class LocationListAdapter extends BaseAdapter<LocationListHolder> {
             }
         }
 
+        storeHolder.vItemLocationLeft.setOnClickListener(img_OnClick_Evt);
+        storeHolder.vItemLocationRight.setOnClickListener(img_OnClick_Evt);
+
         storeHolder.tvImgLeft.setOnClickListener(img_OnClick_Evt);
         storeHolder.tvImgRight.setOnClickListener(img_OnClick_Evt);
 
@@ -83,7 +86,7 @@ public class LocationListAdapter extends BaseAdapter<LocationListHolder> {
             int id = v.getId();
             Store tmpStore = new Store();
 
-            if(id == R.id.img_left){
+            if(id == R.id.img_left || id == R.id.item_location_left){
                 for(int i = 0; i < DataLeft.size(); i++){
                     if(DataLeft.get(i).getLocationID().equals(v.getTag(v.getId()).toString())){
                         tmpStore = DataLeft.get(i);

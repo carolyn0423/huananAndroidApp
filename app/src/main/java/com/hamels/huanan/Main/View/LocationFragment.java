@@ -53,18 +53,25 @@ public class LocationFragment extends BaseFragment implements LocationListContra
     private EditText etProductKeyword;
     private ImageView ivImgSearch;
     private TextView ivCancelText;
+    String sMode = "";
 
-
-    public static LocationFragment getInstance() {
+    public static LocationFragment getInstance(String mode) {
         if (fragment == null) {
             fragment = new LocationFragment();
         }
+        Bundle bundle = new Bundle();
+        bundle.putString("MODE", mode);
+        fragment.setArguments(bundle);
         return fragment;
     }
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_store, container, false);
+        if (getArguments() != null) {
+            sMode = getArguments().getString("MODE", "");
+        }
+
         initView(view);
 
         // 添加点击监听器
@@ -78,8 +85,13 @@ public class LocationFragment extends BaseFragment implements LocationListContra
 
         return view;
     }
+    @Override
+    public void onResume() {
+        super.onResume();
+        Log.e(TAG, "onResume");
 
-
+        getSearchKeyword();
+    }
     private void initView(View view) {
         ((MainActivity) getActivity()).EditFragmentBottom(true, true);
         ((MainActivity) getActivity()).setAppTitle(R.string.tab_shop);
@@ -121,8 +133,6 @@ public class LocationFragment extends BaseFragment implements LocationListContra
         recyclerView.setHasFixedSize(true);
         recyclerView.setAdapter(locationListAdapter);
 
-        storeListPresenter.getLocationList("");
-
         tlProductKeyword.getEditText().setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
@@ -161,7 +171,14 @@ public class LocationFragment extends BaseFragment implements LocationListContra
     public void getSearchKeyword(){
         InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
         imm.hideSoftInputFromWindow(etProductKeyword.getWindowToken(), 0);
-        storeListPresenter.getLocationList(etProductKeyword.getText().toString());
+
+        if(sMode.equals("Menu")){
+            sMode = "";
+            etProductKeyword.setText("");
+            storeListPresenter.getLocationList("");
+        }else{
+            storeListPresenter.getLocationList(etProductKeyword.getText().toString());
+        }
     }
     @Override
     public void setLocationList(List<Store> stores) {
