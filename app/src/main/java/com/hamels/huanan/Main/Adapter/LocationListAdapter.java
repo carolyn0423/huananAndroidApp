@@ -1,17 +1,15 @@
 package com.hamels.huanan.Main.Adapter;
 
-import android.Manifest;
 import androidx.annotation.NonNull;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.hamels.huanan.Base.BaseAdapter;
-import com.hamels.huanan.Base.BaseContract;
 import com.hamels.huanan.Main.Contract.LocationListContract;
 import com.hamels.huanan.Main.Holder.LocationListHolder;
 import com.hamels.huanan.R;
-import com.hamels.huanan.Repository.Model.ProductMainType;
 import com.hamels.huanan.Repository.Model.Store;
 
 import java.util.ArrayList;
@@ -58,10 +56,10 @@ public class LocationListAdapter extends BaseAdapter<LocationListHolder> {
         storeHolder.tvImgLeft.setOnClickListener(img_OnClick_Evt);
         storeHolder.tvImgRight.setOnClickListener(img_OnClick_Evt);
 
+        storeHolder.clItemStoreList.setOnClickListener(Search_OnClick_Evt);
         storeHolder.clBtnProductLeft.setOnClickListener(btn_OnClick_Evt);
         storeHolder.clBtnProductRight.setOnClickListener(btn_OnClick_Evt);
     }
-
     @Override
     public int getItemCount() {
         if(DataLeft.size() > 0){
@@ -70,7 +68,15 @@ public class LocationListAdapter extends BaseAdapter<LocationListHolder> {
             return DataLeft.size();
         }
     }
-
+    View.OnClickListener Search_OnClick_Evt = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            int id = v.getId();
+            if (id == R.id.item_store_list){
+                presenter.eventKeyword();
+            }
+        }
+    };
     View.OnClickListener img_OnClick_Evt = new View.OnClickListener() {
         @Override
         public void onClick(View v) {

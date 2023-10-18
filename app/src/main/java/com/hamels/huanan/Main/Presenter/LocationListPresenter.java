@@ -21,6 +21,8 @@ public class LocationListPresenter extends BasePresenter<LocationListContract.Vi
 
     public void goLocationDesc(Store store){ view.goLocationDesc(store); }
 
+    public void eventKeyword() { view.getSearchKeyword(); }
+
     public void getLocationList(String sKeyword) {
         repositoryManager.callGetLocationApi("AppLocation", repositoryManager.getCustomerID(), "", "0", "", sKeyword, new BaseContract.ValueCallback<List<Store>>() {
             @Override

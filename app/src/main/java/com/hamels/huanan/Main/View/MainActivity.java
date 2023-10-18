@@ -22,6 +22,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.appcompat.app.AlertDialog;
 import android.util.Log;
@@ -900,7 +901,7 @@ public class MainActivity extends BaseActivity implements MainContract.View {
                         public void run() {
                             setAppTitleString(title);
                         }
-                    }, 1500);
+                    }, 1000);
                 }
             }
         });
@@ -1151,7 +1152,9 @@ public class MainActivity extends BaseActivity implements MainContract.View {
             } else {
                 // 點推播通知進來的
                 if (getSupportFragmentManager().getBackStackEntryCount() == 1
-                        && getSupportFragmentManager().getFragments().get(0).equals(MailFileFragment.getInstance())) {
+                        && ( getSupportFragmentManager().getFragments().size() == 0
+                            || getSupportFragmentManager().getFragments().get(0).equals(MailFileFragment.getInstance()))
+                    ) {
                     changeNavigationColor(R.id.home);
                     changeTabFragment(MainIndexFragment.getInstance());
                 } else {
@@ -1168,7 +1171,12 @@ public class MainActivity extends BaseActivity implements MainContract.View {
                     }else if(currentFragment instanceof MessageListFragment){
                         MessageListBack("2");
                     }else{
-                        super.onBackPressed();
+                        if(!getSupportFragmentManager().isStateSaved()){
+                            changeNavigationColor(R.id.home);
+                            changeTabFragment(MainIndexFragment.getInstance());
+                        }else {
+                            super.onBackPressed();
+                        }
                     }
                 }
             }
@@ -1183,7 +1191,12 @@ public class MainActivity extends BaseActivity implements MainContract.View {
                 changeNavigationColor(R.id.home);
                 changeTabFragment(MainIndexFragment.getInstance());
             }else {
-                super.onBackPressed();
+                if(!getSupportFragmentManager().isStateSaved()){
+                    changeNavigationColor(R.id.home);
+                    changeTabFragment(MainIndexFragment.getInstance());
+                }else {
+                    super.onBackPressed();
+                }
             }
         }
     }

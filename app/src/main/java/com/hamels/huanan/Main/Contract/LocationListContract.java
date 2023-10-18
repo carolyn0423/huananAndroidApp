@@ -18,6 +18,8 @@ public interface LocationListContract {
         void setOnlineShoppingFlag(boolean isOnlineShopping, List<Store> Count);
 
         void goLocationDesc(Store store);
+
+        void getSearchKeyword();
     }
 
     interface Presenter extends BaseContract.Presenter {
@@ -36,5 +38,7 @@ public interface LocationListContract {
         void goLocationDesc(Store store);
 
         void getLocationList(String sKeyword);
+
+        void eventKeyword();
     }
 }

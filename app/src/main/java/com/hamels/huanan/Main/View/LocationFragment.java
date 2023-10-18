@@ -1,17 +1,21 @@
 package com.hamels.huanan.Main.View;
 
+import android.content.Context;
 import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.constraintlayout.widget.Group;
 import androidx.recyclerview.widget.RecyclerView;
+
+import android.text.InputType;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -44,7 +48,7 @@ public class LocationFragment extends BaseFragment implements LocationListContra
     private LocationListAdapter locationListAdapter;
     private LocationListContract.Presenter storeListPresenter;
 
-    private ConstraintLayout clSearch;
+    private ConstraintLayout clFragmentStore, clSearch;
     private TextInputLayout tlProductKeyword;
     private EditText etProductKeyword;
     private ImageView ivImgSearch;
@@ -62,6 +66,15 @@ public class LocationFragment extends BaseFragment implements LocationListContra
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_store, container, false);
         initView(view);
+
+        // 添加点击监听器
+        view.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // 在整个Fragment被点击时执行操作
+                getSearchKeyword();
+            }
+        });
 
         return view;
     }
@@ -82,6 +95,8 @@ public class LocationFragment extends BaseFragment implements LocationListContra
         ((MainActivity) getActivity()).setMainIndexMessageUnreadVisibility(false);
         ((MainActivity) getActivity()).setBottomNavigationVisibility(true);
         ((MainActivity) getActivity()).setCartBadgeVisibility(true);
+
+        clFragmentStore = view.findViewById(R.id.fragment_store);
 
         noLocationGroup = view.findViewById(R.id.no_location_group);
 
@@ -108,11 +123,20 @@ public class LocationFragment extends BaseFragment implements LocationListContra
 
         storeListPresenter.getLocationList("");
 
+        tlProductKeyword.getEditText().setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (!hasFocus) {
+                    getSearchKeyword();
+                }
+            }
+        });
+
         tlProductKeyword.getEditText().setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView textView, int actionId , KeyEvent keyEvent) {
                 if (actionId == EditorInfo.IME_ACTION_GO || actionId == EditorInfo.IME_ACTION_NEXT || actionId == EditorInfo.IME_ACTION_DONE) {
-                    storeListPresenter.getLocationList(etProductKeyword.getText().toString());
+                    getSearchKeyword();
                     return true;
                 }
                 return false;
@@ -123,16 +147,21 @@ public class LocationFragment extends BaseFragment implements LocationListContra
             @Override
             public void onClick(View v) {
                 etProductKeyword.setText("");
-                storeListPresenter.getLocationList("");
+                getSearchKeyword();
             }
         });
 
         ivImgSearch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                storeListPresenter.getLocationList(etProductKeyword.getText().toString());
+                getSearchKeyword();
             }
         });
+    }
+    public void getSearchKeyword(){
+        InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+        imm.hideSoftInputFromWindow(etProductKeyword.getWindowToken(), 0);
+        storeListPresenter.getLocationList(etProductKeyword.getText().toString());
     }
     @Override
     public void setLocationList(List<Store> stores) {

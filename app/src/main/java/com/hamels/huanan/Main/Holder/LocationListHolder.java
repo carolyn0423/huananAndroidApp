@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -26,7 +27,7 @@ public class LocationListHolder extends RecyclerView.ViewHolder {
 
     public TextView tvNameLeft, tvNameRight;
     public ImageView tvImgLeft, tvImgRight;
-    public ConstraintLayout clBtnProductLeft, clBtnProductRight;
+    public ConstraintLayout clItemStoreList, clBtnProductLeft, clBtnProductRight;
 
     public LocationListHolder(@NonNull View itemView) {
         super(itemView);
@@ -36,6 +37,7 @@ public class LocationListHolder extends RecyclerView.ViewHolder {
         tvImgLeft = itemView.findViewById(R.id.img_left);
         tvImgRight = itemView.findViewById(R.id.img_right);
 
+        clItemStoreList = itemView.findViewById(R.id.item_store_list);
         clBtnProductLeft = itemView.findViewById(R.id.btn_product_left);
         clBtnProductRight = itemView.findViewById(R.id.btn_product_right);
     }
