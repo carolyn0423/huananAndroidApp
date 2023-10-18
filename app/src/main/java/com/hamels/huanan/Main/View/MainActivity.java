@@ -1164,11 +1164,15 @@ public class MainActivity extends BaseActivity implements MainContract.View {
                 } else {
                     Fragment currentFragment = getSupportFragmentManager().findFragmentById(R.id.frame);
 
-                    if(currentFragment instanceof ProductDetailFragment){   //  商品內頁
+                    if(currentFragment instanceof ProductDetailFragment){
                         addFragment(ProductFragment.getInstance());
-                    }else if(currentFragment instanceof ProductFragment){   //  商品列表
+                    }else if(currentFragment instanceof ProductFragment){
                         addFragment(ProductMainTypeFragment.getInstance());
-                    }else if(currentFragment instanceof ProductMainTypeFragment || currentFragment instanceof LocationDescFragment){
+                    }else if(currentFragment instanceof LocationDescFragment){
+                        addFragment(LocationFragment.getInstance(""));
+                    }else if(currentFragment instanceof MemberCenterFragment){
+                        addFragment(MainIndexFragment.getInstance());
+                    }else if(currentFragment instanceof ProductMainTypeFragment){
                         mainPresenter.getLocationList();
                     }else if(currentFragment instanceof LocationFragment || currentFragment instanceof WhatCoffeeFragment){
                         addFragment(MainIndexFragment.getInstance());
