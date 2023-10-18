@@ -60,7 +60,7 @@ public class MailFileFragment extends BaseFragment implements MailFileContract.V
         ((MainActivity) getActivity()).setAppTitle(R.string.mail_file);
         ((MainActivity) getActivity()).setBackButtonVisibility(true);
         ((MainActivity) getActivity()).setMessageButtonVisibility(true);
-        ((MainActivity) getActivity()).setMailButtonVisibility(false);
+        ((MainActivity) getActivity()).setMailButtonVisibility(true);
         ((MainActivity) getActivity()).setSortButtonVisibility(false);
         ((MainActivity) getActivity()).setTopBarVisibility(false);
         ((MainActivity) getActivity()).setAppToolbarVisibility(true);
