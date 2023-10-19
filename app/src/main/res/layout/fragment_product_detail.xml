@@ -33,7 +33,6 @@
                     android:id="@+id/layout_card_front"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:visibility="visible"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
@@ -46,6 +45,7 @@
                         android:layout_height="0dp"
                         android:layout_margin="10dp"
                         app:isAutoPlay="true"
+                        android:scaleType="fitXY"
                         app:layout_constraintDimensionRatio="h,1:1"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
@@ -121,9 +121,10 @@
                             android:textSize="15sp"
                             android:textColor="@color/Black"
                             android:text=""
+                            android:gravity="center"
+                            app:layout_constraintTop_toTopOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@+id/tv_store_name" />
+                            app:layout_constraintStart_toStartOf="parent" />
 
                         <TextView
                             android:id="@+id/tv_same_price"
