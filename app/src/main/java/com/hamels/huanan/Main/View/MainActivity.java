@@ -1164,7 +1164,17 @@ public class MainActivity extends BaseActivity implements MainContract.View {
                 } else {
                     Fragment currentFragment = getSupportFragmentManager().findFragmentById(R.id.frame);
 
-                    if(currentFragment instanceof ProductDetailFragment){
+                    if(currentFragment instanceof MainIndexFragment) {
+                        new AlertDialog.Builder(this).setTitle(null).setMessage(R.string.close_hint)
+                                .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        System.exit(0);
+                                    }
+                                })
+                                .setNegativeButton(android.R.string.no, null)
+                                .show();
+                    }else if(currentFragment instanceof ProductDetailFragment){
                         addFragment(ProductFragment.getInstance());
                     }else if(currentFragment instanceof ProductFragment){
                         addFragment(ProductMainTypeFragment.getInstance());
