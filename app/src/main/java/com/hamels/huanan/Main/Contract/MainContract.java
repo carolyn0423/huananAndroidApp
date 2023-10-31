@@ -94,5 +94,9 @@ public interface MainContract {
         void getLocationList();
 
         void GetShopCartLocationQuantity();
+
+        String getUserName();
+
+        String getInvitationCode();
     }
 }

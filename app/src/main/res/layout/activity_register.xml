@@ -367,6 +367,44 @@
                     android:textSize="13sp" />
             </com.google.android.material.textfield.TextInputLayout>
 
+            <TextView
+                android:id="@+id/tv_invitation_code"
+                style="@style/fontRegularTw.greyDoubleDark"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="@string/invitation_code"
+                android:textSize="13sp"
+                app:layout_constraintStart_toStartOf="@id/tv_name"
+                app:layout_constraintTop_toBottomOf="@+id/layout_repassword" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/layout_invitation_code"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="20dp"
+                android:theme="@style/EditTextBlack"
+                app:hintEnabled="false"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@id/tv_name"
+                app:layout_constraintTop_toBottomOf="@id/tv_invitation_code">
+
+                <EditText
+                    android:id="@+id/et_invitation_code"
+                    style="@style/fontRegularTw.GreyDark"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/selec_et_line"
+                    android:hint="@string/hint_input_invitation_code"
+                    android:imeOptions="actionDone"
+                    android:paddingTop="10dp"
+                    android:paddingBottom="10dp"
+                    android:lines="1"
+                    android:text=""
+                    android:textColorHint="@color/greyHint"
+                    android:textSize="13sp" />
+            </com.google.android.material.textfield.TextInputLayout>
+
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <CheckBox

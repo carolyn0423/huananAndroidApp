@@ -17,6 +17,9 @@
     <string name="login">登入</string>
     <string name="password">密碼</string>
     <string name="repassword">確認密碼</string>
+    <string name="invitation_code">邀請碼</string>
+    <string name="carrier_no">手機載具條碼</string>
+    <string name="recommend_member">推薦人</string>
     <string name="dialog_hint">提醒</string>
     <string name="terms_of_use">紅利點數與購物規範</string>
     <string name="forget_password">忘記密碼</string>
@@ -95,8 +98,10 @@
     <string name="hint_name">請輸入您的姓名</string>
     <string name="hint_birthday">請輸入生日</string>
     <string name="hint_email">請輸入E-MAIL</string>
+    <string name="hint_carrier_no">請輸入載具條碼</string>
     <string name="hint_address">地址</string>
     <string name="hint_register_cellphone">請輸入手機號碼（登入帳號）</string>
+    <string name="hint_input_invitation_code">請輸入好友邀請碼</string>
     <string name="register_agree_terms_of_use">我同意以此資料註冊會員，並同意會員使用條款</string>
     <string name="phone_format_error">手機格式不符</string>
     <string name="email_format_error">Email格式不符</string>

@@ -17,7 +17,8 @@ public class RegisterPresenter extends BasePresenter<RegisterContract.View> impl
 
     @Override
     public void checkInputValue(String name, int selectRadioId, String birth,
-                                String phone, String password, String repassword, boolean isAgreeTermsOfUse) {
+                                String phone, String password, String repassword, String InvitationCode,
+                                boolean isAgreeTermsOfUse) {
         if (name.isEmpty()) {
             view.showErrorMessage(R.string.name_empty);
         }
@@ -27,7 +28,7 @@ public class RegisterPresenter extends BasePresenter<RegisterContract.View> impl
 //        }
 //        else if (birth.isEmpty()) {
 //            view.showErrorMessage(R.string.birth_empty);
-          else if (phone.isEmpty() || !FormatUtils.isCellphoneFormat(phone)) {
+        else if (phone.isEmpty() || !FormatUtils.isCellphoneFormat(phone)) {
             view.showErrorMessage(R.string.phone_format_error);
         } else if (password.isEmpty() || !FormatUtils.isPasswordFormat(password)) {
             view.showErrorMessage(R.string.password_format_error);
@@ -36,20 +37,21 @@ public class RegisterPresenter extends BasePresenter<RegisterContract.View> impl
         } else if (!isAgreeTermsOfUse) {
             view.showErrorMessage(R.string.not_yet_check_terms_of_use);
         } else {
-            startRegister(name, selectRadioId, birth, phone, password);
+            startRegister(name, selectRadioId, birth, phone, password, InvitationCode);
         }
     }
 
-    private void startRegister(String name, int selectRadioId, String birth, final String phone, final String password) {
+    private void startRegister(String name, int selectRadioId, String birth, final String phone, final String password, String InvitationCode) {
         User user = new User();
         user.setAccount(phone);
         user.setName(name);
         user.setBirthday(birth);
+        user.setInvitationCode(InvitationCode);
 
         // 性別不傳
         // user.setGender(selectRadioId == R.id.radio_male ? "1" : "0");
 
-        repositoryManager.callRegisterApi(user, password, new BaseContract.ValueCallback<User>() {
+        repositoryManager.callRegisterApi(user, password, InvitationCode, new BaseContract.ValueCallback<User>() {
             @Override
             public void onValueCallback(int task, User type) {
                 repositoryManager.saveAccountInfo(phone, password);
