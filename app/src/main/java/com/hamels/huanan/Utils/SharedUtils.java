@@ -59,6 +59,11 @@ public class SharedUtils {
                 .putString("MemberID", member_id)
                 .apply();
     }
+    public void saveUserName(Context context, String member_name){
+        context.getSharedPreferences("MemberName", Context.MODE_PRIVATE).edit()
+                .putString("MemberName", member_name)
+                .apply();
+    }
     public void saveLoveCustomer(Context context, String sLoveCustomer){
         context.getSharedPreferences("LoveCustomer", Context.MODE_PRIVATE).edit()
                 .putString("LoveCustomer", sLoveCustomer)
@@ -105,6 +110,12 @@ public class SharedUtils {
     public void saveVerifyCode(Context context, String verifyState){
         context.getSharedPreferences("VerifyCode", Context.MODE_PRIVATE).edit()
                 .putString("VerifyCode", verifyState)
+                .apply();
+    }
+
+    public void saveInvitationCode(Context context, String InvitationCode){
+        context.getSharedPreferences("InvitationCode", Context.MODE_PRIVATE).edit()
+                .putString("InvitationCode", InvitationCode)
                 .apply();
     }
 
@@ -170,6 +181,10 @@ public class SharedUtils {
         return context.getSharedPreferences("MemberID", Context.MODE_PRIVATE).getString("MemberID", "");
     }
 
+    public String getUserName(Context context) {
+        return context.getSharedPreferences("MemberName", Context.MODE_PRIVATE).getString("MemberName", "");
+    }
+
     public String getLoveCustomer(Context context) {
         return context.getSharedPreferences("LoveCustomer", Context.MODE_PRIVATE).getString("LoveCustomer", "");
     }
@@ -200,6 +215,10 @@ public class SharedUtils {
 
     public String getVerifyCode(Context context) {
         return context.getSharedPreferences("VerifyCode", Context.MODE_PRIVATE).getString("VerifyCode", "");
+    }
+
+    public String getInvitationCode(Context context) {
+        return context.getSharedPreferences("InvitationCode", Context.MODE_PRIVATE).getString("InvitationCode", "");
     }
 
     public String getSourceActive(Context context) {

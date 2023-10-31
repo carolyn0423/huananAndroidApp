@@ -57,6 +57,18 @@ public class User {
     @SerializedName("Online_Enabled")
     private String OnlineEnabled;
 
+    @SerializedName("invitation_code")
+    private String InvitationCode;
+
+    @SerializedName("carrier_no")
+    private String CarrierNo;
+
+    @SerializedName("recommend_member_name")
+    private String RecommendMemberName;
+
+    @SerializedName("connection_name")
+    private String ConnectionName;
+
     private List<String> topic;
 
     public int getCustomer() {
@@ -250,7 +262,19 @@ public class User {
     public String getOnlineEnabled() {
         return OnlineEnabled;
     }
-
+    public void setInvitationCode(String InvitationCode) {
+        this.InvitationCode = InvitationCode;
+    }
+    public String getInvitationCode() {
+        return InvitationCode;
+    }
+    public void setCarrierNo(String CarrierNo) { this.CarrierNo = CarrierNo; }
+    public String getCarrierNo() {
+        return CarrierNo;
+    }
+    public String getRecommendMemberName() {
+        return RecommendMemberName;
+    }
     @Override
     public String toString() {
         JSONObject jsonObject = new JSONObject();
@@ -280,6 +304,10 @@ public class User {
 //            jsonObject.put("topic", topic);
             jsonObject.put("verify_code", verify_code);
             jsonObject.put("Online_Enabled", OnlineEnabled);
+            jsonObject.put("invitation_code", InvitationCode);
+            jsonObject.put("carrier_no", CarrierNo);
+            jsonObject.put("recommend_member_name", RecommendMemberName);
+            jsonObject.put("connection_name", ConnectionName);
         } catch (JSONException e) {
             e.printStackTrace();
         }

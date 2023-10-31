@@ -2,6 +2,8 @@ package com.hamels.huanan.Main.View;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
+import android.content.ClipData;
+import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -124,10 +126,10 @@ public class MainActivity extends BaseActivity implements MainContract.View {
     // qrcode
     private PopupWindow popupWindow;
     private ImageView dialog_img_qrcode;
-    private int barcodeWidth = 300;
-    private int barcodeHeight = 300;
+    private int barcodeWidth = 250;
+    private int barcodeHeight = 250;
     private int brightnessNow = 0;
-
+    private TextView text_invite_code;
 
     public static String sSourceActive = "";
     public static String sCustomerID = "";
@@ -474,9 +476,12 @@ public class MainActivity extends BaseActivity implements MainContract.View {
                     popupWindow.setHeight(ViewGroup.LayoutParams.MATCH_PARENT);
 
                     dialog_img_qrcode = view.findViewById(R.id.dialog_img_qrcode);
+                    text_invite_code = view.findViewById(R.id.text_invite_code);
 
                     User user = getUser();
-                    createBarcodeImage(user.getMembershipCode());
+                    createQRcodeImage(user.getMembershipCode(), dialog_img_qrcode);
+                    text_invite_code.setText(mainPresenter.getInvitationCode());
+
 
                     Button dialog_btn_close = view.findViewById(R.id.dialog_btn_close);
                     dialog_btn_close.setOnClickListener(new View.OnClickListener() {
@@ -484,6 +489,13 @@ public class MainActivity extends BaseActivity implements MainContract.View {
                         public void onClick(View view) {
                             popupWindow.dismiss();
                             changeAppBrightness(brightnessNow);
+                        }
+                    });
+
+                    text_invite_code.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            OpenShared();
                         }
                     });
 
@@ -1354,42 +1366,6 @@ public class MainActivity extends BaseActivity implements MainContract.View {
 //        });
     }
 
-    private void createBarcodeImage(String barcodeNum) {
-        if (barcodeNum != null && !barcodeNum.equals("")) {
-            dialog_img_qrcode.setBackgroundColor(Color.WHITE);
-            if (willChangeFragment.isAdded()) {
-                MultiFormatWriter multiFormatWriter = new MultiFormatWriter();
-                try {
-                    BitMatrix bitMatrix = new MultiFormatWriter().encode(barcodeNum, BarcodeFormat.QR_CODE, barcodeWidth, barcodeHeight);
-
-                    int newWidth = 800;
-                    int newHeight = 800;
-
-                    Bitmap bitmap = Bitmap.createBitmap(newWidth, newHeight, Bitmap.Config.ARGB_8888);
-                    float scaleX = (float) newWidth / barcodeWidth;
-                    float scaleY = (float) newHeight / barcodeHeight;
-                    for (int x = 0; x < barcodeWidth; x++) {
-                        for (int y = 0; y < barcodeHeight; y++) {
-                            if (bitMatrix.get(x, y)) {
-                                for (int scaledX = (int) (x * scaleX); scaledX < (int) ((x + 1) * scaleX); scaledX++) {
-                                    for (int scaledY = (int) (y * scaleY); scaledY < (int) ((y + 1) * scaleY); scaledY++) {
-                                        bitmap.setPixel(scaledX, scaledY, Color.BLACK);
-                                    }
-                                }
-                            }
-                        }
-                    }
-                    dialog_img_qrcode.setImageBitmap(bitmap);
-                } catch (WriterException e) {
-                    e.printStackTrace();
-                }
-            }
-
-            brightnessNow = getSystemBrightness();
-            changeAppBrightness(255);
-        }
-    }
-
     private int getSystemBrightness() {
         int systemBrightness = 0;
         try {
@@ -1528,5 +1504,61 @@ public class MainActivity extends BaseActivity implements MainContract.View {
 
         // 更新 FrameLayout 的父容器的參數
         frameLayout.setLayoutParams(layoutParams);
+    }
+
+    public void OpenShared(){
+        // 获取剪贴板管理器
+        ClipboardManager clipboard = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
+        String copiedText = mainPresenter.getUserName() + " 邀請您下載 " + EOrderApplication.CUSTOMER_NAME + " APP，註冊時輸入邀請碼: " + mainPresenter.getInvitationCode() + "，即可獲得新會員獎勵";
+        //copiedText += "\niOS下載連結 : https://itunes.apple.com/app/id6463211336";
+        //copiedText += "\nAndroid下載連結 : https://play.google.com/store/apps/details?id=com.hamels.daybydayegg";
+        if (clipboard != null) {
+            // 创建一个ClipData对象，将文本复制到剪贴板
+            ClipData clip = ClipData.newPlainText("Copied Text", copiedText);
+            clipboard.setPrimaryClip(clip);
+            Toast.makeText(this, "已複製", Toast.LENGTH_SHORT).show();
+        }
+
+        // 打开分享对话框
+        Intent shareIntent = new Intent(Intent.ACTION_SEND);
+        shareIntent.setType("text/plain");
+        shareIntent.putExtra(Intent.EXTRA_TEXT, copiedText);
+        startActivity(Intent.createChooser(shareIntent, "分享到"));
+    }
+
+    private void createQRcodeImage(String qrcodeNum, ImageView qrcode_img) {
+        if (qrcodeNum != null && !qrcodeNum.equals("")) {
+            qrcode_img.setBackgroundColor(Color.WHITE);
+            if (willChangeFragment.isAdded()) {
+                MultiFormatWriter multiFormatWriter = new MultiFormatWriter();
+                try {
+                    BitMatrix bitMatrix = new MultiFormatWriter().encode(qrcodeNum, BarcodeFormat.QR_CODE, barcodeWidth, barcodeHeight);
+
+                    int newWidth = 250;
+                    int newHeight = 250;
+
+                    Bitmap bitmap = Bitmap.createBitmap(newWidth, newHeight, Bitmap.Config.ARGB_8888);
+                    float scaleX = (float) newWidth / barcodeWidth;
+                    float scaleY = (float) newHeight / barcodeHeight;
+                    for (int x = 0; x < barcodeWidth; x++) {
+                        for (int y = 0; y < barcodeHeight; y++) {
+                            if (bitMatrix.get(x, y)) {
+                                for (int scaledX = (int) (x * scaleX); scaledX < (int) ((x + 1) * scaleX); scaledX++) {
+                                    for (int scaledY = (int) (y * scaleY); scaledY < (int) ((y + 1) * scaleY); scaledY++) {
+                                        bitmap.setPixel(scaledX, scaledY, Color.BLACK);
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    qrcode_img.setImageBitmap(bitmap);
+                } catch (WriterException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            brightnessNow = getSystemBrightness();
+            changeAppBrightness(255);
+        }
     }
 }

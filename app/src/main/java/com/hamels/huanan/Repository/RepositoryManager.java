@@ -64,9 +64,9 @@ public class RepositoryManager {
         return isLogin;
     }
 
-    public void callRegisterApi(User user, String password, final BaseContract.ValueCallback<User> valueCallback, final BaseContract.ValueCallback<String> errorCallback) {
+    public void callRegisterApi(User user, String password, String InvitationCode, final BaseContract.ValueCallback<User> valueCallback, final BaseContract.ValueCallback<String> errorCallback) {
         basePresenter.startCallApi();
-        MemberRepository.getInstance().register(user, password, new ApiCallback<BaseModel<User>>(basePresenter) {
+        MemberRepository.getInstance().register(user, password, InvitationCode, new ApiCallback<BaseModel<User>>(basePresenter) {
             @Override
             public void onApiSuccess(BaseModel<User> response) {
                 super.onApiSuccess(response);
@@ -672,10 +672,10 @@ public class RepositoryManager {
         });
     }
 
-    public void callUpdateMemberInfoApi(String customer_id, String city_code, String area_code, String address, String email, String birth, final BaseContract.ValueCallback<String> valueCallback) {
+    public void callUpdateMemberInfoApi(String customer_id, String city_code, String area_code, String address, String email, String birth, String carrier_no, final BaseContract.ValueCallback<String> valueCallback) {
         basePresenter.startCallApi();
         String member_id = context.getSharedPreferences("MemberID", Context.MODE_PRIVATE).getString("MemberID", "");
-        MemberRepository.getInstance().updateMemberInfo(customer_id, member_id, city_code, area_code, address, email, birth, new ApiCallback<BaseModel>(basePresenter) {
+        MemberRepository.getInstance().updateMemberInfo(customer_id, member_id, city_code, area_code, address, email, birth, carrier_no, new ApiCallback<BaseModel>(basePresenter) {
             @Override
             public void onApiSuccess(BaseModel response) {
                 super.onApiSuccess(response);
@@ -1075,6 +1075,10 @@ public class RepositoryManager {
 
     public String getUserID() { return SharedUtils.getInstance().getUserID(context); }
 
+    public void saveUserName(String member_name) { SharedUtils.getInstance().saveUserName(context, member_name); }
+
+    public String getUserName() { return SharedUtils.getInstance().getUserName(context); }
+
     public String getLoveCustomer() { return SharedUtils.getInstance().getLoveCustomer(context); }
 
     public String getCustomerID() { return SharedUtils.getInstance().getCustomerID(context); }
@@ -1090,6 +1094,10 @@ public class RepositoryManager {
     public String getUserPassword() { return ApiUtils.decryption(SharedUtils.getInstance().getUserPassword(context)).trim(); }
 
     public String getVerifyCode() { return SharedUtils.getInstance().getVerifyCode(context); }
+
+    public void saveInvitationCode(String InvitationCode) { SharedUtils.getInstance().saveInvitationCode(context, InvitationCode); }
+
+    public String getInvitationCode() { return SharedUtils.getInstance().getInvitationCode(context); }
 
     public String getSourceActive() { return SharedUtils.getInstance().getSourceActive(context); }
 
