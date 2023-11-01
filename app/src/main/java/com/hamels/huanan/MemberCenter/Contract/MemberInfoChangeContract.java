@@ -26,6 +26,6 @@ public interface MemberInfoChangeContract {
 
         void getPropertyData();
 
-        void updateMember(String customerId, String city_code, String area_code, String address, String email, String birth);
+        void updateMember(String customerId, String city_code, String area_code, String address, String email, String birth, String carrier_no);
     }
 }

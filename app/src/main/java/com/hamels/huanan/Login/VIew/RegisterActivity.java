@@ -34,7 +34,7 @@ public class RegisterActivity extends BaseActivity implements RegisterContract.V
 
     private ScrollView scrollView;
     private TextView tvErrorMessage, tvBirth;
-    private EditText etName, etPhone, etPassword, etRePassword;
+    private EditText etName, etPhone, etPassword, etRePassword, etInvitationCode;
     private RadioGroup radioGender;
     private CheckBox cbTermsOfUse;
     private ConstraintLayout btnRegister;
@@ -71,6 +71,7 @@ public class RegisterActivity extends BaseActivity implements RegisterContract.V
         etPhone = findViewById(R.id.et_phone);
         etPassword = findViewById(R.id.et_password);
         etRePassword = findViewById(R.id.et_repassword);
+        etInvitationCode = findViewById(R.id.et_invitation_code);
         radioGender = findViewById(R.id.group_gender);
         btnRegister = findViewById(R.id.btn_register);
         btnRegister.setOnClickListener(new View.OnClickListener() {
@@ -82,6 +83,7 @@ public class RegisterActivity extends BaseActivity implements RegisterContract.V
                         , etPhone.getText().toString()
                         , etPassword.getText().toString()
                         , etRePassword.getText().toString()
+                        , etInvitationCode.getText().toString()
                         , cbTermsOfUse.isChecked());
             }
         });

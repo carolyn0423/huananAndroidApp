@@ -37,7 +37,7 @@ public class MemberRepository extends ApiRepository {
         super();
     }
 
-    public void register(final User user, final String password, final AbsApiCallback callback) {
+    public void register(final User user, final String password, String InvitationCode, final AbsApiCallback callback) {
         Map<String, String> map = new HashMap<>();
         map.put("connection_name", EOrderApplication.dbConnectName);
         map.put("customer_id", EOrderApplication.CUSTOMER_ID);
@@ -51,6 +51,7 @@ public class MemberRepository extends ApiRepository {
         map.put("isApp", "true");
         map.put("machine_type", "android"); //原生自行寫死，安卓傳”android”，蘋果傳”iOS”
         map.put("firebase_token", SharedUtils.getInstance().getFirebaseToken(EOrderApplication.getInstance()));
+        map.put("invitation_code", InvitationCode);
         Log.e(TAG, "API register : " + map);
         RequestBody requestBody = RequestBody.create(MediaType.parse("text/plain"), ApiUtils.getEncodeStringParams(map));
         retrofit.create(MemberApiService.class).postRegister(requestBody).enqueue(callback);
@@ -525,18 +526,18 @@ public class MemberRepository extends ApiRepository {
         retrofit.create(MemberApiService.class).patchUpdatePassword(requestBody).enqueue(callback);
     }
 
-    public void updateMemberInfo(String customer_id, final String sMebmer_id, final String city_code, final String area_code, final String address, final String email, final String birth, final AbsApiCallback callback) {
+    public void updateMemberInfo(String customer_id, final String sMebmer_id, final String city_code, final String area_code, final String address, final String email, final String birth, String carrier_no, final AbsApiCallback callback) {
         Map<String, String> map = new HashMap<>();
         map.put("connection_name", EOrderApplication.dbConnectName);
         map.put("customer_id", customer_id);
         map.put("modified_user", sMebmer_id);
         map.put("member_id", sMebmer_id);
-//        map.put("gender", gender);
         map.put("birthday", birth);
         map.put("city_code", city_code);
         map.put("area_code", area_code);
         map.put("address", address);
         map.put("email", email);
+        map.put("carrier_no", carrier_no);
         map.put("isApp", "true");
 
         Log.e(TAG, "API updateMemberInfo : " + map);

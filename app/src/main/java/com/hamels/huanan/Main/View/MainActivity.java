@@ -2,6 +2,8 @@ package com.hamels.huanan.Main.View;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
+import android.content.ClipData;
+import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -9,8 +11,10 @@ import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Environment;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
@@ -21,6 +25,8 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
+import androidx.core.content.FileProvider;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
@@ -85,6 +91,11 @@ import com.hamels.huanan.Utils.IntentUtils;
 
 import org.json.JSONObject;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.List;
 
 import static com.hamels.huanan.Constant.Constant.REQUEST_COUPON;
@@ -124,16 +135,17 @@ public class MainActivity extends BaseActivity implements MainContract.View {
     // qrcode
     private PopupWindow popupWindow;
     private ImageView dialog_img_qrcode;
-    private int barcodeWidth = 300;
-    private int barcodeHeight = 300;
+    private int barcodeWidth = 250;
+    private int barcodeHeight = 250;
     private int brightnessNow = 0;
-
+    private TextView text_invite_code;
 
     public static String sSourceActive = "";
     public static String sCustomerID = "";
     private Boolean isUpdate = false;
     private int VersionCode = 0;
-
+    private static final int REQUEST_WRITE_EXTERNAL_STORAGE = 1;
+    private String sPDFDir = "";
     private Handler handler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
@@ -474,9 +486,12 @@ public class MainActivity extends BaseActivity implements MainContract.View {
                     popupWindow.setHeight(ViewGroup.LayoutParams.MATCH_PARENT);
 
                     dialog_img_qrcode = view.findViewById(R.id.dialog_img_qrcode);
+                    text_invite_code = view.findViewById(R.id.text_invite_code);
 
                     User user = getUser();
-                    createBarcodeImage(user.getMembershipCode());
+                    createQRcodeImage(user.getMembershipCode(), dialog_img_qrcode);
+                    text_invite_code.setText(mainPresenter.getInvitationCode());
+
 
                     Button dialog_btn_close = view.findViewById(R.id.dialog_btn_close);
                     dialog_btn_close.setOnClickListener(new View.OnClickListener() {
@@ -484,6 +499,13 @@ public class MainActivity extends BaseActivity implements MainContract.View {
                         public void onClick(View view) {
                             popupWindow.dismiss();
                             changeAppBrightness(brightnessNow);
+                        }
+                    });
+
+                    text_invite_code.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            OpenShared();
                         }
                     });
 
@@ -1051,6 +1073,14 @@ public class MainActivity extends BaseActivity implements MainContract.View {
         public void jsCall_setShoppingCartAppTitle(String sParam) {
             ShoppingCartFragment.getInstance().setShoppingCartAppTitle(sParam);
         }
+        @JavascriptInterface
+        public void jsCall_SharedPDF(String sPDFUrl) {
+            new DownloadFile().execute(sPDFUrl, "Shared");
+        }
+        @JavascriptInterface
+        public void jsCall_DownloadPDF(String sPDFUrl) {
+            new DownloadFile().execute(sPDFUrl, "Download");
+        }
     }
 
     private void savePaySchemeOrderData(String sParam){
@@ -1354,42 +1384,6 @@ public class MainActivity extends BaseActivity implements MainContract.View {
 //        });
     }
 
-    private void createBarcodeImage(String barcodeNum) {
-        if (barcodeNum != null && !barcodeNum.equals("")) {
-            dialog_img_qrcode.setBackgroundColor(Color.WHITE);
-            if (willChangeFragment.isAdded()) {
-                MultiFormatWriter multiFormatWriter = new MultiFormatWriter();
-                try {
-                    BitMatrix bitMatrix = new MultiFormatWriter().encode(barcodeNum, BarcodeFormat.QR_CODE, barcodeWidth, barcodeHeight);
-
-                    int newWidth = 800;
-                    int newHeight = 800;
-
-                    Bitmap bitmap = Bitmap.createBitmap(newWidth, newHeight, Bitmap.Config.ARGB_8888);
-                    float scaleX = (float) newWidth / barcodeWidth;
-                    float scaleY = (float) newHeight / barcodeHeight;
-                    for (int x = 0; x < barcodeWidth; x++) {
-                        for (int y = 0; y < barcodeHeight; y++) {
-                            if (bitMatrix.get(x, y)) {
-                                for (int scaledX = (int) (x * scaleX); scaledX < (int) ((x + 1) * scaleX); scaledX++) {
-                                    for (int scaledY = (int) (y * scaleY); scaledY < (int) ((y + 1) * scaleY); scaledY++) {
-                                        bitmap.setPixel(scaledX, scaledY, Color.BLACK);
-                                    }
-                                }
-                            }
-                        }
-                    }
-                    dialog_img_qrcode.setImageBitmap(bitmap);
-                } catch (WriterException e) {
-                    e.printStackTrace();
-                }
-            }
-
-            brightnessNow = getSystemBrightness();
-            changeAppBrightness(255);
-        }
-    }
-
     private int getSystemBrightness() {
         int systemBrightness = 0;
         try {
@@ -1528,5 +1522,133 @@ public class MainActivity extends BaseActivity implements MainContract.View {
 
         // 更新 FrameLayout 的父容器的參數
         frameLayout.setLayoutParams(layoutParams);
+    }
+
+    public void OpenShared(){
+        // 获取剪贴板管理器
+        ClipboardManager clipboard = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
+        String copiedText = mainPresenter.getUserName() + " 邀請您下載 " + EOrderApplication.CUSTOMER_NAME + " APP，註冊時輸入邀請碼: " + mainPresenter.getInvitationCode() + "，即可獲得新會員獎勵";
+        //copiedText += "\niOS下載連結 : https://itunes.apple.com/app/id6463211336";
+        //copiedText += "\nAndroid下載連結 : https://play.google.com/store/apps/details?id=com.hamels.daybydayegg";
+        if (clipboard != null) {
+            // 创建一个ClipData对象，将文本复制到剪贴板
+            ClipData clip = ClipData.newPlainText("Copied Text", copiedText);
+            clipboard.setPrimaryClip(clip);
+            Toast.makeText(this, "已複製", Toast.LENGTH_SHORT).show();
+        }
+
+        // 打开分享对话框
+        Intent shareIntent = new Intent(Intent.ACTION_SEND);
+        shareIntent.setType("text/plain");
+        shareIntent.putExtra(Intent.EXTRA_TEXT, copiedText);
+        startActivity(Intent.createChooser(shareIntent, "分享到"));
+    }
+
+    private void createQRcodeImage(String qrcodeNum, ImageView qrcode_img) {
+        if (qrcodeNum != null && !qrcodeNum.equals("")) {
+            qrcode_img.setBackgroundColor(Color.WHITE);
+            if (willChangeFragment.isAdded()) {
+                MultiFormatWriter multiFormatWriter = new MultiFormatWriter();
+                try {
+                    BitMatrix bitMatrix = new MultiFormatWriter().encode(qrcodeNum, BarcodeFormat.QR_CODE, barcodeWidth, barcodeHeight);
+
+                    int newWidth = 250;
+                    int newHeight = 250;
+
+                    Bitmap bitmap = Bitmap.createBitmap(newWidth, newHeight, Bitmap.Config.ARGB_8888);
+                    float scaleX = (float) newWidth / barcodeWidth;
+                    float scaleY = (float) newHeight / barcodeHeight;
+                    for (int x = 0; x < barcodeWidth; x++) {
+                        for (int y = 0; y < barcodeHeight; y++) {
+                            if (bitMatrix.get(x, y)) {
+                                for (int scaledX = (int) (x * scaleX); scaledX < (int) ((x + 1) * scaleX); scaledX++) {
+                                    for (int scaledY = (int) (y * scaleY); scaledY < (int) ((y + 1) * scaleY); scaledY++) {
+                                        bitmap.setPixel(scaledX, scaledY, Color.BLACK);
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    qrcode_img.setImageBitmap(bitmap);
+                } catch (WriterException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            brightnessNow = getSystemBrightness();
+            changeAppBrightness(255);
+        }
+    }
+    private class DownloadFile extends AsyncTask<String, Void, Boolean> {
+
+        @Override
+        protected Boolean doInBackground(String... strings) {
+            Boolean bResult = false;
+            String fileUrl = strings[0];
+            String Mode = strings[1];
+            File pdffile = new File(fileUrl);
+            String fileName = pdffile.getName();
+            try {
+                // 检查是否已经获得写入外部存储的权限
+                if (ContextCompat.checkSelfPermission(MainActivity.this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+                    // 如果没有权限，请求权限
+                    ActivityCompat.requestPermissions(MainActivity.this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, REQUEST_WRITE_EXTERNAL_STORAGE);
+                }
+
+                URL url = new URL(fileUrl);
+                HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+                connection.setRequestMethod("GET");
+                connection.connect();
+
+                File storageDir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS);
+                storageDir.mkdirs();
+                sPDFDir = storageDir.getPath();
+                File oldFile = new File(storageDir.getPath() + "/" + fileName);
+                if (oldFile.exists()) {
+                    // 如果文件存在，首先删除它
+                    oldFile.delete();
+                }
+                File pdfFile = new File(storageDir, fileName);
+
+                FileOutputStream output = new FileOutputStream(pdfFile);
+                InputStream input = connection.getInputStream();
+
+                byte[] buffer = new byte[1024];
+                int len;
+                while ((len = input.read(buffer)) != -1) {
+                    output.write(buffer, 0, len);
+                }
+
+                output.close();
+                input.close();
+
+                bResult = true;
+
+                if(Mode.equals("Shared")) {
+                    // Share the downloaded PDF using FileProvider
+                    Intent shareIntent = new Intent();
+                    shareIntent.setAction(Intent.ACTION_SEND);
+                    shareIntent.setType("application/pdf");
+
+                    Uri pdfUri = FileProvider.getUriForFile(getApplicationContext(), "com.hamels.daybydayegg.fileprovider", pdfFile);
+                    shareIntent.putExtra(Intent.EXTRA_STREAM, pdfUri);
+
+                    // Grant temporary read permission to the content URI
+                    shareIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+
+                    startActivity(Intent.createChooser(shareIntent, "分享到"));
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            return bResult;
+        }
+        @Override
+        protected void onPostExecute(Boolean success) {
+            if (success) {
+                // 共享成功，显示成功消息
+                Toast.makeText(getApplicationContext(), "文件已成功儲存至: " + sPDFDir, Toast.LENGTH_LONG).show();
+            }
+        }
     }
 }

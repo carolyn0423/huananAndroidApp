@@ -256,6 +256,14 @@ public class MainPresenter extends BasePresenter<MainContract.View> implements M
 
     public String getApiUrl() { return repositoryManager.getApiUrl(); }
 
+    public String getInvitationCode() {
+        return repositoryManager.getInvitationCode();
+    }
+
+    public String getUserName() {
+        return repositoryManager.getUserName();
+    }
+
     public String getUserAccount() { return repositoryManager.getUserAccount(); }
 
     public String getUserPw() { return repositoryManager.getUserPassword(); }

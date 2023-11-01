@@ -45,8 +45,8 @@ public class MemberInfoChangeFragment extends BaseFragment implements MemberInfo
 
     private static MemberInfoChangeFragment fragment;
     private RadioGroup radioGender;
-    private TextView tvName, tvBirth, tvPhone, btnSend;
-    private EditText etMail, etAddress;
+    private TextView tvName, tvBirth, tvPhone, tvInvitationCode, tvRecommendMember, btnSend;
+    private EditText etMail, etAddress, etCarrierNo;
     private Spinner spinner_city, spinner_area;
     private ArrayAdapter<String> CitySpinnerList, AreaSpinnerList;
 
@@ -84,13 +84,16 @@ public class MemberInfoChangeFragment extends BaseFragment implements MemberInfo
         spinner_city = view.findViewById(R.id.spinner_city);
         spinner_area = view.findViewById(R.id.spinner_area);
 
-
         radioGender = view.findViewById(R.id.group_gender);
         tvName = view.findViewById(R.id.tv_name);
         tvBirth = view.findViewById(R.id.tv_birth);
         tvPhone = view.findViewById(R.id.tv_phone);
+        tvInvitationCode = view.findViewById(R.id.tv_invitation_code);
+        //tvRecommendMember = view.findViewById(R.id.tv_recommend_member);
+
         etMail = view.findViewById(R.id.et_mail);
         etAddress = view.findViewById(R.id.et_address);
+        etCarrierNo = view.findViewById(R.id.et_carrier_no);
 
         btnSend = view.findViewById(R.id.tv_send);
         btnSend.setOnClickListener(this);
@@ -118,6 +121,8 @@ public class MemberInfoChangeFragment extends BaseFragment implements MemberInfo
         tvPhone.setText(user.getMobile());
         etMail.setText(user.getEmail());
         etAddress.setText(user.getAddress());
+        etCarrierNo.setText(user.getCarrierNo());
+        tvInvitationCode.setText(user.getInvitationCode().equals("") ? "無輸入" : "");
 
         int spinnerCity = 0;
         if(user.getCitycode()!=null){
@@ -236,7 +241,7 @@ public class MemberInfoChangeFragment extends BaseFragment implements MemberInfo
         int id = view.getId();
         if (id == R.id.tv_send){
 //                memberPresenter.updateMember(spinner_city.getSelectedItem().toString(), spinner_area.getSelectedItem().toString(), etAddress.getText().toString(), etMail.getText().toString(), radioGender.getCheckedRadioButtonId(), tvBirth.getText().toString());
-            memberPresenter.updateMember(EOrderApplication.CUSTOMER_ID, spinner_city.getSelectedItem().toString(), spinner_area.getSelectedItem().toString(), etAddress.getText().toString(), etMail.getText().toString(), tvBirth.getText().toString());
+            memberPresenter.updateMember(EOrderApplication.CUSTOMER_ID, spinner_city.getSelectedItem().toString(), spinner_area.getSelectedItem().toString(), etAddress.getText().toString(), etMail.getText().toString(), tvBirth.getText().toString(), etCarrierNo.getText().toString());
         }else if (id == R.id.tv_birth){
             showDatePickerDialog();
         }
