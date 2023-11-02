@@ -122,7 +122,7 @@ public class MemberInfoChangeFragment extends BaseFragment implements MemberInfo
         etMail.setText(user.getEmail());
         etAddress.setText(user.getAddress());
         etCarrierNo.setText(user.getCarrierNo());
-        tvInvitationCode.setText(user.getInvitationCode().equals("") ? "無輸入" : "");
+        tvInvitationCode.setText(user.getInvitationCode().equals("") ? "無輸入" : user.getInvitationCode());
 
         int spinnerCity = 0;
         if(user.getCitycode()!=null){
