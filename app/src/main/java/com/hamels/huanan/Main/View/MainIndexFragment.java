@@ -2,6 +2,7 @@ package com.hamels.huanan.Main.View;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -16,12 +17,15 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.hamels.huanan.Base.BaseActivity;
 import com.hamels.huanan.Base.BaseFragment;
 import com.hamels.huanan.EOrderApplication;
+import com.hamels.huanan.Login.VIew.LoginActivity;
 import com.hamels.huanan.Main.Contract.MainIndexContract;
 import com.hamels.huanan.Main.Presenter.MainIndexPresenter;
 import com.hamels.huanan.R;
 import com.hamels.huanan.Repository.Model.Carousel;
+import com.hamels.huanan.Utils.IntentUtils;
 import com.stx.xhb.xbanner.XBanner;
 
 import java.util.ArrayList;
@@ -154,6 +158,20 @@ public class MainIndexFragment extends BaseFragment implements MainIndexContract
         super.onResume();
 
         mainindexPresenter.getCarouselList(CUSTOMER_ID);
+    }
+
+    public void getVeriftCode() {
+        new AlertDialog.Builder(fragment.getActivity())
+                .setTitle(R.string.dialog_hint)
+                .setMessage("尚未完成簡訊驗證")
+                .setPositiveButton(android.R.string.ok,
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        ((MainActivity) getActivity()).intentToVerifyCode();
+                    }
+                })
+                .show();
     }
 
     public void CustomerOnlineISFalse() {

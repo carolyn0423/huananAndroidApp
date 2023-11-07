@@ -46,4 +46,5 @@ public class MessageListPresenter extends BasePresenter<MessageListContract.View
             }
         });
     }
+    public boolean getUserLogin(){return repositoryManager.getUserLogin();}
 }

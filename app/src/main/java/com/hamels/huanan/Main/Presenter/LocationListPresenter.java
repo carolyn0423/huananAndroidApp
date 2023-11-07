@@ -51,7 +51,7 @@ public class LocationListPresenter extends BasePresenter<LocationListContract.Vi
         }
     }
 
-    public boolean getUserLogin(){ return repositoryManager.getUserLogin(); }
+    public boolean getUserLogin(){ return repositoryManager.getUserLogin();}
 
     public String getSourceActive() { return repositoryManager.getSourceActive(); }
 

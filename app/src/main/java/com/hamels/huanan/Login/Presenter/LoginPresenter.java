@@ -16,7 +16,6 @@ public class LoginPresenter extends BasePresenter<LoginContract.View> implements
     public LoginPresenter(LoginContract.View view, RepositoryManager repositoryManager) {
         super(view, repositoryManager);
     }
-
     @Override
     public void register() {
         view.intentToRegister();

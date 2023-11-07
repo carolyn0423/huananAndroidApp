@@ -12,6 +12,8 @@ public interface MainIndexContract {
         void setMemberCardImg(String group);
 
         void CustomerOnlineISFalse();
+
+        void getVeriftCode();
     }
 
     interface Presenter extends BaseContract.Presenter {

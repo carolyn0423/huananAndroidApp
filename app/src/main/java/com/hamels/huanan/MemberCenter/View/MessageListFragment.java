@@ -55,7 +55,9 @@ public class MessageListFragment extends BaseFragment implements MessageListCont
     @Override
     public void onResume() {
         super.onResume();
-        startAutoRefresh();
+        if(messagePresenter.getUserLogin()){
+            startAutoRefresh();
+        }
     }
 
     @Override

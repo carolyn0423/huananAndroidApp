@@ -126,7 +126,9 @@ public class DonateFragment extends BaseFragment implements DonateContract.View{
         donateListAdapter = new DonateListAdapter(donatePresenter);
         recyclerView.setAdapter(donateListAdapter);
 
-        donatePresenter.getDonateList();
+        if(donatePresenter.getUserLogin()) {
+            donatePresenter.getDonateList();
+        }
     }
 
     private void initDataHistory(View view) {
@@ -145,7 +147,9 @@ public class DonateFragment extends BaseFragment implements DonateContract.View{
         donatelisthistoryAdapter = new DonateListHistoryAdapter(donatePresenter);
         recyclerView.setAdapter(donatelisthistoryAdapter);
 
-        donatePresenter.getTicketUsedHistory();
+        if(donatePresenter.getUserLogin()) {
+            donatePresenter.getTicketUsedHistory();
+        }
     }
 
     @Override
