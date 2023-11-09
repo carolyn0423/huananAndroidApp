@@ -158,11 +158,11 @@ public class RepositoryManager {
 
     public void callDeleteMemberApi(String member_id, final BaseContract.ValueCallback<String> valueCallback) {
         basePresenter.startCallApi();
-        MemberRepository.getInstance().getDeleteMember(member_id, new ApiCallback<BaseModel<String>>(basePresenter) {
+        MemberRepository.getInstance().getDeleteMember(member_id, new ApiCallback<BaseModel<List<Map<String, String>>>>(basePresenter) {
             @Override
-            public void onApiSuccess(BaseModel<String> response) {
+            public void onApiSuccess(BaseModel<List<Map<String, String>>> response) {
                 super.onApiSuccess(response);
-                valueCallback.onValueCallback(TASK_POST_DELETE_MEMBER, response.getItems());
+                valueCallback.onValueCallback(TASK_POST_DELETE_MEMBER, response.getMessage());
             }
         });
     }

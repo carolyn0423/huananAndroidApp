@@ -18,6 +18,8 @@ public interface MemberCenterContract {
         void setPointData(User user);
 
         void deleteMember();
+
+        void deleteError(String s);
     }
 
     interface Presenter extends BaseContract.Presenter {

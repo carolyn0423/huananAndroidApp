@@ -167,7 +167,6 @@ public class MemberCenterFragment extends BaseFragment implements View.OnClickLi
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
                             memberPresenter.getDeleteMember();
-                            deleteMember();
                         }
                     })
                     .setNegativeButton(android.R.string.no, null)
@@ -208,6 +207,15 @@ public class MemberCenterFragment extends BaseFragment implements View.OnClickLi
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         memberPresenter.logout();
+                    }
+                })
+                .show();
+    }
+    public void deleteError(String sMessage){
+        new AlertDialog.Builder(getContext()).setTitle(null).setMessage(sMessage)
+                .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
                     }
                 })
                 .show();
