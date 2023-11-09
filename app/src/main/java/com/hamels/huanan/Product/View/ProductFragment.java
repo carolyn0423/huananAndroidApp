@@ -138,14 +138,14 @@ public class ProductFragment extends BaseFragment implements ProductContract.Vie
             title.setTypeface(typeface);
         }
         //
-        productPresenter.getProductList(location_id,sort , Integer.toString(product_type_main_id) , "" , "", isETicket);
+        productPresenter.getProductList(location_id, sort, Integer.toString(product_type_main_id), "", "", isETicket);
 
         //上方分頁功能監聽觸發事件
         tabLayout.addOnTabSelectedListener(new TabLayout.BaseOnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
                 type_id = tab.getTag().toString();
-                productPresenter.getProductList(location_id,sort , Integer.toString(product_type_main_id) , type_id , "", isETicket);
+                productPresenter.getProductList(location_id, sort, Integer.toString(product_type_main_id), type_id, "", isETicket);
                 //改變Unselected tab font
                 TextView title = (TextView)(((LinearLayout) ((LinearLayout) tabLayout.getChildAt(0)).getChildAt(tab.getPosition())).getChildAt(1));
                 Typeface typeface = ResourcesCompat.getFont(getActivity(), R.font.noto_sans_tc_medium);
@@ -186,7 +186,7 @@ public class ProductFragment extends BaseFragment implements ProductContract.Vie
     //MainActivity呼叫用  排序 傳入後重新排序
     public void SortMode(String sSortMode){
         sort = sSortMode;
-        productPresenter.getProductList(location_id,sort , Integer.toString(product_type_main_id) , type_id , "", isETicket);
+        productPresenter.getProductList(location_id, sort ,Integer.toString(product_type_main_id), type_id,"", isETicket);
     }
 }
 

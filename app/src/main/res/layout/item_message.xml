@@ -22,7 +22,7 @@
             android:layout_marginEnd="20dp"
             android:gravity="center_vertical"
             android:textColor="@color/greyMessage"
-            android:textSize="13sp"
+            android:textSize="14dp"
             android:text="2021/05/19 12:10"
             android:layout_margin="8dp"
             android:paddingBottom="8dp"
@@ -58,7 +58,7 @@
                 android:layout_toStartOf="@+id/triangle_gray"
                 android:padding="15dp"
                 android:textColor="@color/white"
-                android:textSize="13sp"
+                android:textSize="14dp"
                 android:background="@drawable/rec_solid_green_button"/>
         </RelativeLayout>
 
@@ -83,7 +83,7 @@
             android:layout_marginEnd="20dp"
             android:gravity="center_vertical"
             android:textColor="@color/greyMenu"
-            android:textSize="13sp"
+            android:textSize="14dp"
             android:text="管理員"
             android:layout_margin="8dp"
             android:paddingBottom="8dp"
@@ -100,7 +100,7 @@
             android:layout_marginEnd="20dp"
             android:gravity="center_vertical"
             android:textColor="@color/greyMessage"
-            android:textSize="13sp"
+            android:textSize="14dp"
             android:text="2021/05/19 12:10"
             android:layout_margin="8dp"
             android:paddingBottom="8dp"
@@ -132,7 +132,7 @@
                 android:layout_toEndOf="@+id/triangle_green"
                 android:padding="15dp"
                 android:text="留言"
-                android:textSize="13sp"
+                android:textSize="14dp"
                 android:textColor="@color/white"
                 android:background="@drawable/rec_solid_gray_button"
                 />

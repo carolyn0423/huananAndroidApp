@@ -73,7 +73,7 @@
                 android:letterSpacing="0.2"
                 android:text=""
                 android:textColor="#FFFFFF"
-                android:textSize="18sp"
+                android:textSize="18dp"
                 app:layout_constraintBottom_toBottomOf="@+id/img_member_card"
                 app:layout_constraintEnd_toEndOf="@+id/img_member_card"
                 app:layout_constraintStart_toStartOf="parent" />
@@ -173,7 +173,7 @@
                     android:layout_marginTop="4dp"
                     android:text="行動支付"
                     style="@style/fontRegularTw.greyDoubleDark"
-                    android:textSize="13sp"
+                    android:textSize="14dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="@+id/guideline4" />
@@ -266,7 +266,7 @@
                     android:layout_marginTop="4dp"
                     android:text="優惠券"
                     style="@style/fontRegularTw.greyDoubleDark"
-                    android:textSize="13sp"
+                    android:textSize="14dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="@+id/guideline23" />
@@ -329,7 +329,7 @@
                     android:layout_marginTop="4dp"
                     android:text="抽獎抽籤"
                     style="@style/fontRegularTw.greyDoubleDark"
-                    android:textSize="13sp"
+                    android:textSize="14dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="@+id/guideline24" />
@@ -392,7 +392,7 @@
                     android:layout_marginTop="4dp"
                     android:text="企業專區"
                     style="@style/fontRegularTw.greyDoubleDark"
-                    android:textSize="130sp"
+                    android:textSize="130dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/imageView118" />

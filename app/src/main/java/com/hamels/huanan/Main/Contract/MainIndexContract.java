@@ -13,7 +13,7 @@ public interface MainIndexContract {
 
         void CustomerOnlineISFalse();
 
-        void getVeriftCode();
+        void getNoVerift();
     }
 
     interface Presenter extends BaseContract.Presenter {
@@ -26,5 +26,7 @@ public interface MainIndexContract {
         void checkMemberData();
 
         boolean getUserLogin();
+
+        void logout();
     }
 }

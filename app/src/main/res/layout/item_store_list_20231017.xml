@@ -14,7 +14,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="50dp"
         android:layout_marginTop="20dp"
-        android:textSize="16sp"
+        android:textSize="16dp"
         android:textColor="#3AAD37"
         android:text="商家"
         app:layout_constraintStart_toStartOf="parent"
@@ -53,7 +53,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="點擊看品牌介紹"
-            android:textSize="11sp"
+            android:textSize="14dp"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="5dp" />
 

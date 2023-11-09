@@ -3,21 +3,21 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         style="@style/fontRegularTw.GreyDark"
-        android:textSize="10sp"
+        android:textSize="12dp"
         android:id="@+id/item_news"
         android:checked="true"
         android:icon="@drawable/icons8_home"
         android:title="@string/tab_main" />
     <item
         style="@style/fontBoldTw.GreyDoubleDark"
-        android:textSize="10sp"
+        android:textSize="12dp"
         android:id="@+id/item_shop"
         android:icon="@drawable/icons8_bag"
         android:title="產品專區" />
 
     <item
         style="@style/fontRegularTw.GreyDark"
-        android:textSize="10sp"
+        android:textSize="12dp"
         android:id="@+id/item_member_info"
         android:icon="@drawable/icons8_fastcart"
         android:title="@string/tab_shopping_cart" />
@@ -31,7 +31,7 @@
     -->
     <item
         style="@style/fontRegularTw.GreyDark"
-        android:textSize="10sp"
+        android:textSize="12dp"
         android:id="@+id/item_member_card"
         android:icon="@drawable/icons8_user"
         android:title="@string/tab_member_info" />

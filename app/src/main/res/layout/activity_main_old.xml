@@ -98,7 +98,7 @@
                         android:gravity="center"
                         android:text="會員編碼"
                         android:textColor="@color/white"
-                        android:textSize="13sp" />
+                        android:textSize="14dp" />
                 </LinearLayout>
 
                 <View
@@ -131,7 +131,7 @@
                         android:gravity="center"
                         android:text="你是什麼咖"
                         android:textColor="@color/white"
-                        android:textSize="13sp" />
+                        android:textSize="14dp" />
                 </LinearLayout>
 
                 <View
@@ -164,7 +164,7 @@
                         android:gravity="center"
                         android:text="我的訊息"
                         android:textColor="@color/white"
-                        android:textSize="13sp" />
+                        android:textSize="14dp" />
                 </LinearLayout>
 
             </LinearLayout>
@@ -230,7 +230,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="@string/tab_main"
-                            android:textSize="13sp"
+                            android:textSize="14dp"
                             android:layout_marginTop="5dp"
                             android:gravity="center"
                             android:textColor="#FFFFFF" />
@@ -259,7 +259,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="產品專區"
-                            android:textSize="13sp"
+                            android:textSize="14dp"
                             android:layout_marginTop="5dp"
                             android:gravity="center"
                             android:textColor="#FFFFFF" />
@@ -288,7 +288,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="購物車"
-                            android:textSize="13sp"
+                            android:textSize="14dp"
                             android:layout_marginTop="5dp"
                             android:gravity="center"
                             android:textColor="#FFFFFF" />
@@ -317,7 +317,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="@string/tab_member_info"
-                            android:textSize="13sp"
+                            android:textSize="14dp"
                             android:layout_marginTop="5dp"
                             android:gravity="center"
                             android:textColor="#FFFFFF" />
