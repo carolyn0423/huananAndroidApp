@@ -66,7 +66,9 @@
             android:layout_height="35dp"
             android:gravity="center"
             android:textSize="16dp"
-            android:text="XXXX"
+            android:text=""
+            android:maxLines="2"
+            android:ellipsize="end"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tv_desc_right" />
@@ -173,7 +175,9 @@
             android:layout_height="35dp"
             android:gravity="center"
             android:textSize="16dp"
-            android:text="XXXX"
+            android:text=""
+            android:maxLines="2"
+            android:ellipsize="end"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tv_desc_left" />
