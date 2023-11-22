@@ -535,6 +535,7 @@ public class ProductDetailFragment extends BaseFragment implements ProductDetail
             @Override
             public void loadBanner(XBanner banner, Object model, View view, int position) {
                 ImageView img_carousel = (ImageView) view.findViewById(R.id.img_carousel);
+                img_carousel.setScaleType(ImageView.ScaleType.FIT_XY);
                 Glide
                         .with(getActivity())
                         .load(((CustomViewsInfo) model).getXBannerUrl())
