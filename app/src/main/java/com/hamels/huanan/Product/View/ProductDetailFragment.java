@@ -253,7 +253,7 @@ public class ProductDetailFragment extends BaseFragment implements ProductDetail
                             addCart();
                         }else{
                             // 若有完售項目，POP
-                            new AlertDialog.Builder(fragment.getActivity()).setTitle(R.string.dialog_hint).setMessage("今日完售商品僅適用預約取餐，是否確定？")
+                            new AlertDialog.Builder(fragment.getActivity()).setTitle(R.string.dialog_hint).setMessage("今日完售商品僅適用預約取貨，是否確定？")
                                     .setPositiveButton(R.string.verify, new DialogInterface.OnClickListener() {
                                         @Override
                                         public void onClick(DialogInterface dialog, int which) {
@@ -281,7 +281,7 @@ public class ProductDetailFragment extends BaseFragment implements ProductDetail
                                             addCart();
                                         }else{
                                             // 若有完售項目，POP
-                                            new AlertDialog.Builder(fragment.getActivity()).setTitle(R.string.dialog_hint).setMessage("今日完售商品僅適用預約取餐，是否確定？")
+                                            new AlertDialog.Builder(fragment.getActivity()).setTitle(R.string.dialog_hint).setMessage("今日完售商品僅適用預約取貨，是否確定？")
                                                     .setPositiveButton(R.string.verify, new DialogInterface.OnClickListener() {
                                                         @Override
                                                         public void onClick(DialogInterface dialog, int which) {
@@ -310,7 +310,7 @@ public class ProductDetailFragment extends BaseFragment implements ProductDetail
                         addCart();
                     }else{
                         // 若有完售項目，POP
-                        new AlertDialog.Builder(fragment.getActivity()).setTitle(R.string.dialog_hint).setMessage("今日完售商品僅適用預約取餐，是否確定？")
+                        new AlertDialog.Builder(fragment.getActivity()).setTitle(R.string.dialog_hint).setMessage("今日完售商品僅適用預約取貨，是否確定？")
                                 .setPositiveButton(R.string.verify, new DialogInterface.OnClickListener() {
                                     @Override
                                     public void onClick(DialogInterface dialog, int which) {
