@@ -129,6 +129,7 @@ public class ProductDetailFragment extends BaseFragment implements ProductDetail
 
     private void initView(View view) {
         ((MainActivity) getActivity()).EditFragmentBottom(true, true);
+        ((MainActivity) getActivity()).setAppTitleString(EOrderApplication.LOCATION_NAME);
         ((MainActivity) getActivity()).setBackButtonVisibility(true);
         ((MainActivity) getActivity()).setMessageButtonVisibility(true);
         ((MainActivity) getActivity()).setMailButtonVisibility(true);
@@ -173,12 +174,12 @@ public class ProductDetailFragment extends BaseFragment implements ProductDetail
         view_scroll = view.findViewById(R.id.view_scroll);
         tv_water_mask = view.findViewById(R.id.tv_water_mask);
         if (isETicket.equals("Y")) {
-            ((MainActivity) getActivity()).setAppTitle(R.string.tab_ticket);
+            //((MainActivity) getActivity()).setAppTitle(R.string.tab_ticket);
             layout_spec.setVisibility(View.GONE);
             //img_product_ribbon.setVisibility(View.VISIBLE);
             constraintLayout_conf.setVisibility(View.GONE);
         } else {
-            ((MainActivity) getActivity()).setAppTitle(R.string.tab_shop);
+            //((MainActivity) getActivity()).setAppTitle(R.string.tab_shop);
             layout_spec.setVisibility(View.VISIBLE);
             //img_product_ribbon.setVisibility(View.GONE);
             constraintLayout_conf.setVisibility(View.VISIBLE);

@@ -16,6 +16,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.hamels.huanan.Base.BaseFragment;
+import com.hamels.huanan.EOrderApplication;
 import com.hamels.huanan.Main.View.MainActivity;
 import com.hamels.huanan.Product.Adapter.ProductETicketListAdapter;
 import com.hamels.huanan.Product.Adapter.ProductListAdapter;
@@ -83,7 +84,8 @@ public class ProductFragment extends BaseFragment implements ProductContract.Vie
 
     private void initView(View view) {
         ((MainActivity) getActivity()).EditFragmentBottom(true, true);
-        ((MainActivity) getActivity()).setAppTitle(R.string.tab_shop);
+        //((MainActivity) getActivity()).setAppTitle(R.string.tab_shop);
+        ((MainActivity) getActivity()).setAppTitleString(EOrderApplication.LOCATION_NAME);
         ((MainActivity) getActivity()).setBackButtonVisibility(true);
         ((MainActivity) getActivity()).setMessageButtonVisibility(true);
         ((MainActivity) getActivity()).setMailButtonVisibility(true);

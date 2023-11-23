@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.hamels.huanan.Base.BaseAdapter;
+import com.hamels.huanan.EOrderApplication;
 import com.hamels.huanan.Main.Contract.LocationListContract;
 import com.hamels.huanan.Main.Holder.LocationListHolder;
 import com.hamels.huanan.R;
@@ -108,6 +109,21 @@ public class LocationListAdapter extends BaseAdapter<LocationListHolder> {
         @Override
         public void onClick(View v) {
             int id = v.getId();
+
+            if(id == R.id.btn_product_left){
+                for(int i = 0; i < DataLeft.size(); i++){
+                    if(DataLeft.get(i).getLocationID().equals(v.getTag(v.getId()).toString())){
+                        EOrderApplication.LOCATION_NAME = DataLeft.get(i).getName();
+                    }
+                }
+            }else{
+                for(int i = 0; i < DataRight.size(); i++){
+                    if(DataRight.get(i).getLocationID().equals(v.getTag(v.getId()).toString())){
+                        EOrderApplication.LOCATION_NAME = DataRight.get(i).getName();
+                    }
+                }
+            }
+
             if (id == R.id.btn_product_left || id == R.id.btn_product_right){
                 presenter.goProductMainType(v.getTag(v.getId()).toString());
             }

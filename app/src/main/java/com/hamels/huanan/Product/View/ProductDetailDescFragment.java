@@ -11,6 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.hamels.huanan.Base.BaseFragment;
+import com.hamels.huanan.EOrderApplication;
 import com.hamels.huanan.Main.View.MainActivity;
 import com.hamels.huanan.R;
 import com.hamels.huanan.Repository.Model.Product;
@@ -69,7 +70,8 @@ public class ProductDetailDescFragment extends BaseFragment {
 
     private void initView(View view) {
         ((MainActivity) getActivity()).EditFragmentBottom(true, true);
-        ((MainActivity) getActivity()).setAppTitle(R.string.product_desc);
+        ((MainActivity) getActivity()).setAppTitleString(EOrderApplication.LOCATION_NAME);
+        //((MainActivity) getActivity()).setAppTitle(R.string.product_desc);
         ((MainActivity) getActivity()).refreshBadge();
         ((MainActivity) getActivity()).setBackButtonVisibility(true);
         ((MainActivity) getActivity()).setMessageButtonVisibility(true);

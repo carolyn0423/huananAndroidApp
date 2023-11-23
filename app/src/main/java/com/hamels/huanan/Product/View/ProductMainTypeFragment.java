@@ -18,6 +18,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.hamels.huanan.Base.BaseFragment;
+import com.hamels.huanan.EOrderApplication;
 import com.hamels.huanan.Main.View.MainActivity;
 import com.hamels.huanan.Main.View.MainIndexFragment;
 import com.hamels.huanan.Product.Adapter.ProductETicketListAdapter;
@@ -72,8 +73,8 @@ public class ProductMainTypeFragment extends BaseFragment implements ProductMain
     }
     private void initView(View view) {
         ((MainActivity) getActivity()).EditFragmentBottom(true, true);
-        ((MainActivity) getActivity()).setAppTitle(R.string.main_type_name);
-
+        //((MainActivity) getActivity()).setAppTitle(R.string.main_type_name);
+        ((MainActivity) getActivity()).setAppTitleString(EOrderApplication.LOCATION_NAME);
         ((MainActivity) getActivity()).setBackButtonVisibility(true);
         ((MainActivity) getActivity()).setMailButtonVisibility(true);
         ((MainActivity) getActivity()).setSortButtonVisibility(false);

@@ -922,14 +922,19 @@ public class MainActivity extends BaseActivity implements MainContract.View {
             @Override
             public void onReceivedTitle(WebView view, String title) {
                 super.onReceivedTitle(view, title);
-                if(title.indexOf("html") == -1 && title.indexOf("com") == -1) {
-                    Handler handler = new Handler();
-                    handler.postDelayed(new Runnable() {
-                        @Override
-                        public void run() {
-                            setAppTitleString(title);
-                        }
-                    }, 1000);
+                Fragment currentFragment = getSupportFragmentManager().findFragmentById(R.id.frame);
+                if(currentFragment instanceof ProductDetailFragment){
+
+                }else {
+                    if (title.indexOf("html") == -1 && title.indexOf("com") == -1) {
+                        Handler handler = new Handler();
+                        handler.postDelayed(new Runnable() {
+                            @Override
+                            public void run() {
+                                setAppTitleString(title);
+                            }
+                        }, 1000);
+                    }
                 }
             }
         });
