@@ -4,15 +4,11 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.DataSetObserver;
 import android.graphics.Paint;
-import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.constraintlayout.widget.ConstraintLayout;
-
-import com.bumptech.glide.request.target.CustomViewTarget;
-import com.bumptech.glide.request.transition.Transition;
 import com.google.android.material.tabs.TabLayout;
 import androidx.appcompat.app.AlertDialog;
 import android.text.Html;
@@ -534,39 +530,18 @@ public class ProductDetailFragment extends BaseFragment implements ProductDetail
         for (int i = 0; i < productPictureList.size(); i++) {
             data.add(new CustomViewsInfo(EOrderApplication.sApiUrl + productPictureList.get(i).getPictureurl(), productPictureList.get(i).getId()));
         }
+
+
         mXBanner.setBannerData(R.layout.layout_main_activity, data);
         mXBanner.loadImage(new XBanner.XBannerAdapter() {
             @Override
             public void loadBanner(XBanner banner, Object model, View view, int position) {
-                ImageView img_carousel = view.findViewById(R.id.img_carousel);
-                Glide.with(getActivity())
+                ImageView img_carousel = (ImageView) view.findViewById(R.id.img_carousel);
+                Glide
+                        .with(getActivity())
                         .load(((CustomViewsInfo) model).getXBannerUrl())
-                        .into(new CustomViewTarget<ImageView, Drawable>(img_carousel) {
-                            @Override
-                            public void onLoadFailed(@Nullable Drawable errorDrawable) {
-                                // 图片加载失败时的操作
-                            }
+                        .into(img_carousel);
 
-                            @Override
-                            public void onResourceReady(@NonNull Drawable resource, @Nullable Transition<? super Drawable> transition) {
-                                int width = resource.getIntrinsicWidth();
-                                int height = resource.getIntrinsicHeight();
-
-                                // 根据图片比例设置 XBanner 的高度
-                                int newHeight = (int) ((float) height / width * getResources().getDisplayMetrics().widthPixels);
-
-                                ConstraintLayout.LayoutParams params = (ConstraintLayout.LayoutParams) mXBanner.getLayoutParams();
-                                params.height = newHeight;
-                                mXBanner.setLayoutParams(params);
-
-                                img_carousel.setImageDrawable(resource);
-                            }
-
-                            @Override
-                            protected void onResourceCleared(@Nullable Drawable placeholder) {
-                                // 图片加载失败或清除的处理
-                            }
-                        });
             }
         });
 
@@ -584,7 +559,7 @@ public class ProductDetailFragment extends BaseFragment implements ProductDetail
         String sTicketSalePrice = mDecimalFormat.format((double) (product.getticket_sales_price() ));
         //String sSalePrice = mDecimalFormat.format((double) (product.getSale_price() * iLimitQuantity));
         String sSalePrice = mDecimalFormat.format((double) (product.getSale_price()));
-       // String sPrice = mDecimalFormat.format((double) (product.getPrice() * iLimitQuantity));
+        // String sPrice = mDecimalFormat.format((double) (product.getPrice() * iLimitQuantity));
         String sPrice = mDecimalFormat.format((double) (product.getPrice() ));
 
         if (isETicket.equals("Y")) {
