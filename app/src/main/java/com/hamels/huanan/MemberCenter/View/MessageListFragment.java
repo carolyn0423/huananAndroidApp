@@ -34,6 +34,7 @@ public class MessageListFragment extends BaseFragment implements MessageListCont
     private MessageListAdapter messageListAdapter;
     private MessageListContract.Presenter messagePresenter;
     private Handler handler = new Handler();
+    private int iMessageCount = 0;
 
     public static MessageListFragment getInstance() {
         if (fragment == null) {
@@ -116,7 +117,11 @@ public class MessageListFragment extends BaseFragment implements MessageListCont
     @Override
     public void setMessageList(List<Message> list) {
         messageListAdapter.setMessages(list);
-        recyclerView.scrollToPosition(list.size() - 1);
         messagePresenter.updateReadMessageApi();
+
+        if(iMessageCount != list.size()){
+            iMessageCount = list.size();
+            recyclerView.scrollToPosition(list.size() - 1);
+        }
     }
 }

@@ -1,5 +1,7 @@
 package com.hamels.huanan.Main.View;
 
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import androidx.annotation.NonNull;
@@ -11,9 +13,11 @@ import android.view.ViewGroup;
 import android.webkit.WebView;
 
 import com.hamels.huanan.Base.BaseFragment;
+import com.hamels.huanan.Login.VIew.LoginActivity;
 import com.hamels.huanan.R;
 import com.hamels.huanan.EOrderApplication;
-
+import com.hamels.huanan.Repository.RepositoryManager;
+import static com.hamels.huanan.Constant.Constant.REQUEST_MAIN_INDEX;
 import java.util.Objects;
 
 public class ShoppingCartFragment extends BaseFragment {
@@ -23,6 +27,7 @@ public class ShoppingCartFragment extends BaseFragment {
     private WebView webView;
     private static final String ORDERTYPE = "orderType";
     private String orderType = "";
+    private RepositoryManager repositoryManager;
 
     public static ShoppingCartFragment getInstance() {
         if (fragment == null) {
@@ -75,19 +80,31 @@ public class ShoppingCartFragment extends BaseFragment {
         ((MainActivity) getActivity()).setMainIndexMessageUnreadVisibility(false);
         ((MainActivity) getActivity()).setBottomNavigationVisibility(true);
         ((MainActivity) getActivity()).setCartBadgeVisibility(true);
+        repositoryManager = getRepositoryManager(getContext());
 
-        switch (orderType) {
-            case "G":
-                webView.loadUrl(EOrderApplication.sApiUrl + EOrderApplication.WEBVIEW_SHOPPING_CART_URL);
-                break;
-            case "E":
-                webView.loadUrl(EOrderApplication.sApiUrl + EOrderApplication.WEBVIEW_SHOPPING_CART_URL2);
-                break;
-            default:
-                webView.loadUrl(EOrderApplication.sApiUrl + EOrderApplication.WEBVIEW_SHOPPING_CART_URL);
-                break;
+        if(EOrderApplication.CUSTOMER_ID.equals("") || EOrderApplication.sApiUrl.equals("") || EOrderApplication.dbConnectName.equals("") ||
+                repositoryManager == null || repositoryManager.getCustomerID() == null || repositoryManager.getCustomerID().equals("")){
+            new androidx.appcompat.app.AlertDialog.Builder(fragment.getActivity()).setTitle(R.string.dialog_hint).setMessage("登入資訊不完整，請重新登入")
+                    .setPositiveButton(R.string.verify, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            Intent intent = new Intent(fragment.getActivity(), LoginActivity.class);
+                            fragment.getActivity().startActivityForResult(intent, REQUEST_MAIN_INDEX);
+                        }
+                    }).show();
+        }else {
+            switch (orderType) {
+                case "G":
+                    webView.loadUrl(EOrderApplication.sApiUrl + EOrderApplication.WEBVIEW_SHOPPING_CART_URL);
+                    break;
+                case "E":
+                    webView.loadUrl(EOrderApplication.sApiUrl + EOrderApplication.WEBVIEW_SHOPPING_CART_URL2);
+                    break;
+                default:
+                    webView.loadUrl(EOrderApplication.sApiUrl + EOrderApplication.WEBVIEW_SHOPPING_CART_URL);
+                    break;
+            }
         }
-
     }
 
     @Override
