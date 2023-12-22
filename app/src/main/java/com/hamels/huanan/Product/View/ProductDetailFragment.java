@@ -550,6 +550,13 @@ public class ProductDetailFragment extends BaseFragment implements ProductDetail
             List<String> labels = new ArrayList<>();
             labels.add("今日完售");
             tv_water_mask.setBackground(new WaterMaskUtils(getContext(),labels,-30,18));
+            //  關閉加入購物車按鍵
+            layout_shopping.setEnabled(false);
+            // 設定按鍵背景為灰色
+            layout_shopping.setBackgroundResource(R.drawable.btn_black_rounded_bg);
+        }else{
+            layout_shopping.setEnabled(true);
+            layout_shopping.setBackgroundResource(R.drawable.btn_blue_rounded_bg);
         }
         location_id = productDetail.get(0).getLocation_id();
         product_type_main_id = productDetail.get(0).getProductTypeMainID();

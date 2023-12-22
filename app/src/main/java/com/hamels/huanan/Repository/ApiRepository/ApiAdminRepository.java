@@ -83,6 +83,7 @@ public class ApiAdminRepository {
         map.put("isPagination", "false");
         map.put("functionname", sFunctionName);
         map.put("modified_user", "app");
+        map.put("sys_name", "android_huanan_appstore_version");
 
         Log.e(TAG,"map : " + map.toString());
 

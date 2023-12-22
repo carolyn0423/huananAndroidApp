@@ -188,7 +188,7 @@ public class VerifyCodeActivity extends BaseActivity implements VerifyCodeContra
 
     @Override
     public void finishActivity() {
-        IntentUtils.intentToMain(this, true, EOrderApplication.CUSTOMER_ID,false);
+        IntentUtils.intentToMain(this, true, EOrderApplication.CUSTOMER_ID,false, false);
     }
 
     class AutoFocusWatchLayout implements TextWatcher {

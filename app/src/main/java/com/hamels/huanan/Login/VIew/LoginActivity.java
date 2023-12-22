@@ -203,6 +203,13 @@ public class LoginActivity extends BaseActivity implements LoginContract.View{
         loginPresenter.getCustomer();
     }
 
+    @Override
+    public void onBackPressed() {
+        IntentUtils.intentToMain(this, false, EOrderApplication.CUSTOMER_ID,false, true);
+        setResult(RESULT_OK);
+        finish();
+    }
+
     protected void onActivityResult(int requestCode, int resultCode, Intent data)
     {
         final IntentResult result = IntentIntegrator.parseActivityResult(requestCode,resultCode,data);
@@ -432,7 +439,7 @@ public class LoginActivity extends BaseActivity implements LoginContract.View{
     public void setResultOkFinishActivity() {
         //  防止登入後自動跳轉到交易明細頁
         getRepositoryManager(this).savePaySchemeOrderData("");
-        IntentUtils.intentToMain(this, true, EOrderApplication.CUSTOMER_ID,true);
+        IntentUtils.intentToMain(this, true, EOrderApplication.CUSTOMER_ID,true, false);
         setResult(RESULT_OK);
         finish();
     }
