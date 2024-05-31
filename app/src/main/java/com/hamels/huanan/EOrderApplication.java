@@ -16,8 +16,9 @@ public class EOrderApplication extends Application {
     public static final String DOMAIN_ADMIN_UAT = "https://www.hamels.com.tw:9941/";
     public static final String DOMAIN_ADMIN_SIT = "https://eorder.hamels.com.tw:9940/";
 
-    public static String ADMIN_DOMAIN = isPrd ? DOMAIN_ADMIN_PRO : DOMAIN_ADMIN_SIT;
-
+    //public static String ADMIN_DOMAIN = isPrd ? DOMAIN_ADMIN_PRO : DOMAIN_ADMIN_SIT;
+    public static String ADMIN_DOMAIN = DOMAIN_ADMIN_SIT;
+    
     public static String CUSTOMER_ID = "110";
     public static String CUSTOMER_NAME = "學田泉";
     public static String sApiUrl = "";
