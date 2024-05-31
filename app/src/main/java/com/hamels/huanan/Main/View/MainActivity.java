@@ -775,8 +775,9 @@ public class MainActivity extends BaseActivity implements MainContract.View {
                 break;
             case 2:
                 for (Fragment f : fragmentList) {
-                    if (f.equals(MainIndexFragment.getInstance())) {
+                    if (f instanceof MainIndexFragment) {
                         isMainIndex = true;
+                        break;
                     }
                 }
                 break;
