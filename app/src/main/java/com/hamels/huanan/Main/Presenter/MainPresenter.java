@@ -12,6 +12,7 @@ import com.hamels.huanan.Main.View.MemberCenterFragment;
 
 import com.hamels.huanan.Main.View.MessageFragment;
 import com.hamels.huanan.Main.View.ShoppingCartFragment;
+import com.hamels.huanan.MemberCenter.View.AdminMessageFragment;
 import com.hamels.huanan.MemberCenter.View.MailDetailFragment;
 import com.hamels.huanan.MemberCenter.View.MailFileFragment;
 import com.hamels.huanan.MemberCenter.View.MessageListFragment;
@@ -175,9 +176,30 @@ public class MainPresenter extends BasePresenter<MainContract.View> implements M
     }
 
     @Override
+    public void checkLoginForMessage(String fragmentName) {
+        if (fragmentName.equals(MessageListFragment.TAG)) {
+            return;
+        }
+
+        if (getUserLogin()) {
+            if(repositoryManager.getShopkeeper().equals("Y")){
+                view.addFragment(AdminMessageFragment.getInstance());
+            }else{
+                view.addFragment(MessageListFragment.getInstance(repositoryManager.getUserID(), repositoryManager.getMobile(), "N"));
+            }
+        } else {
+            view.intentToLogin(REQUEST_MESSAGE);
+        }
+    }
+
+    @Override
     public void checkLoginForMessage() {
-        if (repositoryManager.getUserLogin()) {
-            view.changeTabFragment(MessageFragment.getInstance());
+        if (getUserLogin()) {
+            if(repositoryManager.getShopkeeper().equals("Y")){
+                view.addFragment(AdminMessageFragment.getInstance());
+            }else{
+                view.addFragment(MessageListFragment.getInstance(repositoryManager.getUserID(), repositoryManager.getMobile(), "N"));
+            }
         } else {
             view.intentToLogin(REQUEST_MESSAGE);
         }
@@ -186,7 +208,11 @@ public class MainPresenter extends BasePresenter<MainContract.View> implements M
     @Override
     public void checkLoginForMessageList() {
         if (repositoryManager.getUserLogin()) {
-            view.changeTabFragment(MessageListFragment.getInstance());
+            if(repositoryManager.getShopkeeper().equals("Y")){
+                view.addFragment(AdminMessageFragment.getInstance());
+            }else{
+                view.addFragment(MessageListFragment.getInstance(repositoryManager.getUserID(), repositoryManager.getMobile(), "N"));
+            }
         } else {
             view.intentToLogin(REQUEST_MESSAGE_LIST);
         }
@@ -211,19 +237,6 @@ public class MainPresenter extends BasePresenter<MainContract.View> implements M
             //view.addFragment(MainIndexFragment.getInstance());
         } else {
             view.intentToLogin(REQUEST_MAIL);
-        }
-    }
-
-    @Override
-    public void checkLoginForMessage(String fragmentName) {
-        if (fragmentName.equals(MessageListFragment.TAG)) {
-            return;
-        }
-
-        if (repositoryManager.getUserLogin()) {
-            view.addFragment(MessageListFragment.getInstance());
-        } else {
-            view.intentToLogin(REQUEST_MESSAGE);
         }
     }
 
@@ -258,13 +271,19 @@ public class MainPresenter extends BasePresenter<MainContract.View> implements M
         return repositoryManager.getInvitationCode();
     }
 
+    public String getUserID() { return repositoryManager.getUserID(); }
+
     public String getUserName() {
         return repositoryManager.getUserName();
     }
 
     public String getUserAccount() { return repositoryManager.getUserAccount(); }
 
+    public String getMobile() { return repositoryManager.getMobile(); }
+
     public String getUserPw() { return repositoryManager.getUserPassword(); }
+
+    public String getShopkeeper() { return repositoryManager.getShopkeeper(); }
 
     public void saveSourceActive(String sSourceActive) { repositoryManager.saveSourceActive(sSourceActive); }
 

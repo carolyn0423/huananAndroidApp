@@ -57,12 +57,18 @@ import android.widget.PopupWindow;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
 import com.google.zxing.BarcodeFormat;
+import com.google.zxing.EncodeHintType;
 import com.google.zxing.MultiFormatWriter;
 import com.google.zxing.WriterException;
 import com.google.zxing.common.BitMatrix;
+import com.google.zxing.qrcode.QRCodeWriter;
+import com.google.zxing.qrcode.decoder.ErrorCorrectionLevel;
 import com.hamels.huanan.Donate.View.DonateFragment;
 import com.hamels.huanan.MemberCenter.View.AboutFragment;
+import com.hamels.huanan.MemberCenter.View.AdminMessageFragment;
 import com.hamels.huanan.MemberCenter.View.MemberInfoChangeFragment;
 import com.hamels.huanan.MemberCenter.View.MemberPointFragment;
 import com.hamels.huanan.MemberCenter.View.PasswordChangeFragment;
@@ -71,6 +77,8 @@ import com.hamels.huanan.Product.View.ProductMainTypeFragment;
 import com.hamels.huanan.Repository.ApiRepository.ApiRepository;
 import com.hamels.huanan.Repository.ApiRepository.MemberRepository;
 import com.hamels.huanan.Repository.Model.Customer;
+import com.hamels.huanan.Repository.Model.MessageEvent;
+import com.hamels.huanan.Utils.CustomBottomNavigationView;
 import com.hamels.huanan.Utils.SharedUtils;
 import com.ittianyu.bottomnavigationviewex.BottomNavigationViewEx;
 import com.hamels.huanan.Base.BaseActivity;
@@ -89,6 +97,7 @@ import com.hamels.huanan.Repository.Model.User;
 import com.hamels.huanan.EOrderApplication;
 import com.hamels.huanan.Utils.IntentUtils;
 
+import org.greenrobot.eventbus.EventBus;
 import org.json.JSONObject;
 
 import java.io.File;
@@ -96,7 +105,10 @@ import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 import static com.hamels.huanan.Constant.Constant.REQUEST_COUPON;
 import static com.hamels.huanan.Constant.Constant.REQUEST_MAIL;
@@ -111,13 +123,20 @@ import static com.hamels.huanan.Constant.Constant.REQUEST_LOT_LIST;
 import static com.hamels.huanan.Constant.Constant.REQUEST_DONATE;
 import static com.hamels.huanan.Constant.Constant.REQUEST_MESSAGE_LIST;
 
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
+import okhttp3.WebSocket;
+import okhttp3.WebSocketListener;
+
 public class MainActivity extends BaseActivity implements MainContract.View {
     public static final String TAG = MainActivity.class.getSimpleName();
     private final int BACK_STACK_CLEAR = 0;
     private final int FRAGMENT_REMOVE = 1;
 
     private BaseFragment willChangeFragment;
-    private BottomNavigationViewEx bottomNavigationViewEx;
+    // navigation
+    private CustomBottomNavigationView bottomNavigationView;
     private MainContract.Presenter mainPresenter;
     private WebView webView;
     private static TextView tvShoppingCart, tvShoppingCartETicket, tvMessageUnread;
@@ -160,7 +179,18 @@ public class MainActivity extends BaseActivity implements MainContract.View {
             super.handleMessage(msg);
         }
     };
+    //  WebSocket
+    private WebSocket webSocket;
+    private OkHttpClient client;
+    private Gson gson;
 
+    public void WebSocketManager() {
+        gson = new Gson();
+        client = new OkHttpClient.Builder()
+                .readTimeout(0, TimeUnit.MILLISECONDS)
+                .build();
+        handler = new Handler(Looper.getMainLooper());
+    }
     @Override
     protected void onNewIntent(Intent intent) {
         super.onNewIntent(intent);
@@ -191,6 +221,8 @@ public class MainActivity extends BaseActivity implements MainContract.View {
         setCustomerData();
         initView();
         initAnimation(this);
+
+        WebSocketManager();
     }
 
     @Override
@@ -385,36 +417,35 @@ public class MainActivity extends BaseActivity implements MainContract.View {
             }
         });
         refreshBadge();
-        bottomNavigationViewEx = findViewById(R.id.navigation);
-        bottomNavigationViewEx.enableAnimation(false);
-        bottomNavigationViewEx.setIconSize(20, 20);
-        for (int i = 0; i < bottomNavigationViewEx.getItemCount(); i++) {
-            bottomNavigationViewEx.getIconAt(i).setScaleType(ImageView.ScaleType.CENTER_CROP);
+        bottomNavigationView = findViewById(R.id.navigation);
+        for (int i = 0; i < bottomNavigationView.getMenu().size(); i++) {
+            MenuItem menuItem = bottomNavigationView.getMenu().getItem(i);
+            bottomNavigationView.setIconScaleType(menuItem);
         }
 
-        bottomNavigationViewEx.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
-                int id = menuItem.getItemId();
-                if (id == R.id.item_news){
+        bottomNavigationView.setOnNavigationItemSelectedListener(item -> {
+            // Handle navigation item clicks here
+            switch (item.getItemId()) {
+                case R.id.item_news:
                     setMainIndexMessageUnreadVisibility(true);
                     changeTabFragment(MainIndexFragment.getInstance());
-                }else if (id == R.id.item_shop){
+                    return true;
+                case R.id.item_shop:
                     setMainIndexMessageUnreadVisibility(false);
                     checkMerchantCount("PRODUCT", "N"); //非電子商品
-                }else if (id == R.id.item_member_card){
+                    return true;
+                case R.id.item_member_card:
                     setMainIndexMessageUnreadVisibility(false);
                     mainPresenter.checkLoginForMemberCenter();
-                }else if (id == R.id.item_location){
+                    return true;
+                case R.id.item_location:
                     setMainIndexMessageUnreadVisibility(false);
                     mainPresenter.saveFragmentLocation("");
                     changeTabFragment(LocationFragment.getInstance("Menu"));
-                }
-                return true;
+                    return true;
             }
+            return false;
         });
-
-
 
         //bottomNavigationViewEx.setCurrentItem(0);
         //====for notification 當此MainActivity是由FcmService呼叫帶起時,要直接將畫面轉至訊息中心========
@@ -450,14 +481,12 @@ public class MainActivity extends BaseActivity implements MainContract.View {
                     FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
                     transaction.replace(R.id.frame, fragment);
                     transaction.commit();
-
-                    //  addFragment(MainIndexFragment.getInstance());
-
                     Handler handler = new Handler();
                     handler.postDelayed(new Runnable() {
                         @Override
                         public void run() {
-                            bottomNavigationViewEx.getIconAt(0).callOnClick();
+                            MenuItem menuItem = bottomNavigationView.getMenu().getItem(0);
+                            bottomNavigationView.setIconScaleType(menuItem);
                         }
                     }, 500);
                     break;
@@ -491,7 +520,7 @@ public class MainActivity extends BaseActivity implements MainContract.View {
             /*首頁上方menu*/
             else if (id == R.id.qrcode){
                 if (mainPresenter.getUserLogin()) {
-                    View view = LayoutInflater.from(willChangeFragment.getActivity()).inflate(R.layout.dialog_qrcode, null);
+                    View view = LayoutInflater.from(MainActivity.this).inflate(R.layout.dialog_qrcode, null);
 
                     popupWindow = new PopupWindow(view);
                     popupWindow.setWidth(ViewGroup.LayoutParams.MATCH_PARENT);
@@ -735,7 +764,11 @@ public class MainActivity extends BaseActivity implements MainContract.View {
                 addFragment(DonateFragment.getInstance());
                 break;
             case REQUEST_MESSAGE_LIST:
-                changeTabFragment(MessageListFragment.getInstance());
+                if(mainPresenter.getShopkeeper().equals("Y")){
+                    addFragment(AdminMessageFragment.getInstance());
+                }else{
+                    addFragment(MessageListFragment.getInstance(mainPresenter.getUserID(), mainPresenter.getMobile(), "N"));
+                }
                 break;
         }
     }
@@ -876,8 +909,8 @@ public class MainActivity extends BaseActivity implements MainContract.View {
 
     public void intentToVerifyCode() { IntentUtils.intentToVerifyCode(this, true); }
 
-    public BottomNavigationViewEx getBottomNavigationViewEx() {
-        return bottomNavigationViewEx;
+    public CustomBottomNavigationView getBottomNavigationView() {
+        return bottomNavigationView;
     }
 
     private void removeAllStackFragment() {
@@ -904,12 +937,14 @@ public class MainActivity extends BaseActivity implements MainContract.View {
     @Override
     public void changeTabFragment(BaseFragment willChangeFragment) {
         this.willChangeFragment = willChangeFragment;
-        Log.e(TAG, "changeTabFragment" + willChangeFragment + "");
+        Log.e(TAG, "changeTabFragment" + willChangeFragment);
         removeAllStackFragment();
+        addFragment(willChangeFragment);
     }
 
     @Override
     public void addFragment(BaseFragment baseFragment) {
+        this.willChangeFragment = baseFragment;
         Fragment fragment = getSupportFragmentManager().findFragmentById(baseFragment.getId());
         if (fragment != null) {
             getSupportFragmentManager().beginTransaction().remove(fragment).commitNow();
@@ -1122,20 +1157,13 @@ public class MainActivity extends BaseActivity implements MainContract.View {
     }
 
     public void setTabPage(int page) {
-        bottomNavigationViewEx.setCurrentItem(page);
+        MenuItem menuItem = bottomNavigationView.getMenu().getItem(page);
+        bottomNavigationView.setIconScaleType(menuItem);
     }
 
     public void resetPassword() {
         setTabPage(0);
         mainPresenter.logout();
-    }
-
-    public void hideBottomNavigation() {
-        bottomNavigationViewEx.setVisibility(View.GONE);
-    }
-
-    public void showBottomNavigation() {
-        bottomNavigationViewEx.setVisibility(View.VISIBLE);
     }
 
     @Override
@@ -1425,7 +1453,7 @@ public class MainActivity extends BaseActivity implements MainContract.View {
     }
 
     public void changeAppBrightness(int brightness) {
-        Window window = willChangeFragment.getActivity().getWindow();
+        Window window = MainActivity.this.getWindow();
         WindowManager.LayoutParams lp = window.getAttributes();
         if (brightness == -1) {
             lp.screenBrightness = WindowManager.LayoutParams.BRIGHTNESS_OVERRIDE_NONE;
@@ -1492,6 +1520,84 @@ public class MainActivity extends BaseActivity implements MainContract.View {
 
         if(compareVersion(VersionCode + "", sOnlineVision)){
             isUpdate = true;
+        }
+    }
+
+    public void CreateWebSocket() {
+        boolean isCreate = false;
+        if((EOrderApplication.WEB_SOCKET_MOBILE_CHK != EOrderApplication.WEB_SOCKET_MOBILE) || webSocket == null){
+            isCreate = true;
+            EOrderApplication.WEB_SOCKET_MOBILE_CHK = EOrderApplication.WEB_SOCKET_MOBILE;
+        }
+
+        if (!EOrderApplication.WEB_SOCKET_PATH.equals("") && !EOrderApplication.WEB_SOCKET_MOBILE.equals("") && isCreate) {
+            String sWssUrl = EOrderApplication.WEB_SOCKET_PATH.replace("https", "wss") + "?connector_id=" + EOrderApplication.WEB_SOCKET_MOBILE;
+            Request request = new Request.Builder().url(sWssUrl).build();
+            webSocket = client.newWebSocket(request, new WebSocketListener() {
+                @Override
+                public void onOpen(WebSocket webSocket, Response response) {
+                    Log.d(TAG, "WebSocket Connected");
+                }
+
+                @Override
+                public void onMessage(WebSocket webSocket, String message) {
+                    Log.d(TAG, "Message Received: " + message);
+                    JsonObject jsonObject = gson.fromJson(message, JsonObject.class);
+                    if (jsonObject.has("function_name")) {
+                        String functionName = jsonObject.get("function_name").getAsString();
+                        if ("leave_message".equals(functionName)) {
+                            EventBus.getDefault().post(new MessageEvent(message));
+                        }
+                    }
+                }
+
+                @Override
+                public void onClosing(WebSocket webSocket, int code, String reason) {
+                    Log.d(TAG, "WebSocket Closing: " + reason);
+                    closeWebSocket();
+                    EOrderApplication.WEB_SOCKET_MOBILE_CHK = "";
+                    scheduleReconnect(); // 安排重連
+                }
+
+                @Override
+                public void onFailure(WebSocket webSocket, Throwable t, Response response) {
+                    Log.d(TAG, "WebSocket Failure: " + t.getMessage());
+                    closeWebSocket();
+                    EOrderApplication.WEB_SOCKET_MOBILE_CHK = "";
+                    scheduleReconnect(); // 安排重連
+                }
+            });
+        }
+    }
+
+    private void scheduleReconnect() {
+        // 延遲重連，避免過於頻繁的重連導致伺服器過載
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                closeWebSocket();
+                CreateWebSocket();
+            }
+        }, 5000);
+    }
+
+    public void closeWebSocket() {
+        if (webSocket != null) {
+            webSocket.close(1000, "Client closed");
+            webSocket = null;
+        }
+    }
+
+    public void sendMessageToWebSocket(String sMemberID) {
+        if (webSocket != null) {
+            JsonObject notification = new JsonObject();
+            notification.addProperty("connection_name", EOrderApplication.dbConnectName);
+            notification.addProperty("customer_id", EOrderApplication.CUSTOMER_ID);
+            notification.addProperty("member_id", sMemberID);
+            notification.addProperty("function_name", "leave_message");
+            String notificationMessage = gson.toJson(notification);
+            webSocket.send(notificationMessage);
+            Log.d("WebSocket", "Sent: " + notificationMessage);
         }
     }
 
@@ -1574,41 +1680,33 @@ public class MainActivity extends BaseActivity implements MainContract.View {
         startActivity(Intent.createChooser(shareIntent, "分享到"));
     }
 
-    private void createQRcodeImage(String qrcodeNum, ImageView qrcode_img) {
-        if (qrcodeNum != null && !qrcodeNum.equals("")) {
-            qrcode_img.setBackgroundColor(Color.WHITE);
-            if (willChangeFragment.isAdded()) {
-                MultiFormatWriter multiFormatWriter = new MultiFormatWriter();
-                try {
-                    BitMatrix bitMatrix = new MultiFormatWriter().encode(qrcodeNum, BarcodeFormat.QR_CODE, barcodeWidth, barcodeHeight);
+    private void createQRcodeImage(String content, ImageView qrcode_img) {
+        QRCodeWriter qrCodeWriter = new QRCodeWriter();
+        Map<EncodeHintType, Object> hints = new HashMap<>();
+        hints.put(EncodeHintType.ERROR_CORRECTION, ErrorCorrectionLevel.H); // 设置纠错级别为最高
+        hints.put(EncodeHintType.CHARACTER_SET, "UTF-8");
 
-                    int newWidth = 250;
-                    int newHeight = 250;
+        try {
+            BitMatrix bitMatrix = qrCodeWriter.encode(content, BarcodeFormat.QR_CODE, 300, 300, hints);
 
-                    Bitmap bitmap = Bitmap.createBitmap(newWidth, newHeight, Bitmap.Config.ARGB_8888);
-                    float scaleX = (float) newWidth / barcodeWidth;
-                    float scaleY = (float) newHeight / barcodeHeight;
-                    for (int x = 0; x < barcodeWidth; x++) {
-                        for (int y = 0; y < barcodeHeight; y++) {
-                            if (bitMatrix.get(x, y)) {
-                                for (int scaledX = (int) (x * scaleX); scaledX < (int) ((x + 1) * scaleX); scaledX++) {
-                                    for (int scaledY = (int) (y * scaleY); scaledY < (int) ((y + 1) * scaleY); scaledY++) {
-                                        bitmap.setPixel(scaledX, scaledY, Color.BLACK);
-                                    }
-                                }
-                            }
-                        }
-                    }
-                    qrcode_img.setImageBitmap(bitmap);
-                } catch (WriterException e) {
-                    e.printStackTrace();
+            int width = bitMatrix.getWidth();
+            int height = bitMatrix.getHeight();
+
+            Bitmap qrBitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
+
+            for (int x = 0; x < width; x++) {
+                for (int y = 0; y < height; y++) {
+                    qrBitmap.setPixel(x, y, bitMatrix.get(x, y) ? getResources().getColor(R.color.Black) : getResources().getColor(R.color.white));
                 }
             }
 
-            brightnessNow = getSystemBrightness();
-            changeAppBrightness(255);
+            qrcode_img.setImageBitmap(qrBitmap);
+
+        } catch (WriterException e) {
+            e.printStackTrace();
         }
     }
+
     private class DownloadFile extends AsyncTask<String, Void, Boolean> {
 
         @Override

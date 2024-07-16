@@ -21,6 +21,7 @@ import com.hamels.huanan.Repository.Model.Faq;
 import com.hamels.huanan.Repository.Model.MemberMessage;
 import com.hamels.huanan.Repository.Model.Merchant;
 import com.hamels.huanan.Repository.Model.Message;
+import com.hamels.huanan.Repository.Model.MessageGroup;
 import com.hamels.huanan.Repository.Model.Order;
 import com.hamels.huanan.Repository.Model.OrderProduct;
 import com.hamels.huanan.Repository.Model.PointHistory;
@@ -714,6 +715,18 @@ public class RepositoryManager {
         });
     }
 
+    public void callMessageListGroup(final BaseContract.ValueCallback<List<MessageGroup>> valueCallback) {
+        basePresenter.startCallApi();
+        String member_id = context.getSharedPreferences("MemberID", Context.MODE_PRIVATE).getString("MemberID", "");
+        MemberRepository.getInstance().getMessageListGroup(member_id, new ApiCallback<BaseModel<List<MessageGroup>>>(basePresenter) {
+            @Override
+            public void onApiSuccess(BaseModel<List<MessageGroup>> response) {
+                super.onApiSuccess(response);
+                valueCallback.onValueCallback(TASK_POST_GET_MESSAGE_LIST_GROUP, response.getItems());
+            }
+        });
+    }
+
     public void callAboutDataApi(final BaseContract.ValueCallback<List<About>> valueCallback) {
         basePresenter.startCallApi();
         String customer_id = context.getSharedPreferences("CustomerID", Context.MODE_PRIVATE).getString("CustomerID", "");
@@ -957,12 +970,9 @@ public class RepositoryManager {
         });
     }
 
-    public void callGetMessageListApi(final BaseContract.ValueCallback<List<Message>> valueCallback) {
+    public void callGetMessageListApi(String sMemberID, final BaseContract.ValueCallback<List<Message>> valueCallback) {
         basePresenter.startCallApi();
-        String customer_id = context.getSharedPreferences("CustomerID", Context.MODE_PRIVATE).getString("CustomerID", "");
-        String member_id = context.getSharedPreferences("MemberID", Context.MODE_PRIVATE).getString("MemberID", "");
-        String canned_message_type = EOrderApplication.MESSAGE_TAG;
-        MemberRepository.getInstance().getMessageList(customer_id,member_id, canned_message_type,new ApiCallback<BaseModel<List<Message>>>(basePresenter) {
+        MemberRepository.getInstance().getMessageList(sMemberID, new ApiCallback<BaseModel<List<Message>>>(basePresenter) {
             @Override
             public void onApiSuccess(BaseModel<List<Message>> response) {
                 super.onApiSuccess(response);
@@ -980,6 +990,17 @@ public class RepositoryManager {
             public void onApiSuccess(BaseModel response) {
                 super.onApiSuccess(response);
                 valueCallback.onValueCallback(TASK_POST_ADD_MEMBER_CONTACT, true);
+            }
+        });
+    }
+
+    public void callAddNewReplyMessageApi(String sReMemberID, String sMessage, final BaseContract.ValueCallback<Boolean> valueCallback) {
+        basePresenter.startCallApi();
+        MemberRepository.getInstance().AddNewReplyMessage(sReMemberID, sMessage, new ApiCallback<BaseModel>(basePresenter) {
+            @Override
+            public void onApiSuccess(BaseModel response) {
+                super.onApiSuccess(response);
+                valueCallback.onValueCallback(TASK_POST_ADD_NEWREPLY_MESSAGE, true);
             }
         });
     }
@@ -1011,6 +1032,12 @@ public class RepositoryManager {
     public void saveAccountInfo(String account, String password) { SharedUtils.getInstance().saveAccountInfo(context, ApiUtils.encryption(account), ApiUtils.encryption(password)); }
 
     public void saveUserID(String member_id) { SharedUtils.getInstance().saveUserID(context, member_id); }
+
+    public void saveUserName(String member_name) { SharedUtils.getInstance().saveUserName(context, member_name); }
+
+    public void saveMobile(String sMobile) { SharedUtils.getInstance().saveMobile(context, sMobile); }
+
+    public void saveShopkeeper(String Shopkeeper) { SharedUtils.getInstance().saveShopkeeper(context, Shopkeeper); }
 
     public Boolean saveLoveCustomer(String customer_id) {
         String sLoveCustomerID = getLoveCustomer();
@@ -1078,9 +1105,11 @@ public class RepositoryManager {
 
     public String getUserID() { return SharedUtils.getInstance().getUserID(context); }
 
-    public void saveUserName(String member_name) { SharedUtils.getInstance().saveUserName(context, member_name); }
-
     public String getUserName() { return SharedUtils.getInstance().getUserName(context); }
+
+    public String getMobile() { return SharedUtils.getInstance().getMobile(context); }
+
+    public String getShopkeeper() { return SharedUtils.getInstance().getShopkeeper(context); }
 
     public String getLoveCustomer() { return SharedUtils.getInstance().getLoveCustomer(context); }
 

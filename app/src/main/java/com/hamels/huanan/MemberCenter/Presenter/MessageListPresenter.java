@@ -18,8 +18,9 @@ public class MessageListPresenter extends BasePresenter<MessageListContract.View
     }
 
     @Override
-    public void getMessageList() {
-        repositoryManager.callGetMessageListApi(new BaseContract.ValueCallback<List<Message>>() {
+    public void getMessageList(String sMemberID) {
+        sMemberID = sMemberID.equals("") ? repositoryManager.getUserID() : sMemberID;
+        repositoryManager.callGetMessageListApi(sMemberID, new BaseContract.ValueCallback<List<Message>>() {
             @Override
             public void onValueCallback(int task, List<Message> type) {
                 Log.e(TAG,type.toString());
@@ -38,13 +39,25 @@ public class MessageListPresenter extends BasePresenter<MessageListContract.View
     }
 
     @Override
-    public void sendMessage(String message) {
-        repositoryManager.callSendMessageApi(message, new BaseContract.ValueCallback<Boolean>() {
+    public void sendMessage(String sMemberID, String sMessage) {
+        repositoryManager.callSendMessageApi(sMessage, new BaseContract.ValueCallback<Boolean>() {
             @Override
             public void onValueCallback(int task, Boolean type) {
-                getMessageList();
+                view.queryCustomerServiceAPI();
             }
         });
     }
-    public boolean getUserLogin(){return repositoryManager.getUserLogin();}
+
+    @Override
+    public void reSendMessage(String sReMemberID, String sMessage) {
+        repositoryManager.callAddNewReplyMessageApi(sReMemberID, sMessage, new BaseContract.ValueCallback<Boolean>() {
+            @Override
+            public void onValueCallback(int task, Boolean type) {
+                view.queryCustomerServiceAPI();
+            }
+        });
+    }
+
+    public boolean getUserLogin() { return repositoryManager.getUserLogin(); }
+    public String getUserID() { return repositoryManager.getUserID(); }
 }
