@@ -179,7 +179,7 @@ public class MainIndexFragment extends BaseFragment implements MainIndexContract
 
     public void CustomerOnlineISFalse() {
         new AlertDialog.Builder(fragment.getActivity()).setTitle(R.string.dialog_hint).setMessage("此商家無開放APP購物").setPositiveButton(android.R.string.ok, null).show();
-        ((MainActivity) Objects.requireNonNull(getActivity())).resetPassword();
+        ((MainActivity) requireActivity()).resetPassword();
     }
 
     @Override
@@ -234,9 +234,15 @@ public class MainIndexFragment extends BaseFragment implements MainIndexContract
 
         mainindexPresenter.checkMemberData();
 
+        CallActive();
+    }
+
+    public void CallActive(){
         Activity activity = getActivity();
         if (activity instanceof MainActivity) {
             ((MainActivity) activity).refreshBadge();
+            EOrderApplication.WEB_SOCKET_MOBILE = mainindexPresenter.getMobile();
+            ((MainActivity) activity).CreateWebSocket();
         }
     }
 }

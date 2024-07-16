@@ -11,6 +11,7 @@ import com.hamels.huanan.Repository.Model.Faq;
 import com.hamels.huanan.Repository.Model.MemberMessage;
 import com.hamels.huanan.Repository.Model.Merchant;
 import com.hamels.huanan.Repository.Model.Message;
+import com.hamels.huanan.Repository.Model.MessageGroup;
 import com.hamels.huanan.Repository.Model.Order;
 import com.hamels.huanan.Repository.Model.PointHistory;
 import com.hamels.huanan.Repository.Model.Product;
@@ -174,8 +175,14 @@ public interface MemberApiService {
     @POST("Message/GetMessageAndReplyData")
     Call<BaseModel<List<Message>>> postGetMessageList(@Body RequestBody body);
 
+    @POST("Message/GetMessageListGroupByMember")
+    Call<BaseModel<List<MessageGroup>>> postGetMessageListGroup(@Body RequestBody body);
+
     @POST("Message/AddNewMessage")
     Call<BaseModel> postAddMemberContact(@Body RequestBody body);
+
+    @POST("Message/AddNewReplyMessage")
+    Call<BaseModel> postAddNewReplyMessage(@Body RequestBody body);
 
     @POST("Message/UpdateMessageReadFlag")
     Call<BaseModel> updateReadMessage(@Body RequestBody body);

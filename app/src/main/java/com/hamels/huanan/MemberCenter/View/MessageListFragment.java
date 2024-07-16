@@ -14,12 +14,18 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 
 import com.hamels.huanan.Base.BaseFragment;
+import com.hamels.huanan.EOrderApplication;
 import com.hamels.huanan.Main.View.MainActivity;
 import com.hamels.huanan.MemberCenter.Adapter.MessageListAdapter;
 import com.hamels.huanan.MemberCenter.Contract.MessageListContract;
 import com.hamels.huanan.MemberCenter.Presenter.MessageListPresenter;
 import com.hamels.huanan.R;
 import com.hamels.huanan.Repository.Model.Message;
+import com.hamels.huanan.Repository.Model.MessageEvent;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.List;
 
@@ -35,40 +41,71 @@ public class MessageListFragment extends BaseFragment implements MessageListCont
     private MessageListContract.Presenter messagePresenter;
     private Handler handler = new Handler();
     private int iMessageCount = 0;
-
-    public static MessageListFragment getInstance() {
+    private String sMemberID = "", sMobile = "";
+    boolean isAdmin = false;
+    //  WebSocket
+    public static MessageListFragment getInstance(String parmMemberID, String sMobile, String isAdmin) {
         if (fragment == null) {
             fragment = new MessageListFragment();
         }
+        Bundle bundle = new Bundle();
+        bundle.putString("MEMBERID", parmMemberID);
+        bundle.putString("MOBILE", sMobile);
+        bundle.putString("ISADMIN", isAdmin);
+        fragment.setArguments(bundle);
         return fragment;
     }
-
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = LayoutInflater.from(container.getContext()).inflate(R.layout.fragment_message_list, container, false);
+        sMemberID = getArguments().getString("MEMBERID", "");
+        sMobile = getArguments().getString("MOBILE", "");
+        isAdmin = getArguments().getString("ISADMIN", "").equals("Y");
         initView(view);
 
-        messagePresenter = new MessageListPresenter(this, getRepositoryManager(getContext()));
+        if(messagePresenter == null) {
+            messagePresenter = new MessageListPresenter(this, getRepositoryManager(getContext()));
+        }
+
+        EOrderApplication.WEB_SOCKET_MOBILE = sMobile;
+        ((MainActivity) getActivity()).CreateWebSocket();
         return view;
     }
 
     @Override
     public void onResume() {
         super.onResume();
-        if(messagePresenter.getUserLogin()){
-            startAutoRefresh();
-        }
     }
 
     @Override
     public void onPause() {
         super.onPause();
-        handler.removeCallbacksAndMessages(null); // 取消所有待执行的任务
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        EventBus.getDefault().register(this);
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        EventBus.getDefault().unregister(this);
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onMessageEvent(MessageEvent event) {
+        queryCustomerServiceAPI();
     }
 
     private void initView(View view) {
-        ((MainActivity) getActivity()).EditFragmentBottom(true, true);
+        if(isAdmin){
+            ((MainActivity) getActivity()).setAppTitleString("回覆留言");
+        }else {
+            ((MainActivity) getActivity()).setAppTitle(R.string.message_list);
+        }
         ((MainActivity) getActivity()).setAppTitle(R.string.message_list);
         ((MainActivity) getActivity()).setBackButtonVisibility(true);
         ((MainActivity) getActivity()).setMessageButtonVisibility(true);
@@ -77,7 +114,6 @@ public class MessageListFragment extends BaseFragment implements MessageListCont
         ((MainActivity) getActivity()).setTopBarVisibility(false);
         ((MainActivity) getActivity()).setAppToolbarVisibility(true);
         ((MainActivity) getActivity()).setMainIndexMessageUnreadVisibility(false);
-        ((MainActivity) getActivity()).setBottomNavigationVisibility(true);
         ((MainActivity) getActivity()).setCartBadgeVisibility(true);
 
         etMessage = view.findViewById(R.id.et_message);
@@ -87,7 +123,13 @@ public class MessageListFragment extends BaseFragment implements MessageListCont
             public void onClick(View v) {
                 String msg = etMessage.getText().toString();
                 if (!msg.isEmpty()) {
-                    messagePresenter.sendMessage(msg);
+                    if(isAdmin){
+                        messagePresenter.reSendMessage(sMemberID, msg);
+                    }else {
+                        messagePresenter.sendMessage(sMemberID, msg);
+                    }
+
+                    ((MainActivity) getActivity()).sendMessageToWebSocket(sMemberID);
                     etMessage.setText("");
                 }
             }
@@ -100,18 +142,19 @@ public class MessageListFragment extends BaseFragment implements MessageListCont
         messageListAdapter = new MessageListAdapter();
         recyclerView.setHasFixedSize(true);
         recyclerView.setAdapter(messageListAdapter);
+
+        queryCustomerServiceAPI();
     }
 
-    private void startAutoRefresh() {
-        handler.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                // 在此处执行API请求以刷新数据
-                messagePresenter.getMessageList();
-                // 完成后再次调度自动刷新
-                startAutoRefresh();
-            }
-        }, 1000);
+    public void queryCustomerServiceAPI() {
+        // 调用查询客服中心API的代码
+        // 更新消息列表
+        if(messagePresenter != null) {
+            messagePresenter.getMessageList(sMemberID);
+        }else{
+            messagePresenter = new MessageListPresenter(this, getRepositoryManager(getContext()));
+            messagePresenter.getMessageList(sMemberID);
+        }
     }
 
     @Override
@@ -119,9 +162,10 @@ public class MessageListFragment extends BaseFragment implements MessageListCont
         messageListAdapter.setMessages(list);
         messagePresenter.updateReadMessageApi();
 
-        if(iMessageCount != list.size()){
-            iMessageCount = list.size();
-            recyclerView.scrollToPosition(list.size() - 1);
-        }
+//        if (iMessageCount != messageListAdapter.getItemCount()) {
+//            iMessageCount = messageListAdapter.getItemCount();
+//            recyclerView.smoothScrollToPosition(messageListAdapter.getItemCount() - 1);
+//        }
+        recyclerView.smoothScrollToPosition(messageListAdapter.getItemCount() - 1);
     }
 }

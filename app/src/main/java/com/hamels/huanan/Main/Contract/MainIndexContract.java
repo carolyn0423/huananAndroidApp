@@ -14,6 +14,8 @@ public interface MainIndexContract {
         void CustomerOnlineISFalse();
 
         void getNoVerift();
+
+        void CallActive();
     }
 
     interface Presenter extends BaseContract.Presenter {
@@ -28,5 +30,7 @@ public interface MainIndexContract {
         boolean getUserLogin();
 
         void logout();
+
+        String getMobile();
     }
 }

@@ -276,7 +276,7 @@
                         android:id="@+id/img_purchase"
                         android:layout_width="25dp"
                         android:layout_height="25dp"
-                        android:Color="#0000FF"
+                        android:color ="#0000FF"
                         app:layout_constraintStart_toEndOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
                         android:duplicateParentState="true"
@@ -540,9 +540,7 @@
 
     <!--    -->
 
-
-
-    <com.ittianyu.bottomnavigationviewex.BottomNavigationViewEx
+    <com.hamels.huanan.Utils.CustomBottomNavigationView
         android:visibility="gone"
         android:id="@+id/navigation"
         android:layout_width="0dp"

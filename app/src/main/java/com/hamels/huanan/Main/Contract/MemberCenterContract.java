@@ -34,5 +34,11 @@ public interface MemberCenterContract {
         boolean getUserLogin();
 
         void saveSourceActive(String sSourceActive);
+
+        Object getShopkeeper();
+
+        String getUserID();
+
+        String getMobile();
     }
 }

@@ -20,6 +20,7 @@ import com.hamels.huanan.Base.BaseFragment;
 import com.hamels.huanan.Main.Contract.MemberCenterContract;
 import com.hamels.huanan.Main.Presenter.MemberCenterPresenter;
 import com.hamels.huanan.MemberCenter.View.AboutFragment;
+import com.hamels.huanan.MemberCenter.View.AdminMessageFragment;
 import com.hamels.huanan.MemberCenter.View.FaqFragment;
 import com.hamels.huanan.MemberCenter.View.MemberInfoChangeFragment;
 import com.hamels.huanan.MemberCenter.View.MemberPointFragment;
@@ -154,12 +155,13 @@ public class MemberCenterFragment extends BaseFragment implements View.OnClickLi
         }else if (id == R.id.btn_trans_record){
             ((MainActivity) getActivity()).addFragment(TransRecordFragment.getInstance("G", "", ""));
         }else if (id == R.id.btn_logout){
-
             memberPresenter.logout();
         }else if (id == R.id.btn_customerservice){
-            EOrderApplication.MESSAGE_TAG = "";
-            ((MainActivity) getActivity()).addFragment(MessageListFragment.getInstance());
-//                Toast.makeText(getActivity(), "此功能未開放", Toast.LENGTH_LONG).show();
+            if(memberPresenter.getShopkeeper().equals("Y")){
+                ((MainActivity) getActivity()).addFragment(AdminMessageFragment.getInstance());
+            }else{
+                ((MainActivity) getActivity()).addFragment(MessageListFragment.getInstance(memberPresenter.getUserID(), memberPresenter.getMobile(), "N"));
+            }
         }else if(id == R.id.btn_member_logout || id == R.id.btn_delete){
             //  刪除會員
             new AlertDialog.Builder(getContext()).setTitle("確定刪除帳號?").setMessage(R.string.delete_member)
@@ -191,8 +193,9 @@ public class MemberCenterFragment extends BaseFragment implements View.OnClickLi
 
     @Override
     public void redirectToMainPage() {
-        ((MainActivity) Objects.requireNonNull(getActivity())).setTabPage(0);
-        ((MainActivity) Objects.requireNonNull(getActivity())).refreshBadge();
+        ((MainActivity) requireActivity()).setTabPage(0);
+        ((MainActivity) requireActivity()).refreshBadge();
+        ((MainActivity) requireActivity()).changeTabFragment(MainIndexFragment.getInstance());
     }
 
     @Override

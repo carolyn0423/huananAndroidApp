@@ -98,5 +98,11 @@ public interface MainContract {
         String getUserName();
 
         String getInvitationCode();
+
+        String getUserID();
+
+        String getMobile();
+
+        Object getShopkeeper();
     }
 }

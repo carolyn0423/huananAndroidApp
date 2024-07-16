@@ -7,11 +7,12 @@ import androidx.annotation.Nullable;
 import androidx.constraintlayout.widget.Group;
 import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.ittianyu.bottomnavigationviewex.BottomNavigationViewEx;
+import com.hamels.huanan.Utils.CustomBottomNavigationView;
 import com.hamels.huanan.Base.BaseContract;
 import com.hamels.huanan.Base.BaseFragment;
 import com.hamels.huanan.Main.View.MainActivity;
@@ -97,10 +98,10 @@ public class OrderListFragment extends BaseFragment implements OrderListContract
             public void onValueCallback(int task, Order order) {
                 switch (task) {
                     case TASK_RETURN:
-                        ((TransRecordFragment) Objects.requireNonNull(getParentFragment())).addReturnFragment(order, STATUS_RETURN);
+                        ((TransRecordFragment) requireParentFragment()).addReturnFragment(order, STATUS_RETURN);
                         break;
                     case TASK_EXCHANGE:
-                        ((TransRecordFragment) Objects.requireNonNull(getParentFragment())).addReturnFragment(order, STATUS_EXCHANGE);
+                        ((TransRecordFragment) requireParentFragment()).addReturnFragment(order, STATUS_EXCHANGE);
                         break;
                 }
             }
@@ -112,9 +113,11 @@ public class OrderListFragment extends BaseFragment implements OrderListContract
     public void onClick(View view) {
         int id = view.getId();
         if (id == R.id.tv_send){
-            BottomNavigationViewEx bottomNavigationViewEx = ((MainActivity) Objects.requireNonNull(getActivity())).getBottomNavigationViewEx();
-            if (bottomNavigationViewEx != null) {
-                bottomNavigationViewEx.setCurrentItem(1);
+            CustomBottomNavigationView bottomNavigationView = ((MainActivity) getActivity()).getBottomNavigationView();
+            if (bottomNavigationView != null) {
+                MenuItem menuItem = bottomNavigationView.getMenu().getItem(1);
+                bottomNavigationView.setIconScaleType(menuItem);
+                //bottomNavigationView.setCurrentItem(1);
             }
         }
     }

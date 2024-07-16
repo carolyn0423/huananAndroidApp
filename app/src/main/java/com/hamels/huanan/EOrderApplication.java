@@ -22,6 +22,10 @@ public class EOrderApplication extends Application {
     public static String CUSTOMER_ID = "110";
     public static String CUSTOMER_NAME = "學田泉";
     public static String sApiUrl = "";
+    public static String WEB_SOCKET_PATH = "";
+    public static String WEB_SOCKET_PATH_NAME = "WebSocketHandler.ashx";
+    public static String WEB_SOCKET_MOBILE = "";
+    public static String WEB_SOCKET_MOBILE_CHK = "";
     public static boolean isLogin = false;
     public static String dbConnectName = "";
     public static String cartBadgeCount = "0";
