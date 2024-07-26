@@ -47,7 +47,7 @@
             android:layout_height="wrap_content"
             android:hint=""
             android:layout_marginStart="30dp"
-            android:layout_marginEnd="50dp"
+            android:layout_marginEnd="70dp"
             android:theme="@style/EditTextBlack"
             app:hintEnabled="false"
             android:background="@android:color/transparent"

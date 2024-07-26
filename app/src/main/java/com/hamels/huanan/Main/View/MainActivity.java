@@ -165,6 +165,7 @@ public class MainActivity extends BaseActivity implements MainContract.View {
     private int VersionCode = 0;
     private static final int REQUEST_WRITE_EXTERNAL_STORAGE = 1;
     private String sPDFDir = "";
+    private float originalBrightness = -1; // 保存原始亮度值
     private Handler handler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
@@ -825,23 +826,23 @@ public class MainActivity extends BaseActivity implements MainContract.View {
         // messageUnreadNum_pushUnreadNum_cartTotalQuantity
         String[] array = count.split("_");
 
-        // 訊息夾未讀、客服留言未讀
-        if (array.length >= 2) {
+        //  客服留言未讀
+        if(array.length > 0){
+            EOrderApplication.messageBadgeCount = array[0];
             appToolbar.setMessageBadgeCount(Integer.parseInt(array[0]));
-            appToolbar.setMailBadgeCount(Integer.parseInt(array[1]));
+        }else{
+            appToolbar.setMessageBadgeCount(0);
+        }
 
-            if (array[1].equals("0") || !isMainIndex()) {
-                tvMessageUnread.setText("0");
-                setMainIndexMessageUnreadVisibility(false);
-            } else {
-                tvMessageUnread.setText(array[1]);
+        // 訊息夾未讀
+        if (array.length > 1) {
+            EOrderApplication.mailBadgeCount = array[1];
+            appToolbar.setMailBadgeCount(Integer.parseInt(array[1]));
+            if(isMainIndex()){
                 setMainIndexMessageUnreadVisibility(true);
             }
-        } else {
-            appToolbar.setMessageBadgeCount(Integer.parseInt("0"));
-            appToolbar.setMailBadgeCount(Integer.parseInt("0"));
-            tvMessageUnread.setText("0");
-            setMainIndexMessageUnreadVisibility(false);
+        }else{
+            appToolbar.setMailBadgeCount(0);
         }
 
         // 購物車商品數量
@@ -1461,6 +1462,10 @@ public class MainActivity extends BaseActivity implements MainContract.View {
             lp.screenBrightness = (brightness <= 0 ? 1 : brightness) / 255f;
         }
         window.setAttributes(lp);
+
+        // 恢复屏幕亮度
+        getWindow().getAttributes().screenBrightness = originalBrightness;
+        getWindow().setAttributes(getWindow().getAttributes());
     }
 
     public void getPermissionsCamera(){
@@ -1661,6 +1666,9 @@ public class MainActivity extends BaseActivity implements MainContract.View {
     }
 
     public void OpenShared(){
+        // 保存当前屏幕亮度
+        WindowManager.LayoutParams lp = getWindow().getAttributes();
+        originalBrightness = lp.screenBrightness;
         // 获取剪贴板管理器
         ClipboardManager clipboard = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
         String copiedText = mainPresenter.getUserName() + " 邀請您下載 " + EOrderApplication.CUSTOMER_NAME + " APP，註冊時輸入邀請碼: " + mainPresenter.getInvitationCode() + "，即可獲得新會員獎勵";
@@ -1678,6 +1686,10 @@ public class MainActivity extends BaseActivity implements MainContract.View {
         shareIntent.setType("text/plain");
         shareIntent.putExtra(Intent.EXTRA_TEXT, copiedText);
         startActivity(Intent.createChooser(shareIntent, "分享到"));
+
+        // 恢复屏幕亮度
+        getWindow().getAttributes().screenBrightness = originalBrightness;
+        getWindow().setAttributes(getWindow().getAttributes());
     }
 
     private void createQRcodeImage(String content, ImageView qrcode_img) {

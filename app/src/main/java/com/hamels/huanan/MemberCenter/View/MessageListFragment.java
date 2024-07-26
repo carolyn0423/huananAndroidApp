@@ -159,13 +159,15 @@ public class MessageListFragment extends BaseFragment implements MessageListCont
 
     @Override
     public void setMessageList(List<Message> list) {
-        messageListAdapter.setMessages(list);
-        messagePresenter.updateReadMessageApi();
+        if(!list.isEmpty()) {
+            messageListAdapter.setMessages(list);
+            messagePresenter.updateReadMessageApi();
 
 //        if (iMessageCount != messageListAdapter.getItemCount()) {
 //            iMessageCount = messageListAdapter.getItemCount();
 //            recyclerView.smoothScrollToPosition(messageListAdapter.getItemCount() - 1);
 //        }
-        recyclerView.smoothScrollToPosition(messageListAdapter.getItemCount() - 1);
+            recyclerView.smoothScrollToPosition(messageListAdapter.getItemCount() - 1);
+        }
     }
 }

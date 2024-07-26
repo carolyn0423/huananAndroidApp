@@ -7,6 +7,8 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
+import androidx.core.text.HtmlCompat;
+
 import com.hamels.huanan.R;
 import com.hamels.huanan.Repository.Model.ProductConf;
 
@@ -61,8 +63,9 @@ public class ProductConfSubListAdapter extends BaseAdapter {
         if(conf_foldout != null && conf_foldout.equals("Y")){
             conf_content += " <br /> <font color='#FF3333'>(今日完售)</font>";
         }
-
-        tvConfContent.setText(Html.fromHtml(conf_content));
+        // 使用 HtmlCompat.fromHtml
+        CharSequence formattedText = HtmlCompat.fromHtml(conf_content, HtmlCompat.FROM_HTML_MODE_LEGACY);
+        tvConfContent.setText(formattedText);
 
         return convertView;
     }

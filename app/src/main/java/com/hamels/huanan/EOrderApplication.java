@@ -17,7 +17,7 @@ public class EOrderApplication extends Application {
     public static final String DOMAIN_ADMIN_SIT = "https://eorder.hamels.com.tw:9940/";
 
     //public static String ADMIN_DOMAIN = isPrd ? DOMAIN_ADMIN_PRO : DOMAIN_ADMIN_SIT;
-    public static String ADMIN_DOMAIN = DOMAIN_ADMIN_SIT;
+    public static String ADMIN_DOMAIN = DOMAIN_ADMIN_UAT;
     
     public static String CUSTOMER_ID = "110";
     public static String CUSTOMER_NAME = "學田泉";
@@ -28,7 +28,16 @@ public class EOrderApplication extends Application {
     public static String WEB_SOCKET_MOBILE_CHK = "";
     public static boolean isLogin = false;
     public static String dbConnectName = "";
+    //  購物車數
     public static String cartBadgeCount = "0";
+    //  票卷購物車數
+    public static String cartTicketBadgeCount = "0";
+    //  票卷數
+    public static String memberTicketBadgeCount = "0";
+    //  訊息
+    public static String mailBadgeCount = "0";
+    //  客服
+    public static String messageBadgeCount = "0";
     public static String LOCATION_NAME = "";
     public static String WEBVIEW_WHATCOFFEE_URL = "/what_coffee.html";
     public static String WEBVIEW_COUPONS_URL = "/coupon.html";

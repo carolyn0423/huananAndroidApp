@@ -4,6 +4,7 @@ import android.os.Build;
 import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.text.HtmlCompat;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -84,6 +85,9 @@ public class NewsFragment extends BaseFragment implements NewsContract.View {
         tv_news_title.setText(carousel.getTitle());
 
         webView.loadUrl(EOrderApplication.sApiUrl + EOrderApplication.WEBVIEW_CONTENT_URL + "?mode=News&id=" + carousel.getId());
+        // 使用 HtmlCompat.fromHtml
+//        CharSequence formattedText = HtmlCompat.fromHtml(carousel.getContent(), HtmlCompat.FROM_HTML_MODE_LEGACY);
+//        tv_news_content.setText(formattedText);
 //        String sContent = carousel.getContent();
 //        webView.clearCache(true);
 //        webView.getSettings().setJavaScriptEnabled(true);   //支持javascript
@@ -103,6 +107,6 @@ public class NewsFragment extends BaseFragment implements NewsContract.View {
     @Override
     public void onDetach() {
         super.onDetach();
-        ((MainActivity) Objects.requireNonNull(getActivity())).detachWebView();
+        ((MainActivity) requireActivity()).detachWebView();
     }
 }
