@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
+    android:fitsSystemWindows="true"
 
     tools:context=".Main.View.MainActivity">
 
@@ -29,9 +30,8 @@
         <FrameLayout
             android:id="@+id/frame"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginTop="0dp"
-            android:layout_marginBottom="0dp" />
+            android:layout_height="match_parent" />
+
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/const_background"

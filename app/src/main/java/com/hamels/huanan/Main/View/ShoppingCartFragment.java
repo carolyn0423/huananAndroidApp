@@ -29,34 +29,17 @@ public class ShoppingCartFragment extends BaseFragment {
     private String orderType = "";
     private RepositoryManager repositoryManager;
 
-    public static ShoppingCartFragment getInstance() {
-        if (fragment == null) {
-            fragment = new ShoppingCartFragment();
-        }
-
-        return fragment;
+    public static ShoppingCartFragment newInstance() {
+        return new ShoppingCartFragment();
     }
 
-    public static ShoppingCartFragment getInstance(String orderType) {
-        Log.e(TAG, "----------------------------" + orderType);
-
-        if (fragment == null) {
-            fragment = new ShoppingCartFragment();
-        }
-
-        Bundle bundle = new Bundle();
-        bundle.putString(ORDERTYPE, orderType);
-        fragment.setArguments(bundle);
-
-        return fragment;
-    }
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_webview, container, false);
 
-        orderType = "G";
+        orderType = getArguments() != null ? getArguments().getString(ORDERTYPE, "G") : "G";
 
         //  orderType = getArguments().getString("G", "");
 

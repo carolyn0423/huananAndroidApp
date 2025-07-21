@@ -2,15 +2,15 @@ apply plugin: 'com.android.application'
 apply plugin: 'com.google.gms.google-services'
 
 android {
-    compileSdkVersion 34
+    compileSdkVersion 36
     flavorDimensions "version"
     namespace "com.hamels.huanan"
     defaultConfig {
         applicationId "com.hamels.huanan"
         minSdk 25
-        targetSdkVersion 34
-        versionCode 8
-        versionName '8.0'
+        targetSdkVersion 36
+        versionCode 9
+        versionName '9.0'
         testInstrumentationRunner 'androidx.test.runner.AndroidJUnitRunner'
     }
     buildTypes {

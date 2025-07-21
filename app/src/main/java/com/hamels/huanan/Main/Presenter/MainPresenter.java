@@ -221,7 +221,7 @@ public class MainPresenter extends BasePresenter<MainContract.View> implements M
     @Override
     public void checkLoginForShoppingCart(String orderType) {
         if (repositoryManager.getUserLogin()) {
-            view.changeTabFragment(ShoppingCartFragment.getInstance(orderType));
+            view.changeTabFragment(ShoppingCartFragment.newInstance());
         } else {
             view.intentToLogin(REQUEST_SHOPPING_CART);
         }

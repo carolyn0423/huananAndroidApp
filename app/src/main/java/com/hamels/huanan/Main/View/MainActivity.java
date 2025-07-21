@@ -764,7 +764,7 @@ public class MainActivity extends BaseActivity implements MainContract.View {
                 addFragment(MessageFragment.getInstance());
                 break;
             case REQUEST_SHOPPING_CART:
-                changeTabFragment(ShoppingCartFragment.getInstance());
+                changeTabFragment(ShoppingCartFragment.newInstance());
                 break;
             case REQUEST_BUSINESS:
                 addFragment(BusinessFragment.getInstance());
@@ -950,10 +950,11 @@ public class MainActivity extends BaseActivity implements MainContract.View {
     @Override
     public void changeTabFragment(BaseFragment willChangeFragment) {
         this.willChangeFragment = willChangeFragment;
-        Log.e(TAG, "changeTabFragment" + willChangeFragment);
-        removeAllStackFragment();
-        addFragment(willChangeFragment);
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        transaction.replace(R.id.frame, willChangeFragment);
+        transaction.commitAllowingStateLoss();
     }
+
 
     @Override
     public void addFragment(BaseFragment baseFragment) {
@@ -1139,7 +1140,7 @@ public class MainActivity extends BaseActivity implements MainContract.View {
 
         @JavascriptInterface
         public void jsCall_setShoppingCartAppTitle(String sParam) {
-            ShoppingCartFragment.getInstance().setShoppingCartAppTitle(sParam);
+            ShoppingCartFragment.newInstance().setShoppingCartAppTitle(sParam);
         }
         @JavascriptInterface
         public void jsCall_SharedPDF(String sPDFUrl) {
@@ -1327,7 +1328,7 @@ public class MainActivity extends BaseActivity implements MainContract.View {
         if(iLocationQuantity < 2){
             changeTabFragment(MainIndexFragment.getInstance());
         }else{
-            changeTabFragment(ShoppingCartFragment.getInstance());
+            changeTabFragment(ShoppingCartFragment.newInstance());
         }
     }
 
